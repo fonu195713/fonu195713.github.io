@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="命令模式（Command Pattern）#說明 ChatGPT：命令模式（Command Pattern）是一種行為型設計模式，它將請求（request）或操作封裝成一個獨立的對象，使得能夠將客戶端的請求參數化、延遲執行或者將請求排入佇列中。這樣可以使請求的發送者和接收者解耦。在命令模式中，主要包含以下角色：【命令】（Command）：它是一個抽象類或接口，聲明了執行請求的方法 execute()。【具體命令】（Concrete Command）：具體命令實現了命令接口，包含了具體的操作和接收者。通常會持有接收者的實例，用來執行實際的請求。【接收者】（Receiver）：接收者知道如何執行真正的操作，接收者會被具體命令所調用。【調用者】（Invoker）：調用者持有命令對象，並在需要的時候調用命令的 execute() 方法。【客戶端】（Client）：創建具體命令對象，設置命令的接收者，並將命令對象設置給調用者。命令模式的核心思想是將「操作」和「操作的執行」解耦，將它們封裝成對象，從而實現請求的發送者和接收者之間的解耦。這使得我們可以輕鬆地增加新的請求類型，或進行撤銷、重做等功能，，對於實現複雜的交互操作和請求發送的場景非常有用。
+維基百科：在物件導向程式設計中，命令模式是一種行為型設計模式，它使用一個物件來封裝所有執行動作或稍後觸發事件所需的資訊。這些資訊包括方法名稱、擁有該方法的物件和該方法的參數值。命令模式通常與四個術語相關，它們是命令（Command）、接收者（Receiver）、調用者（Invoker）和客戶端（Client）。一個【命令】了解接收者並調用接收者的方法，該方法的參數值會存儲在命令中。【接收者】用於執行這些方法。當調用【命令】中的 execute() 方法時，【接收者】便開始執行工作。【調用者】物件知道如何執行一個命令，並可以選擇性地進行有關命令執行的記錄。【調用者】不知道具體的命令，只知道【命令】的介面。【客戶端】持有【調用者】、【命令】和【接收者】。【客戶端】決定將哪些【接收者】指派給【命令】，以及將哪些【命令】指派給【調用者】。【客戶端】決定在何時執行哪些命令。為了執行一個命令，它將【命令】傳遞給【調用者】。使用【命令】可以更容易地構建通用元件，這些元件需要在它們選擇的時間點委派、序列化、或執行方法的呼叫，而無需了解方法的類別或方法的參數。這個設計模式的核心思想與「函數式程式設計」中的「一等函數」和「高階函數」的語義非常相似，具體來說，【調用者】是高階函數，而【命令】是一等參數。
+特點 將請求封裝成【命令】，使得命令可以參數化 可以將【調用者】和【接收者】解耦 容易進行擴展操作，且支持命令的延遲執行 UML Graphic classDiagramclass Command~Interface~ {Character* charactervoid execute();void undo();}Command &lt;|-- AttackCommandCommand &lt;|-- DefenceCommandclass AttackCommand {void execute() : character.attack();void undo() : character.cancelAttack();}class DefenceCommand {void execute() : character.defence();void undo() : character.cancelDefence();}classDiagramclass Character~Interace~Character &lt;|-- WarriorCharacter &lt;|-- BowmanCharacter &lt;|-- MagicianCharacter &lt;|-- Thiefclass Character {void attack();void cancelAttack();void defence();void cancelDefence();}class CommandInvoker {Command* commandvoid setCommand(Command* cmd);void execute() : cmd.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="命令模式（Command Pattern）" />
+<meta property="og:description" content="命令模式（Command Pattern）#說明 ChatGPT：命令模式（Command Pattern）是一種行為型設計模式，它將請求（request）或操作封裝成一個獨立的對象，使得能夠將客戶端的請求參數化、延遲執行或者將請求排入佇列中。這樣可以使請求的發送者和接收者解耦。在命令模式中，主要包含以下角色：【命令】（Command）：它是一個抽象類或接口，聲明了執行請求的方法 execute()。【具體命令】（Concrete Command）：具體命令實現了命令接口，包含了具體的操作和接收者。通常會持有接收者的實例，用來執行實際的請求。【接收者】（Receiver）：接收者知道如何執行真正的操作，接收者會被具體命令所調用。【調用者】（Invoker）：調用者持有命令對象，並在需要的時候調用命令的 execute() 方法。【客戶端】（Client）：創建具體命令對象，設置命令的接收者，並將命令對象設置給調用者。命令模式的核心思想是將「操作」和「操作的執行」解耦，將它們封裝成對象，從而實現請求的發送者和接收者之間的解耦。這使得我們可以輕鬆地增加新的請求類型，或進行撤銷、重做等功能，，對於實現複雜的交互操作和請求發送的場景非常有用。
+維基百科：在物件導向程式設計中，命令模式是一種行為型設計模式，它使用一個物件來封裝所有執行動作或稍後觸發事件所需的資訊。這些資訊包括方法名稱、擁有該方法的物件和該方法的參數值。命令模式通常與四個術語相關，它們是命令（Command）、接收者（Receiver）、調用者（Invoker）和客戶端（Client）。一個【命令】了解接收者並調用接收者的方法，該方法的參數值會存儲在命令中。【接收者】用於執行這些方法。當調用【命令】中的 execute() 方法時，【接收者】便開始執行工作。【調用者】物件知道如何執行一個命令，並可以選擇性地進行有關命令執行的記錄。【調用者】不知道具體的命令，只知道【命令】的介面。【客戶端】持有【調用者】、【命令】和【接收者】。【客戶端】決定將哪些【接收者】指派給【命令】，以及將哪些【命令】指派給【調用者】。【客戶端】決定在何時執行哪些命令。為了執行一個命令，它將【命令】傳遞給【調用者】。使用【命令】可以更容易地構建通用元件，這些元件需要在它們選擇的時間點委派、序列化、或執行方法的呼叫，而無需了解方法的類別或方法的參數。這個設計模式的核心思想與「函數式程式設計」中的「一等函數」和「高階函數」的語義非常相似，具體來說，【調用者】是高階函數，而【命令】是一等參數。
+特點 將請求封裝成【命令】，使得命令可以參數化 可以將【調用者】和【接收者】解耦 容易進行擴展操作，且支持命令的延遲執行 UML Graphic classDiagramclass Command~Interface~ {Character* charactervoid execute();void undo();}Command &lt;|-- AttackCommandCommand &lt;|-- DefenceCommandclass AttackCommand {void execute() : character.attack();void undo() : character.cancelAttack();}class DefenceCommand {void execute() : character.defence();void undo() : character.cancelDefence();}classDiagramclass Character~Interace~Character &lt;|-- WarriorCharacter &lt;|-- BowmanCharacter &lt;|-- MagicianCharacter &lt;|-- Thiefclass Character {void attack();void cancelAttack();void defence();void cancelDefence();}class CommandInvoker {Command* commandvoid setCommand(Command* cmd);void execute() : cmd." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/command_pattern/" /><meta property="article:section" content="docs" />
+
+
+<title>命令模式（Command Pattern） | Fonu Site</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5ffcf89ac915f6608e9b341666487379426c5f4266e5d4ac450ef060cb91bc51.js" integrity="sha256-X/z4mskV9mCOmzQWZkhzeUJsX0Jm5dSsRQ7wYMuRvFE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f4362153a9424eb450dd350e64dfffc7" class="toggle"  />
+    <label for="section-f4362153a9424eb450dd350e64dfffc7" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/to_do_list/" class="">［置頂］待辦事項</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5f16b5923caa653815be6bb5f018b2f0" class="toggle"  />
+    <label for="section-5f16b5923caa653815be6bb5f018b2f0" class="flex justify-between">
+      <a role="button" class="">人生節點</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/nodes/masters_degree/" class="">碩士的畢業證書</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-68339e45fbc633241628720af6b731c7" class="toggle"  />
+    <label for="section-68339e45fbc633241628720af6b731c7" class="flex justify-between">
+      <a role="button" class="">日常札記</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/xinxinmota/" class="">新新魔塔 v2.6.6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/japan/" class="">7 萬步的日本行</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
+      <a role="button" class="">閱讀心得</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/reading_experience/head_first_design_pattern/" class="">《深入淺出設計模式》</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資訊工程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/recommended_books/" class="">推薦書單</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3975d187eb6b0c47dcb29d31a654027a" class="toggle" checked />
+    <label for="section-3975d187eb6b0c47dcb29d31a654027a" class="flex justify-between">
+      <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/mediator_pattern/" class="">中介者模式（Mediator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/flyweight_pattern/" class="">享元模式（Flyweight Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/proxy_pattern/" class="">代理模式（Proxy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/prototype_pattern/" class="">原型模式（Prototype Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/command_pattern/" class="active">命令模式（Command Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/singleton_pattern/" class="">單例模式（Singleton Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/facade_pattern/" class="">外觀模式（Facade Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/factory_method_pattern/" class="">工廠方法模式（Factory Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/abstract_factory_pattern/" class="">抽象工廠模式（Abstract Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/template_method_pattern/" class="">模板方法模式（Template Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/bridge_pattern/" class="">橋接模式（Bridge Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/state_pattern/" class="">狀態模式（State Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/builder_pattern/" class="">生成器模式（Builder Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/strategy_pattern/" class="">策略模式（Strategy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/simple_factory_pattern/" class="">簡單工廠模式（Simple Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_pattern/" class="">組合模式（Composite Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/decorator_pattern/" class="">裝飾器模式（Decorator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/observer_pattern/" class="">觀察者模式（Observer Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interpreter_pattern/" class="">解釋器模式（Interpreter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/visitor_pattern/" class="">訪問者模式（Visitor Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" class="">責任鏈模式（Chain of Responsibility Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/iterator_pattern/" class="">迭代器模式（Iterator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/adapter_pattern/" class="">適配器模式（Adapter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/single_responsibility_principle/" class="">單一職責原則（Single Responsibility Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/liskov_substitution_principle/" class="">里式替換原則（Liskov Substitution Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/open_closed_principle/" class="">開放封閉原則（Open Closed Principle）</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
+      <a role="button" class="">宗教命理</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
+      <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/fortune_telling/tarot/daily_log/" class="">［置頂］每日一翻</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="toggle"  />
+    <label for="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="flex justify-between">
+      <a role="button" class="">自由創作</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>命令模式（Command Pattern）</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="命令模式command-pattern">
+  命令模式（Command Pattern）
+  <a class="anchor" href="#%e5%91%bd%e4%bb%a4%e6%a8%a1%e5%bc%8fcommand-pattern">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>說明</strong></li>
+</ul>
+<p><strong>ChatGPT</strong>：命令模式（Command Pattern）是一種行為型設計模式，它將請求（request）或操作封裝成一個獨立的對象，使得能夠將客戶端的請求參數化、延遲執行或者將請求排入佇列中。這樣可以使請求的發送者和接收者解耦。在命令模式中，主要包含以下角色：【命令】（Command）：它是一個抽象類或接口，聲明了執行請求的方法 <code>execute()</code>。【具體命令】（Concrete Command）：具體命令實現了命令接口，包含了具體的操作和接收者。通常會持有接收者的實例，用來執行實際的請求。【接收者】（Receiver）：接收者知道如何執行真正的操作，接收者會被具體命令所調用。【調用者】（Invoker）：調用者持有命令對象，並在需要的時候調用命令的 <code>execute()</code> 方法。【客戶端】（Client）：創建具體命令對象，設置命令的接收者，並將命令對象設置給調用者。命令模式的核心思想是將「操作」和「操作的執行」解耦，將它們封裝成對象，從而實現請求的發送者和接收者之間的解耦。這使得我們可以輕鬆地增加新的請求類型，或進行撤銷、重做等功能，，對於實現複雜的交互操作和請求發送的場景非常有用。</p>
+<p><strong>維基百科</strong>：在物件導向程式設計中，命令模式是一種行為型設計模式，它使用一個物件來封裝所有執行動作或稍後觸發事件所需的資訊。這些資訊包括方法名稱、擁有該方法的物件和該方法的參數值。命令模式通常與四個術語相關，它們是命令（Command）、接收者（Receiver）、調用者（Invoker）和客戶端（Client）。一個【命令】了解接收者並調用接收者的方法，該方法的參數值會存儲在命令中。【接收者】用於執行這些方法。當調用【命令】中的 <code>execute()</code> 方法時，【接收者】便開始執行工作。【調用者】物件知道如何執行一個命令，並可以選擇性地進行有關命令執行的記錄。【調用者】不知道具體的命令，只知道【命令】的介面。【客戶端】持有【調用者】、【命令】和【接收者】。【客戶端】決定將哪些【接收者】指派給【命令】，以及將哪些【命令】指派給【調用者】。【客戶端】決定在何時執行哪些命令。為了執行一個命令，它將【命令】傳遞給【調用者】。使用【命令】可以更容易地構建通用元件，這些元件需要在它們選擇的時間點委派、序列化、或執行方法的呼叫，而無需了解方法的類別或方法的參數。這個設計模式的核心思想與「函數式程式設計」中的「一等函數」和「高階函數」的語義非常相似，具體來說，【調用者】是高階函數，而【命令】是一等參數。</p>
+<hr>
+<ul>
+<li><strong>特點</strong></li>
+</ul>
+<ol>
+<li>將請求封裝成【命令】，使得命令可以參數化</li>
+<li>可以將【調用者】和【接收者】解耦</li>
+<li>容易進行擴展操作，且支持命令的延遲執行</li>
+</ol>
+<hr>
+<ul>
+<li><strong>UML Graphic</strong></li>
+</ul>
+
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+</script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<p class="mermaid">
+classDiagram
+    class Command~Interface~ {
+        Character* character
+        void execute();
+        void undo();
+    }
+
+    Command <|-- AttackCommand
+    Command <|-- DefenceCommand
+
+    class AttackCommand {
+        void execute() : character.attack();
+        void undo() : character.cancelAttack();
+    }
+
+    class DefenceCommand {
+        void execute() : character.defence();
+        void undo() : character.cancelDefence();
+    }
+</p>
+
+
+
+<p class="mermaid">
+classDiagram
+    class Character~Interace~
+    Character <|-- Warrior
+    Character <|-- Bowman
+    Character <|-- Magician
+    Character <|-- Thief
+
+    class Character {
+        void attack();
+        void cancelAttack();
+        void defence();
+        void cancelDefence();
+    }
+
+    class CommandInvoker {
+        Command* command
+        void setCommand(Command* cmd);
+        void execute() : cmd.execute();
+        void undo() : cmd.undo();
+    }
+</p>
+
+<hr>
+<ul>
+<li><strong>內文</strong></li>
+</ul>
+<p>命令模式主要有三種角色：命令的內容、執行命令的物件、跟決定哪時候要執行命令的物件，這三個角色依序是【命令】（Command）【接收者】（Receiver）和【調用者】（Invoker）。讓我們用 RPG 遊戲做個舉例：【命令】就是執行動作的內容，一般會用 <code>Command</code> 類別來表示，【命令】通常是一個抽象類別，裡面會有 <code>execute()</code>, <code>undo()</code> 兩種方法，分別代表「執行命令」與「取消執行」。其他繼承【命令】的子類別（像是【攻擊命令】、【防禦命令】&hellip;等）會實作不同的命令指令（像是 <code>attack()</code>, <code>cancelAttack()</code>, <code>defence()</code>, <code>cancelDefence()</code> &hellip;等）。</p>
+<p>【接收者】就是可以真正執行命令的類別，在 RPG 遊戲裡面可以是【角色】【怪物】、或其他 NPC &hellip;等，【接收者】會實作不同的命令細節，可能 <code>Warrior</code> 類的 <code>attack()</code> 是用斧頭攻擊、<code>Bowman</code> 的類別則會變成用弓箭射擊 &hellip;等等。【接收者】在命令模式下只負責「不同的命令要怎麼執行」，換句話來說：「何時要執行命令」與「要執行哪一個命令」並不是【接收者】所關心的議題，它們是【調用者】所關心的議題。</p>
+<p>【調用者】負責「調用」命令，也就是決定那些命令要在哪個時候執行。調用者裡面同樣也會有 <code>execute()</code> 和 <code>undo()</code> 兩種方法。但不同於【命令】中的 <code>execute()</code> 會直接實作具體的命令內容，【調用者】的 <code>execute()</code> 只會透過呼叫自己成員變數 <code>command</code> 的 <code>execute()</code> 來執行某些命令，也因此，調用者不會知道【命令】的具體細節，它只會負責決定哪時候要執行命令而已。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Commands
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Command</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#f92672">~</span>Command<span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">undo</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AttackCommand</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Command <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Player<span style="color:#f92672">*</span> player<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        Monster<span style="color:#f92672">*</span> target<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        AttackCommand<span style="color:#f92672">(</span>Player<span style="color:#f92672">*</span> player<span style="color:#f92672">,</span> Monster<span style="color:#f92672">*</span> target<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">:</span> player<span style="color:#f92672">(</span>player<span style="color:#f92672">),</span> target<span style="color:#f92672">(</span>target<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            player <span style="color:#f92672">-&gt;</span> attack<span style="color:#f92672">(</span>target<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">undo</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DefendCommand</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Command <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Player<span style="color:#f92672">*</span> player<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        DefendCommand<span style="color:#f92672">(</span>Player<span style="color:#f92672">*</span> player<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">:</span> player<span style="color:#f92672">(</span>player<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        player <span style="color:#f92672">-&gt;</span> defend<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">undo</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Receivers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        string name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#a6e22e">attack</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#a6e22e">defend</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Player</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">(</span>Monster<span style="color:#f92672">*</span> target<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Some codes about attacks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">defend</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Some codes about defend
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Monster</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">(</span>Player<span style="color:#f92672">*</span> target<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Some codes about attacks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">defend</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Some codes about defend
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Invoker
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BattleManager</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Command<span style="color:#f92672">*</span> command<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        BattleManager<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">:</span> currentCommand<span style="color:#f92672">(</span>nullptr<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setCommand</span><span style="color:#f92672">(</span>Command<span style="color:#f92672">*</span> cmd<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            command <span style="color:#f92672">=</span> cmd<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>command<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                command <span style="color:#f92672">-&gt;</span> execute<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">undo</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>command<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                command <span style="color:#f92672">-&gt;</span> undo<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><hr>
+<ul>
+<li><strong>小結</strong></li>
+</ul>
+<p>命令模式的優點：</p>
+<ul>
+<li>解耦【發送者】和【接收者】的程式</li>
+<li>可以支持「執行」和「撤銷」的兩種令操作</li>
+<li>容易擴展不同的命令</li>
+</ul>
+<p>命令模式的缺點：</p>
+<ul>
+<li>會讓類別的數量變多</li>
+<li>執行效率可能會因為類別的各種呼叫而噌加</li>
+<li>增加記憶體的佔用和消耗</li>
+</ul>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

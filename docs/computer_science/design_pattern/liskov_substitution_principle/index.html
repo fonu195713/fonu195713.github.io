@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="里式替換原則（Liskov Substitution Principle）#ChatGPT 的說明 里式替換原則（Liskov Substitution Principle，簡稱 LSP）是物件導向程式設計中的一個重要原則，由 [Barbara Liskov][1] 在 1987 年的一個會議 &ldquo;[Data abstraction and hierarchy][2]&rdquo; 所提出。該原則強調：「子類別應該能夠替換其父類別，並且同時保持原有程式的正確性。」里式替換原則告訴我們：一個衍生類別（也就是子類別）必須能夠完全替換其基底類別（父類別）而不影響原有的程序行為。換句話說，子類別應該具有與父類別相同的行為和參數，這樣才能保證其程式的正確性和穩定性。LSP 主要包含了的 2 個關鍵點：
+首先【子類別必須完全擁有父類別的屬性或行為】：子類別需要做的事情，應該是「重寫」或「擴展」父類別的方法，而不是修改其行為，例如當一個名為【角色】的類別擁有攻擊 attack()、防禦 defence()、和魔法攻擊 magicAttack() 三種方法時，所以繼承該【角色】類別的子類別，都必須完全擁有這些行為，這意味著不能完全執行這三項行為的類別不可以繼承【角色】（例如【戰士】不會使用魔法攻擊、【僧侶】沒有防禦手段&hellip;等）。但我們可以透過「擴增」類別的行為，讓子類別保持與父類別一致的完整性。例如先移除【角色】中的 magicAttack(), 方法，再將【能使用魔法攻擊的角色】與【不能使用魔法攻擊的角色】分別繼承於【角色】，並將 magicAttack() 方法定義於【能使用魔法攻擊的角色】當中。這樣一來，【戰士】別即可以透過繼承【不能使用魔法攻擊的角色】成為【角色】的一員。
+接下來：【子類別應該完全遵循由父類所設計的邏輯】，意即保證父類別的行為在子類別中也能夠正確執行。子類不應該修改父類別所設計的邏輯、制定的規則、前提條件、或者是後置條件，也不應該引入新的前提條件或後置條件。例如：在名為【角色】的父類別中，如果有定義一個 defence() 方法，其實作的內容為「利用手中的武器進行防禦。」那麼所有繼承於【角色】的類別，即便是改寫或擴增 defence() 方法，也不可以違背「用武器防禦」這項原則。（這意味著不可以改寫【盜賊】的 defence() 為「透過閃躲防禦」）。透過保持規則的一致性，可以避免程式的不可預測性，例如原本【戰鬥】的攻防計算為「武器攻擊力 - 武器防禦力」，但因為我們將【盜賊】的防禦修改為「閃躲」，並沒有所謂的「武器防禦力」，在這樣的情況下可能就會造成不可預知的錯誤。
+以下我們使用一個簡單的情境來解釋里式替換原則和非里式替換原則的程式邏輯：我們需要製作一個 RPG 遊戲，其中有著一個【角色】類別，和【戰士】【法師】【盜賊】三種子類別。【角色】有攻擊（attack()） 和 防禦（defence()）兩種方法，有些角色也可以嘗試進行魔法攻擊（magicAttack()），此外，防禦（defence()）的程式邏輯為「受到的傷害 = 武器的攻擊力 - 自身的防禦力」。程式撰寫邏輯如下：
+// Adhering to OCP (Open Closed Principle) // Adhering to OCP (Open Closed Principle) // Adhering to OCP (Open Closed Principle) class Character { protected: int attack; int defense; public: Character(int attack, int defense) : attack(attack), defense(defense) {} virtual void attack() { cout &lt;&lt; &#34;Character attacks with attack power: &#34; &lt;&lt; attack &lt;&lt; endl; } virtual void defense(int received_atk) { int received_dmg = received_atk - defense; received_dmg = (received_dmg &lt; 0)?">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="里式替換原則（Liskov Substitution Principle）" />
+<meta property="og:description" content="里式替換原則（Liskov Substitution Principle）#ChatGPT 的說明 里式替換原則（Liskov Substitution Principle，簡稱 LSP）是物件導向程式設計中的一個重要原則，由 [Barbara Liskov][1] 在 1987 年的一個會議 &ldquo;[Data abstraction and hierarchy][2]&rdquo; 所提出。該原則強調：「子類別應該能夠替換其父類別，並且同時保持原有程式的正確性。」里式替換原則告訴我們：一個衍生類別（也就是子類別）必須能夠完全替換其基底類別（父類別）而不影響原有的程序行為。換句話說，子類別應該具有與父類別相同的行為和參數，這樣才能保證其程式的正確性和穩定性。LSP 主要包含了的 2 個關鍵點：
+首先【子類別必須完全擁有父類別的屬性或行為】：子類別需要做的事情，應該是「重寫」或「擴展」父類別的方法，而不是修改其行為，例如當一個名為【角色】的類別擁有攻擊 attack()、防禦 defence()、和魔法攻擊 magicAttack() 三種方法時，所以繼承該【角色】類別的子類別，都必須完全擁有這些行為，這意味著不能完全執行這三項行為的類別不可以繼承【角色】（例如【戰士】不會使用魔法攻擊、【僧侶】沒有防禦手段&hellip;等）。但我們可以透過「擴增」類別的行為，讓子類別保持與父類別一致的完整性。例如先移除【角色】中的 magicAttack(), 方法，再將【能使用魔法攻擊的角色】與【不能使用魔法攻擊的角色】分別繼承於【角色】，並將 magicAttack() 方法定義於【能使用魔法攻擊的角色】當中。這樣一來，【戰士】別即可以透過繼承【不能使用魔法攻擊的角色】成為【角色】的一員。
+接下來：【子類別應該完全遵循由父類所設計的邏輯】，意即保證父類別的行為在子類別中也能夠正確執行。子類不應該修改父類別所設計的邏輯、制定的規則、前提條件、或者是後置條件，也不應該引入新的前提條件或後置條件。例如：在名為【角色】的父類別中，如果有定義一個 defence() 方法，其實作的內容為「利用手中的武器進行防禦。」那麼所有繼承於【角色】的類別，即便是改寫或擴增 defence() 方法，也不可以違背「用武器防禦」這項原則。（這意味著不可以改寫【盜賊】的 defence() 為「透過閃躲防禦」）。透過保持規則的一致性，可以避免程式的不可預測性，例如原本【戰鬥】的攻防計算為「武器攻擊力 - 武器防禦力」，但因為我們將【盜賊】的防禦修改為「閃躲」，並沒有所謂的「武器防禦力」，在這樣的情況下可能就會造成不可預知的錯誤。
+以下我們使用一個簡單的情境來解釋里式替換原則和非里式替換原則的程式邏輯：我們需要製作一個 RPG 遊戲，其中有著一個【角色】類別，和【戰士】【法師】【盜賊】三種子類別。【角色】有攻擊（attack()） 和 防禦（defence()）兩種方法，有些角色也可以嘗試進行魔法攻擊（magicAttack()），此外，防禦（defence()）的程式邏輯為「受到的傷害 = 武器的攻擊力 - 自身的防禦力」。程式撰寫邏輯如下：
+// Adhering to OCP (Open Closed Principle) // Adhering to OCP (Open Closed Principle) // Adhering to OCP (Open Closed Principle) class Character { protected: int attack; int defense; public: Character(int attack, int defense) : attack(attack), defense(defense) {} virtual void attack() { cout &lt;&lt; &#34;Character attacks with attack power: &#34; &lt;&lt; attack &lt;&lt; endl; } virtual void defense(int received_atk) { int received_dmg = received_atk - defense; received_dmg = (received_dmg &lt; 0)?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/liskov_substitution_principle/" /><meta property="article:section" content="docs" />
+
+
+<title>里式替換原則（Liskov Substitution Principle） | Fonu Site</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5ffcf89ac915f6608e9b341666487379426c5f4266e5d4ac450ef060cb91bc51.js" integrity="sha256-X/z4mskV9mCOmzQWZkhzeUJsX0Jm5dSsRQ7wYMuRvFE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f4362153a9424eb450dd350e64dfffc7" class="toggle"  />
+    <label for="section-f4362153a9424eb450dd350e64dfffc7" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/to_do_list/" class="">［置頂］待辦事項</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5f16b5923caa653815be6bb5f018b2f0" class="toggle"  />
+    <label for="section-5f16b5923caa653815be6bb5f018b2f0" class="flex justify-between">
+      <a role="button" class="">人生節點</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/nodes/masters_degree/" class="">碩士的畢業證書</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-68339e45fbc633241628720af6b731c7" class="toggle"  />
+    <label for="section-68339e45fbc633241628720af6b731c7" class="flex justify-between">
+      <a role="button" class="">日常札記</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/xinxinmota/" class="">新新魔塔 v2.6.6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/japan/" class="">7 萬步的日本行</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
+      <a role="button" class="">閱讀心得</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/reading_experience/head_first_design_pattern/" class="">《深入淺出設計模式》</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資訊工程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/recommended_books/" class="">推薦書單</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3975d187eb6b0c47dcb29d31a654027a" class="toggle" checked />
+    <label for="section-3975d187eb6b0c47dcb29d31a654027a" class="flex justify-between">
+      <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/mediator_pattern/" class="">中介者模式（Mediator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/flyweight_pattern/" class="">享元模式（Flyweight Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/proxy_pattern/" class="">代理模式（Proxy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/prototype_pattern/" class="">原型模式（Prototype Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/command_pattern/" class="">命令模式（Command Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/singleton_pattern/" class="">單例模式（Singleton Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/facade_pattern/" class="">外觀模式（Facade Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/factory_method_pattern/" class="">工廠方法模式（Factory Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/abstract_factory_pattern/" class="">抽象工廠模式（Abstract Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/template_method_pattern/" class="">模板方法模式（Template Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/bridge_pattern/" class="">橋接模式（Bridge Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/state_pattern/" class="">狀態模式（State Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/builder_pattern/" class="">生成器模式（Builder Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/strategy_pattern/" class="">策略模式（Strategy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/simple_factory_pattern/" class="">簡單工廠模式（Simple Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_pattern/" class="">組合模式（Composite Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/decorator_pattern/" class="">裝飾器模式（Decorator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/observer_pattern/" class="">觀察者模式（Observer Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interpreter_pattern/" class="">解釋器模式（Interpreter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/visitor_pattern/" class="">訪問者模式（Visitor Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" class="">責任鏈模式（Chain of Responsibility Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/iterator_pattern/" class="">迭代器模式（Iterator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/adapter_pattern/" class="">適配器模式（Adapter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/single_responsibility_principle/" class="">單一職責原則（Single Responsibility Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/liskov_substitution_principle/" class="active">里式替換原則（Liskov Substitution Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/open_closed_principle/" class="">開放封閉原則（Open Closed Principle）</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
+      <a role="button" class="">宗教命理</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
+      <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/fortune_telling/tarot/daily_log/" class="">［置頂］每日一翻</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="toggle"  />
+    <label for="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="flex justify-between">
+      <a role="button" class="">自由創作</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>里式替換原則（Liskov Substitution Principle）</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="里式替換原則liskov-substitution-principle">
+  里式替換原則（Liskov Substitution Principle）
+  <a class="anchor" href="#%e9%87%8c%e5%bc%8f%e6%9b%bf%e6%8f%9b%e5%8e%9f%e5%89%87liskov-substitution-principle">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>里式替換原則（Liskov Substitution Principle，簡稱 LSP）是物件導向程式設計中的一個重要原則，由 [Barbara Liskov][1] 在 1987 年的一個會議 &ldquo;[Data abstraction and hierarchy][2]&rdquo; 所提出。該原則強調：「子類別應該能夠替換其父類別，並且同時保持原有程式的正確性。」里式替換原則告訴我們：一個衍生類別（也就是子類別）必須能夠完全替換其基底類別（父類別）而不影響原有的程序行為。換句話說，子類別應該具有與父類別相同的行為和參數，這樣才能保證其程式的正確性和穩定性。LSP 主要包含了的 2 個關鍵點：</p>
+<p>首先【<strong>子類別必須完全擁有父類別的屬性或行為</strong>】：子類別需要做的事情，應該是「重寫」或「擴展」父類別的方法，而不是修改其行為，例如當一個名為【角色】的類別擁有攻擊 <code>attack()</code>、防禦 <code>defence()</code>、和魔法攻擊 <code>magicAttack()</code> 三種方法時，所以繼承該【角色】類別的子類別，都必須完全擁有這些行為，這意味著不能完全執行這三項行為的類別不可以繼承【角色】（例如【戰士】不會使用魔法攻擊、【僧侶】沒有防禦手段&hellip;等）。但我們可以透過「擴增」類別的行為，讓子類別保持與父類別一致的完整性。例如先移除【角色】中的 <code>magicAttack()</code>, 方法，再將【能使用魔法攻擊的角色】與【不能使用魔法攻擊的角色】分別繼承於【角色】，並將 <code>magicAttack()</code> 方法定義於【能使用魔法攻擊的角色】當中。這樣一來，【戰士】別即可以透過繼承【不能使用魔法攻擊的角色】成為【角色】的一員。</p>
+<p>接下來：【<strong>子類別應該完全遵循由父類所設計的邏輯</strong>】，意即保證父類別的行為在子類別中也能夠正確執行。子類不應該修改父類別所設計的邏輯、制定的規則、前提條件、或者是後置條件，也不應該引入新的前提條件或後置條件。例如：在名為【角色】的父類別中，如果有定義一個 <code>defence()</code> 方法，其實作的內容為「利用手中的武器進行防禦。」那麼所有繼承於【角色】的類別，即便是改寫或擴增 <code>defence()</code> 方法，也不可以違背「用武器防禦」這項原則。（這意味著不可以改寫【盜賊】的 <code>defence()</code> 為「透過閃躲防禦」）。透過保持規則的一致性，可以避免程式的不可預測性，例如原本【戰鬥】的攻防計算為「武器攻擊力 - 武器防禦力」，但因為我們將【盜賊】的防禦修改為「閃躲」，並沒有所謂的「武器防禦力」，在這樣的情況下可能就會造成不可預知的錯誤。</p>
+<p>以下我們使用一個簡單的情境來解釋里式替換原則和非里式替換原則的程式邏輯：我們需要製作一個 RPG 遊戲，其中有著一個【角色】類別，和【戰士】【法師】【盜賊】三種子類別。【角色】有攻擊（<code>attack()</code>） 和 防禦（<code>defence()</code>）兩種方法，有些角色也可以嘗試進行魔法攻擊（<code>magicAttack()</code>），此外，防禦（<code>defence()</code>）的程式邏輯為「受到的傷害 = 武器的攻擊力 - 自身的防禦力」。程式撰寫邏輯如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Adhering to OCP (Open Closed Principle)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Adhering to OCP (Open Closed Principle)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Adhering to OCP (Open Closed Principle)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> attack<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> defense<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        Character<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> attack<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> defense<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">:</span> attack<span style="color:#f92672">(</span>attack<span style="color:#f92672">),</span> defense<span style="color:#f92672">(</span>defense<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Character attacks with attack power: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> attack <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">defense</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> received_atk<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> received_dmg <span style="color:#f92672">=</span> received_atk <span style="color:#f92672">-</span> defense<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            received_dmg <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>received_dmg <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">)?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> received_dmg<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Character received damage: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> received_dmg <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Warrior</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Warrior<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> attack<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> Character<span style="color:#f92672">(</span>attack<span style="color:#f92672">,</span> <span style="color:#ae81ff">20</span><span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Mage</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Mage<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> attack<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> Character<span style="color:#f92672">(</span>attack<span style="color:#f92672">,</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">magicAttack</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Mage casts a powerful magic spell!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Thief</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Thief<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> attack<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> Character<span style="color:#f92672">(</span>attack<span style="color:#f92672">,</span> <span style="color:#ae81ff">15</span><span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dodge</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Thief dodged the incoming damage.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Warrior <span style="color:#a6e22e">warrior</span><span style="color:#f92672">(</span><span style="color:#ae81ff">50</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    Mage <span style="color:#a6e22e">mage</span><span style="color:#f92672">(</span><span style="color:#ae81ff">40</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    Thief <span style="color:#a6e22e">thief</span><span style="color:#f92672">(</span><span style="color:#ae81ff">40</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    warrior<span style="color:#f92672">.</span><span style="color:#a6e22e">attack</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    warrior<span style="color:#f92672">.</span><span style="color:#a6e22e">defense</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    mage<span style="color:#f92672">.</span><span style="color:#a6e22e">attack</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    mage<span style="color:#f92672">.</span><span style="color:#a6e22e">defense</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    mage<span style="color:#f92672">.</span><span style="color:#a6e22e">magicAttack</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    thief<span style="color:#f92672">.</span><span style="color:#a6e22e">attack</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    thief<span style="color:#f92672">.</span><span style="color:#a6e22e">dodge</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Not adhering to OCP (Open Closed Principle)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Not adhering to OCP (Open Closed Principle)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Not adhering to OCP (Open Closed Principle)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> attack<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> defense<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        Character<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> attack<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> defense<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">:</span> attack<span style="color:#f92672">(</span>attack<span style="color:#f92672">),</span> defense<span style="color:#f92672">(</span>defense<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Character attacks with attack power: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> attack <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">defense</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> actualDefense <span style="color:#f92672">=</span> attack <span style="color:#f92672">-</span> defense<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Character defends with defense value: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> actualDefense <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">magicAttack</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Character uses a magic attack!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Warrior</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Warrior<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> attack<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> Character<span style="color:#f92672">(</span>attack<span style="color:#f92672">,</span> <span style="color:#ae81ff">20</span><span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// The subclass contains inaccessible methods from the parent class.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">magicAttack</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Mage</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Mage<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> attack<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> Character<span style="color:#f92672">(</span>attack<span style="color:#f92672">,</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Thief</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Thief<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> attack<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> Character<span style="color:#f92672">(</span>attack<span style="color:#f92672">,</span> <span style="color:#ae81ff">15</span><span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// The logic defined in the subclass is inconsistent with that of the superclass.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">defense</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Thief dodges the attack.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Warrior <span style="color:#a6e22e">warrior</span><span style="color:#f92672">(</span><span style="color:#ae81ff">50</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    Mage <span style="color:#a6e22e">mage</span><span style="color:#f92672">(</span><span style="color:#ae81ff">40</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    Thief <span style="color:#a6e22e">thief</span><span style="color:#f92672">(</span><span style="color:#ae81ff">40</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    warrior<span style="color:#f92672">.</span><span style="color:#a6e22e">attack</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    warrior<span style="color:#f92672">.</span><span style="color:#a6e22e">defense</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    mage<span style="color:#f92672">.</span><span style="color:#a6e22e">attack</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    mage<span style="color:#f92672">.</span><span style="color:#a6e22e">defense</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    mage<span style="color:#f92672">.</span><span style="color:#a6e22e">magicAttack</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    thief<span style="color:#f92672">.</span><span style="color:#a6e22e">attack</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    thief<span style="color:#f92672">.</span><span style="color:#a6e22e">defense</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div></article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

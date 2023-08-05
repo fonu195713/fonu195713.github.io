@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="訪問者模式（Visitor Pattern）#說明 ChatGPT：訪問者模式（Visitor Pattern）是一種行為型設計模式，它用於將算法操作從物件的結構中分離出來。訪問者模式允許「在不修改已有的物件結構」的情況下，定義新的操作。這種模式主要用於對一組相關的物件進行某種操作，而不必修改這些物件的類別。在訪問者模式中，有兩個主要角色：分別是訪問者（Visitor）和元素（Element）。【訪問者】是一個接口或者一個抽象類別，它定義了對物件結構中，操作每個元素的方法。具體的【訪問者】類別將實現這些方法，以定義特定的操作。【元素】則是一個接口或抽象類，它定義了接受訪問者的方法。每個元素類別將實現這個方法，以便在【訪問者】來訪時，調用【訪問者】的相應方法。訪問者模式的核心思想是：「當需要對物件結構中的元素進行不同的操作時，不需要修改元素類別，而是定義新的訪問者類別來實現這些操作。」這樣可以實現操作的「新增」而不改變元素結構，同時也不會影響其他的操作。訪問者模式適用於以下情況：「當一個物件結構包含多種類型的元素，且需要對這些元素進行不同的操作時。」「當物件想要新增新的操作，同時也希望不影響現有元素類別時。」與「當對象結構中的元素結構相對穩定，但其操作算法可能會經常更改時。」總的來說，訪問者模式可以幫助我們實現對物件結構的不同元素進行多種操作，同時保持類別的相對穩定，並提高了系統的可擴展性和可維護性。
+維基百科：訪問者模式（Visitor Pattern）是一種軟體設計模式，用於將演算法與物件結構分離。由於這種分離，使用者可以在不修改物件結構的情況下，向現有的物件結構添加新的操作。這是在 &ldquo;物件導向程式&rdquo; 和 &ldquo;軟體工程&rdquo; 中，遵循開放封閉原則的一種方法。基本上，訪問者允許在一個類族中添加新的虛擬函數，而無需修改這些類。接著，再創建一個訪問者類，其中實現了所有適當的虛擬函數的實例化。訪問者接收實例引用作為輸入，並通過雙重派發（double dispatch）來實現目標。訪問者模式能夠輕鬆地分支處理物件的類型，並在定義了訪問者尚未處理的新物件類型時生成編譯器錯誤。此外，訪問者設計模式也是 23 種著名的四人幫設計模式之一，它（四人幫設計模式）描述了如何解決重複性的設計問題，以設計靈活且可重用的面向對象軟體，即易於實現、更改、測試和重用的物件。「什麼問題可以通過訪問者設計模式解決？」：如果想要在不更改類的情況下，為物件結構的（某些）類別定義新操作，可以使用此類別。「訪問者設計模式描述了什麼解決方案？」訪問者模式定義一個單獨的【訪問者】物件，該物件實現對物件結構的元素執行的操作。客戶端可以遍歷物件結構，並在元素上調用訪問者進行元素操作：意即將操作將請求分派（委派）給【被接受的訪問者物件】。然後，訪問者物件對元素執行操作（&ldquo;訪問元素&rdquo;）。這樣一來，可以通過添加新的訪問者物件獨立於物件結構的類別來創建新的操作。
+特點 可以分離【元素】與【操作】的高度耦和 新增【操作】不會影響到原【元素】的程式碼 增加程式的彈性與靈活性 UML Graphic classDiagramclass Character~Interface~ {void accept(Visitor* visitor);}note &#34;void accept(Visitor* visitor) {\n　visitor.visit(this);\n}&#34;Character &lt;|-- RoleCharacter &lt;|-- MonsterRole &lt;|-- WarriorRole &lt;|-- BowmanRole &lt;|-- MagicianRole &lt;|-- ThiefMonster &lt;|-- ZombieMonster &lt;|-- SlimeMonster &lt;|-- SkeletonclassDiagramclass Visitor~Interface~ {void visit(Role* role);void visit(Monster* monster);}Visitor &lt;|-- PhysicalAttackVisitorVisitor &lt;|-- MagicAttackVisitorVisitor &lt;|-- EscapeVisitor內文 訪問者模式主要要解決的問題是「在不更動原始物件的前提下，對原始物件進行一些新的功能擴充」也就是在不影響原始物件的前提下，進行物件的方法擴充。我們用一個 RPG 遊戲的戰鬥過程來做舉例：假設在一個 RPG 的回合制戰鬥中，【角色】總共可以對【怪物】進行兩種不同的攻擊方式，分別是「普通攻擊（物理攻及）」和「魔法攻擊」這兩種。在不使用訪問者模式的程式撰寫情境下，我們可能會寫出類似於下面的程式碼：">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="訪問者模式（Visitor Pattern）" />
+<meta property="og:description" content="訪問者模式（Visitor Pattern）#說明 ChatGPT：訪問者模式（Visitor Pattern）是一種行為型設計模式，它用於將算法操作從物件的結構中分離出來。訪問者模式允許「在不修改已有的物件結構」的情況下，定義新的操作。這種模式主要用於對一組相關的物件進行某種操作，而不必修改這些物件的類別。在訪問者模式中，有兩個主要角色：分別是訪問者（Visitor）和元素（Element）。【訪問者】是一個接口或者一個抽象類別，它定義了對物件結構中，操作每個元素的方法。具體的【訪問者】類別將實現這些方法，以定義特定的操作。【元素】則是一個接口或抽象類，它定義了接受訪問者的方法。每個元素類別將實現這個方法，以便在【訪問者】來訪時，調用【訪問者】的相應方法。訪問者模式的核心思想是：「當需要對物件結構中的元素進行不同的操作時，不需要修改元素類別，而是定義新的訪問者類別來實現這些操作。」這樣可以實現操作的「新增」而不改變元素結構，同時也不會影響其他的操作。訪問者模式適用於以下情況：「當一個物件結構包含多種類型的元素，且需要對這些元素進行不同的操作時。」「當物件想要新增新的操作，同時也希望不影響現有元素類別時。」與「當對象結構中的元素結構相對穩定，但其操作算法可能會經常更改時。」總的來說，訪問者模式可以幫助我們實現對物件結構的不同元素進行多種操作，同時保持類別的相對穩定，並提高了系統的可擴展性和可維護性。
+維基百科：訪問者模式（Visitor Pattern）是一種軟體設計模式，用於將演算法與物件結構分離。由於這種分離，使用者可以在不修改物件結構的情況下，向現有的物件結構添加新的操作。這是在 &ldquo;物件導向程式&rdquo; 和 &ldquo;軟體工程&rdquo; 中，遵循開放封閉原則的一種方法。基本上，訪問者允許在一個類族中添加新的虛擬函數，而無需修改這些類。接著，再創建一個訪問者類，其中實現了所有適當的虛擬函數的實例化。訪問者接收實例引用作為輸入，並通過雙重派發（double dispatch）來實現目標。訪問者模式能夠輕鬆地分支處理物件的類型，並在定義了訪問者尚未處理的新物件類型時生成編譯器錯誤。此外，訪問者設計模式也是 23 種著名的四人幫設計模式之一，它（四人幫設計模式）描述了如何解決重複性的設計問題，以設計靈活且可重用的面向對象軟體，即易於實現、更改、測試和重用的物件。「什麼問題可以通過訪問者設計模式解決？」：如果想要在不更改類的情況下，為物件結構的（某些）類別定義新操作，可以使用此類別。「訪問者設計模式描述了什麼解決方案？」訪問者模式定義一個單獨的【訪問者】物件，該物件實現對物件結構的元素執行的操作。客戶端可以遍歷物件結構，並在元素上調用訪問者進行元素操作：意即將操作將請求分派（委派）給【被接受的訪問者物件】。然後，訪問者物件對元素執行操作（&ldquo;訪問元素&rdquo;）。這樣一來，可以通過添加新的訪問者物件獨立於物件結構的類別來創建新的操作。
+特點 可以分離【元素】與【操作】的高度耦和 新增【操作】不會影響到原【元素】的程式碼 增加程式的彈性與靈活性 UML Graphic classDiagramclass Character~Interface~ {void accept(Visitor* visitor);}note &#34;void accept(Visitor* visitor) {\n　visitor.visit(this);\n}&#34;Character &lt;|-- RoleCharacter &lt;|-- MonsterRole &lt;|-- WarriorRole &lt;|-- BowmanRole &lt;|-- MagicianRole &lt;|-- ThiefMonster &lt;|-- ZombieMonster &lt;|-- SlimeMonster &lt;|-- SkeletonclassDiagramclass Visitor~Interface~ {void visit(Role* role);void visit(Monster* monster);}Visitor &lt;|-- PhysicalAttackVisitorVisitor &lt;|-- MagicAttackVisitorVisitor &lt;|-- EscapeVisitor內文 訪問者模式主要要解決的問題是「在不更動原始物件的前提下，對原始物件進行一些新的功能擴充」也就是在不影響原始物件的前提下，進行物件的方法擴充。我們用一個 RPG 遊戲的戰鬥過程來做舉例：假設在一個 RPG 的回合制戰鬥中，【角色】總共可以對【怪物】進行兩種不同的攻擊方式，分別是「普通攻擊（物理攻及）」和「魔法攻擊」這兩種。在不使用訪問者模式的程式撰寫情境下，我們可能會寫出類似於下面的程式碼：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/visitor_pattern/" /><meta property="article:section" content="docs" />
+
+
+<title>訪問者模式（Visitor Pattern） | Fonu Site</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5ffcf89ac915f6608e9b341666487379426c5f4266e5d4ac450ef060cb91bc51.js" integrity="sha256-X/z4mskV9mCOmzQWZkhzeUJsX0Jm5dSsRQ7wYMuRvFE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f4362153a9424eb450dd350e64dfffc7" class="toggle"  />
+    <label for="section-f4362153a9424eb450dd350e64dfffc7" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/to_do_list/" class="">［置頂］待辦事項</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5f16b5923caa653815be6bb5f018b2f0" class="toggle"  />
+    <label for="section-5f16b5923caa653815be6bb5f018b2f0" class="flex justify-between">
+      <a role="button" class="">人生節點</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/nodes/masters_degree/" class="">碩士的畢業證書</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-68339e45fbc633241628720af6b731c7" class="toggle"  />
+    <label for="section-68339e45fbc633241628720af6b731c7" class="flex justify-between">
+      <a role="button" class="">日常札記</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/xinxinmota/" class="">新新魔塔 v2.6.6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/japan/" class="">7 萬步的日本行</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
+      <a role="button" class="">閱讀心得</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/reading_experience/head_first_design_pattern/" class="">《深入淺出設計模式》</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資訊工程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/recommended_books/" class="">推薦書單</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3975d187eb6b0c47dcb29d31a654027a" class="toggle" checked />
+    <label for="section-3975d187eb6b0c47dcb29d31a654027a" class="flex justify-between">
+      <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/mediator_pattern/" class="">中介者模式（Mediator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/flyweight_pattern/" class="">享元模式（Flyweight Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/proxy_pattern/" class="">代理模式（Proxy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/prototype_pattern/" class="">原型模式（Prototype Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/command_pattern/" class="">命令模式（Command Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/singleton_pattern/" class="">單例模式（Singleton Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/facade_pattern/" class="">外觀模式（Facade Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/factory_method_pattern/" class="">工廠方法模式（Factory Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/abstract_factory_pattern/" class="">抽象工廠模式（Abstract Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/template_method_pattern/" class="">模板方法模式（Template Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/bridge_pattern/" class="">橋接模式（Bridge Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/state_pattern/" class="">狀態模式（State Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/builder_pattern/" class="">生成器模式（Builder Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/strategy_pattern/" class="">策略模式（Strategy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/simple_factory_pattern/" class="">簡單工廠模式（Simple Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_pattern/" class="">組合模式（Composite Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/decorator_pattern/" class="">裝飾器模式（Decorator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/observer_pattern/" class="">觀察者模式（Observer Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interpreter_pattern/" class="">解釋器模式（Interpreter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/visitor_pattern/" class="active">訪問者模式（Visitor Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" class="">責任鏈模式（Chain of Responsibility Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/iterator_pattern/" class="">迭代器模式（Iterator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/adapter_pattern/" class="">適配器模式（Adapter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/single_responsibility_principle/" class="">單一職責原則（Single Responsibility Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/liskov_substitution_principle/" class="">里式替換原則（Liskov Substitution Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/open_closed_principle/" class="">開放封閉原則（Open Closed Principle）</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
+      <a role="button" class="">宗教命理</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
+      <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/fortune_telling/tarot/daily_log/" class="">［置頂］每日一翻</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="toggle"  />
+    <label for="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="flex justify-between">
+      <a role="button" class="">自由創作</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>訪問者模式（Visitor Pattern）</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="訪問者模式visitor-pattern">
+  訪問者模式（Visitor Pattern）
+  <a class="anchor" href="#%e8%a8%aa%e5%95%8f%e8%80%85%e6%a8%a1%e5%bc%8fvisitor-pattern">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>說明</strong></li>
+</ul>
+<p><strong>ChatGPT</strong>：訪問者模式（Visitor Pattern）是一種行為型設計模式，它用於將算法操作從物件的結構中分離出來。訪問者模式允許「在不修改已有的物件結構」的情況下，定義新的操作。這種模式主要用於對一組相關的物件進行某種操作，而不必修改這些物件的類別。在訪問者模式中，有兩個主要角色：分別是訪問者（Visitor）和元素（Element）。【訪問者】是一個接口或者一個抽象類別，它定義了對物件結構中，操作每個元素的方法。具體的【訪問者】類別將實現這些方法，以定義特定的操作。【元素】則是一個接口或抽象類，它定義了接受訪問者的方法。每個元素類別將實現這個方法，以便在【訪問者】來訪時，調用【訪問者】的相應方法。訪問者模式的核心思想是：「當需要對物件結構中的元素進行不同的操作時，不需要修改元素類別，而是定義新的訪問者類別來實現這些操作。」這樣可以實現操作的「新增」而不改變元素結構，同時也不會影響其他的操作。訪問者模式適用於以下情況：「當一個物件結構包含多種類型的元素，且需要對這些元素進行不同的操作時。」「當物件想要新增新的操作，同時也希望不影響現有元素類別時。」與「當對象結構中的元素結構相對穩定，但其操作算法可能會經常更改時。」總的來說，訪問者模式可以幫助我們實現對物件結構的不同元素進行多種操作，同時保持類別的相對穩定，並提高了系統的可擴展性和可維護性。</p>
+<p><strong>維基百科</strong>：訪問者模式（Visitor Pattern）是一種軟體設計模式，用於將演算法與物件結構分離。由於這種分離，使用者可以在不修改物件結構的情況下，向現有的物件結構添加新的操作。這是在 &ldquo;物件導向程式&rdquo; 和 &ldquo;軟體工程&rdquo; 中，遵循開放封閉原則的一種方法。基本上，訪問者允許在一個類族中添加新的虛擬函數，而無需修改這些類。接著，再創建一個訪問者類，其中實現了所有適當的虛擬函數的實例化。訪問者接收實例引用作為輸入，並通過雙重派發（double dispatch）來實現目標。訪問者模式能夠輕鬆地分支處理物件的類型，並在定義了訪問者尚未處理的新物件類型時生成編譯器錯誤。此外，訪問者設計模式也是 23 種著名的四人幫設計模式之一，它（四人幫設計模式）描述了如何解決重複性的設計問題，以設計靈活且可重用的面向對象軟體，即易於實現、更改、測試和重用的物件。「什麼問題可以通過訪問者設計模式解決？」：如果想要在不更改類的情況下，為物件結構的（某些）類別定義新操作，可以使用此類別。「訪問者設計模式描述了什麼解決方案？」訪問者模式定義一個單獨的【訪問者】物件，該物件實現對物件結構的元素執行的操作。客戶端可以遍歷物件結構，並在元素上調用訪問者進行元素操作：意即將操作將請求分派（委派）給【被接受的訪問者物件】。然後，訪問者物件對元素執行操作（&ldquo;訪問元素&rdquo;）。這樣一來，可以通過添加新的訪問者物件獨立於物件結構的類別來創建新的操作。</p>
+<hr>
+<ul>
+<li><strong>特點</strong></li>
+</ul>
+<ol>
+<li>可以分離【元素】與【操作】的高度耦和</li>
+<li>新增【操作】不會影響到原【元素】的程式碼</li>
+<li>增加程式的彈性與靈活性</li>
+</ol>
+<hr>
+<ul>
+<li><strong>UML Graphic</strong></li>
+</ul>
+
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+</script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<p class="mermaid">
+classDiagram
+    class Character~Interface~ {
+        void accept(Visitor* visitor);
+    }
+
+    note "void accept(Visitor* visitor) {\n　visitor.visit(this);\n}"
+
+    Character <|-- Role
+    Character <|-- Monster
+
+    Role <|-- Warrior
+    Role <|-- Bowman
+    Role <|-- Magician
+    Role <|-- Thief
+
+    Monster <|-- Zombie
+    Monster <|-- Slime
+    Monster <|-- Skeleton
+</p>
+
+
+
+<p class="mermaid">
+classDiagram
+    class Visitor~Interface~ {
+        void visit(Role* role);
+        void visit(Monster* monster);
+    }
+
+    Visitor <|-- PhysicalAttackVisitor
+    Visitor <|-- MagicAttackVisitor
+    Visitor <|-- EscapeVisitor
+</p>
+
+<hr>
+<ul>
+<li><strong>內文</strong></li>
+</ul>
+<p>訪問者模式主要要解決的問題是「在不更動原始物件的前提下，對原始物件進行一些新的功能擴充」也就是在不影響原始物件的前提下，進行物件的方法擴充。我們用一個 RPG 遊戲的戰鬥過程來做舉例：假設在一個 RPG 的回合制戰鬥中，【角色】總共可以對【怪物】進行兩種不同的攻擊方式，分別是「普通攻擊（物理攻及）」和「魔法攻擊」這兩種。在不使用訪問者模式的程式撰寫情境下，我們可能會寫出類似於下面的程式碼：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">physicalAttack</span><span style="color:#f92672">(</span>Character<span style="color:#f92672">*</span> character<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">magicAttack</span><span style="color:#f92672">(</span>Character<span style="color:#f92672">*</span> character<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Role</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Warrior</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Role <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bowman</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Role <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Magician</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Role <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Thief</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Role <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Monster</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Zombie</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Monster <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Slime</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Monster <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Skeleton</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Monster <span style="color:#f92672">{};</span>
+</span></span></code></pre></div><p>在上述的程式中，因為總共有 7 個不同的實際角色，分別是【戰士】【弓箭手】【法師】【盜賊】【殭屍】【史萊姆】和【骷髏】，因此在程式上，我們會需要對每一個不同的實際角色去做 <code>physicalAttack()</code> 和 <code>magicAttack()</code> 的改寫。這樣的狀況一眼看下去是沒有問題的，但如果今天這個 RPG 遊戲推出了一種新的攻擊機制：爆擊攻擊，此外也對魔法攻擊做出更加細化的屬性攻擊（火、土、風、水之類的），那這樣我們就要重新地開啟這些實際的角色類別，然後再重新撰寫類別內的程式碼了，也就違反了「開放封閉原則」想要闡述的念頭。</p>
+<p>所以在「訪問者」模式上，我們會透過「將『方法』設定為『類別』」的方式，對於這些 &ldquo;方法依賴&rdquo; 的情況做出一些改善：我們會先將整個機制分為兩個部分，分別是「訪問者（Visitor）」和「元素（Element）」。【訪問者】就是原本的方法，在這個例子下就是 <code>physicalAttack()</code> 和 <code>magicAttack()</code>。通常【訪問者】會都有一個共同的父類別 <code>Visitor</code>，方法們會 &ldquo;升級&rdquo; 成類別（<code>PhysicalAttackVisitor</code> 和 <code>MagicAttackVisitor</code>）並繼承 <code>Visitor</code>，<code>Visitor</code> 裡面會包含一個 <code>visit()</code> 方法，用來「訪問」元素。【元素】則是原本的實體物件，在這個例子下，就是【戰士】【弓箭手】【殭屍】&hellip;等不同的角色類別。它們負責「接受」訪問者的訪問，因此它們身上會有一個名為 <code>accept()</code> 的方法，用來實例「【訪問者】如何進行訪問」這件事情，就像是下面程式的這個樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Visitor</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">accept</span><span style="color:#f92672">(</span>Visitor<span style="color:#f92672">&amp;</span> visitor<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            visitor<span style="color:#f92672">.</span><span style="color:#a6e22e">visit</span><span style="color:#f92672">(*</span><span style="color:#66d9ef">this</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Role</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Monster</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Role</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Warrior</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Role <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bowman</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Role <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Magician</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Role <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Thief</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Role <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Monster</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Zombie</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Monster <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Slime</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Monster <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Skeleton</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Monster <span style="color:#f92672">{};</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Visitor</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">visit</span><span style="color:#f92672">(</span>Role<span style="color:#f92672">&amp;</span> role<span style="color:#f92672">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">visit</span><span style="color:#f92672">(</span>Monster<span style="color:#f92672">&amp;</span> monster<span style="color:#f92672">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PhysicalAttackVisitor</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Visitor <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">visit</span><span style="color:#f92672">(</span>Role<span style="color:#f92672">&amp;</span> role<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Monster deal physical damage to character.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">visit</span><span style="color:#f92672">(</span>Monster<span style="color:#f92672">&amp;</span> monster<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Character deal physical damage to monster.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CriticalAttackVisitor</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Visitor <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">visit</span><span style="color:#f92672">(</span>Role<span style="color:#f92672">&amp;</span> role<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Monster deal critical damage to character.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">visit</span><span style="color:#f92672">(</span>Monster<span style="color:#f92672">&amp;</span> monster<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Character deal critical damage to monster.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ElementalMagicAttackVisitor</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Visitor <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        string name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        ElementalMagicAttackVisitor<span style="color:#f92672">(</span>string n<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">:</span> name<span style="color:#f92672">(</span>n<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">visit</span><span style="color:#f92672">(</span>Role<span style="color:#f92672">&amp;</span> role<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Monster deal magic damage to character.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">visit</span><span style="color:#f92672">(</span>Monster<span style="color:#f92672">&amp;</span> monster<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Character deal magic damage to monster.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+</span></span><span style="display:flex;"><span>    Character<span style="color:#f92672">*</span> magician <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Magician();
+</span></span><span style="display:flex;"><span>    Visitor physicalAttack <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PhysicalAttackVisitor();
+</span></span><span style="display:flex;"><span>    Visitor fireMagic <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ElementalMagicAttackVisitor(<span style="color:#e6db74">&#34;fire&#34;</span>);
+</span></span><span style="display:flex;"><span>    Visitor earthMagic <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ElementalMagicAttackVisitor(<span style="color:#e6db74">&#34;earth&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    magician.accept(physicalAttack);
+</span></span><span style="display:flex;"><span>    magician.accept(fireMagic);
+</span></span><span style="display:flex;"><span>    magician.accept(earthMagic);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>向上述這樣，我們只要讓 <code>Character</code> 去進行 <code>accept()</code> 的方法，就可以達成「讓角色（或怪物）進行各種不同的攻擊」的程式了。而若如果我們需要再新增一些角色可以做的功能（例如逃跑？），我們也不需要重新對所有的 <code>Character</code> 類別實作 <code>escape()</code> 的方法，只需要新增一個 <code>EscapeVisitor</code> 的類別，並在該類別內寫出「不同的角色跟怪物該怎麼逃跑？」的程式，再讓 <code>magician</code> 做出類似 <code>magician.accept(new EscapeVisitor());</code> 的動作，即可完成「讓角色進行逃跑」的這個行為了。</p>
+<p>透過將【角色】與【角色可以執行的動作】解耦，即可避免發生「如果要擴充角色可以執行的功能，就會需要重新打開角色的程式，對裏頭的程式進行修改」的這件事情。值得注意的事情是：訪問者模式因為會需要對於所有的「元素」進行動作的改寫。因此我們在做的事情比較像是「把『會更動的程式』從每個【角色】的程式裡頭，移動到『一個統一的類別』裡。」實際上需要修改的程式量提應該也是差不多的。因此這一種設計模式 <strong>並.不.適.合</strong> 使用在「資料結構不穩定」的程式上面。如果「元素」的底層邏輯可能會需要頻繁做修改（像是一直拿捏不定【角色】身上會有那些屬性，或者是抗性列表有時變多有時變少&hellip;等），就不會建議使用訪問者模式對程式進行重構或撰寫。</p>
+<hr>
+<ul>
+<li><strong>小結</strong></li>
+</ul>
+<p>訪問者模式的優點：</p>
+<ul>
+<li>可以將【角色】與【角色所執行的動作】解耦</li>
+<li>讓方法的增添和修改變得更加容易</li>
+<li>將方法統一管裡，避免了需要不同打開不同程式的問題</li>
+</ul>
+<p>訪問者模式的缺點：</p>
+<ul>
+<li>增加了許多類別，會讓程式複雜度變高</li>
+<li>破壞了元素的封裝性，類別的執行動作會在其餘類別被實現</li>
+</ul>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

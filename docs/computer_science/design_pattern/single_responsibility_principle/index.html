@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="單一職責原則（Single Responsibility Principle）#ChatGPT 的說明 單一職責原則（Single Responsibility Principle，簡稱 SRP）是物件導向程式設計中的一個基本原則，它強調「每個類別（或方法）應該都只有一個職責」，意即「只有『一個』理由可以導致該類別或方法產生」。換句話說，一個類別或方法應該只具有一個主要的功能或職責，而不應該承擔過多的功能。這有助於使程式更容易理解、更容易維護和更容易擴展。SRP 的核心思想是「將不同的功能隔離到不同的位置」，從而實現高內聚（High Cohesion）和低耦合（Low Coupling）。這樣做可以使程式更加模組化，且當需求發生變化時，只需要負責該變化的部分，而不會影響到其他的程式與功能。
+違反 SRP 可能導致以下問題：首先是「複雜性增加」： 當一個類別承擔太多的職責時，會導致該類別的程式變得複雜、難以理解、和不易維護。再來，程式的「耦合程度也會變高」：將不同職責的程式混合在一起，會導致類別與類別的依賴加重，進而增加程式的耦合程度，這將使得當類別需要發生改變時，可能會連帶需要修改到其餘的類別，使影響範圍擴大。同時，違反單一職責也會使「程式的重用性下降」：與遵守單一職責的類別相比，具有當類別具有多重職責時，通常難以重用，因為其功能過於特定。此外，也可能發生多了類別具有相同或近似功能的重複性程式。最後，違反 SPR 的程式也會「增加程式變更的風險」： 當一個職責的變化，需要修改類別中的多個部分時，容易會發生撰寫的錯誤，進而引發程式的崩潰，此外也需要考慮是否存在「其他類別也擁有相同功能，因此需要一並修改」的可能性。簡而言之，單一職責原則有助於保持程式的清晰、可維護性和可擴展性，通過確保一個類別只有一個主要職責，可以使系統遍的更加靈活和易於改變。
+以下我們使用一個簡單的情境來解釋單一職責原則，我們假設在一個 RPG 遊戲中，角色可能會有「回復」「受到攻擊」與「升級」三種可能會發生的變化，如果我們使用 SRP 的程式原則，我們就會將這三種變化區別書寫成 takeDamage(), heal(), 和 levelUp() 三種方法。但如果不使用 SRP 的撰寫原則，程式就會全部擠在 update() 裡面，使得程式變得繁冗與複雜：
+// Adhering to SRP (Single Responsibility Principle) // Adhering to SRP (Single Responsibility Principle) // Adhering to SRP (Single Responsibility Principle) class Character { private: string name; int health; int level; public: Character(string name) : name(name), health(100), level(1) {} public: void takeDamage(int amount) { health -= amount; cout &lt;&lt; name &lt;&lt; &#34; takes &#34; &lt;&lt; amount &lt;&lt; &#34; damage.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="單一職責原則（Single Responsibility Principle）" />
+<meta property="og:description" content="單一職責原則（Single Responsibility Principle）#ChatGPT 的說明 單一職責原則（Single Responsibility Principle，簡稱 SRP）是物件導向程式設計中的一個基本原則，它強調「每個類別（或方法）應該都只有一個職責」，意即「只有『一個』理由可以導致該類別或方法產生」。換句話說，一個類別或方法應該只具有一個主要的功能或職責，而不應該承擔過多的功能。這有助於使程式更容易理解、更容易維護和更容易擴展。SRP 的核心思想是「將不同的功能隔離到不同的位置」，從而實現高內聚（High Cohesion）和低耦合（Low Coupling）。這樣做可以使程式更加模組化，且當需求發生變化時，只需要負責該變化的部分，而不會影響到其他的程式與功能。
+違反 SRP 可能導致以下問題：首先是「複雜性增加」： 當一個類別承擔太多的職責時，會導致該類別的程式變得複雜、難以理解、和不易維護。再來，程式的「耦合程度也會變高」：將不同職責的程式混合在一起，會導致類別與類別的依賴加重，進而增加程式的耦合程度，這將使得當類別需要發生改變時，可能會連帶需要修改到其餘的類別，使影響範圍擴大。同時，違反單一職責也會使「程式的重用性下降」：與遵守單一職責的類別相比，具有當類別具有多重職責時，通常難以重用，因為其功能過於特定。此外，也可能發生多了類別具有相同或近似功能的重複性程式。最後，違反 SPR 的程式也會「增加程式變更的風險」： 當一個職責的變化，需要修改類別中的多個部分時，容易會發生撰寫的錯誤，進而引發程式的崩潰，此外也需要考慮是否存在「其他類別也擁有相同功能，因此需要一並修改」的可能性。簡而言之，單一職責原則有助於保持程式的清晰、可維護性和可擴展性，通過確保一個類別只有一個主要職責，可以使系統遍的更加靈活和易於改變。
+以下我們使用一個簡單的情境來解釋單一職責原則，我們假設在一個 RPG 遊戲中，角色可能會有「回復」「受到攻擊」與「升級」三種可能會發生的變化，如果我們使用 SRP 的程式原則，我們就會將這三種變化區別書寫成 takeDamage(), heal(), 和 levelUp() 三種方法。但如果不使用 SRP 的撰寫原則，程式就會全部擠在 update() 裡面，使得程式變得繁冗與複雜：
+// Adhering to SRP (Single Responsibility Principle) // Adhering to SRP (Single Responsibility Principle) // Adhering to SRP (Single Responsibility Principle) class Character { private: string name; int health; int level; public: Character(string name) : name(name), health(100), level(1) {} public: void takeDamage(int amount) { health -= amount; cout &lt;&lt; name &lt;&lt; &#34; takes &#34; &lt;&lt; amount &lt;&lt; &#34; damage." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/single_responsibility_principle/" /><meta property="article:section" content="docs" />
+
+
+<title>單一職責原則（Single Responsibility Principle） | Fonu Site</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5ffcf89ac915f6608e9b341666487379426c5f4266e5d4ac450ef060cb91bc51.js" integrity="sha256-X/z4mskV9mCOmzQWZkhzeUJsX0Jm5dSsRQ7wYMuRvFE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f4362153a9424eb450dd350e64dfffc7" class="toggle"  />
+    <label for="section-f4362153a9424eb450dd350e64dfffc7" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/to_do_list/" class="">［置頂］待辦事項</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5f16b5923caa653815be6bb5f018b2f0" class="toggle"  />
+    <label for="section-5f16b5923caa653815be6bb5f018b2f0" class="flex justify-between">
+      <a role="button" class="">人生節點</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/nodes/masters_degree/" class="">碩士的畢業證書</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-68339e45fbc633241628720af6b731c7" class="toggle"  />
+    <label for="section-68339e45fbc633241628720af6b731c7" class="flex justify-between">
+      <a role="button" class="">日常札記</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/xinxinmota/" class="">新新魔塔 v2.6.6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/japan/" class="">7 萬步的日本行</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
+      <a role="button" class="">閱讀心得</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/reading_experience/head_first_design_pattern/" class="">《深入淺出設計模式》</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資訊工程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/recommended_books/" class="">推薦書單</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3975d187eb6b0c47dcb29d31a654027a" class="toggle" checked />
+    <label for="section-3975d187eb6b0c47dcb29d31a654027a" class="flex justify-between">
+      <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/mediator_pattern/" class="">中介者模式（Mediator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/flyweight_pattern/" class="">享元模式（Flyweight Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/proxy_pattern/" class="">代理模式（Proxy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/prototype_pattern/" class="">原型模式（Prototype Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/command_pattern/" class="">命令模式（Command Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/singleton_pattern/" class="">單例模式（Singleton Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/facade_pattern/" class="">外觀模式（Facade Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/factory_method_pattern/" class="">工廠方法模式（Factory Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/abstract_factory_pattern/" class="">抽象工廠模式（Abstract Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/template_method_pattern/" class="">模板方法模式（Template Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/bridge_pattern/" class="">橋接模式（Bridge Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/state_pattern/" class="">狀態模式（State Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/builder_pattern/" class="">生成器模式（Builder Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/strategy_pattern/" class="">策略模式（Strategy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/simple_factory_pattern/" class="">簡單工廠模式（Simple Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_pattern/" class="">組合模式（Composite Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/decorator_pattern/" class="">裝飾器模式（Decorator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/observer_pattern/" class="">觀察者模式（Observer Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interpreter_pattern/" class="">解釋器模式（Interpreter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/visitor_pattern/" class="">訪問者模式（Visitor Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" class="">責任鏈模式（Chain of Responsibility Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/iterator_pattern/" class="">迭代器模式（Iterator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/adapter_pattern/" class="">適配器模式（Adapter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/single_responsibility_principle/" class="active">單一職責原則（Single Responsibility Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/liskov_substitution_principle/" class="">里式替換原則（Liskov Substitution Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/open_closed_principle/" class="">開放封閉原則（Open Closed Principle）</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
+      <a role="button" class="">宗教命理</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
+      <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/fortune_telling/tarot/daily_log/" class="">［置頂］每日一翻</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="toggle"  />
+    <label for="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="flex justify-between">
+      <a role="button" class="">自由創作</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>單一職責原則（Single Responsibility Principle）</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="單一職責原則single-responsibility-principle">
+  單一職責原則（Single Responsibility Principle）
+  <a class="anchor" href="#%e5%96%ae%e4%b8%80%e8%81%b7%e8%b2%ac%e5%8e%9f%e5%89%87single-responsibility-principle">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>單一職責原則（Single Responsibility Principle，簡稱 SRP）是物件導向程式設計中的一個基本原則，它強調「每個類別（或方法）應該都只有一個職責」，意即「只有『一個』理由可以導致該類別或方法產生」。換句話說，一個類別或方法應該只具有一個主要的功能或職責，而不應該承擔過多的功能。這有助於使程式更容易理解、更容易維護和更容易擴展。SRP 的核心思想是「將不同的功能隔離到不同的位置」，從而實現高內聚（High Cohesion）和低耦合（Low Coupling）。這樣做可以使程式更加模組化，且當需求發生變化時，只需要負責該變化的部分，而不會影響到其他的程式與功能。</p>
+<p>違反 SRP 可能導致以下問題：首先是「<strong>複雜性增加</strong>」： 當一個類別承擔太多的職責時，會導致該類別的程式變得複雜、難以理解、和不易維護。再來，程式的「<strong>耦合程度也會變高</strong>」：將不同職責的程式混合在一起，會導致類別與類別的依賴加重，進而增加程式的耦合程度，這將使得當類別需要發生改變時，可能會連帶需要修改到其餘的類別，使影響範圍擴大。同時，違反單一職責也會使「<strong>程式的重用性下降</strong>」：與遵守單一職責的類別相比，具有當類別具有多重職責時，通常難以重用，因為其功能過於特定。此外，也可能發生多了類別具有相同或近似功能的重複性程式。最後，違反 SPR 的程式也會「<strong>增加程式變更的風險</strong>」： 當一個職責的變化，需要修改類別中的多個部分時，容易會發生撰寫的錯誤，進而引發程式的崩潰，此外也需要考慮是否存在「其他類別也擁有相同功能，因此需要一並修改」的可能性。簡而言之，單一職責原則有助於保持程式的清晰、可維護性和可擴展性，通過確保一個類別只有一個主要職責，可以使系統遍的更加靈活和易於改變。</p>
+<hr>
+<p>以下我們使用一個簡單的情境來解釋單一職責原則，我們假設在一個 RPG 遊戲中，角色可能會有「回復」「受到攻擊」與「升級」三種可能會發生的變化，如果我們使用 SRP 的程式原則，我們就會將這三種變化區別書寫成 <code>takeDamage()</code>, <code>heal()</code>, 和 <code>levelUp()</code> 三種方法。但如果不使用 SRP 的撰寫原則，程式就會全部擠在 <code>update()</code> 裡面，使得程式變得繁冗與複雜：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Adhering to SRP (Single Responsibility Principle)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Adhering to SRP (Single Responsibility Principle)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Adhering to SRP (Single Responsibility Principle)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        string name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> health<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> level<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        Character<span style="color:#f92672">(</span>string name<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> name<span style="color:#f92672">(</span>name<span style="color:#f92672">),</span> health<span style="color:#f92672">(</span><span style="color:#ae81ff">100</span><span style="color:#f92672">),</span> level<span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">takeDamage</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> amount<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            health <span style="color:#f92672">-=</span> amount<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> name <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; takes &#34;</span> <span style="color:#f92672">&lt;&lt;</span> amount <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; damage.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">heal</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> amount<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            health <span style="color:#f92672">+=</span> amount<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> name <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; heals &#34;</span> <span style="color:#f92672">&lt;&lt;</span> amount <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; health.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">levelUp</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            level<span style="color:#f92672">++;</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> name <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; levels up to &#34;</span> <span style="color:#f92672">&lt;&lt;</span> level <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Character <span style="color:#a6e22e">player</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hero&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    player<span style="color:#f92672">.</span><span style="color:#a6e22e">takeDamage</span><span style="color:#f92672">(</span><span style="color:#ae81ff">20</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    player<span style="color:#f92672">.</span><span style="color:#a6e22e">heal</span><span style="color:#f92672">(</span><span style="color:#ae81ff">10</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    player<span style="color:#f92672">.</span><span style="color:#a6e22e">levelUp</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Not adhering to SRP (Single Responsibility Principle)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Not adhering to SRP (Single Responsibility Principle)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Not adhering to SRP (Single Responsibility Principle)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        string name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> health<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> level<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Character<span style="color:#f92672">(</span>string name<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> name<span style="color:#f92672">(</span>name<span style="color:#f92672">),</span> health<span style="color:#f92672">(</span><span style="color:#ae81ff">100</span><span style="color:#f92672">),</span> level<span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> damageAmount<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> healAmount<span style="color:#f92672">,</span> bool levelUp<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>levelUp<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                level<span style="color:#f92672">++;</span>
+</span></span><span style="display:flex;"><span>                cout <span style="color:#f92672">&lt;&lt;</span> name <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; levels up to &#34;</span> <span style="color:#f92672">&lt;&lt;</span> level <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>damageAmount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                health <span style="color:#f92672">-=</span> damageAmount<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                cout <span style="color:#f92672">&lt;&lt;</span> name <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; takes &#34;</span> <span style="color:#f92672">&lt;&lt;</span> damageAmount <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; damage.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>healAmount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                health <span style="color:#f92672">+=</span> healAmount<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                cout <span style="color:#f92672">&lt;&lt;</span> name <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; heals &#34;</span> <span style="color:#f92672">&lt;&lt;</span> healAmount <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; health.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Character <span style="color:#a6e22e">player</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hero&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    player<span style="color:#f92672">.</span><span style="color:#a6e22e">update</span><span style="color:#f92672">(</span><span style="color:#ae81ff">20</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    player<span style="color:#f92672">.</span><span style="color:#a6e22e">update</span><span style="color:#f92672">(</span><span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    player<span style="color:#f92672">.</span><span style="color:#a6e22e">update</span><span style="color:#f92672">(</span><span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div></article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

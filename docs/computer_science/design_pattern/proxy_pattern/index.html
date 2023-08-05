@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="代理模式（Proxy Pattern）#說明 ChatGPT：代理模式（Proxy Pattern）是一種結構型設計模式，它允許通過使用一個「代理對象」來代表真實對象，從而控制對真實對象的訪問。代理模式提供了一個額外的層次，用於處理對真實對象的訪問，並可以在不改變真實對象的情況下，為其添加一些額外的功能。代理模式的核心思想是：「在【客戶端】和【真實對象】之間引入一個【代理對象】」，這個代理對象充當了客戶端和真實對象之間的中間人。當客戶端想要訪問真實對象時，它不直接與真實對象進行交互，而是通過代理對象來進行訪問。代理對象在接收到客戶端的訪問請求後，可以選擇是否轉發請求給真實對象，並可以在轉發請求前後執行一些額外的操作。代理模式主要包含以下幾個角色：Subject（主題）：主題定義了真實對象和代理對象之間的共同接口，這樣在任何使用真實對象的地方都可以使用代理對象。RealSubject（真實主題）：真實對象實現了 Subject 定義的接口，也就是真實對象，客戶端並不直接與它進行交互。Proxy（代理）：代理同樣也實現了 Subject 定義的接口，內部包含一個真實對象的引用，客戶端通過訪問該對象來代替訪問真實對象。
+維基百科：代理模式（英語：Proxy Pattern）是軟體工程中的一種設計模式。所謂的【代理者】是指一個類別可以作為其它東西的介面。【代理者】可以作任何東西的介面：例如網路連接、記憶體中的大物件、某些特定檔案、或其它昂貴或無法複製的資源。著名的代理模式例子為參照計數（英語：reference counting）指標物件。此外，當一個複雜物件的多份副本須存在時，代理模式可以結合享元模式以減少記憶體用量，典型的作法是建立一個複雜物件及多個代理者，每個代理者都會參照到原本的複雜物件，而作用在代理者的運算會轉送到原本物件，而一旦所有的代理者都不存在時，該複雜物件將會被移除。
+特點 通過代理者減少對於實體對象的依賴 能夠保持真實對象的穩定與獨立 可以客製化地提供真實對象的擴充功能 UML Graphic classDiagramclass Serverclass ProxyServer &lt;|-- Proxyclass User {Proxy* proxyvoid call_server()}User --&gt; Proxynote &#34;void call_server() {\n　proxy.request();\n}&#34;內文 類似於「霧運算」或者是「邊緣計算」的概念，代理模式的功能是透過一個【代理者】類別，將【真實對象】的工作給區分出去，讓【客戶】有需要進行一些對於【真實對象】的存取時，可以透過【代理者】來進行，從而減少對【真實對象】的依賴或負擔。例如在一個 RPG 遊戲中，我們每次在創建線上遊戲的角色的時候，都會需要做一個「確認 ID 是否重複」的事情，在程式的撰寫上可能會有向下面這樣的例子：
+class GameServer { public: std::vector&lt;string&gt; id_vector; public: bool name_duplicated(string str) { auto it = std::find(id_vector.begin(), id_vector.end(), str); if(it != id_vector.end()) return true; else return false; } }; class Character { private: std::string name; public: void set_user_name() { GameServer server = new GameServer(); std::string tmp_name; std::cin &gt;&gt; tmp_name; while(server.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="代理模式（Proxy Pattern）" />
+<meta property="og:description" content="代理模式（Proxy Pattern）#說明 ChatGPT：代理模式（Proxy Pattern）是一種結構型設計模式，它允許通過使用一個「代理對象」來代表真實對象，從而控制對真實對象的訪問。代理模式提供了一個額外的層次，用於處理對真實對象的訪問，並可以在不改變真實對象的情況下，為其添加一些額外的功能。代理模式的核心思想是：「在【客戶端】和【真實對象】之間引入一個【代理對象】」，這個代理對象充當了客戶端和真實對象之間的中間人。當客戶端想要訪問真實對象時，它不直接與真實對象進行交互，而是通過代理對象來進行訪問。代理對象在接收到客戶端的訪問請求後，可以選擇是否轉發請求給真實對象，並可以在轉發請求前後執行一些額外的操作。代理模式主要包含以下幾個角色：Subject（主題）：主題定義了真實對象和代理對象之間的共同接口，這樣在任何使用真實對象的地方都可以使用代理對象。RealSubject（真實主題）：真實對象實現了 Subject 定義的接口，也就是真實對象，客戶端並不直接與它進行交互。Proxy（代理）：代理同樣也實現了 Subject 定義的接口，內部包含一個真實對象的引用，客戶端通過訪問該對象來代替訪問真實對象。
+維基百科：代理模式（英語：Proxy Pattern）是軟體工程中的一種設計模式。所謂的【代理者】是指一個類別可以作為其它東西的介面。【代理者】可以作任何東西的介面：例如網路連接、記憶體中的大物件、某些特定檔案、或其它昂貴或無法複製的資源。著名的代理模式例子為參照計數（英語：reference counting）指標物件。此外，當一個複雜物件的多份副本須存在時，代理模式可以結合享元模式以減少記憶體用量，典型的作法是建立一個複雜物件及多個代理者，每個代理者都會參照到原本的複雜物件，而作用在代理者的運算會轉送到原本物件，而一旦所有的代理者都不存在時，該複雜物件將會被移除。
+特點 通過代理者減少對於實體對象的依賴 能夠保持真實對象的穩定與獨立 可以客製化地提供真實對象的擴充功能 UML Graphic classDiagramclass Serverclass ProxyServer &lt;|-- Proxyclass User {Proxy* proxyvoid call_server()}User --&gt; Proxynote &#34;void call_server() {\n　proxy.request();\n}&#34;內文 類似於「霧運算」或者是「邊緣計算」的概念，代理模式的功能是透過一個【代理者】類別，將【真實對象】的工作給區分出去，讓【客戶】有需要進行一些對於【真實對象】的存取時，可以透過【代理者】來進行，從而減少對【真實對象】的依賴或負擔。例如在一個 RPG 遊戲中，我們每次在創建線上遊戲的角色的時候，都會需要做一個「確認 ID 是否重複」的事情，在程式的撰寫上可能會有向下面這樣的例子：
+class GameServer { public: std::vector&lt;string&gt; id_vector; public: bool name_duplicated(string str) { auto it = std::find(id_vector.begin(), id_vector.end(), str); if(it != id_vector.end()) return true; else return false; } }; class Character { private: std::string name; public: void set_user_name() { GameServer server = new GameServer(); std::string tmp_name; std::cin &gt;&gt; tmp_name; while(server." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/proxy_pattern/" /><meta property="article:section" content="docs" />
+
+
+<title>代理模式（Proxy Pattern） | Fonu Site</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5ffcf89ac915f6608e9b341666487379426c5f4266e5d4ac450ef060cb91bc51.js" integrity="sha256-X/z4mskV9mCOmzQWZkhzeUJsX0Jm5dSsRQ7wYMuRvFE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f4362153a9424eb450dd350e64dfffc7" class="toggle"  />
+    <label for="section-f4362153a9424eb450dd350e64dfffc7" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/to_do_list/" class="">［置頂］待辦事項</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5f16b5923caa653815be6bb5f018b2f0" class="toggle"  />
+    <label for="section-5f16b5923caa653815be6bb5f018b2f0" class="flex justify-between">
+      <a role="button" class="">人生節點</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/nodes/masters_degree/" class="">碩士的畢業證書</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-68339e45fbc633241628720af6b731c7" class="toggle"  />
+    <label for="section-68339e45fbc633241628720af6b731c7" class="flex justify-between">
+      <a role="button" class="">日常札記</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/xinxinmota/" class="">新新魔塔 v2.6.6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/japan/" class="">7 萬步的日本行</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
+      <a role="button" class="">閱讀心得</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/reading_experience/head_first_design_pattern/" class="">《深入淺出設計模式》</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資訊工程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/recommended_books/" class="">推薦書單</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3975d187eb6b0c47dcb29d31a654027a" class="toggle" checked />
+    <label for="section-3975d187eb6b0c47dcb29d31a654027a" class="flex justify-between">
+      <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/mediator_pattern/" class="">中介者模式（Mediator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/flyweight_pattern/" class="">享元模式（Flyweight Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/proxy_pattern/" class="active">代理模式（Proxy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/prototype_pattern/" class="">原型模式（Prototype Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/command_pattern/" class="">命令模式（Command Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/singleton_pattern/" class="">單例模式（Singleton Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/facade_pattern/" class="">外觀模式（Facade Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/factory_method_pattern/" class="">工廠方法模式（Factory Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/abstract_factory_pattern/" class="">抽象工廠模式（Abstract Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/template_method_pattern/" class="">模板方法模式（Template Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/bridge_pattern/" class="">橋接模式（Bridge Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/state_pattern/" class="">狀態模式（State Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/builder_pattern/" class="">生成器模式（Builder Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/strategy_pattern/" class="">策略模式（Strategy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/simple_factory_pattern/" class="">簡單工廠模式（Simple Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_pattern/" class="">組合模式（Composite Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/decorator_pattern/" class="">裝飾器模式（Decorator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/observer_pattern/" class="">觀察者模式（Observer Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interpreter_pattern/" class="">解釋器模式（Interpreter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/visitor_pattern/" class="">訪問者模式（Visitor Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" class="">責任鏈模式（Chain of Responsibility Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/iterator_pattern/" class="">迭代器模式（Iterator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/adapter_pattern/" class="">適配器模式（Adapter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/single_responsibility_principle/" class="">單一職責原則（Single Responsibility Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/liskov_substitution_principle/" class="">里式替換原則（Liskov Substitution Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/open_closed_principle/" class="">開放封閉原則（Open Closed Principle）</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
+      <a role="button" class="">宗教命理</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
+      <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/fortune_telling/tarot/daily_log/" class="">［置頂］每日一翻</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="toggle"  />
+    <label for="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="flex justify-between">
+      <a role="button" class="">自由創作</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>代理模式（Proxy Pattern）</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="代理模式proxy-pattern">
+  代理模式（Proxy Pattern）
+  <a class="anchor" href="#%e4%bb%a3%e7%90%86%e6%a8%a1%e5%bc%8fproxy-pattern">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>說明</strong></li>
+</ul>
+<p><strong>ChatGPT</strong>：代理模式（Proxy Pattern）是一種結構型設計模式，它允許通過使用一個「代理對象」來代表真實對象，從而控制對真實對象的訪問。代理模式提供了一個額外的層次，用於處理對真實對象的訪問，並可以在不改變真實對象的情況下，為其添加一些額外的功能。代理模式的核心思想是：「在【客戶端】和【真實對象】之間引入一個【代理對象】」，這個代理對象充當了客戶端和真實對象之間的<strong>中間人</strong>。當客戶端想要訪問真實對象時，它不直接與真實對象進行交互，而是通過代理對象來進行訪問。代理對象在接收到客戶端的訪問請求後，可以選擇是否轉發請求給真實對象，並可以在轉發請求前後執行一些額外的操作。代理模式主要包含以下幾個角色：Subject（主題）：主題定義了真實對象和代理對象之間的共同接口，這樣在任何使用真實對象的地方都可以使用代理對象。RealSubject（真實主題）：真實對象實現了 Subject 定義的接口，也就是真實對象，客戶端並不直接與它進行交互。Proxy（代理）：代理同樣也實現了 Subject 定義的接口，內部包含一個真實對象的引用，客戶端通過訪問該對象來代替訪問真實對象。</p>
+<p><strong>維基百科</strong>：代理模式（英語：Proxy Pattern）是軟體工程中的一種設計模式。所謂的【代理者】是指一個類別可以作為其它東西的介面。【代理者】可以作任何東西的介面：例如網路連接、記憶體中的大物件、某些特定檔案、或其它昂貴或無法複製的資源。著名的代理模式例子為參照計數（英語：reference counting）指標物件。此外，當一個複雜物件的多份副本須存在時，代理模式可以結合<a href="/docs/computer_science/design_pattern/flyweight_pattern/">享元模式</a>以減少記憶體用量，典型的作法是建立一個複雜物件及多個代理者，每個代理者都會參照到原本的複雜物件，而作用在代理者的運算會轉送到原本物件，而一旦所有的代理者都不存在時，該複雜物件將會被移除。</p>
+<hr>
+<ul>
+<li><strong>特點</strong></li>
+</ul>
+<ol>
+<li>通過代理者減少對於實體對象的依賴</li>
+<li>能夠保持真實對象的穩定與獨立</li>
+<li>可以客製化地提供真實對象的擴充功能</li>
+</ol>
+<hr>
+<ul>
+<li><strong>UML Graphic</strong></li>
+</ul>
+
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+</script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<p class="mermaid">
+classDiagram
+    class Server
+    class Proxy
+
+    Server <|-- Proxy
+
+    class User {
+        Proxy* proxy
+        void call_server()
+    }
+
+    User --> Proxy
+
+    note "void call_server() {\n　proxy.request();\n}"
+</p>
+
+<hr>
+<ul>
+<li><strong>內文</strong></li>
+</ul>
+<p>類似於「霧運算」或者是「邊緣計算」的概念，代理模式的功能是透過一個【代理者】類別，將【真實對象】的工作給區分出去，讓【客戶】有需要進行一些對於【真實對象】的存取時，可以透過【代理者】來進行，從而減少對【真實對象】的依賴或負擔。例如在一個 RPG 遊戲中，我們每次在創建線上遊戲的角色的時候，都會需要做一個「確認 ID 是否重複」的事情，在程式的撰寫上可能會有向下面這樣的例子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GameServer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> id_vector;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> name_duplicated(string str) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(id_vector.begin(), id_vector.end(), str);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(it <span style="color:#f92672">!=</span> id_vector.end())
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>string name;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> set_user_name() {
+</span></span><span style="display:flex;"><span>            GameServer server <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GameServer();
+</span></span><span style="display:flex;"><span>            std<span style="color:#f92672">::</span>string tmp_name;
+</span></span><span style="display:flex;"><span>            std<span style="color:#f92672">::</span>cin <span style="color:#f92672">&gt;&gt;</span> tmp_name;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(server.name_duplicated()) {
+</span></span><span style="display:flex;"><span>                std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Name is duplicated.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>                std<span style="color:#f92672">::</span>cin <span style="color:#f92672">&gt;&gt;</span> tmp_name;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            server.set_user_name(tmp_name);
+</span></span><span style="display:flex;"><span>            name <span style="color:#f92672">=</span> tmp_name;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>這樣做會有幾個缺點：首先是程式的運行會對伺服器有著很大的負擔。如果【客戶】裡所有大大小小的事情都必須要交給【伺服器】去做處理時，那伺服器的工作量就會變得巨量龐大。其次，因為大量的工作被湧進【伺服器】的排程中，因此可預見的：使用者的等待時間或者是體驗分數就會被大打折扣。因此，對於這樣的情況，我們可以使用「代理模式」來解決問題：代理模式可以在【客戶】和【伺服器】之間建立一個【代理者】。【代理者】允許被擁有部分（或全部）【伺服器】可以執行的操作或功能。讓【客戶】想要操作一些資料的時候，直接去找【代理者】即可。</p>
+<p>這樣做有幾個好處：首先是「<strong>控制訪問權限</strong>」。我們可以透過代理者，先初步過濾不合法的一些操作或請求（例如客戶端想要存取伺服器重要資料之類的），以提升程式的安全性。此外，我們也可以利用【代理者】進行 <strong>Lazy Loading</strong>，讓一些程式資源不需要一開始就先全部準備好（會花很多時間，讓賀酷的使用者體驗變差），透過背景加載、或者是需要時再加載&hellip;等方法彈性地運用程式資源。此外，我們也可以把【代理者】當成一個小小的暫存空間，透過對【代理者】的存取，除了可以提升程式的運行速度之外，也可以進一步降低對【伺服器】的重複請求。還有其他優點，像是簡化客戶端的程式、提升存取效率、可以利用代理者進興一些擴增的伺服器操作&hellip;等。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Server</span> {};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GameServer</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Server {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">static</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> id_vector;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">static</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> get_id_vector() {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> id_vector;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">insert_id</span>(std<span style="color:#f92672">::</span>string id) {
+</span></span><span style="display:flex;"><span>            id_vector.push_back(id);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Proxy</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Server {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> id_vector;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Proxy() <span style="color:#f92672">:</span> id_vector(GameServer<span style="color:#f92672">::</span>get_id_vector()) {};
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> name_duplicated(string str) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(id_vector.begin(), id_vector.end(), str);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(it <span style="color:#f92672">!=</span> id_vector.end())
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">set_user_name</span>(std<span style="color:#f92672">::</span>string name) {
+</span></span><span style="display:flex;"><span>            GameServer<span style="color:#f92672">::</span>insert_id(name);
+</span></span><span style="display:flex;"><span>            id_vector <span style="color:#f92672">=</span> GameServer<span style="color:#f92672">::</span>get_id_vector();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>string name;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> set_user_name() {
+</span></span><span style="display:flex;"><span>            Proxy proxy <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Proxy();
+</span></span><span style="display:flex;"><span>            std<span style="color:#f92672">::</span>string tmp_name;
+</span></span><span style="display:flex;"><span>            std<span style="color:#f92672">::</span>cin <span style="color:#f92672">&gt;&gt;</span> tmp_name;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(proxy.name_duplicated()) {
+</span></span><span style="display:flex;"><span>                std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Name is duplicated.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>                std<span style="color:#f92672">::</span>cin <span style="color:#f92672">&gt;&gt;</span> tmp_name;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            proxy.set_user_name(tmp_name);
+</span></span><span style="display:flex;"><span>            name <span style="color:#f92672">=</span> tmp_name;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>總的來說，代理模式提供了一個額外的【代理者】來控制【客戶】對【真實對象】的訪問，同時可以為【真實對象】提供額外的功能。這樣的設計除了可以降低【真實對象】的工作負擔之外，更可以提升【客戶】的使用者體驗，也有助於降低系統的耦合度，提高程式的可讀性、可維護性、遠程訪問和安全控制&hellip;等需求。</p>
+<hr>
+<ul>
+<li><strong>小結</strong></li>
+</ul>
+<p>代理模式的優點：</p>
+<ul>
+<li>控制【客戶】對於【真實對象】的訪問，增加程式安全性</li>
+<li>簡化伺服器的工作與負擔，提升伺服器的運行效率</li>
+<li>可以延遲加載，提升用戶在使用程式時的使用者體驗</li>
+</ul>
+<p>原型模式的缺點：</p>
+<ul>
+<li>因為多了【代理者】類別，因此增加了程式的複雜性</li>
+<li>過多的代理者可能同樣會對【伺服器】造成負擔</li>
+<li>可能會因為【代理者】協調不彰，造成類似 Deadlock 的問題</li>
+</ul>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

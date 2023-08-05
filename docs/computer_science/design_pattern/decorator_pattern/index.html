@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="裝飾器模式（Decorator Pattern）#說明 ChatGPT：裝飾器模式（Decorator Pattern）是一種結構型設計模式，它允許動態地為對象添加額外的功能，並且不需要修改其代碼。這種模式通常用於擴展一個類的功能，並且提供了比繼承更靈活的解決方案。 在裝飾器模式中，將功能的實現分成核心部分和裝飾部分。核心部分代表原始類，它可以是一個抽象類或接口，裝飾部分則是一系列具體的裝飾器類，用於擴展核心部分的功能。裝飾器模式的典型應用場景是在不改變原始類的情況下，動態地擴展功能。例如，可以用來為一個圖形繪製程式添加不同的效果，如邊框、陰影、填充等，這些效果可以在運行時動態地添加，且不影響圖形本身的類結構。通常來說，一個裝飾器模式的基本結構包含以下角色：Component（組件）：定義了核心功能的接口，可以是抽象類或接口。Concrete Component（具體組件）：實現了 Component 接口的具體類，代表原始類。Decorator（裝飾器）：維持一個指向 Component 的引用，並實現 Component 接口，這樣可以動態地添加功能。ConcreteDecorator（具體裝飾器）：擴展 Decorator 的功能，並實現具體的裝飾行為。
+維基百科：裝飾器模式又叫做「修飾模式」，是物件導向程式領域中，一種動態地往一個類別中添加新的行為的設計模式。就功能而言，裝飾器模式相比生成子類別更為靈活，這樣可以給某個對象而不是整個類別添加一些功能。通過使用裝飾器模式，可以在程式運行時，動態地擴充一個類別的功能。原理是：增加一個「修飾類」去包裹原來的類別，包裹的方式是在修飾類的構造函數中將原來的類以參數的形式傳入。裝飾類實現新的功能，但是，在不需要用到新功能的地方，它可以直接調用原來的類別中的方法。此外，修飾類必須和原來的類別有相同的接口。裝飾器模式是類別繼承的另外一種選擇。類繼承在編譯時候增加行為，而裝飾器模式則是在程式運行時增加行為。當有幾個相互獨立的功能需要擴充時，這個區別就變得很重要。在有些物件導向的程式語言中，類別不能在運行時被創建，通常在設計的時候也不能預測到有哪幾種功能組合。這就意味著要為每一種組合創建一個新類別。相反，裝飾器模式是在程式運行時候的實例化物件的，這樣就可以在程式運行的時後，根據需要進行不同地組合。
+特點 可以通過裝飾器類，動態地擴展物件的功能 可以對物件任意組合功能，使得系統的擴展性更好 遵從設計原則中的「開放封閉原則」 UML Graphic classDiagramWeapon &lt;|-- SwordWeapon &lt;|-- AxeWeapon &lt;|-- Daggerclass Decorator~Interface~ {Decorator(Weapon* w)}Weapon &lt;|-- Decorator~Interface~Decorator~Interface~ &lt;|-- AttackBuffDecorator~Interface~ &lt;|-- CritBuffDecorator~Interface~ &lt;|-- PenetratingBuff#內文 裝飾器模式是一種比較特別的設計模式，它的核心用途是「利用『非繼承』的方式，擴增原本的類別」。因為裝飾器模式可以遞迴執行（或者說它的本質就是遞迴執行），因此也適用在「重複疊加某一種效果的需求」的情境上。讓我們用一個 RPG 遊戲來當例子：假設我們在實現一個【武器強化】的功能，可以針對不同的武器（像是劍、斧頭、匕首&hellip;等）進行不同種的強化（增益攻擊、爆擊、或護甲穿透&hellip;等），如果我們用「繼承」的方式來寫的話，可能會寫出類似於下面這樣的程式碼：
+class Weapon {}; class Sword : public Weapon {}; class Attack_Buff_Sword : public Sword {}; class Crit_Buff_Sword : public Sword {}; class Penetrating_Buff_Sword : public Sword {}; class Axe : public Weapon {}; class Attack_Buff_Axe : public Axe {}; class Crit_Buff_Axe : public Axe {}; class Penetrating_Buff_Axe : public Axe {}; class Dagger : public Weapon {}; class Attack_Buff_Dagger : public Dagger {}; class Crit_Buff_Dagger : public Dagger {}; class Penetrating_Buff_Dagger : public Dagger {}; 這樣子的做法有幾個壞處：首先是程式的類別會依照【武器】與【增益效果】的變多而快速增加。在當前的狀況下，如果我們想要新增兩種武器（長槍、弓箭）那麼我們除了新增 Lance, Bow 兩種類別之外，我們還要根據不同的類別分別實作攻擊增益、爆及增益、以及穿透護甲增益三種類別。那如果再之後我們打算多新增 \(x\)種武器和 \(y\)種增益效果，類別的數量就會以驚人的速度成長了。">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="裝飾器模式（Decorator Pattern）" />
+<meta property="og:description" content="裝飾器模式（Decorator Pattern）#說明 ChatGPT：裝飾器模式（Decorator Pattern）是一種結構型設計模式，它允許動態地為對象添加額外的功能，並且不需要修改其代碼。這種模式通常用於擴展一個類的功能，並且提供了比繼承更靈活的解決方案。 在裝飾器模式中，將功能的實現分成核心部分和裝飾部分。核心部分代表原始類，它可以是一個抽象類或接口，裝飾部分則是一系列具體的裝飾器類，用於擴展核心部分的功能。裝飾器模式的典型應用場景是在不改變原始類的情況下，動態地擴展功能。例如，可以用來為一個圖形繪製程式添加不同的效果，如邊框、陰影、填充等，這些效果可以在運行時動態地添加，且不影響圖形本身的類結構。通常來說，一個裝飾器模式的基本結構包含以下角色：Component（組件）：定義了核心功能的接口，可以是抽象類或接口。Concrete Component（具體組件）：實現了 Component 接口的具體類，代表原始類。Decorator（裝飾器）：維持一個指向 Component 的引用，並實現 Component 接口，這樣可以動態地添加功能。ConcreteDecorator（具體裝飾器）：擴展 Decorator 的功能，並實現具體的裝飾行為。
+維基百科：裝飾器模式又叫做「修飾模式」，是物件導向程式領域中，一種動態地往一個類別中添加新的行為的設計模式。就功能而言，裝飾器模式相比生成子類別更為靈活，這樣可以給某個對象而不是整個類別添加一些功能。通過使用裝飾器模式，可以在程式運行時，動態地擴充一個類別的功能。原理是：增加一個「修飾類」去包裹原來的類別，包裹的方式是在修飾類的構造函數中將原來的類以參數的形式傳入。裝飾類實現新的功能，但是，在不需要用到新功能的地方，它可以直接調用原來的類別中的方法。此外，修飾類必須和原來的類別有相同的接口。裝飾器模式是類別繼承的另外一種選擇。類繼承在編譯時候增加行為，而裝飾器模式則是在程式運行時增加行為。當有幾個相互獨立的功能需要擴充時，這個區別就變得很重要。在有些物件導向的程式語言中，類別不能在運行時被創建，通常在設計的時候也不能預測到有哪幾種功能組合。這就意味著要為每一種組合創建一個新類別。相反，裝飾器模式是在程式運行時候的實例化物件的，這樣就可以在程式運行的時後，根據需要進行不同地組合。
+特點 可以通過裝飾器類，動態地擴展物件的功能 可以對物件任意組合功能，使得系統的擴展性更好 遵從設計原則中的「開放封閉原則」 UML Graphic classDiagramWeapon &lt;|-- SwordWeapon &lt;|-- AxeWeapon &lt;|-- Daggerclass Decorator~Interface~ {Decorator(Weapon* w)}Weapon &lt;|-- Decorator~Interface~Decorator~Interface~ &lt;|-- AttackBuffDecorator~Interface~ &lt;|-- CritBuffDecorator~Interface~ &lt;|-- PenetratingBuff#內文 裝飾器模式是一種比較特別的設計模式，它的核心用途是「利用『非繼承』的方式，擴增原本的類別」。因為裝飾器模式可以遞迴執行（或者說它的本質就是遞迴執行），因此也適用在「重複疊加某一種效果的需求」的情境上。讓我們用一個 RPG 遊戲來當例子：假設我們在實現一個【武器強化】的功能，可以針對不同的武器（像是劍、斧頭、匕首&hellip;等）進行不同種的強化（增益攻擊、爆擊、或護甲穿透&hellip;等），如果我們用「繼承」的方式來寫的話，可能會寫出類似於下面這樣的程式碼：
+class Weapon {}; class Sword : public Weapon {}; class Attack_Buff_Sword : public Sword {}; class Crit_Buff_Sword : public Sword {}; class Penetrating_Buff_Sword : public Sword {}; class Axe : public Weapon {}; class Attack_Buff_Axe : public Axe {}; class Crit_Buff_Axe : public Axe {}; class Penetrating_Buff_Axe : public Axe {}; class Dagger : public Weapon {}; class Attack_Buff_Dagger : public Dagger {}; class Crit_Buff_Dagger : public Dagger {}; class Penetrating_Buff_Dagger : public Dagger {}; 這樣子的做法有幾個壞處：首先是程式的類別會依照【武器】與【增益效果】的變多而快速增加。在當前的狀況下，如果我們想要新增兩種武器（長槍、弓箭）那麼我們除了新增 Lance, Bow 兩種類別之外，我們還要根據不同的類別分別實作攻擊增益、爆及增益、以及穿透護甲增益三種類別。那如果再之後我們打算多新增 \(x\)種武器和 \(y\)種增益效果，類別的數量就會以驚人的速度成長了。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/decorator_pattern/" /><meta property="article:section" content="docs" />
+
+
+<title>裝飾器模式（Decorator Pattern） | Fonu Site</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5ffcf89ac915f6608e9b341666487379426c5f4266e5d4ac450ef060cb91bc51.js" integrity="sha256-X/z4mskV9mCOmzQWZkhzeUJsX0Jm5dSsRQ7wYMuRvFE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f4362153a9424eb450dd350e64dfffc7" class="toggle"  />
+    <label for="section-f4362153a9424eb450dd350e64dfffc7" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/to_do_list/" class="">［置頂］待辦事項</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5f16b5923caa653815be6bb5f018b2f0" class="toggle"  />
+    <label for="section-5f16b5923caa653815be6bb5f018b2f0" class="flex justify-between">
+      <a role="button" class="">人生節點</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/nodes/masters_degree/" class="">碩士的畢業證書</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-68339e45fbc633241628720af6b731c7" class="toggle"  />
+    <label for="section-68339e45fbc633241628720af6b731c7" class="flex justify-between">
+      <a role="button" class="">日常札記</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/xinxinmota/" class="">新新魔塔 v2.6.6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/japan/" class="">7 萬步的日本行</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
+      <a role="button" class="">閱讀心得</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/reading_experience/head_first_design_pattern/" class="">《深入淺出設計模式》</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資訊工程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/recommended_books/" class="">推薦書單</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3975d187eb6b0c47dcb29d31a654027a" class="toggle" checked />
+    <label for="section-3975d187eb6b0c47dcb29d31a654027a" class="flex justify-between">
+      <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/mediator_pattern/" class="">中介者模式（Mediator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/flyweight_pattern/" class="">享元模式（Flyweight Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/proxy_pattern/" class="">代理模式（Proxy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/prototype_pattern/" class="">原型模式（Prototype Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/command_pattern/" class="">命令模式（Command Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/singleton_pattern/" class="">單例模式（Singleton Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/facade_pattern/" class="">外觀模式（Facade Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/factory_method_pattern/" class="">工廠方法模式（Factory Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/abstract_factory_pattern/" class="">抽象工廠模式（Abstract Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/template_method_pattern/" class="">模板方法模式（Template Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/bridge_pattern/" class="">橋接模式（Bridge Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/state_pattern/" class="">狀態模式（State Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/builder_pattern/" class="">生成器模式（Builder Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/strategy_pattern/" class="">策略模式（Strategy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/simple_factory_pattern/" class="">簡單工廠模式（Simple Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_pattern/" class="">組合模式（Composite Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/decorator_pattern/" class="active">裝飾器模式（Decorator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/observer_pattern/" class="">觀察者模式（Observer Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interpreter_pattern/" class="">解釋器模式（Interpreter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/visitor_pattern/" class="">訪問者模式（Visitor Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" class="">責任鏈模式（Chain of Responsibility Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/iterator_pattern/" class="">迭代器模式（Iterator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/adapter_pattern/" class="">適配器模式（Adapter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/single_responsibility_principle/" class="">單一職責原則（Single Responsibility Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/liskov_substitution_principle/" class="">里式替換原則（Liskov Substitution Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/open_closed_principle/" class="">開放封閉原則（Open Closed Principle）</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
+      <a role="button" class="">宗教命理</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
+      <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/fortune_telling/tarot/daily_log/" class="">［置頂］每日一翻</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="toggle"  />
+    <label for="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="flex justify-between">
+      <a role="button" class="">自由創作</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>裝飾器模式（Decorator Pattern）</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="裝飾器模式decorator-pattern">
+  裝飾器模式（Decorator Pattern）
+  <a class="anchor" href="#%e8%a3%9d%e9%a3%be%e5%99%a8%e6%a8%a1%e5%bc%8fdecorator-pattern">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>說明</strong></li>
+</ul>
+<p><strong>ChatGPT</strong>：裝飾器模式（Decorator Pattern）是一種結構型設計模式，它允許動態地為對象添加額外的功能，並且不需要修改其代碼。這種模式通常用於擴展一個類的功能，並且提供了比繼承更靈活的解決方案。 在裝飾器模式中，將功能的實現分成核心部分和裝飾部分。核心部分代表原始類，它可以是一個抽象類或接口，裝飾部分則是一系列具體的裝飾器類，用於擴展核心部分的功能。裝飾器模式的典型應用場景是在不改變原始類的情況下，動態地擴展功能。例如，可以用來為一個圖形繪製程式添加不同的效果，如邊框、陰影、填充等，這些效果可以在運行時動態地添加，且不影響圖形本身的類結構。通常來說，一個裝飾器模式的基本結構包含以下角色：Component（組件）：定義了核心功能的接口，可以是抽象類或接口。Concrete Component（具體組件）：實現了 Component 接口的具體類，代表原始類。Decorator（裝飾器）：維持一個指向 Component 的引用，並實現 Component 接口，這樣可以動態地添加功能。ConcreteDecorator（具體裝飾器）：擴展 Decorator 的功能，並實現具體的裝飾行為。</p>
+<p><strong>維基百科</strong>：裝飾器模式又叫做「修飾模式」，是物件導向程式領域中，一種動態地往一個類別中添加新的行為的設計模式。就功能而言，裝飾器模式相比生成子類別更為靈活，這樣可以給某個對象而不是整個類別添加一些功能。通過使用裝飾器模式，可以在程式運行時，動態地擴充一個類別的功能。原理是：增加一個「修飾類」去包裹原來的類別，包裹的方式是在修飾類的構造函數中將原來的類以參數的形式傳入。裝飾類實現新的功能，但是，在不需要用到新功能的地方，它可以直接調用原來的類別中的方法。此外，修飾類必須和原來的類別有相同的接口。裝飾器模式是類別繼承的另外一種選擇。類繼承在編譯時候增加行為，而裝飾器模式則是在程式運行時增加行為。當有幾個相互獨立的功能需要擴充時，這個區別就變得很重要。在有些物件導向的程式語言中，類別不能在運行時被創建，通常在設計的時候也不能預測到有哪幾種功能組合。這就意味著要為每一種組合創建一個新類別。相反，裝飾器模式是在程式運行時候的實例化物件的，這樣就可以在程式運行的時後，根據需要進行不同地組合。</p>
+<hr>
+<ul>
+<li><strong>特點</strong></li>
+</ul>
+<ol>
+<li>可以通過裝飾器類，動態地擴展物件的功能</li>
+<li>可以對物件任意組合功能，使得系統的擴展性更好</li>
+<li>遵從設計原則中的「開放封閉原則」</li>
+</ol>
+<hr>
+<ul>
+<li><strong>UML Graphic</strong></li>
+</ul>
+<h2 id="hahahugoshortcodes0hbhb">
+  
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+</script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<p class="mermaid">
+classDiagram
+    Weapon <|-- Sword
+    Weapon <|-- Axe
+    Weapon <|-- Dagger
+
+    class Decorator~Interface~ {
+        Decorator(Weapon* w)
+    }
+
+    Weapon <|-- Decorator~Interface~
+    Decorator~Interface~ <|-- AttackBuff
+    Decorator~Interface~ <|-- CritBuff
+    Decorator~Interface~ <|-- PenetratingBuff
+</p>
+
+  <a class="anchor" href="#hahahugoshortcodes0hbhb">#</a>
+</h2>
+<ul>
+<li><strong>內文</strong></li>
+</ul>
+<p>裝飾器模式是一種比較特別的設計模式，它的核心用途是「利用『非繼承』的方式，擴增原本的類別」。因為裝飾器模式可以遞迴執行（或者說它的本質就是遞迴執行），因此也適用在「重複疊加某一種效果的需求」的情境上。讓我們用一個 RPG 遊戲來當例子：假設我們在實現一個【武器強化】的功能，可以針對不同的武器（像是劍、斧頭、匕首&hellip;等）進行不同種的強化（增益攻擊、爆擊、或護甲穿透&hellip;等），如果我們用「繼承」的方式來寫的話，可能會寫出類似於下面這樣的程式碼：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Weapon</span> {};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sword</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Weapon {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Attack_Buff_Sword</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Sword {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Crit_Buff_Sword</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Sword {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Penetrating_Buff_Sword</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Sword {};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Axe</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Weapon {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Attack_Buff_Axe</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Axe {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Crit_Buff_Axe</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Axe {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Penetrating_Buff_Axe</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Axe {};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dagger</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Weapon {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Attack_Buff_Dagger</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Dagger {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Crit_Buff_Dagger</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Dagger {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Penetrating_Buff_Dagger</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Dagger {};
+</span></span></code></pre></div><p>這樣子的做法有幾個壞處：首先是程式的類別會依照【武器】與【增益效果】的變多而快速增加。在當前的狀況下，如果我們想要新增兩種武器（長槍、弓箭）那麼我們除了新增 <code>Lance</code>, <code>Bow</code> 兩種類別之外，我們還要根據不同的類別分別實作攻擊增益、爆及增益、以及穿透護甲增益三種類別。那如果再之後我們打算多新增 
+<link rel="stylesheet" href="/katex/katex.min.css" />
+<script defer src="/katex/katex.min.js"></script>
+<script defer src="/katex/auto-render.min.js" onload="renderMathInElement(document.body);"></script><span>
+  \(x\)
+</span>
+ 種武器和 <span>
+  \(y\)
+</span>
+ 種增益效果，類別的數量就會以驚人的速度成長了。</p>
+<p>第二個比較明顯的壞處是它無法遞回疊加。同樣拿剛剛的「武器增益」來作例子，在大部分的遊戲中，武器的增益通常都是可以進行 1 次以上的，並且除了通常的「劍 +1」「劍 +2」之外，也有可能會出現「劍【攻擊+1】【穿透 +3%】」類似這樣的複合效果、或疊加效果。如果我們想要讓程式實現類似這樣的效果的話，單用「繼承」可能就不是一個好方法了。因為你會需要考慮「當前的劍的狀態是什麼？」「增益之後又會變成什麼狀態？」類別的數量也會以指數的量級提升 <code>Sword_3_attack</code>, <code>Sword_2_attack_1_crit</code> &hellip; <code>Sword_3_Penetrating</code>，基本上把類別全部寫完就會想要放棄該功能了 XD。</p>
+<p>因此在這樣的情況下，裝飾器模式就可以很好的起到改善的作用了：裝飾器顧名思義，就是用來「裝飾類別」的類別。在剛剛的例子下，我們可以把「裝飾」這件事情拉成一個【裝飾類別】來呈現，並讓不同的增益效果（攻擊增益、爆擊增益、護甲穿透增益&hellip;等）繼承在這個【裝飾類別】下面，整體的程式就會變成類似於下面的樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Weapon</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        string name;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sword</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Weapon {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Axe</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Weapon {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dagger</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Weapon {};
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WeaponDecorator</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Weapon <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AttackBuff</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> WeaponDecorator <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    AttackBuff<span style="color:#f92672">(</span>Weapon<span style="color:#f92672">*</span> weapon<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> WeaponDecorator<span style="color:#f92672">(</span>weapon<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;weapon attack += 5&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CritBuff</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> WeaponDecorator <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    CritBuff<span style="color:#f92672">(</span>Weapon<span style="color:#f92672">*</span> weapon<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> WeaponDecorator<span style="color:#f92672">(</span>weapon<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;weapon crit += 1%&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PenetratingBuff</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> WeaponDecorator <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    PenetratingBuff<span style="color:#f92672">(</span>Weapon<span style="color:#f92672">*</span> weapon<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> WeaponDecorator<span style="color:#f92672">(</span>weapon<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;weapon penetrating damage += 1%&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><p>先讓 <code>Weapon</code> 擁有一個名為 <code>WeaponDecorator</code> 的裝飾類別，再讓其他繼承於 <code>WeaponDecorator</code> 的子類別分別實現不同的增益功能。這樣一來，我們就可以動態地寫出像是 <code>new AttackBuff(sword)</code> 這類的「增益攻擊之後的『劍』」了。此外，因為我們把【增益】和【武器】分開來實現，所以現在不管是增加【增益】或者是增加【武器】，都不會影響到另一邊的程式碼，也算是提升了程式的可維護性。最後，因為現在所有的增益都是被「包裹」進武器裡面的，所以我們也可已寫出類似以下的程式。透過包裹的方式，讓原本的 <code>Sword</code> 一層、一層的提升攻擊、提升爆擊。這樣就能實現複合增益、疊加增益的效果了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// sword now attack = 25
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Weapon<span style="color:#f92672">*</span> superSword <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Sword<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// each for loop, atk += 5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    superSword <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AttackBuff<span style="color:#f92672">(</span>superSword<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// sword now attack = 525
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// sword now attack = 525, crit += 6%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>superSword <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CritBuff<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> CritBuff<span style="color:#f92672">(</span>superSword<span style="color:#f92672">));</span>
+</span></span></code></pre></div><hr>
+<ul>
+<li><strong>小結</strong></li>
+</ul>
+<p>裝飾器模式的優點：</p>
+<ul>
+<li>靈活擴展，可以根據需程式需求套用不同物件效果</li>
+<li>將物件「本身」與物件的「附帶功能」分離</li>
+<li>利用類似組合的方式，可以提供更加彈性的物件呈現</li>
+</ul>
+<p>裝飾器模式的缺點：</p>
+<ul>
+<li>增加類別的數量，提高系統的大小</li>
+<li>因為是用「包裹」的方式，可能會產生複雜的程式結構</li>
+<li>因為不是單純的「繼承」，因此效能會比較低下</li>
+</ul>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

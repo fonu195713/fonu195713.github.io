@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="解釋器模式（Interpreter Pattern）#說明 ChatGPT：解釋器模式（Interpreter Pattern）是一種行為型設計模式，它主要用於「定義一種語言文法的表示」，並提供一個【解釋器】來解釋這種語言中的句子。該模式通常用於解決特定領域中的問題，例如解釋語言、數學表達式或查詢語句等。解釋器模式的主要組件包括：抽象表達式（Abstract Expression）、終端表達式（Terminal Expression）、非終端表達式（Non-terminal Expression）、上下文（Context）、和解釋器（Interpreter）。【抽象表達式】會定義一個抽象的介面，包含一個 interpret() 方法，這個方法會根據特定語言文法進行解釋。【終端表達式】實現了抽象表達式的 interpret() 方法，代表該語言中的終端符號，不能再分解成更小的元素。【非終端表達式】也同樣會實現【抽象表達式】的 interpret() 方法，用於組合多個終端表達式，形成複雜的語句。【上下文】包含要解釋的語句，通常由解釋器進行操作。【解釋器】則會根據語言文法對表達式進行解釋。 解釋器模式的工作流程如下：首先我們需要定義「語言文法」，並將其分解成【終端表達式】和【非終端表達式】。接下來，我們會創建對應的【表達式】類別，實現 interpret() 方法，根據語言文法進行解釋。然後，會構建一個語句的抽象語法樹（AST - Abstract Syntax Tree），將表達式組合成複雜的語句。再創建上下文，傳遞要解釋的語句。最後創建解釋器，根據語句的 AST 對其進行解釋，生成結果。
+維基百科：在物件導向程式設計中，「解譯器模式」是一種行為型設計模式，用於指定「如何評估一種『語言』中的句子」。基本思想是為專門的電腦語言中的每個符號建立一個（或一些）類別，其中包含【終端類別】與【非終端類別】。該語言中，「句子」的語法樹是組合模式的實例，用於為客戶端「解釋」該句子。解譯器設計模式是 23 種著名的 GoF 設計模式之一，GoF 設計模式描述了如何解決反復出現的設計問題，以設計靈活且可重用的物件導向程式，即更容易實施、更容易變更、更容易測試和重用的對象。「解譯器設計模式可以解決哪些問題？」解釋器模式透過定義一種簡單語言的語法，讓程式可以簡單地「解釋」該語法中的不同語句。當某種問題經常一類似的結構發生時，我們可以考慮將其表示為一種新的、簡單的語言中的句子，以便【解譯器】可以通過解釋該語句來解決問題。例如：當需要指定許多不同或複雜的搜索表達式時。將它們直接硬編寫到類別中是不靈活的，因為它會使類別受限於特定的表達式，並且無法獨立於類別之外的新的表達式或更改現有的表達式。因此在這樣的情況下，透過新增一個【解釋器】，並將語句定義為各種【終端語句】與【非終端語句】會更為靈活與彈性。
+特點 可以通過「語言解釋」將複雜的語句轉變為一系列的程式邏輯 可以解耦【語法】和【程式執行】，使其更為彈性 可以自由組合不同的語句，形成各種多樣語靈活的表示方法 UML Graphic classDiagramclass Character {void spellcast()}class Expression~Interface~ {interpret();}Expression &lt;|-- FixedExpressionExpression &lt;|-- GodExpressionExpression &lt;|-- StateExpression#內文 從體感上來看，個人認為解釋器模式是 23 種常見的設計模式裡最難讓人搞懂得一個模式。有學過「編譯器」這門課的人對於解釋器在做的工作應該會比較能夠有感：整體而言，解釋器模式的工作就是在「拆分」與「分析」一段句子是否符合邏輯？和他想要表達什麼樣的意思。讓我們用一個 RPG 遊戲來舉例：假設在一個 RPG 遊戲中，我們打算實踐一個「咒文詠唱系統」。其功能是讓玩家（一個法師）在進行戰鬥的時候，可以透過『輸入一串咒文』來達成「強力施法」這件事情。並且在這樣的情況下，我們定義了一個「傷害反彈」的詠唱詞：「誠惶誠恐呼喚日不見神，先祖之產土神。領受已久之山河，誠惶誠恐，僅此奉還於。(註１)」如果成功在某一特定的秒數內詠唱該詞句，便可以增加玩家的防禦力。在不使用「解釋器模式」的狀況下：可能會撰寫出類似下面的程式：
+class Character { public: string name; int defense; public: Player(string name) : name(name) : defense(20) {} void spellCasting(string prayer) { if (prayer == &#34;誠惶誠恐呼喚日不見神，先祖之產土神。領受已久之山河，誠惶誠恐，僅此奉還於爾&#34;) { defense &#43;= 10; cout &lt;&lt; &#34;defense &#43;= 10&#34; &lt;&lt; endl; } else { cout &lt;&lt; &#34;.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="解釋器模式（Interpreter Pattern）" />
+<meta property="og:description" content="解釋器模式（Interpreter Pattern）#說明 ChatGPT：解釋器模式（Interpreter Pattern）是一種行為型設計模式，它主要用於「定義一種語言文法的表示」，並提供一個【解釋器】來解釋這種語言中的句子。該模式通常用於解決特定領域中的問題，例如解釋語言、數學表達式或查詢語句等。解釋器模式的主要組件包括：抽象表達式（Abstract Expression）、終端表達式（Terminal Expression）、非終端表達式（Non-terminal Expression）、上下文（Context）、和解釋器（Interpreter）。【抽象表達式】會定義一個抽象的介面，包含一個 interpret() 方法，這個方法會根據特定語言文法進行解釋。【終端表達式】實現了抽象表達式的 interpret() 方法，代表該語言中的終端符號，不能再分解成更小的元素。【非終端表達式】也同樣會實現【抽象表達式】的 interpret() 方法，用於組合多個終端表達式，形成複雜的語句。【上下文】包含要解釋的語句，通常由解釋器進行操作。【解釋器】則會根據語言文法對表達式進行解釋。 解釋器模式的工作流程如下：首先我們需要定義「語言文法」，並將其分解成【終端表達式】和【非終端表達式】。接下來，我們會創建對應的【表達式】類別，實現 interpret() 方法，根據語言文法進行解釋。然後，會構建一個語句的抽象語法樹（AST - Abstract Syntax Tree），將表達式組合成複雜的語句。再創建上下文，傳遞要解釋的語句。最後創建解釋器，根據語句的 AST 對其進行解釋，生成結果。
+維基百科：在物件導向程式設計中，「解譯器模式」是一種行為型設計模式，用於指定「如何評估一種『語言』中的句子」。基本思想是為專門的電腦語言中的每個符號建立一個（或一些）類別，其中包含【終端類別】與【非終端類別】。該語言中，「句子」的語法樹是組合模式的實例，用於為客戶端「解釋」該句子。解譯器設計模式是 23 種著名的 GoF 設計模式之一，GoF 設計模式描述了如何解決反復出現的設計問題，以設計靈活且可重用的物件導向程式，即更容易實施、更容易變更、更容易測試和重用的對象。「解譯器設計模式可以解決哪些問題？」解釋器模式透過定義一種簡單語言的語法，讓程式可以簡單地「解釋」該語法中的不同語句。當某種問題經常一類似的結構發生時，我們可以考慮將其表示為一種新的、簡單的語言中的句子，以便【解譯器】可以通過解釋該語句來解決問題。例如：當需要指定許多不同或複雜的搜索表達式時。將它們直接硬編寫到類別中是不靈活的，因為它會使類別受限於特定的表達式，並且無法獨立於類別之外的新的表達式或更改現有的表達式。因此在這樣的情況下，透過新增一個【解釋器】，並將語句定義為各種【終端語句】與【非終端語句】會更為靈活與彈性。
+特點 可以通過「語言解釋」將複雜的語句轉變為一系列的程式邏輯 可以解耦【語法】和【程式執行】，使其更為彈性 可以自由組合不同的語句，形成各種多樣語靈活的表示方法 UML Graphic classDiagramclass Character {void spellcast()}class Expression~Interface~ {interpret();}Expression &lt;|-- FixedExpressionExpression &lt;|-- GodExpressionExpression &lt;|-- StateExpression#內文 從體感上來看，個人認為解釋器模式是 23 種常見的設計模式裡最難讓人搞懂得一個模式。有學過「編譯器」這門課的人對於解釋器在做的工作應該會比較能夠有感：整體而言，解釋器模式的工作就是在「拆分」與「分析」一段句子是否符合邏輯？和他想要表達什麼樣的意思。讓我們用一個 RPG 遊戲來舉例：假設在一個 RPG 遊戲中，我們打算實踐一個「咒文詠唱系統」。其功能是讓玩家（一個法師）在進行戰鬥的時候，可以透過『輸入一串咒文』來達成「強力施法」這件事情。並且在這樣的情況下，我們定義了一個「傷害反彈」的詠唱詞：「誠惶誠恐呼喚日不見神，先祖之產土神。領受已久之山河，誠惶誠恐，僅此奉還於。(註１)」如果成功在某一特定的秒數內詠唱該詞句，便可以增加玩家的防禦力。在不使用「解釋器模式」的狀況下：可能會撰寫出類似下面的程式：
+class Character { public: string name; int defense; public: Player(string name) : name(name) : defense(20) {} void spellCasting(string prayer) { if (prayer == &#34;誠惶誠恐呼喚日不見神，先祖之產土神。領受已久之山河，誠惶誠恐，僅此奉還於爾&#34;) { defense &#43;= 10; cout &lt;&lt; &#34;defense &#43;= 10&#34; &lt;&lt; endl; } else { cout &lt;&lt; &#34;." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/interpreter_pattern/" /><meta property="article:section" content="docs" />
+
+
+<title>解釋器模式（Interpreter Pattern） | Fonu Site</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5ffcf89ac915f6608e9b341666487379426c5f4266e5d4ac450ef060cb91bc51.js" integrity="sha256-X/z4mskV9mCOmzQWZkhzeUJsX0Jm5dSsRQ7wYMuRvFE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f4362153a9424eb450dd350e64dfffc7" class="toggle"  />
+    <label for="section-f4362153a9424eb450dd350e64dfffc7" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/to_do_list/" class="">［置頂］待辦事項</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5f16b5923caa653815be6bb5f018b2f0" class="toggle"  />
+    <label for="section-5f16b5923caa653815be6bb5f018b2f0" class="flex justify-between">
+      <a role="button" class="">人生節點</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/nodes/masters_degree/" class="">碩士的畢業證書</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-68339e45fbc633241628720af6b731c7" class="toggle"  />
+    <label for="section-68339e45fbc633241628720af6b731c7" class="flex justify-between">
+      <a role="button" class="">日常札記</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/xinxinmota/" class="">新新魔塔 v2.6.6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/japan/" class="">7 萬步的日本行</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
+      <a role="button" class="">閱讀心得</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/reading_experience/head_first_design_pattern/" class="">《深入淺出設計模式》</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資訊工程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/recommended_books/" class="">推薦書單</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3975d187eb6b0c47dcb29d31a654027a" class="toggle" checked />
+    <label for="section-3975d187eb6b0c47dcb29d31a654027a" class="flex justify-between">
+      <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/mediator_pattern/" class="">中介者模式（Mediator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/flyweight_pattern/" class="">享元模式（Flyweight Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/proxy_pattern/" class="">代理模式（Proxy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/prototype_pattern/" class="">原型模式（Prototype Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/command_pattern/" class="">命令模式（Command Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/singleton_pattern/" class="">單例模式（Singleton Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/facade_pattern/" class="">外觀模式（Facade Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/factory_method_pattern/" class="">工廠方法模式（Factory Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/abstract_factory_pattern/" class="">抽象工廠模式（Abstract Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/template_method_pattern/" class="">模板方法模式（Template Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/bridge_pattern/" class="">橋接模式（Bridge Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/state_pattern/" class="">狀態模式（State Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/builder_pattern/" class="">生成器模式（Builder Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/strategy_pattern/" class="">策略模式（Strategy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/simple_factory_pattern/" class="">簡單工廠模式（Simple Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_pattern/" class="">組合模式（Composite Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/decorator_pattern/" class="">裝飾器模式（Decorator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/observer_pattern/" class="">觀察者模式（Observer Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interpreter_pattern/" class="active">解釋器模式（Interpreter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/visitor_pattern/" class="">訪問者模式（Visitor Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" class="">責任鏈模式（Chain of Responsibility Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/iterator_pattern/" class="">迭代器模式（Iterator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/adapter_pattern/" class="">適配器模式（Adapter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/single_responsibility_principle/" class="">單一職責原則（Single Responsibility Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/liskov_substitution_principle/" class="">里式替換原則（Liskov Substitution Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/open_closed_principle/" class="">開放封閉原則（Open Closed Principle）</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
+      <a role="button" class="">宗教命理</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
+      <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/fortune_telling/tarot/daily_log/" class="">［置頂］每日一翻</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="toggle"  />
+    <label for="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="flex justify-between">
+      <a role="button" class="">自由創作</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>解釋器模式（Interpreter Pattern）</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="解釋器模式interpreter-pattern">
+  解釋器模式（Interpreter Pattern）
+  <a class="anchor" href="#%e8%a7%a3%e9%87%8b%e5%99%a8%e6%a8%a1%e5%bc%8finterpreter-pattern">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>說明</strong></li>
+</ul>
+<p><strong>ChatGPT</strong>：解釋器模式（Interpreter Pattern）是一種行為型設計模式，它主要用於「定義一種語言文法的表示」，並提供一個【解釋器】來解釋這種語言中的句子。該模式通常用於解決特定領域中的問題，例如解釋語言、數學表達式或查詢語句等。解釋器模式的主要組件包括：抽象表達式（Abstract Expression）、終端表達式（Terminal Expression）、非終端表達式（Non-terminal Expression）、上下文（Context）、和解釋器（Interpreter）。【抽象表達式】會定義一個抽象的介面，包含一個 <code>interpret()</code> 方法，這個方法會根據特定語言文法進行解釋。【終端表達式】實現了抽象表達式的 <code>interpret()</code> 方法，代表該語言中的終端符號，不能再分解成更小的元素。【非終端表達式】也同樣會實現【抽象表達式】的 <code>interpret()</code> 方法，用於組合多個終端表達式，形成複雜的語句。【上下文】包含要解釋的語句，通常由解釋器進行操作。【解釋器】則會根據語言文法對表達式進行解釋。 解釋器模式的工作流程如下：首先我們需要定義「語言文法」，並將其分解成【終端表達式】和【非終端表達式】。接下來，我們會創建對應的【表達式】類別，實現 <code>interpret()</code> 方法，根據語言文法進行解釋。然後，會構建一個語句的抽象語法樹（AST - Abstract Syntax Tree），將表達式組合成複雜的語句。再創建上下文，傳遞要解釋的語句。最後創建解釋器，根據語句的 AST 對其進行解釋，生成結果。</p>
+<p><strong>維基百科</strong>：在物件導向程式設計中，「解譯器模式」是一種行為型設計模式，用於指定「如何評估一種『語言』中的句子」。基本思想是為專門的電腦語言中的每個符號建立一個（或一些）類別，其中包含【終端類別】與【非終端類別】。該語言中，「句子」的語法樹是<a href="/docs/computer_science/design_pattern/composite_pattern/">組合模式</a>的實例，用於為客戶端「解釋」該句子。解譯器設計模式是 23 種著名的 GoF 設計模式之一，GoF 設計模式描述了如何解決反復出現的設計問題，以設計靈活且可重用的物件導向程式，即更容易實施、更容易變更、更容易測試和重用的對象。「解譯器設計模式可以解決哪些問題？」解釋器模式透過<strong>定義一種簡單語言的語法</strong>，讓程式可以簡單地「解釋」該語法中的不同語句。當某種問題經常一類似的結構發生時，我們可以考慮將其表示為一種新的、簡單的語言中的句子，以便【解譯器】可以通過解釋該語句來解決問題。例如：當需要指定許多不同或複雜的搜索表達式時。將它們直接硬編寫到類別中是不靈活的，因為它會使類別受限於特定的表達式，並且無法獨立於類別之外的新的表達式或更改現有的表達式。因此在這樣的情況下，透過新增一個【解釋器】，並將語句定義為各種【終端語句】與【非終端語句】會更為靈活與彈性。</p>
+<hr>
+<ul>
+<li><strong>特點</strong></li>
+</ul>
+<ol>
+<li>可以通過「語言解釋」將複雜的語句轉變為一系列的程式邏輯</li>
+<li>可以解耦【語法】和【程式執行】，使其更為彈性</li>
+<li>可以自由組合不同的語句，形成各種多樣語靈活的表示方法</li>
+</ol>
+<hr>
+<ul>
+<li><strong>UML Graphic</strong></li>
+</ul>
+<h2 id="hahahugoshortcodes0hbhb">
+  
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+</script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<p class="mermaid">
+classDiagram
+    class Character {
+        void spellcast()
+    }
+
+    class Expression~Interface~ {
+        interpret();
+    }
+
+    Expression <|-- FixedExpression
+    Expression <|-- GodExpression
+    Expression <|-- StateExpression
+</p>
+
+  <a class="anchor" href="#hahahugoshortcodes0hbhb">#</a>
+</h2>
+<ul>
+<li><strong>內文</strong></li>
+</ul>
+<p>從體感上來看，個人認為解釋器模式是 23 種常見的設計模式裡最難讓人搞懂得一個模式。有學過「編譯器」這門課的人對於解釋器在做的工作應該會比較能夠有感：整體而言，解釋器模式的工作就是在「拆分」與「分析」一段句子是否符合邏輯？和他想要表達什麼樣的意思。讓我們用一個 RPG 遊戲來舉例：假設在一個 RPG 遊戲中，我們打算實踐一個「咒文詠唱系統」。其功能是讓玩家（一個法師）在進行戰鬥的時候，可以透過『輸入一串咒文』來達成「強力施法」這件事情。並且在這樣的情況下，我們定義了一個「傷害反彈」的詠唱詞：「誠惶誠恐呼喚日不見神，先祖之產土神。領受已久之山河，誠惶誠恐，僅此奉還於。(註１)」如果成功在某一特定的秒數內詠唱該詞句，便可以增加玩家的防禦力。在不使用「解釋器模式」的狀況下：可能會撰寫出類似下面的程式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        string name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> defense<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        Player<span style="color:#f92672">(</span>string name<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> name<span style="color:#f92672">(</span>name<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> defense<span style="color:#f92672">(</span><span style="color:#ae81ff">20</span><span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">spellCasting</span><span style="color:#f92672">(</span>string prayer<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>prayer <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;誠惶誠恐呼喚日不見神，先祖之產土神。領受已久之山河，誠惶誠恐，僅此奉還於爾&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                defense <span style="color:#f92672">+=</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;defense += 10&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">displayStats</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Defence: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> defense <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><p>在上述的程式碼中，我們定義了一段詠唱文（誠惶誠恐&hellip;奉還於爾），只要玩家能夠打出上述的詠唱文，便可以在接下來的一段時間內提升防禦力。但問題出現了：如果我們現在想要新增一個【元素】系統，讓法師的每個攻擊都包含著風、火、水、土中的任一元素，此外，針對不同的元素，除了 &ldquo;日不見神&rdquo; 和 &ldquo;產土神&rdquo; 之外，我們也需要在不同的情境下，對不同的【神明】進行祈禱，此外，其增幅的能力也會因為祈禱文內容而有所改變，像是 &ldquo;奉還於爾&rdquo; 代表「反擊」，其他字詞可能就會有其他意思&hellip;等。在這樣的情境要求下，如果我們採取暴力破解（也就是分別輸入所有可能的咒文，然後再一一對應該咒文的能力）可想而知，就會使整個程式的量提變得極為龐大和低效。也因此，我們可以改用【解釋器】來完成上述的咒文能力要求：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expression</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        virtual bool <span style="color:#a6e22e">interpret</span><span style="color:#f92672">(</span>string input<span style="color:#f92672">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FixedExpression</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Expression <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        string value<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        FixedExpression<span style="color:#f92672">(</span>string value<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> value<span style="color:#f92672">(</span>value<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        bool <span style="color:#a6e22e">interpret</span><span style="color:#f92672">(</span>string input<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> input <span style="color:#f92672">==</span> value<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GodExpression</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Expression <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">static</span> vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> validGods <span style="color:#f92672">=</span> <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;產土神&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;日不見神&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;蛭子神&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;風之神&#34;</span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        GodExpression<span style="color:#f92672">(</span>string str<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        bool <span style="color:#a6e22e">interpret</span><span style="color:#f92672">(</span>string<span style="color:#f92672">&amp;</span> input<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> find<span style="color:#f92672">(</span>validGods<span style="color:#f92672">.</span><span style="color:#a6e22e">begin</span><span style="color:#f92672">(),</span> validGods<span style="color:#f92672">.</span><span style="color:#a6e22e">end</span><span style="color:#f92672">(),</span> input<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> validGods<span style="color:#f92672">.</span><span style="color:#a6e22e">end</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StateExpression</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Expression <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">static</span> vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> validGods <span style="color:#f92672">=</span> <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;奉還於爾&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;惡鬼亡滅&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;揮除百懨&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;護守吾身&#34;</span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        bool <span style="color:#a6e22e">Interpret</span><span style="color:#f92672">(</span><span style="color:#66d9ef">const</span> string<span style="color:#f92672">&amp;</span> input<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> find<span style="color:#f92672">(</span>validGods<span style="color:#f92672">.</span><span style="color:#a6e22e">begin</span><span style="color:#f92672">(),</span> validGods<span style="color:#f92672">.</span><span style="color:#a6e22e">end</span><span style="color:#f92672">(),</span> input<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> validGods<span style="color:#f92672">.</span><span style="color:#a6e22e">end</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ChantContext</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>Expression<span style="color:#f92672">*&gt;</span> expressions<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        ChantContext<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            expressions<span style="color:#f92672">.</span><span style="color:#a6e22e">push_back</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> FixedExpression<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;誠惶誠恐呼喚&#34;</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>            expressions<span style="color:#f92672">.</span><span style="color:#a6e22e">push_back</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> GodExpression<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;[神明]&#34;</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>            expressions<span style="color:#f92672">.</span><span style="color:#a6e22e">push_back</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> FixedExpression<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;先祖之&#34;</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>            expressions<span style="color:#f92672">.</span><span style="color:#a6e22e">push_back</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> GodExpression<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;[神明]&#34;</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>            expressions<span style="color:#f92672">.</span><span style="color:#a6e22e">push_back</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> FixedExpression<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;領受已久之山河&#34;</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>            expressions<span style="color:#f92672">.</span><span style="color:#a6e22e">push_back</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> FixedExpression<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;誠惶誠恐&#34;</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>            expressions<span style="color:#f92672">.</span><span style="color:#a6e22e">push_back</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> StateExpression<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;[狀態]&#34;</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">validateChant</span><span style="color:#f92672">(</span>Character<span style="color:#f92672">*</span> character<span style="color:#f92672">,</span> vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> input<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>input<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()</span> <span style="color:#f92672">!=</span> expressions<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> input<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">();</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>expressions<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">-&gt;</span> interpret<span style="color:#f92672">(</span>input<span style="color:#f92672">[</span>i<span style="color:#f92672">]))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        string name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> attack<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> defence<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> counterRate<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">spellcast</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> prayer <span style="color:#f92672">=</span> getPrayer<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            ChantContext chantContext<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            bool validChant <span style="color:#f92672">=</span> chantContext<span style="color:#f92672">.</span><span style="color:#a6e22e">validateChant</span><span style="color:#f92672">(</span>prayer<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>validChant<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                applyEffects<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>                displayStats<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getPrayer</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            string input<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            getline<span style="color:#f92672">(</span>cin<span style="color:#f92672">,</span> input<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> words<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            istringstream <span style="color:#a6e22e">iss</span><span style="color:#f92672">(</span>input<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>string word<span style="color:#f92672">;</span> iss <span style="color:#f92672">&gt;&gt;</span> word<span style="color:#f92672">;)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                words<span style="color:#f92672">.</span><span style="color:#a6e22e">push_back</span><span style="color:#f92672">(</span>word<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> words<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Character magician <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Character<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    magician<span style="color:#f92672">.</span><span style="color:#a6e22e">spellcast</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>像這樣將整段語句進行拆分，我們可以分別檢查「固定字詞」（<code>FixedExpression</code>）「非固定字詞」（<code>GodExpression</code>, <code>StateExpression</code>）是否符合原本的輸入邏輯。這僅僅是一個簡單的例子。在實際的解釋器模式下，我們還可以利用<a href="/docs/computer_science/design_pattern/composite_pattern/">組合模式</a>將語句轉變為更為複雜的、樹狀的形式，以此來表示更為複雜的意涵或者是狀態表達。而這種「透過將一段語句進行拆分、解析，從而判斷該語句所代表的原始意涵」的行為，即是解釋器模式想要傳達的訊息。</p>
+<hr>
+<p><em>註１：該詠唱詞取自於【鈴芽之旅】</em></p>
+<hr>
+<ul>
+<li><strong>小結</strong></li>
+</ul>
+<p>解釋器模式的優點：</p>
+<ul>
+<li>透過拆分語句，可對於語句進行靈活的擴展與修改</li>
+<li>因為拆分語句的緣故，使得各子句之間變得更為容易理解</li>
+</ul>
+<p>解釋器模式的缺點：</p>
+<ul>
+<li>解釋器通常只能針對特定的語法進行解析，因此不易大量泛用</li>
+<li>增加類別的數量，提高了系統的複雜度</li>
+<li>會需要使多個類別彼此交互，因此會稍微降低系統的效率</li>
+</ul>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

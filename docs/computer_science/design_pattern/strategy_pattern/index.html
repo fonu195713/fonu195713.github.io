@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="策略模式（Strategy Pattern）#說明 ChatGPT：策略模式（Strategy Pattern）是一種行為型設計模式，該模式允許在程式運行時，根據不同的需求，選擇不同的算法或行為。策略模式將演算法的定義、演算法的實現、和演算法的使用分離，這種彈性的程式撰寫方式，使得它們可以彼此獨立地變化，互相替換。策略模式的核心思想，是將「行為」封裝各種成獨立的「策略」，使得使用者（或程式）可以根據需要，選擇實踐不同的策略，同時需要改變策略的程式碼。這種靈活性和可替換性，使得策略模式在需要動態地改變物件的行為的情況下非常有用，並且能夠實現高度可定制和可擴展的系統設計。
+維基百科：策略模式是一種行為型軟體設計模式，它可以在運行時選擇一個演算法。程式在撰寫的過程中，不會直接實現單一的演算法，而是根據運行時的指示。從一系列的篩選方式中，選擇一個方法出來。策略模式使得演算法能夠獨立於使用它的客戶端變化，它將「選擇使用哪個演算法」的決策推遲到運行時，可以使呼叫程式的方式更靈活和可重用。例如，對輸入數據進行驗證的類別可以使用策略模式，根據類型、來源、使用者選擇、或其他區分因素來選擇驗證演算法。因為這些後天的因素需要直到運行時才知道，因此不同的輸入可能需要執行完全不同的驗證。在此情況下，將驗證演算法（策略）與驗證的物件分開封裝，可以在系統的不同區域（甚至不同系統）中由其他驗證物件使用，而無需重複編寫代碼。
+特點 定義了一個算法族 封裝算法族中的每一個算法 不同的算法可以互相替換 UML Graphic classDiagramclass Character {AttackMethod* atkattack() : atk.attack()}class AttackMethod~Interface~ {attack()}Character *-- AttackMethodclass PhysicalAttack {attack() &#34;Physical attack&#34;}class MagicAttack {attack() &#34;Magic attack&#34;}AttackMethod &lt;|-- PhysicalAttackAttackMethod &lt;|-- MagicAttack內文 光看維基百科的說明可能會有點霧煞煞，我們拿 RPG 遊戲來做一個舉例好了：設想今天，我們有一個 RPG 遊戲，裡面的角色可以選擇「劍士、盜賊、弓箭手、法師、和海盜」五種角色，同時每種角色都有其獨特的攻擊方式（劍士用刀劍、弓箭手用弓弩、海盜用手槍指虎&hellip;等等）。在不使用策略模式的情況下，如果我們想要實現遊戲中的程式，可能就會需要有一個像下面的 pesudo code：
+class Role { enum character {Warrior, Thief, Bowman, Magician, Pirate}; void attack() { switch(character) { case Warrior: print(&#34;Using a sword to attack.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="策略模式（Strategy Pattern）" />
+<meta property="og:description" content="策略模式（Strategy Pattern）#說明 ChatGPT：策略模式（Strategy Pattern）是一種行為型設計模式，該模式允許在程式運行時，根據不同的需求，選擇不同的算法或行為。策略模式將演算法的定義、演算法的實現、和演算法的使用分離，這種彈性的程式撰寫方式，使得它們可以彼此獨立地變化，互相替換。策略模式的核心思想，是將「行為」封裝各種成獨立的「策略」，使得使用者（或程式）可以根據需要，選擇實踐不同的策略，同時需要改變策略的程式碼。這種靈活性和可替換性，使得策略模式在需要動態地改變物件的行為的情況下非常有用，並且能夠實現高度可定制和可擴展的系統設計。
+維基百科：策略模式是一種行為型軟體設計模式，它可以在運行時選擇一個演算法。程式在撰寫的過程中，不會直接實現單一的演算法，而是根據運行時的指示。從一系列的篩選方式中，選擇一個方法出來。策略模式使得演算法能夠獨立於使用它的客戶端變化，它將「選擇使用哪個演算法」的決策推遲到運行時，可以使呼叫程式的方式更靈活和可重用。例如，對輸入數據進行驗證的類別可以使用策略模式，根據類型、來源、使用者選擇、或其他區分因素來選擇驗證演算法。因為這些後天的因素需要直到運行時才知道，因此不同的輸入可能需要執行完全不同的驗證。在此情況下，將驗證演算法（策略）與驗證的物件分開封裝，可以在系統的不同區域（甚至不同系統）中由其他驗證物件使用，而無需重複編寫代碼。
+特點 定義了一個算法族 封裝算法族中的每一個算法 不同的算法可以互相替換 UML Graphic classDiagramclass Character {AttackMethod* atkattack() : atk.attack()}class AttackMethod~Interface~ {attack()}Character *-- AttackMethodclass PhysicalAttack {attack() &#34;Physical attack&#34;}class MagicAttack {attack() &#34;Magic attack&#34;}AttackMethod &lt;|-- PhysicalAttackAttackMethod &lt;|-- MagicAttack內文 光看維基百科的說明可能會有點霧煞煞，我們拿 RPG 遊戲來做一個舉例好了：設想今天，我們有一個 RPG 遊戲，裡面的角色可以選擇「劍士、盜賊、弓箭手、法師、和海盜」五種角色，同時每種角色都有其獨特的攻擊方式（劍士用刀劍、弓箭手用弓弩、海盜用手槍指虎&hellip;等等）。在不使用策略模式的情況下，如果我們想要實現遊戲中的程式，可能就會需要有一個像下面的 pesudo code：
+class Role { enum character {Warrior, Thief, Bowman, Magician, Pirate}; void attack() { switch(character) { case Warrior: print(&#34;Using a sword to attack." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/strategy_pattern/" /><meta property="article:section" content="docs" />
+
+
+<title>策略模式（Strategy Pattern） | Fonu Site</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5ffcf89ac915f6608e9b341666487379426c5f4266e5d4ac450ef060cb91bc51.js" integrity="sha256-X/z4mskV9mCOmzQWZkhzeUJsX0Jm5dSsRQ7wYMuRvFE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f4362153a9424eb450dd350e64dfffc7" class="toggle"  />
+    <label for="section-f4362153a9424eb450dd350e64dfffc7" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/to_do_list/" class="">［置頂］待辦事項</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5f16b5923caa653815be6bb5f018b2f0" class="toggle"  />
+    <label for="section-5f16b5923caa653815be6bb5f018b2f0" class="flex justify-between">
+      <a role="button" class="">人生節點</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/nodes/masters_degree/" class="">碩士的畢業證書</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-68339e45fbc633241628720af6b731c7" class="toggle"  />
+    <label for="section-68339e45fbc633241628720af6b731c7" class="flex justify-between">
+      <a role="button" class="">日常札記</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/xinxinmota/" class="">新新魔塔 v2.6.6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/japan/" class="">7 萬步的日本行</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
+      <a role="button" class="">閱讀心得</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/reading_experience/head_first_design_pattern/" class="">《深入淺出設計模式》</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資訊工程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/recommended_books/" class="">推薦書單</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3975d187eb6b0c47dcb29d31a654027a" class="toggle" checked />
+    <label for="section-3975d187eb6b0c47dcb29d31a654027a" class="flex justify-between">
+      <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/mediator_pattern/" class="">中介者模式（Mediator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/flyweight_pattern/" class="">享元模式（Flyweight Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/proxy_pattern/" class="">代理模式（Proxy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/prototype_pattern/" class="">原型模式（Prototype Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/command_pattern/" class="">命令模式（Command Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/singleton_pattern/" class="">單例模式（Singleton Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/facade_pattern/" class="">外觀模式（Facade Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/factory_method_pattern/" class="">工廠方法模式（Factory Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/abstract_factory_pattern/" class="">抽象工廠模式（Abstract Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/template_method_pattern/" class="">模板方法模式（Template Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/bridge_pattern/" class="">橋接模式（Bridge Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/state_pattern/" class="">狀態模式（State Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/builder_pattern/" class="">生成器模式（Builder Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/strategy_pattern/" class="active">策略模式（Strategy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/simple_factory_pattern/" class="">簡單工廠模式（Simple Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_pattern/" class="">組合模式（Composite Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/decorator_pattern/" class="">裝飾器模式（Decorator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/observer_pattern/" class="">觀察者模式（Observer Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interpreter_pattern/" class="">解釋器模式（Interpreter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/visitor_pattern/" class="">訪問者模式（Visitor Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" class="">責任鏈模式（Chain of Responsibility Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/iterator_pattern/" class="">迭代器模式（Iterator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/adapter_pattern/" class="">適配器模式（Adapter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/single_responsibility_principle/" class="">單一職責原則（Single Responsibility Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/liskov_substitution_principle/" class="">里式替換原則（Liskov Substitution Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/open_closed_principle/" class="">開放封閉原則（Open Closed Principle）</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
+      <a role="button" class="">宗教命理</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
+      <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/fortune_telling/tarot/daily_log/" class="">［置頂］每日一翻</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="toggle"  />
+    <label for="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="flex justify-between">
+      <a role="button" class="">自由創作</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>策略模式（Strategy Pattern）</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="策略模式strategy-pattern">
+  策略模式（Strategy Pattern）
+  <a class="anchor" href="#%e7%ad%96%e7%95%a5%e6%a8%a1%e5%bc%8fstrategy-pattern">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>說明</strong></li>
+</ul>
+<p><strong>ChatGPT</strong>：策略模式（Strategy Pattern）是一種行為型設計模式，該模式允許在程式運行時，根據不同的需求，選擇不同的算法或行為。策略模式將演算法的定義、演算法的實現、和演算法的使用分離，這種彈性的程式撰寫方式，使得它們可以彼此獨立地變化，互相替換。策略模式的核心思想，是將「行為」封裝各種成獨立的「策略」，使得使用者（或程式）可以根據需要，選擇實踐不同的策略，同時需要改變策略的程式碼。這種靈活性和可替換性，使得策略模式在需要<strong>動態地改變物件的行為</strong>的情況下非常有用，並且能夠實現高度可定制和可擴展的系統設計。</p>
+<p><strong>維基百科</strong>：策略模式是一種行為型軟體設計模式，它可以在運行時選擇一個演算法。程式在撰寫的過程中，不會直接實現單一的演算法，而是根據運行時的指示。從一系列的篩選方式中，選擇一個方法出來。策略模式使得演算法能夠獨立於使用它的客戶端變化，它將「選擇使用哪個演算法」的決策推遲到運行時，可以使呼叫程式的方式更靈活和可重用。例如，對輸入數據進行驗證的類別可以使用策略模式，根據類型、來源、使用者選擇、或其他區分因素來選擇驗證演算法。因為這些後天的因素需要直到運行時才知道，因此不同的輸入可能需要執行完全不同的驗證。在此情況下，將驗證演算法（策略）與驗證的物件分開封裝，可以在系統的不同區域（甚至不同系統）中由其他驗證物件使用，而無需重複編寫代碼。</p>
+<hr>
+<ul>
+<li><strong>特點</strong></li>
+</ul>
+<ol>
+<li>定義了一個算法族</li>
+<li>封裝算法族中的每一個算法</li>
+<li>不同的算法可以互相替換</li>
+</ol>
+<hr>
+<ul>
+<li><strong>UML Graphic</strong></li>
+</ul>
+
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+</script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<p class="mermaid">
+classDiagram
+    class Character {
+        AttackMethod* atk
+        attack() : atk.attack()
+    }
+
+    class AttackMethod~Interface~ {
+        attack()
+    }
+
+    Character *-- AttackMethod
+
+    class PhysicalAttack {
+        attack() "Physical attack"
+    }
+
+    class MagicAttack {
+        attack() "Magic attack"
+    }
+
+    AttackMethod <|-- PhysicalAttack
+    AttackMethod <|-- MagicAttack
+</p>
+
+<hr>
+<ul>
+<li><strong>內文</strong></li>
+</ul>
+<p>光看維基百科的說明可能會有點霧煞煞，我們拿 RPG 遊戲來做一個舉例好了：設想今天，我們有一個 RPG 遊戲，裡面的角色可以選擇「劍士、盜賊、弓箭手、法師、和海盜」五種角色，同時每種角色都有其獨特的攻擊方式（劍士用刀劍、弓箭手用弓弩、海盜用手槍指虎&hellip;等等）。在不使用策略模式的情況下，如果我們想要實現遊戲中的程式，可能就會需要有一個像下面的 pesudo code：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Role</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">character</span> {Warrior, Thief, Bowman, Magician, Pirate};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">switch</span>(character) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> Warrior:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Using a sword to attack.&#34;</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> Thief:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Using a dagger to attack.&#34;</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> Bowman:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Using a bow to shoot arrows.&#34;</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> Magician:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Using magic attacks with different attributes.&#34;</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> Pirate:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Using a handgun or knuckles to attack.&#34;</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>這樣的程式本身並沒有問題，但麻煩的點在於：如果我們每次新增一個新的職業，抑或是新增一個攻擊方式的話（像是法師有元素攻擊，可以再細拆成冰、雷、火、毒&hellip;等不同種類）那我們每次都要重新打開這個 Role 類別，並修改其裡頭的程式，久而久之，就會讓這份程式變得更加龐大、沉重，耦合性也會變高，就會變得很不好維護（光是 <code>attack()</code> 可能就有 200-300 行程式，還不包含各種職業對於防禦、閃避、移動、或者是屬性提升之類的其他判斷 &hellip;）。</p>
+<p>因此，策略模式主張的程式撰寫方法就是「拆分」以及「組合」。我們可以將一個「攻擊的行為」外包給一個「攻擊的類別」去做處理，角色本身只需要持有一個「可以進行『攻擊』的類別與方法」，剩下的細節（如何攻擊？用什麼攻擊？攻擊範圍是多少？有沒有屬性加成或剋制？）全都不由「角色」這個類別去處理。類似如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Role</span> {
+</span></span><span style="display:flex;"><span>    AttackMethod<span style="color:#f92672">*</span> attack_method;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">changeAttackMethod</span>(AttackMethod<span style="color:#f92672">*</span> method) {
+</span></span><span style="display:flex;"><span>        attack_method <span style="color:#f92672">=</span> method;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span>() {
+</span></span><span style="display:flex;"><span>        attack_method.attack();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AttackMethod</span> {
+</span></span><span style="display:flex;"><span>    abstract <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span>();
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SwordAttack</span> extends AttackMethod {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span>() {
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Attacks with sword&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DaggerAttack</span> extends AttackMethod {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span>() {
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Attacks with dagger&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Staff</span> extends AttackMethod {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span>() {
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Attacks with magic power&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><p>這樣一來，雖然在類別的數量上，相較於原本的做法（只有一個 Role）來說，多出了許多新的類別（AttackMethod 和其他所有繼承該類別的所有類別），但程式的其他效能卻提高了許多：可以預先實現許多不同的攻擊方式，但不需要修改 Role 類別內的程式碼，使原始類別 Role 保持簡潔；將類別的分工拆解得更加明確，增加各程式的可讀性與邏輯呈現；可以重複利用相同的程式，不同職業如果需要相同的攻擊方式，只需要組合同樣的類別即可，不再需要重複撰寫一樣的功能；將類別與類別的依賴程度降低（也就是解耦合），「角色」不再與「攻擊細節」相關，也就不需要負擔「攻擊方式、效果、屬性加減、傷害判定」&hellip;等額外的工作；透過父類別（AttackMethod）做為一種「接口」，在特殊的情況下（例如轉職？）可以輕鬆的實現攻擊模式的抽換、更替，同時不會對於任何一個類別造成額外的程式負擔 &hellip;</p>
+<hr>
+<ul>
+<li><strong>小結</strong></li>
+</ul>
+<p>策略模式的優點：</p>
+<ul>
+<li>提高程式的彈性、可讀性、替換性</li>
+<li>維持低耦合</li>
+<li>降低重複程式的撰寫</li>
+</ul>
+<p>策略模式的缺點：</p>
+<ul>
+<li>增加類別的總數量</li>
+<li>增加程式的複雜性</li>
+</ul>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

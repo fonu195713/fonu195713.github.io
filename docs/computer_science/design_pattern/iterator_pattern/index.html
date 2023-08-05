@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="迭代器模式（Iterator Pattern）#說明 ChatGPT：迭代器模式（Iterator Pattern）是一種行為型設計模式，它主要用於提供一種訪問集合元素（如列表、數組、樹等）的方法，而不需要暴露該集合的內部表示。通過迭代器模式，我們可以透過統一的接口來遍歷（iterate()）集合中的元素，無需關心底層的數據結構。「迭代器模式」的主要目標是「分離集合的『遍歷行為』與『程式實現』」。這樣可以提供更好的解耦和靈活性。該模式通常包含以下主要元素：【迭代器】（Iterator）：用於定義「訪問」和「遍歷」集合元素的介面。迭代器通常包含方法如 next()（返回下一個元素）、hasNext()（檢查是否還有下一個元素）等。【具體迭代器】（Concrete Iterator）：具體迭代器實現了【迭代器】的接口，並提供了對具體集合的元素遍歷實現。不同的集合可能需要不同的具體迭代器。【集合】（Collection）： 定義了管理元素的方法，如添加、刪除元素&hellip;等。可以是列表、數組、樹&hellip;等。【具體集合】（Concrete Collection）：實現了【集合】的接口，提供了實際的元素管理方式。不同的具體集合可能有不同的存儲結構。通過使用迭代器模式，客戶端的程式可以僅通過【迭代器】來訪問集合的元素，而無需關心程式的底層細節。這樣可以使程式更具可讀性、可維護性，並且支持在不改變客戶端程式的情況下更改集合的實現方式。
+維基百科：在物件導向程式設計中，「迭代器模式」是一種設計模式，其中使用【迭代器】來遍歷容器，並訪問容器的逐個元素。迭代器模式嘗試將「遍歷的演算法」與「容器」解耦；「迭代器模式能解決哪些問題？」該模式可以讓聚合物件（列表、數組&hellip;等）的元素，在不暴露其表示資料結構的情況下，進行訪問和遍歷。同時也可以為聚合物件定義新的遍歷操作，而不改變其介面。在一般情況下，直接再聚合介面中定義「訪問」和「遍歷」操作是不靈活的，因為這樣的程式撰寫方式會使得聚合受限於特定的訪問和遍歷操作，且無法在不更改聚合介面的前提下添加新操作。「迭代器模式如何解決此問題方案？」迭代器模式會定義一個獨立的【迭代器】物件，並封裝「訪問」和「遍歷」的方法，讓聚合物件各自繼承並實例。客戶端使用可以直接使用【迭代器】來訪問方法和遍歷方法來檢視聚合物件，而不需要了解其物件內真實的資料結構。不同的迭代器可以以不同的方式訪問和遍歷聚合。可以通過定義新的迭代器來獨立地定義新的訪問和遍歷操作。
+特點 分離「集合」本身的資料結構與「迭代」的程式邏輯 可以隱藏集合的資料結構，使客戶端不須依賴特定的程式操作 提供統一的遍歷程式，提高程式的可重用性 UML Graphic classDiagramclass Iterator {bool hasNext();void next();}Iterator &lt;|-- CharacterTeamIteratorIterator &lt;|-- MonsterTeamIteratorclass CharacterTeam {Iterator* iteratorCharacter teammate[]}class MonsterTeam {Iterator* iteratorMonsterNode head}CharacterTeam &lt;|-- Characterclass MonsterNode {Monster* monsterMonsterNode* next}MonsterTeam --&gt; MonsterNodeMonsterNode --&gt; Monster#內文 迭代器模式是個相對簡單的設計模式。該模式的用途是「讓所有不同的容器，都可以有一個統一的『遍歷』方法。」通常來說，一個迭代器模式裡面總共會包含著四種類別：【迭代器介面】【具體迭代器】【集合介面】和【具體集合】。讓我們用一個 RPG 遊戲來做舉例：假設再一個 RPG 的戰鬥中，總共分為「主角方」和「怪物方」兩方的陣容。在程式的撰寫上分別由工程師 A 和工程師 B 進行工作。工程師 A 在主角（Character）的地方，新增了一個 CharacterTeam 的類別，用以紀錄主角的隊伍成員，以及它們各自的資訊；工程師 B 則同樣使用了類似的做法，在怪物方（Monster）新增了一個 MonsterTeam 類別，同樣也是記錄怪物的編隊與各自的訊息，如下述的程式所示：">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="迭代器模式（Iterator Pattern）" />
+<meta property="og:description" content="迭代器模式（Iterator Pattern）#說明 ChatGPT：迭代器模式（Iterator Pattern）是一種行為型設計模式，它主要用於提供一種訪問集合元素（如列表、數組、樹等）的方法，而不需要暴露該集合的內部表示。通過迭代器模式，我們可以透過統一的接口來遍歷（iterate()）集合中的元素，無需關心底層的數據結構。「迭代器模式」的主要目標是「分離集合的『遍歷行為』與『程式實現』」。這樣可以提供更好的解耦和靈活性。該模式通常包含以下主要元素：【迭代器】（Iterator）：用於定義「訪問」和「遍歷」集合元素的介面。迭代器通常包含方法如 next()（返回下一個元素）、hasNext()（檢查是否還有下一個元素）等。【具體迭代器】（Concrete Iterator）：具體迭代器實現了【迭代器】的接口，並提供了對具體集合的元素遍歷實現。不同的集合可能需要不同的具體迭代器。【集合】（Collection）： 定義了管理元素的方法，如添加、刪除元素&hellip;等。可以是列表、數組、樹&hellip;等。【具體集合】（Concrete Collection）：實現了【集合】的接口，提供了實際的元素管理方式。不同的具體集合可能有不同的存儲結構。通過使用迭代器模式，客戶端的程式可以僅通過【迭代器】來訪問集合的元素，而無需關心程式的底層細節。這樣可以使程式更具可讀性、可維護性，並且支持在不改變客戶端程式的情況下更改集合的實現方式。
+維基百科：在物件導向程式設計中，「迭代器模式」是一種設計模式，其中使用【迭代器】來遍歷容器，並訪問容器的逐個元素。迭代器模式嘗試將「遍歷的演算法」與「容器」解耦；「迭代器模式能解決哪些問題？」該模式可以讓聚合物件（列表、數組&hellip;等）的元素，在不暴露其表示資料結構的情況下，進行訪問和遍歷。同時也可以為聚合物件定義新的遍歷操作，而不改變其介面。在一般情況下，直接再聚合介面中定義「訪問」和「遍歷」操作是不靈活的，因為這樣的程式撰寫方式會使得聚合受限於特定的訪問和遍歷操作，且無法在不更改聚合介面的前提下添加新操作。「迭代器模式如何解決此問題方案？」迭代器模式會定義一個獨立的【迭代器】物件，並封裝「訪問」和「遍歷」的方法，讓聚合物件各自繼承並實例。客戶端使用可以直接使用【迭代器】來訪問方法和遍歷方法來檢視聚合物件，而不需要了解其物件內真實的資料結構。不同的迭代器可以以不同的方式訪問和遍歷聚合。可以通過定義新的迭代器來獨立地定義新的訪問和遍歷操作。
+特點 分離「集合」本身的資料結構與「迭代」的程式邏輯 可以隱藏集合的資料結構，使客戶端不須依賴特定的程式操作 提供統一的遍歷程式，提高程式的可重用性 UML Graphic classDiagramclass Iterator {bool hasNext();void next();}Iterator &lt;|-- CharacterTeamIteratorIterator &lt;|-- MonsterTeamIteratorclass CharacterTeam {Iterator* iteratorCharacter teammate[]}class MonsterTeam {Iterator* iteratorMonsterNode head}CharacterTeam &lt;|-- Characterclass MonsterNode {Monster* monsterMonsterNode* next}MonsterTeam --&gt; MonsterNodeMonsterNode --&gt; Monster#內文 迭代器模式是個相對簡單的設計模式。該模式的用途是「讓所有不同的容器，都可以有一個統一的『遍歷』方法。」通常來說，一個迭代器模式裡面總共會包含著四種類別：【迭代器介面】【具體迭代器】【集合介面】和【具體集合】。讓我們用一個 RPG 遊戲來做舉例：假設再一個 RPG 的戰鬥中，總共分為「主角方」和「怪物方」兩方的陣容。在程式的撰寫上分別由工程師 A 和工程師 B 進行工作。工程師 A 在主角（Character）的地方，新增了一個 CharacterTeam 的類別，用以紀錄主角的隊伍成員，以及它們各自的資訊；工程師 B 則同樣使用了類似的做法，在怪物方（Monster）新增了一個 MonsterTeam 類別，同樣也是記錄怪物的編隊與各自的訊息，如下述的程式所示：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/iterator_pattern/" /><meta property="article:section" content="docs" />
+
+
+<title>迭代器模式（Iterator Pattern） | Fonu Site</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5ffcf89ac915f6608e9b341666487379426c5f4266e5d4ac450ef060cb91bc51.js" integrity="sha256-X/z4mskV9mCOmzQWZkhzeUJsX0Jm5dSsRQ7wYMuRvFE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f4362153a9424eb450dd350e64dfffc7" class="toggle"  />
+    <label for="section-f4362153a9424eb450dd350e64dfffc7" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/to_do_list/" class="">［置頂］待辦事項</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5f16b5923caa653815be6bb5f018b2f0" class="toggle"  />
+    <label for="section-5f16b5923caa653815be6bb5f018b2f0" class="flex justify-between">
+      <a role="button" class="">人生節點</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/nodes/masters_degree/" class="">碩士的畢業證書</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-68339e45fbc633241628720af6b731c7" class="toggle"  />
+    <label for="section-68339e45fbc633241628720af6b731c7" class="flex justify-between">
+      <a role="button" class="">日常札記</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/xinxinmota/" class="">新新魔塔 v2.6.6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/japan/" class="">7 萬步的日本行</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
+      <a role="button" class="">閱讀心得</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/reading_experience/head_first_design_pattern/" class="">《深入淺出設計模式》</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資訊工程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/recommended_books/" class="">推薦書單</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3975d187eb6b0c47dcb29d31a654027a" class="toggle" checked />
+    <label for="section-3975d187eb6b0c47dcb29d31a654027a" class="flex justify-between">
+      <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/mediator_pattern/" class="">中介者模式（Mediator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/flyweight_pattern/" class="">享元模式（Flyweight Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/proxy_pattern/" class="">代理模式（Proxy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/prototype_pattern/" class="">原型模式（Prototype Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/command_pattern/" class="">命令模式（Command Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/singleton_pattern/" class="">單例模式（Singleton Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/facade_pattern/" class="">外觀模式（Facade Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/factory_method_pattern/" class="">工廠方法模式（Factory Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/abstract_factory_pattern/" class="">抽象工廠模式（Abstract Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/template_method_pattern/" class="">模板方法模式（Template Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/bridge_pattern/" class="">橋接模式（Bridge Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/state_pattern/" class="">狀態模式（State Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/builder_pattern/" class="">生成器模式（Builder Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/strategy_pattern/" class="">策略模式（Strategy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/simple_factory_pattern/" class="">簡單工廠模式（Simple Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_pattern/" class="">組合模式（Composite Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/decorator_pattern/" class="">裝飾器模式（Decorator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/observer_pattern/" class="">觀察者模式（Observer Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interpreter_pattern/" class="">解釋器模式（Interpreter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/visitor_pattern/" class="">訪問者模式（Visitor Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" class="">責任鏈模式（Chain of Responsibility Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/iterator_pattern/" class="active">迭代器模式（Iterator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/adapter_pattern/" class="">適配器模式（Adapter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/single_responsibility_principle/" class="">單一職責原則（Single Responsibility Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/liskov_substitution_principle/" class="">里式替換原則（Liskov Substitution Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/open_closed_principle/" class="">開放封閉原則（Open Closed Principle）</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
+      <a role="button" class="">宗教命理</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
+      <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/fortune_telling/tarot/daily_log/" class="">［置頂］每日一翻</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="toggle"  />
+    <label for="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="flex justify-between">
+      <a role="button" class="">自由創作</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>迭代器模式（Iterator Pattern）</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="迭代器模式iterator-pattern">
+  迭代器模式（Iterator Pattern）
+  <a class="anchor" href="#%e8%bf%ad%e4%bb%a3%e5%99%a8%e6%a8%a1%e5%bc%8fiterator-pattern">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>說明</strong></li>
+</ul>
+<p><strong>ChatGPT</strong>：迭代器模式（Iterator Pattern）是一種行為型設計模式，它主要用於提供一種訪問集合元素（如列表、數組、樹等）的方法，而不需要暴露該集合的內部表示。通過迭代器模式，我們可以透過統一的接口來遍歷（<code>iterate()</code>）集合中的元素，無需關心底層的數據結構。「迭代器模式」的主要目標是「分離集合的『遍歷行為』與『程式實現』」。這樣可以提供更好的解耦和靈活性。該模式通常包含以下主要元素：【迭代器】（Iterator）：用於定義「訪問」和「遍歷」集合元素的介面。迭代器通常包含方法如 <code>next()</code>（返回下一個元素）、<code>hasNext()</code>（檢查是否還有下一個元素）等。【具體迭代器】（Concrete Iterator）：具體迭代器實現了【迭代器】的接口，並提供了對具體集合的元素遍歷實現。不同的集合可能需要不同的具體迭代器。【集合】（Collection）： 定義了管理元素的方法，如添加、刪除元素&hellip;等。可以是列表、數組、樹&hellip;等。【具體集合】（Concrete Collection）：實現了【集合】的接口，提供了實際的元素管理方式。不同的具體集合可能有不同的存儲結構。通過使用迭代器模式，客戶端的程式可以僅通過【迭代器】來訪問集合的元素，而無需關心程式的底層細節。這樣可以使程式更具可讀性、可維護性，並且支持在不改變客戶端程式的情況下更改集合的實現方式。</p>
+<p><strong>維基百科</strong>：在物件導向程式設計中，「迭代器模式」是一種設計模式，其中使用【迭代器】來遍歷容器，並訪問容器的逐個元素。迭代器模式嘗試將「遍歷的演算法」與「容器」解耦；「<strong>迭代器模式能解決哪些問題？</strong>」該模式可以讓聚合物件（列表、數組&hellip;等）的元素，在不暴露其表示資料結構的情況下，進行訪問和遍歷。同時也可以為聚合物件定義新的遍歷操作，而不改變其介面。在一般情況下，直接再聚合介面中定義「訪問」和「遍歷」操作是不靈活的，因為這樣的程式撰寫方式會使得聚合受限於特定的訪問和遍歷操作，且無法在不更改聚合介面的前提下添加新操作。「<strong>迭代器模式如何解決此問題方案？</strong>」迭代器模式會定義一個獨立的【迭代器】物件，並封裝「訪問」和「遍歷」的方法，讓聚合物件各自繼承並實例。客戶端使用可以直接使用【迭代器】來訪問方法和遍歷方法來檢視聚合物件，而不需要了解其物件內真實的資料結構。不同的迭代器可以以不同的方式訪問和遍歷聚合。可以通過定義新的迭代器來獨立地定義新的訪問和遍歷操作。</p>
+<hr>
+<ul>
+<li><strong>特點</strong></li>
+</ul>
+<ol>
+<li>分離「集合」本身的資料結構與「迭代」的程式邏輯</li>
+<li>可以隱藏集合的資料結構，使客戶端不須依賴特定的程式操作</li>
+<li>提供統一的遍歷程式，提高程式的可重用性</li>
+</ol>
+<hr>
+<ul>
+<li><strong>UML Graphic</strong></li>
+</ul>
+<h2 id="hahahugoshortcodes0hbhb">
+  
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+</script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<p class="mermaid">
+classDiagram
+    class Iterator {
+        bool hasNext();
+        void next();
+    }
+
+    Iterator <|-- CharacterTeamIterator
+    Iterator <|-- MonsterTeamIterator
+
+    class CharacterTeam {
+        Iterator* iterator
+        Character teammate[]
+    }
+
+    class MonsterTeam {
+        Iterator* iterator
+        MonsterNode head
+    }
+
+    CharacterTeam <|-- Character
+    
+    class MonsterNode {
+        Monster* monster
+        MonsterNode* next
+    }
+
+    MonsterTeam --> MonsterNode
+    MonsterNode --> Monster
+</p>
+
+  <a class="anchor" href="#hahahugoshortcodes0hbhb">#</a>
+</h2>
+<ul>
+<li><strong>內文</strong></li>
+</ul>
+<p>迭代器模式是個相對簡單的設計模式。該模式的用途是「讓所有不同的容器，都可以有一個統一的『遍歷』方法。」通常來說，一個迭代器模式裡面總共會包含著四種類別：【迭代器介面】【具體迭代器】【集合介面】和【具體集合】。讓我們用一個 RPG 遊戲來做舉例：假設再一個 RPG 的戰鬥中，總共分為「主角方」和「怪物方」兩方的陣容。在程式的撰寫上分別由工程師 A 和工程師 B 進行工作。工程師 A 在主角（<code>Character</code>）的地方，新增了一個 <code>CharacterTeam</code> 的類別，用以紀錄主角的隊伍成員，以及它們各自的資訊；工程師 B 則同樣使用了類似的做法，在怪物方（<code>Monster</code>）新增了一個 <code>MonsterTeam</code> 類別，同樣也是記錄怪物的編隊與各自的訊息，如下述的程式所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        string name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> hp<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mana<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> atk<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> def<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Character<span style="color:#f92672">(</span>string name<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">:</span> name<span style="color:#f92672">(</span>name<span style="color:#f92672">),</span> hp<span style="color:#f92672">(</span><span style="color:#ae81ff">100</span><span style="color:#f92672">),</span> mana<span style="color:#f92672">(</span><span style="color:#ae81ff">50</span><span style="color:#f92672">),</span> atk<span style="color:#f92672">(</span><span style="color:#ae81ff">10</span><span style="color:#f92672">),</span> def<span style="color:#f92672">(</span><span style="color:#ae81ff">10</span><span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CharacterTeam</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>Character<span style="color:#f92672">*&gt;</span> teammate<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        CharacterTeam<span style="color:#f92672">()</span> <span style="color:#f92672">:</span> teammate<span style="color:#f92672">(</span>nullptr<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>Character<span style="color:#f92672">*</span> character<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            teammate<span style="color:#f92672">.</span><span style="color:#a6e22e">push_back</span><span style="color:#f92672">(</span>character<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Monster</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        string name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> hp<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mana<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> atk<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> def<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Monster<span style="color:#f92672">(</span>string name<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">:</span> name<span style="color:#f92672">(</span>name<span style="color:#f92672">),</span> hp<span style="color:#f92672">(</span><span style="color:#ae81ff">70</span><span style="color:#f92672">),</span> mana<span style="color:#f92672">(</span><span style="color:#ae81ff">20</span><span style="color:#f92672">),</span> atk<span style="color:#f92672">(</span><span style="color:#ae81ff">30</span><span style="color:#f92672">),</span> def<span style="color:#f92672">(</span><span style="color:#ae81ff">3</span><span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MonsterNode</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Monster<span style="color:#f92672">*</span> monster<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        MonsterNode<span style="color:#f92672">*</span> next<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        MonsterNode<span style="color:#f92672">(</span>Monster<span style="color:#f92672">*</span> monster<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> monster<span style="color:#f92672">(</span>monster<span style="color:#f92672">),</span> next<span style="color:#f92672">(</span>nullptr<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MonsterTeam</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        MonsterNode teamHead<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        MonsterTeam<span style="color:#f92672">()</span> <span style="color:#f92672">:</span> teamHead<span style="color:#f92672">(</span>nullptr<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>Monster<span style="color:#f92672">*</span> monster<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            MonsterNode<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MonsterNode<span style="color:#f92672">(</span>monster<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>teamHead <span style="color:#f92672">==</span> nullptr<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                teamHead <span style="color:#f92672">=</span> node<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                MonsterNode<span style="color:#f92672">*</span> tmp <span style="color:#f92672">=</span> teamHead<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>tmp <span style="color:#f92672">-&gt;</span> next <span style="color:#f92672">!=</span> nullptr<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                    tmp <span style="color:#f92672">=</span> tmp <span style="color:#f92672">-&gt;</span> next<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>                tmp <span style="color:#f92672">-&gt;</span> next <span style="color:#f92672">=</span> node<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><p>我們可以發現到：雖然都是實作類似的功能，但是工程師 A 和工程師 B 採用的卻是不一樣的資料結構，負責 <code>Character</code> 的工程師 A 利用了 vector 當成記錄隊伍的資料結構，負責 <code>Monster</code> 的工程師 B 則自己手刻了一個 <code>Monster</code> 的 linked-list。在這樣的情況下，如果我們有一個 <code>BattleManager</code> 的【戰鬥管理】類別，它需要先記錄雙方的陣容組成的話，如果不使用迭代器模式，程式就會變得比較「不彈性」，也就是說：<code>BattleManager</code> 會需要先知道 <code>CharacterTeam</code> 和 <code>MonsterTeam</code> 雙方的資料結構（vector 和 linked-list）才可以進行遍歷的程式，就如同下方所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BattleManager</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getMemberInfo</span><span style="color:#f92672">(</span>vector<span style="color:#f92672">&lt;</span>Character<span style="color:#f92672">*&gt;</span> character_team<span style="color:#f92672">,</span> Monster<span style="color:#f92672">*</span> monster_node<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> character_team<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">();</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                getCharacterInfo<span style="color:#f92672">(</span>character_team<span style="color:#f92672">[</span>i<span style="color:#f92672">]);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>monster_node <span style="color:#f92672">!=</span> nullptr<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                getMonsterInfo<span style="color:#f92672">(</span>monster_node <span style="color:#f92672">-&gt;</span> monster<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                monster_node <span style="color:#f92672">=</span> monster_node <span style="color:#f92672">-&gt;</span> next<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>而如果在後續的版本迭代中，我們想要修改 <code>CharacterTeam</code> 或者是 <code>MonsterTeam</code> 的集合方式（都改為 vector 之類的？）那這樣就要重新把 <code>BattleManager</code> 的程式也重新改寫，進而違反了「開放封閉原則」。因此，「迭代器模式」在這樣的場景下就可以發揮功用了：迭代器模式提供了一個統一的接口（通常為 <code>next()</code> 和 <code>hasNext()</code>），允許各種不同的集合分別用不同的方式實作這兩項方法，進而使【客戶端】（在這邊指的是 <code>BattleManager</code>）在進行集合的遍歷的時候，不需要研究「實際的資料結構」長什麼樣子，就像是下面的這個樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Iterator</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">bool</span> hasNext() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">next</span>() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CharacterTeamIterator</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Iterator {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>CharacterTeam<span style="color:#f92672">&gt;*</span> team;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> index;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        CharacterTeamIterator(vector<span style="color:#f92672">&lt;</span>CharacterTeam<span style="color:#f92672">&gt;*</span> team) {
+</span></span><span style="display:flex;"><span>            team <span style="color:#f92672">=</span> team;
+</span></span><span style="display:flex;"><span>            index <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> hasNext() <span style="color:#66d9ef">override</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> (index <span style="color:#f92672">&lt;</span> team.size());
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">next</span>() {
+</span></span><span style="display:flex;"><span>            index <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> team[index];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MonsterTeamIterator</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Iterator {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        MonsterNode<span style="color:#f92672">*</span> node;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        MonsterTeamIterator(MonsterNode<span style="color:#f92672">*</span> node) <span style="color:#f92672">:</span> node(node) {};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> hasNext() <span style="color:#66d9ef">override</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> (node <span style="color:#f92672">-&gt;</span> next <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">next</span>() {
+</span></span><span style="display:flex;"><span>            Monster<span style="color:#f92672">*</span> monster <span style="color:#f92672">=</span> node <span style="color:#f92672">-&gt;</span> monster;
+</span></span><span style="display:flex;"><span>            node <span style="color:#f92672">=</span> node <span style="color:#f92672">-&gt;</span> next;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> monster;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在上述的程式中，我們新增了兩個分別名為 <code>CharacterTeamIterator</code> 和 <code>MonsterTeamIterator</code> 的類別，它們分別繼承並實作了 <code>Iterator</code> 中的兩個方法（<code>hasNext()</code> 和 <code>next()</code>）。因為兩個新的子迭代器都使用了相同的 <code>Iterator</code> 接口，因此在客戶端（也就是 <code>BattleManager</code>）的程式上，我們可以修改為以下的樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BattleManager</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getMemberInfo</span><span style="color:#f92672">(</span>CharacterTeamIterator<span style="color:#f92672">*</span> character_iterator<span style="color:#f92672">,</span> MonsterTeamIterator<span style="color:#f92672">*</span> monster_iterator<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>character_iterator <span style="color:#f92672">-&gt;</span> hasNext<span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                getCharacterInfo<span style="color:#f92672">((</span>Character<span style="color:#f92672">*)(</span>character_iterator <span style="color:#f92672">-&gt;</span> next<span style="color:#f92672">()));</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>monster_iterator <span style="color:#f92672">-&gt;</span> hasNext<span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                getCharacterInfo<span style="color:#f92672">((</span>Monster<span style="color:#f92672">*)(</span>monster_iterator <span style="color:#f92672">-&gt;</span> next<span style="color:#f92672">()));</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>在上面的程式中，因為 <code>CharacterTeamIterator</code> 和 <code>MonsterTeamIterator</code> 都有同樣的 <code>hasNext()</code> 方法與 <code>next()</code> 方法，因此無論這兩個集合物件的資料結構為何（不管是 vector, list, map, linked-list &hellip;），我們都可以透過 <code>Iteratoe</code> 所提供的 <code>hasNext()</code> 與 <code>next()</code> 方法完成元素的遍歷，而無須細節地考慮它們分別為哪一種資料結構。此外，及遍之後我們修改了 <code>CharacterTeam</code> 或者是 <code>MonsterTeam</code> 的資料結構，因為 <code>Iterator</code> 仍是採用相同的接口進行遍歷，因此我們也不需要回頭修改 <code>BattleManager</code> 裡面的程式。而這種程式的撰寫方式，就是迭代器模式想要傳達的訊息。</p>
+<hr>
+<ul>
+<li><strong>小結</strong></li>
+</ul>
+<p>解釋器模式的優點：</p>
+<ul>
+<li>利用統一的接口，將遍歷的邏輯封裝，簡化客戶端的程式</li>
+<li>容易進行擴展，擁有良好的程式擴充性</li>
+<li>只要使用同樣的接口，該模式支持各式各樣的資料結構</li>
+</ul>
+<p>解釋器模式的缺點：</p>
+<ul>
+<li>增加了類別的數量，因此提高了系統的複雜度</li>
+<li>會降低程式的性能，因為需要使用多個類別進行溝通</li>
+</ul>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

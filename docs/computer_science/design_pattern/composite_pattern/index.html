@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="組合模式（Composite Pattern）#說明 ChatGPT：組合模式（Composite Pattern）是一種結構型設計模式，它允許將對象組織成樹狀結構以表示「部分 - 整體」的層次結構。組合模式使得用戶可以一致地處理單個對象和組合的對象，並且無需對它們進行區分。在組合模式中，有以下幾個角色：Component（組件）：組件定義了組合中所有對象的通用接口，它可以是接口或抽象類別。它聲明了一些管理和訪問子組件的方法，並可以提供默認的實例方法。Leaf（葉子）：表示組合中的葉子節點，即沒有子節點的對象。葉子對象實現了 Component 接口。Composite（組合）：表示組合中的複合節點，即包含子節點的對象。組合對象實現了 Component 接口，並保存了一個子節點的列表。組合模式的核心思想是「讓用戶對『單個對象』和『組合的對象』進行統一處理」，從而降低了用戶程式的複雜性。用戶不需要區分當前處理的是單個對象還是組合的對象，而是統一通過 Component 接口來進行操作。
+維基百科：在軟體工程中，組合模式是一種結構型模式。組合模式描述了一組對象，這些對象的處理方式與同一類型對象的單個實例相同。組合的目的是將對象「組合」成樹結構，以表示「部分 - 整體」層次結構。實現組合模式可以讓客戶端統一處理單個對象和組合。組合模式是 23 個著名的設計模式之一，它描述瞭如何解決重複出現的設計問題，以靈活的設計且可重用的物件導向程式解決問題，意即更容易實現、更改、測試和重用的對象。組合模式可以解決什麼問題？：組合模式利用了部分 - 整體的層次結構，讓客戶端可以統一對待部分和整體對象。組合模式描述了什麼解決方案？ 組合模式會將物件的部分（Leaf）和整體（Composite）定義一個統一的組件接口。各個 Leaf 直接實例 Component，而 Composite 則將請求轉發到其子組件（可能是 Leaf 或 Composite）。這使得客戶端能夠通過 Component 的接口來統一處理所有程式使得客戶端更容易實現、更改、測試和重用。
+特點 利用「部分 - 整體」的遞迴結構實現單一操作的功能 UML Graphic classDiagramclass Character~Interface~ {void attack();}Character &lt;|-- Monster~Interface~Character &lt;|-- Player~Interface~Character &lt;|-- Team~Interface~class Team {Character[] teammate}Team --&gt; Character內文 組合模式所強調的「部分 - 整體」有點類似一即全，全即一的感覺，透過對於「單個物件的操作」可以遞迴影響到「整個物件群組」舊式組合模式想要解釋的概念。我們可以用一個 RPG 遊戲的例子來解釋組合模式：在一個 RPG 遊戲中，我們想要設定一個「主角可以與一同前行的人物組成『隊伍』，並透過與不同的『怪物們』相互對戰之後，最終打敗大 BOSS 取得勝利」作為一個核心的遊戲戰鬥機制。在這個機制下，所有的「成員」都是「隊伍」的一部分。而「隊伍」即是所有「成員」的組成。">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="組合模式（Composite Pattern）" />
+<meta property="og:description" content="組合模式（Composite Pattern）#說明 ChatGPT：組合模式（Composite Pattern）是一種結構型設計模式，它允許將對象組織成樹狀結構以表示「部分 - 整體」的層次結構。組合模式使得用戶可以一致地處理單個對象和組合的對象，並且無需對它們進行區分。在組合模式中，有以下幾個角色：Component（組件）：組件定義了組合中所有對象的通用接口，它可以是接口或抽象類別。它聲明了一些管理和訪問子組件的方法，並可以提供默認的實例方法。Leaf（葉子）：表示組合中的葉子節點，即沒有子節點的對象。葉子對象實現了 Component 接口。Composite（組合）：表示組合中的複合節點，即包含子節點的對象。組合對象實現了 Component 接口，並保存了一個子節點的列表。組合模式的核心思想是「讓用戶對『單個對象』和『組合的對象』進行統一處理」，從而降低了用戶程式的複雜性。用戶不需要區分當前處理的是單個對象還是組合的對象，而是統一通過 Component 接口來進行操作。
+維基百科：在軟體工程中，組合模式是一種結構型模式。組合模式描述了一組對象，這些對象的處理方式與同一類型對象的單個實例相同。組合的目的是將對象「組合」成樹結構，以表示「部分 - 整體」層次結構。實現組合模式可以讓客戶端統一處理單個對象和組合。組合模式是 23 個著名的設計模式之一，它描述瞭如何解決重複出現的設計問題，以靈活的設計且可重用的物件導向程式解決問題，意即更容易實現、更改、測試和重用的對象。組合模式可以解決什麼問題？：組合模式利用了部分 - 整體的層次結構，讓客戶端可以統一對待部分和整體對象。組合模式描述了什麼解決方案？ 組合模式會將物件的部分（Leaf）和整體（Composite）定義一個統一的組件接口。各個 Leaf 直接實例 Component，而 Composite 則將請求轉發到其子組件（可能是 Leaf 或 Composite）。這使得客戶端能夠通過 Component 的接口來統一處理所有程式使得客戶端更容易實現、更改、測試和重用。
+特點 利用「部分 - 整體」的遞迴結構實現單一操作的功能 UML Graphic classDiagramclass Character~Interface~ {void attack();}Character &lt;|-- Monster~Interface~Character &lt;|-- Player~Interface~Character &lt;|-- Team~Interface~class Team {Character[] teammate}Team --&gt; Character內文 組合模式所強調的「部分 - 整體」有點類似一即全，全即一的感覺，透過對於「單個物件的操作」可以遞迴影響到「整個物件群組」舊式組合模式想要解釋的概念。我們可以用一個 RPG 遊戲的例子來解釋組合模式：在一個 RPG 遊戲中，我們想要設定一個「主角可以與一同前行的人物組成『隊伍』，並透過與不同的『怪物們』相互對戰之後，最終打敗大 BOSS 取得勝利」作為一個核心的遊戲戰鬥機制。在這個機制下，所有的「成員」都是「隊伍」的一部分。而「隊伍」即是所有「成員」的組成。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/composite_pattern/" /><meta property="article:section" content="docs" />
+
+
+<title>組合模式（Composite Pattern） | Fonu Site</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5ffcf89ac915f6608e9b341666487379426c5f4266e5d4ac450ef060cb91bc51.js" integrity="sha256-X/z4mskV9mCOmzQWZkhzeUJsX0Jm5dSsRQ7wYMuRvFE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f4362153a9424eb450dd350e64dfffc7" class="toggle"  />
+    <label for="section-f4362153a9424eb450dd350e64dfffc7" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/to_do_list/" class="">［置頂］待辦事項</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5f16b5923caa653815be6bb5f018b2f0" class="toggle"  />
+    <label for="section-5f16b5923caa653815be6bb5f018b2f0" class="flex justify-between">
+      <a role="button" class="">人生節點</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/nodes/masters_degree/" class="">碩士的畢業證書</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-68339e45fbc633241628720af6b731c7" class="toggle"  />
+    <label for="section-68339e45fbc633241628720af6b731c7" class="flex justify-between">
+      <a role="button" class="">日常札記</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/xinxinmota/" class="">新新魔塔 v2.6.6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/japan/" class="">7 萬步的日本行</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
+      <a role="button" class="">閱讀心得</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/reading_experience/head_first_design_pattern/" class="">《深入淺出設計模式》</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資訊工程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/recommended_books/" class="">推薦書單</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3975d187eb6b0c47dcb29d31a654027a" class="toggle" checked />
+    <label for="section-3975d187eb6b0c47dcb29d31a654027a" class="flex justify-between">
+      <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/mediator_pattern/" class="">中介者模式（Mediator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/flyweight_pattern/" class="">享元模式（Flyweight Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/proxy_pattern/" class="">代理模式（Proxy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/prototype_pattern/" class="">原型模式（Prototype Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/command_pattern/" class="">命令模式（Command Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/singleton_pattern/" class="">單例模式（Singleton Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/facade_pattern/" class="">外觀模式（Facade Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/factory_method_pattern/" class="">工廠方法模式（Factory Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/abstract_factory_pattern/" class="">抽象工廠模式（Abstract Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/template_method_pattern/" class="">模板方法模式（Template Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/bridge_pattern/" class="">橋接模式（Bridge Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/state_pattern/" class="">狀態模式（State Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/builder_pattern/" class="">生成器模式（Builder Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/strategy_pattern/" class="">策略模式（Strategy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/simple_factory_pattern/" class="">簡單工廠模式（Simple Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_pattern/" class="active">組合模式（Composite Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/decorator_pattern/" class="">裝飾器模式（Decorator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/observer_pattern/" class="">觀察者模式（Observer Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interpreter_pattern/" class="">解釋器模式（Interpreter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/visitor_pattern/" class="">訪問者模式（Visitor Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" class="">責任鏈模式（Chain of Responsibility Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/iterator_pattern/" class="">迭代器模式（Iterator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/adapter_pattern/" class="">適配器模式（Adapter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/single_responsibility_principle/" class="">單一職責原則（Single Responsibility Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/liskov_substitution_principle/" class="">里式替換原則（Liskov Substitution Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/open_closed_principle/" class="">開放封閉原則（Open Closed Principle）</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
+      <a role="button" class="">宗教命理</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
+      <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/fortune_telling/tarot/daily_log/" class="">［置頂］每日一翻</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="toggle"  />
+    <label for="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="flex justify-between">
+      <a role="button" class="">自由創作</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>組合模式（Composite Pattern）</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="組合模式composite-pattern">
+  組合模式（Composite Pattern）
+  <a class="anchor" href="#%e7%b5%84%e5%90%88%e6%a8%a1%e5%bc%8fcomposite-pattern">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>說明</strong></li>
+</ul>
+<p><strong>ChatGPT</strong>：組合模式（Composite Pattern）是一種結構型設計模式，它允許將對象組織成樹狀結構以表示「部分 - 整體」的層次結構。組合模式使得用戶可以一致地處理單個對象和組合的對象，並且無需對它們進行區分。在組合模式中，有以下幾個角色：Component（組件）：組件定義了組合中所有對象的通用接口，它可以是接口或抽象類別。它聲明了一些管理和訪問子組件的方法，並可以提供默認的實例方法。Leaf（葉子）：表示組合中的葉子節點，即沒有子節點的對象。葉子對象實現了 Component 接口。Composite（組合）：表示組合中的複合節點，即包含子節點的對象。組合對象實現了 Component 接口，並保存了一個子節點的列表。組合模式的核心思想是「讓用戶對『單個對象』和『組合的對象』進行統一處理」，從而降低了用戶程式的複雜性。用戶不需要區分當前處理的是單個對象還是組合的對象，而是統一通過 Component 接口來進行操作。</p>
+<p><strong>維基百科</strong>：在軟體工程中，組合模式是一種結構型模式。組合模式描述了一組對象，這些對象的處理方式與同一類型對象的單個實例相同。組合的目的是將對象「組合」成樹結構，以表示「部分 - 整體」層次結構。實現組合模式可以讓客戶端統一處理單個對象和組合。組合模式是 23 個著名的設計模式之一，它描述瞭如何解決重複出現的設計問題，以靈活的設計且可重用的物件導向程式解決問題，意即更容易實現、更改、測試和重用的對象。<strong>組合模式可以解決什麼問題？</strong>：組合模式利用了部分 - 整體的層次結構，讓客戶端可以統一對待部分和整體對象。<strong>組合模式描述了什麼解決方案？</strong> 組合模式會將物件的部分（Leaf）和整體（Composite）定義一個統一的組件接口。各個 Leaf 直接實例 Component，而 Composite 則將請求轉發到其子組件（可能是 Leaf 或 Composite）。這使得客戶端能夠通過 Component 的接口來統一處理所有程式使得客戶端更容易實現、更改、測試和重用。</p>
+<hr>
+<ul>
+<li><strong>特點</strong></li>
+</ul>
+<ol>
+<li>利用「部分 - 整體」的遞迴結構實現單一操作的功能</li>
+</ol>
+<hr>
+<ul>
+<li><strong>UML Graphic</strong></li>
+</ul>
+
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+</script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<p class="mermaid">
+classDiagram
+    class Character~Interface~ {
+        void attack();
+    }
+
+    Character <|-- Monster~Interface~
+    Character <|-- Player~Interface~
+    Character <|-- Team~Interface~
+
+    class Team {
+        Character[] teammate
+    }
+
+    Team --> Character
+</p>
+
+<hr>
+<ul>
+<li><strong>內文</strong></li>
+</ul>
+<p>組合模式所強調的「部分 - 整體」有點類似一即全，全即一的感覺，透過對於「單個物件的操作」可以遞迴影響到「整個物件群組」舊式組合模式想要解釋的概念。我們可以用一個 RPG 遊戲的例子來解釋組合模式：在一個 RPG 遊戲中，我們想要設定一個「主角可以與一同前行的人物組成『隊伍』，並透過與不同的『怪物們』相互對戰之後，最終打敗大 BOSS 取得勝利」作為一個核心的遊戲戰鬥機制。在這個機制下，所有的「成員」都是「隊伍」的一部分。而「隊伍」即是所有「成員」的組成。</p>
+<p>也因此，所謂的「成員」就是「一」也就是「部分」。所稱呼的「隊伍」即是「全」也就是「整體」。在<strong>組合模式</strong>的語言中，我們會把這個「部分」稱之為 <strong>葉節點（Leaf）</strong>，然後把「整體」稱之為 <strong>組件（Composite）</strong>。一個【葉節點】裡面只會有一個單一的物件實例（就是一個角色、或一隻怪物），而在【組件】裡面，則可以包含【葉節點】與【組件】（也就是「隊伍」可以包含隊伍成員與其他隊伍）整體而言，程式可以撰寫成以下的樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> attack() {};
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Player</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Monster</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character {};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Warrior</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Player {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bowman</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Player {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Magician</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Player {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Thief</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Player {};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Zombie</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Monster {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Slime</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Monster {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Goblin</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Monster {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Skeleton</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Monster {};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Team</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>Character<span style="color:#f92672">*&gt;</span> teammate;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> addTeammate(Character<span style="color:#f92672">*</span> teammate) {
+</span></span><span style="display:flex;"><span>            teammate.push_back(teammate);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span>() <span style="color:#66d9ef">override</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(Character<span style="color:#f92672">*</span> character : teammate) {
+</span></span><span style="display:flex;"><span>                character <span style="color:#f92672">-&gt;</span> attack();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+</span></span><span style="display:flex;"><span>    Team playerTeam;
+</span></span><span style="display:flex;"><span>    playerTeam.addTeammate(<span style="color:#66d9ef">new</span> Warrior());
+</span></span><span style="display:flex;"><span>    playerTeam.addTeammate(<span style="color:#66d9ef">new</span> Bowman());
+</span></span><span style="display:flex;"><span>    playerTeam.addTeammate(<span style="color:#66d9ef">new</span> Magician());
+</span></span><span style="display:flex;"><span>    playerTeam.addTeammate(<span style="color:#66d9ef">new</span> Thief());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Team monster_team_1;
+</span></span><span style="display:flex;"><span>    monster_team_1.addTeammate(<span style="color:#66d9ef">new</span> Zombie());
+</span></span><span style="display:flex;"><span>    monster_team_1.addTeammate(<span style="color:#66d9ef">new</span> Slime());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Team monster_team_2;
+</span></span><span style="display:flex;"><span>    monster_team_2.addTeammate(<span style="color:#66d9ef">new</span> Goblin());
+</span></span><span style="display:flex;"><span>    monster_team_2.addTeammate(<span style="color:#66d9ef">new</span> Skeleton());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Team monsterTeams;
+</span></span><span style="display:flex;"><span>    monsterTeams.addTeammate(<span style="color:#f92672">&amp;</span>monster_team_1);
+</span></span><span style="display:flex;"><span>    monsterTeams.addTeammate(<span style="color:#f92672">&amp;</span>monster_team_2);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>battle_end()) {
+</span></span><span style="display:flex;"><span>        playerTeam.attack();
+</span></span><span style="display:flex;"><span>        monsterTeams.attack();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>透過組合的方式，可以讓【隊伍】中擁有【隊伍】或【隊員】兩種角色，並透過 <code>team.attack</code> 的方式統一且遞迴遞呼叫 <code>attack</code> 方法，確保【隊員】以及【隊伍中的隊員】（和隊伍中的隊伍中的隊員，和 &hellip;等）都可以執行到 <code>attack()</code> 方法，就是組合模式想叫傳達的概念和想法。</p>
+<hr>
+<ul>
+<li><strong>小結</strong></li>
+</ul>
+<p>組合模式的優點：</p>
+<ul>
+<li>可以用統一的呼叫方法遞迴執行所有成員方法</li>
+<li>提升程式的靈活性與可擴展性</li>
+</ul>
+<p>組合模式的缺點：</p>
+<ul>
+<li>遞迴的邏輯結構容易讓程式在執行的時候出錯</li>
+<li>難以限制 Composite 中的所有元件，可能會有極深的層次</li>
+<li>因為遞迴的緣故，性能可能會以很大的量級增長</li>
+</ul>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

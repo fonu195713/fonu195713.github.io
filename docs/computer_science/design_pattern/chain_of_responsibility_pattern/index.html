@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="責任鏈模式（Chain of Responsibility Pattern）#說明 ChatGPT：責任鏈模式（Chain of Responsibility Pattern）是一種行為型設計模式，它允許多個物件依序處理請求，這些物件會被連成一條「鏈」（chain），每個物件都有可能處理請求，如果某個物件無法處理，則將請求傳遞給下一個物件來處理，直到有物件處理成功或者整個鏈都無法處理為止，責任鏈模式允許程式在運行時不確定哪個物件將處理這個請求。在責任鏈模式中，通常每個處理器（Handler）都會有一個指向下一個處理器的指標，從而形成了一條鏈。當一個請求進入這個鏈時，從第一個處理器開始依序檢查是否可以處理該請求？如果可以，則處理器會進行處理，但如果不行，則傳遞給下一個處理器，依此類推&hellip;，直到找到能夠處理請求的處理器，或者整個鏈都無法處理為止。責任鏈模式可以將請求的發送者和接收者解耦，讓不同的處理器對請求進行獨立的處理，增加了系統的靈活性和可擴展性。同時也支持在運行時動態地組織「鏈」，方便新增或者移除處理器。責任鏈模式的主要角色有：處理器（Handler）：定義一個處理請求的接口，並且持有下一個處理器的指標，以便將請求傳遞給下一個處理器。具體處理器（Concrete Handler）：具體處理器會實現具體的【處理器】接口，並且能夠處理特定類型的請求，如果無法處理則將請求傳遞給下一個【具體處理器】。請求（Request）：定義需要處理的請求。在責任鏈模式中，【請求】將依序經過每個具體處理器，直到找到能夠處理的具體處理器為止。責任鏈模式可以達到動態組織處理器的目的，也提高了系統的靈活性和可維護性。
+維基百科：在物件導向程式設計中，責任鏈模式（Chain of Responsibility Pattern）是一種行為型設計模式，該模式由【命令對象】和一系列的【處理對象】所組成。每個【處理對象】都包含（與定義）它可以處理的命令類型；如果【命令】無法被該【處理對象】執行，【命令】則會被傳遞到責任鏈中的下一個【處理對象】。此外，該模式也存在一種「將新的【處理對象】添加到該鏈末尾」的機制或方法，可以對鏈做一些刪除或擴展。此外，對於責任鏈模型的變體中，一些處理程序可以充當調度程序，向多個方向發送命令，形成一顆責任樹。在某些狀況下，這可能會產生遞歸的情況：【處理對象】使用【命令】調用更高層的【處理對象】，試圖解決問題的較小部分這種模式提倡鬆散耦合的思想。責任鏈模式（Chain of Responsibility Pattern）在結構上與裝飾器模式（Decorator Pattern）幾乎相同，不同之處在於：對於裝飾器來說，所有的類別都會處理請求；可對於責任鏈來說，只有鏈中的一個類別（也就是【處理對象】）會處理請求。
+特點 aaa UML Graphic classDiagramclass Quest {void execute();}Quest &lt;|-- HuntingQuestQuest &lt;|-- GatheringQuestQuest &lt;|-- DungeonQuestclassDiagramclass Handler {Handler* next;void setNext(Handler* handeler);}Handler &lt;|-- MondayHandlerHandler &lt;|-- TuesdayHandlerHandler &lt;|-- WednesdayHandler內文 『責任鏈模式』可以用來解決客戶端「類別依賴」的問題。在一個普通的責任鏈模式中，總共會有是處理器（Handler）與客戶端（Client）兩種不同的角色，如果用 RPG 遊戲來做舉例的話，我們假設【玩家】可以依照不同的「星期」來進行不同的【活動任務】，分別是星期一的【魔物狩獵】（HuntingQuest）、星期二的【藥材採集】（GatheringQuest）、星期三的【地下城探險】（DungeonQuest）、星期四的【跑腿送信】（CourierQuest）、與星期五的【地下城探險】（DungeonQuest）&hellip;，在不使用『責任鏈模式』的狀況下，程式可能會撰寫成以下的樣子：
+class DailyQuest { public: virtual void execute() = 0; }; class HuntingQuest : public DailyQuest { public: void execute() override { // Monster hunting .">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="責任鏈模式（Chain of Responsibility Pattern）" />
+<meta property="og:description" content="責任鏈模式（Chain of Responsibility Pattern）#說明 ChatGPT：責任鏈模式（Chain of Responsibility Pattern）是一種行為型設計模式，它允許多個物件依序處理請求，這些物件會被連成一條「鏈」（chain），每個物件都有可能處理請求，如果某個物件無法處理，則將請求傳遞給下一個物件來處理，直到有物件處理成功或者整個鏈都無法處理為止，責任鏈模式允許程式在運行時不確定哪個物件將處理這個請求。在責任鏈模式中，通常每個處理器（Handler）都會有一個指向下一個處理器的指標，從而形成了一條鏈。當一個請求進入這個鏈時，從第一個處理器開始依序檢查是否可以處理該請求？如果可以，則處理器會進行處理，但如果不行，則傳遞給下一個處理器，依此類推&hellip;，直到找到能夠處理請求的處理器，或者整個鏈都無法處理為止。責任鏈模式可以將請求的發送者和接收者解耦，讓不同的處理器對請求進行獨立的處理，增加了系統的靈活性和可擴展性。同時也支持在運行時動態地組織「鏈」，方便新增或者移除處理器。責任鏈模式的主要角色有：處理器（Handler）：定義一個處理請求的接口，並且持有下一個處理器的指標，以便將請求傳遞給下一個處理器。具體處理器（Concrete Handler）：具體處理器會實現具體的【處理器】接口，並且能夠處理特定類型的請求，如果無法處理則將請求傳遞給下一個【具體處理器】。請求（Request）：定義需要處理的請求。在責任鏈模式中，【請求】將依序經過每個具體處理器，直到找到能夠處理的具體處理器為止。責任鏈模式可以達到動態組織處理器的目的，也提高了系統的靈活性和可維護性。
+維基百科：在物件導向程式設計中，責任鏈模式（Chain of Responsibility Pattern）是一種行為型設計模式，該模式由【命令對象】和一系列的【處理對象】所組成。每個【處理對象】都包含（與定義）它可以處理的命令類型；如果【命令】無法被該【處理對象】執行，【命令】則會被傳遞到責任鏈中的下一個【處理對象】。此外，該模式也存在一種「將新的【處理對象】添加到該鏈末尾」的機制或方法，可以對鏈做一些刪除或擴展。此外，對於責任鏈模型的變體中，一些處理程序可以充當調度程序，向多個方向發送命令，形成一顆責任樹。在某些狀況下，這可能會產生遞歸的情況：【處理對象】使用【命令】調用更高層的【處理對象】，試圖解決問題的較小部分這種模式提倡鬆散耦合的思想。責任鏈模式（Chain of Responsibility Pattern）在結構上與裝飾器模式（Decorator Pattern）幾乎相同，不同之處在於：對於裝飾器來說，所有的類別都會處理請求；可對於責任鏈來說，只有鏈中的一個類別（也就是【處理對象】）會處理請求。
+特點 aaa UML Graphic classDiagramclass Quest {void execute();}Quest &lt;|-- HuntingQuestQuest &lt;|-- GatheringQuestQuest &lt;|-- DungeonQuestclassDiagramclass Handler {Handler* next;void setNext(Handler* handeler);}Handler &lt;|-- MondayHandlerHandler &lt;|-- TuesdayHandlerHandler &lt;|-- WednesdayHandler內文 『責任鏈模式』可以用來解決客戶端「類別依賴」的問題。在一個普通的責任鏈模式中，總共會有是處理器（Handler）與客戶端（Client）兩種不同的角色，如果用 RPG 遊戲來做舉例的話，我們假設【玩家】可以依照不同的「星期」來進行不同的【活動任務】，分別是星期一的【魔物狩獵】（HuntingQuest）、星期二的【藥材採集】（GatheringQuest）、星期三的【地下城探險】（DungeonQuest）、星期四的【跑腿送信】（CourierQuest）、與星期五的【地下城探險】（DungeonQuest）&hellip;，在不使用『責任鏈模式』的狀況下，程式可能會撰寫成以下的樣子：
+class DailyQuest { public: virtual void execute() = 0; }; class HuntingQuest : public DailyQuest { public: void execute() override { // Monster hunting ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" /><meta property="article:section" content="docs" />
+
+
+<title>責任鏈模式（Chain of Responsibility Pattern） | Fonu Site</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5ffcf89ac915f6608e9b341666487379426c5f4266e5d4ac450ef060cb91bc51.js" integrity="sha256-X/z4mskV9mCOmzQWZkhzeUJsX0Jm5dSsRQ7wYMuRvFE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f4362153a9424eb450dd350e64dfffc7" class="toggle"  />
+    <label for="section-f4362153a9424eb450dd350e64dfffc7" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/to_do_list/" class="">［置頂］待辦事項</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5f16b5923caa653815be6bb5f018b2f0" class="toggle"  />
+    <label for="section-5f16b5923caa653815be6bb5f018b2f0" class="flex justify-between">
+      <a role="button" class="">人生節點</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/nodes/masters_degree/" class="">碩士的畢業證書</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-68339e45fbc633241628720af6b731c7" class="toggle"  />
+    <label for="section-68339e45fbc633241628720af6b731c7" class="flex justify-between">
+      <a role="button" class="">日常札記</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/xinxinmota/" class="">新新魔塔 v2.6.6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/japan/" class="">7 萬步的日本行</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
+      <a role="button" class="">閱讀心得</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/reading_experience/head_first_design_pattern/" class="">《深入淺出設計模式》</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資訊工程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/recommended_books/" class="">推薦書單</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3975d187eb6b0c47dcb29d31a654027a" class="toggle" checked />
+    <label for="section-3975d187eb6b0c47dcb29d31a654027a" class="flex justify-between">
+      <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/mediator_pattern/" class="">中介者模式（Mediator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/flyweight_pattern/" class="">享元模式（Flyweight Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/proxy_pattern/" class="">代理模式（Proxy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/prototype_pattern/" class="">原型模式（Prototype Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/command_pattern/" class="">命令模式（Command Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/singleton_pattern/" class="">單例模式（Singleton Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/facade_pattern/" class="">外觀模式（Facade Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/factory_method_pattern/" class="">工廠方法模式（Factory Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/abstract_factory_pattern/" class="">抽象工廠模式（Abstract Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/template_method_pattern/" class="">模板方法模式（Template Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/bridge_pattern/" class="">橋接模式（Bridge Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/state_pattern/" class="">狀態模式（State Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/builder_pattern/" class="">生成器模式（Builder Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/strategy_pattern/" class="">策略模式（Strategy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/simple_factory_pattern/" class="">簡單工廠模式（Simple Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_pattern/" class="">組合模式（Composite Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/decorator_pattern/" class="">裝飾器模式（Decorator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/observer_pattern/" class="">觀察者模式（Observer Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interpreter_pattern/" class="">解釋器模式（Interpreter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/visitor_pattern/" class="">訪問者模式（Visitor Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" class="active">責任鏈模式（Chain of Responsibility Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/iterator_pattern/" class="">迭代器模式（Iterator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/adapter_pattern/" class="">適配器模式（Adapter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/single_responsibility_principle/" class="">單一職責原則（Single Responsibility Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/liskov_substitution_principle/" class="">里式替換原則（Liskov Substitution Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/open_closed_principle/" class="">開放封閉原則（Open Closed Principle）</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
+      <a role="button" class="">宗教命理</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
+      <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/fortune_telling/tarot/daily_log/" class="">［置頂］每日一翻</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="toggle"  />
+    <label for="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="flex justify-between">
+      <a role="button" class="">自由創作</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>責任鏈模式（Chain of Responsibility Pattern）</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="責任鏈模式chain-of-responsibility-pattern">
+  責任鏈模式（Chain of Responsibility Pattern）
+  <a class="anchor" href="#%e8%b2%ac%e4%bb%bb%e9%8f%88%e6%a8%a1%e5%bc%8fchain-of-responsibility-pattern">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>說明</strong></li>
+</ul>
+<p><strong>ChatGPT</strong>：責任鏈模式（Chain of Responsibility Pattern）是一種行為型設計模式，它允許多個物件依序處理請求，這些物件會被連成一條「鏈」（chain），每個物件都有可能處理請求，如果某個物件無法處理，則將請求傳遞給下一個物件來處理，直到有物件處理成功或者整個鏈都無法處理為止，責任鏈模式允許程式在運行時不確定哪個物件將處理這個請求。在責任鏈模式中，通常每個處理器（Handler）都會有一個指向下一個處理器的指標，從而形成了一條鏈。當一個請求進入這個鏈時，從第一個處理器開始依序檢查是否可以處理該請求？如果可以，則處理器會進行處理，但如果不行，則傳遞給下一個處理器，依此類推&hellip;，直到找到能夠處理請求的處理器，或者整個鏈都無法處理為止。責任鏈模式可以將請求的發送者和接收者解耦，讓不同的處理器對請求進行獨立的處理，增加了系統的靈活性和可擴展性。同時也支持在運行時動態地組織「鏈」，方便新增或者移除處理器。責任鏈模式的主要角色有：處理器（Handler）：定義一個處理請求的接口，並且持有下一個處理器的指標，以便將請求傳遞給下一個處理器。具體處理器（Concrete Handler）：具體處理器會實現具體的【處理器】接口，並且能夠處理特定類型的請求，如果無法處理則將請求傳遞給下一個【具體處理器】。請求（Request）：定義需要處理的請求。在責任鏈模式中，【請求】將依序經過每個具體處理器，直到找到能夠處理的具體處理器為止。責任鏈模式可以達到動態組織處理器的目的，也提高了系統的靈活性和可維護性。</p>
+<p><strong>維基百科</strong>：在物件導向程式設計中，責任鏈模式（Chain of Responsibility Pattern）是一種行為型設計模式，該模式由【命令對象】和一系列的【處理對象】所組成。每個【處理對象】都包含（與定義）它可以處理的命令類型；如果【命令】無法被該【處理對象】執行，【命令】則會被傳遞到責任鏈中的下一個【處理對象】。此外，該模式也存在一種「將新的【處理對象】添加到該鏈末尾」的機制或方法，可以對鏈做一些刪除或擴展。此外，對於責任鏈模型的變體中，一些處理程序可以充當調度程序，向多個方向發送命令，形成一顆責任樹。在某些狀況下，這可能會產生遞歸的情況：【處理對象】使用【命令】調用更高層的【處理對象】，試圖解決問題的較小部分這種模式提倡鬆散耦合的思想。責任鏈模式（Chain of Responsibility Pattern）在結構上與<a href="/docs/computer_science/design_pattern/decorator_pattern/">裝飾器模式（Decorator Pattern）</a>幾乎相同，不同之處在於：對於裝飾器來說，所有的類別都會處理請求；可對於責任鏈來說，只有鏈中的一個類別（也就是【處理對象】）會處理請求。</p>
+<hr>
+<ul>
+<li><strong>特點</strong></li>
+</ul>
+<ol>
+<li>aaa</li>
+</ol>
+<hr>
+<ul>
+<li><strong>UML Graphic</strong></li>
+</ul>
+
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+</script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<p class="mermaid">
+classDiagram
+    class Quest {
+        void execute();
+    }
+
+    Quest <|-- HuntingQuest
+    Quest <|-- GatheringQuest
+    Quest <|-- DungeonQuest
+</p>
+
+
+
+<p class="mermaid">
+classDiagram
+    class Handler {
+        Handler* next;
+        void setNext(Handler* handeler);
+    }
+
+    Handler <|-- MondayHandler
+    Handler <|-- TuesdayHandler
+    Handler <|-- WednesdayHandler
+</p>
+
+<hr>
+<ul>
+<li><strong>內文</strong></li>
+</ul>
+<p>『責任鏈模式』可以用來解決客戶端「類別依賴」的問題。在一個普通的責任鏈模式中，總共會有是處理器（Handler）與客戶端（Client）兩種不同的角色，如果用 RPG 遊戲來做舉例的話，我們假設【玩家】可以依照不同的「星期」來進行不同的【活動任務】，分別是星期一的【魔物狩獵】（<code>HuntingQuest</code>）、星期二的【藥材採集】（<code>GatheringQuest</code>）、星期三的【地下城探險】（<code>DungeonQuest</code>）、星期四的【跑腿送信】（<code>CourierQuest</code>）、與星期五的【地下城探險】（<code>DungeonQuest</code>）&hellip;，在不使用『責任鏈模式』的狀況下，程式可能會撰寫成以下的樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DailyQuest</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HuntingQuest</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> DailyQuest <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Monster hunting ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GatheringQuest</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> DailyQuest <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Medicine gathering ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DungeonExplorationQuest</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> DailyQuest <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Dungeon exploration ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CourierQuest</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> DailyQuest <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Errand and delivery services ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DungeonRaidQuest</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> DailyQuest <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Dungeon raid ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    DailyQuest<span style="color:#f92672">*</span> mondayQuest <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HuntingQuest<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    DailyQuest<span style="color:#f92672">*</span> tuesdayQuest <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GatheringQuest<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    DailyQuest<span style="color:#f92672">*</span> wednesdayQuest <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DungeonQuest<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    DailyQuest<span style="color:#f92672">*</span> thursdayQuest <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CourierQuest<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    DailyQuest<span style="color:#f92672">*</span> fridayQuest <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DungeonRaidQuest<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 玩家每天的任務安排
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>string today <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Tuesday&#34;</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 假設今天是星期二
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>today <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Monday&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        mondayQuest <span style="color:#f92672">-&gt;</span> execute<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>today <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Tuesday&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        tuesdayQuest <span style="color:#f92672">-&gt;</span> execute<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>today <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Wednesday&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        wednesdayQuest <span style="color:#f92672">-&gt;</span> execute<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>today <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Thursday&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        thursdayQuest <span style="color:#f92672">-&gt;</span> execute<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>today <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Friday&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        fridayQuest <span style="color:#f92672">-&gt;</span> execute<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>在這個情況下，客戶端（Client，也就是 <code>main</code>）會需要依賴多個不同的任務細節，像是 <code>HuntingQuest</code>, <code>GatheringQuest</code>, 或 <code>DungeonQuest</code> &hellip; 等。在可以預見的範圍內，如果我們今天想要增添或調整不同的每日任務，在一定的程度上，都可能會影響到 <code>main</code> 這支程式的撰寫方式，例如某些任務也許會需要一些額外的參數做調整，像是「根據『等級』決定狩獵的怪物數量」或「根據玩家的『陣營』，決定討伐哪一個副本，與該副本的難易度」&hellip;等，在這個情況下，就會需要對 <code>main</code> 裡面的程式做出修改，除了高度依賴之外，也同時違反了「開放封閉原則」。</p>
+<p>因此，在『責任鏈模式』的程式撰寫方式上，我們會讓每一個「任務」都歸屬到不同的「負責人」（也就是【處理器】<code>Handler</code>）上面。並將這些 Handler 串接起來（負責人 1 有負責人 2 的聯絡方式，負責人 2 有負責人 3 的聯絡方式 &hellip; 依此類推。）並讓「任務」統一交給這個 &ldquo;負責人串列&rdquo; 的最前端，如果該負責人（負責人 1）可以執行接收到的「任務」，就直接進行該任務，否則就將「任務」轉接到下一個「窗口」&hellip;依此類推，直到「任務」被某一個人給解決，或者是所有人都無法執行該任務。也因此，程式可能會被修改成這個樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DailyQuest</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HuntingQuest</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> DailyQuest <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Monster hunting ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GatheringQuest</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> DailyQuest <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Medicine gathering ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DungeonExplorationQuest</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> DailyQuest <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Dungeon exploration ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CourierQuest</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> DailyQuest <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Errand and delivery services ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DungeonRaidQuest</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> DailyQuest <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Dungeon raid ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Handler</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        QuestHandler<span style="color:#f92672">*</span> next<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        QuestHandler<span style="color:#f92672">()</span> <span style="color:#f92672">:</span> nextHandler<span style="color:#f92672">(</span>nullptr<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setNextHandler</span><span style="color:#f92672">(</span>QuestHandler<span style="color:#f92672">*</span> handler<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            next <span style="color:#f92672">=</span> handler<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleQuest</span><span style="color:#f92672">(</span><span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span> today<span style="color:#f92672">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MondayHandler</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> QuestHandler <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleQuest</span><span style="color:#f92672">(</span>string today<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>today <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Monday&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> HuntingQuest<span style="color:#f92672">())</span> <span style="color:#f92672">-&gt;</span> execute<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>nextHandler <span style="color:#f92672">!=</span> nullptr<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                nextHandler <span style="color:#f92672">-&gt;</span> handleQuest<span style="color:#f92672">(</span>today<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TuesdayHandler</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> QuestHandler <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleQuest</span><span style="color:#f92672">(</span>string today<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>today <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Tuesday&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> GatheringQuest<span style="color:#f92672">())</span> <span style="color:#f92672">-&gt;</span> execute<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>nextHandler <span style="color:#f92672">!=</span> nullptr<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                nextHandler <span style="color:#f92672">-&gt;</span> handleQuest<span style="color:#f92672">(</span>today<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WednesdayHandler</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> QuestHandler <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleQuest</span><span style="color:#f92672">(</span>string today<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>today <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Wednesday&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> DungeonExplorationQuest<span style="color:#f92672">())</span> <span style="color:#f92672">-&gt;</span> execute<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>nextHandler <span style="color:#f92672">!=</span> nullptr<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                nextHandler <span style="color:#f92672">-&gt;</span> handleQuest<span style="color:#f92672">(</span>today<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ThursdayHandler</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> QuestHandler <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleQuest</span><span style="color:#f92672">(</span>string today<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>today <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Thursday&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> CourierQuest<span style="color:#f92672">())</span> <span style="color:#f92672">-&gt;</span> execute<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>nextHandler <span style="color:#f92672">!=</span> nullptr<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                nextHandler <span style="color:#f92672">-&gt;</span> handleQuest<span style="color:#f92672">(</span>today<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FridayHandler</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> QuestHandler <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleQuest</span><span style="color:#f92672">(</span>string today<span style="color:#f92672">)</span> override <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>today <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Friday&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> DungeonRaidQuest<span style="color:#f92672">())</span> <span style="color:#f92672">-&gt;</span> execute<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>nextHandler <span style="color:#f92672">!=</span> nullptr<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                nextHandler <span style="color:#f92672">-&gt;</span> handleQuest<span style="color:#f92672">(</span>today<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+</span></span><span style="display:flex;"><span>    QuestHandler<span style="color:#f92672">*</span> mondayHandler <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MondayHandler();
+</span></span><span style="display:flex;"><span>    QuestHandler<span style="color:#f92672">*</span> tuesdayHandler <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TuesdayHandler();
+</span></span><span style="display:flex;"><span>    QuestHandler<span style="color:#f92672">*</span> wednesdayHandler <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> WednesdayHandler();
+</span></span><span style="display:flex;"><span>    QuestHandler<span style="color:#f92672">*</span> thursdayHandler <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> WednesdayHandler();
+</span></span><span style="display:flex;"><span>    QuestHandler<span style="color:#f92672">*</span> fridayHandler <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> WednesdayHandler();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    mondayHandler <span style="color:#f92672">-&gt;</span> setNextHandler(tuesdayHandler);
+</span></span><span style="display:flex;"><span>    tuesdayHandler <span style="color:#f92672">-&gt;</span> setNextHandler(wednesdayHandler);
+</span></span><span style="display:flex;"><span>    wednesdayHandler <span style="color:#f92672">-&gt;</span> setNextHandler(thursdayHandler);
+</span></span><span style="display:flex;"><span>    thursdayHandler <span style="color:#f92672">-&gt;</span> setNextHandler(fridayHandler);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    string day <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Tuesday&#34;</span>;
+</span></span><span style="display:flex;"><span>    mondayHandler <span style="color:#f92672">-&gt;</span> handleQuest(today);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<ul>
+<li><strong>小結</strong></li>
+</ul>
+<p>責任鏈模式的優點：</p>
+<ul>
+<li>可以將請求的發送者和接收者解耦</li>
+<li>提高系統的靈活性和可擴展性</li>
+<li>鬆化耦合，簡化不同類別之間的耦合關係</li>
+</ul>
+<p>責任鏈模式的缺點：</p>
+<ul>
+<li>如果模式設計不良，可能造成請求無法被處理的情況</li>
+<li>增加更多的類別，因此系統的複雜性會變高</li>
+<li>請求的處理變為冗長，會讓個別測試變得複雜</li>
+</ul>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
