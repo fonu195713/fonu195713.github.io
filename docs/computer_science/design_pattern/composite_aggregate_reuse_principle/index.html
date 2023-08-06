@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="合成/聚合複用原則（Composite/Aggregate Reuse Principle）#ChatGPT 的說明 合成/聚合複用原則（CARP）是一個軟體設計原則，旨在引導開發人員在設計類別之間的關係時，能更多地考慮「合成」和「聚合」關係，而不是過度依賴「繼承」。這個原則強調使用合成（Composition）和聚合（Aggregation）的關係來實現複用性和模組化，以增加程式碼的靈活性、可讀性和可維護性。
+【合成關係】（Composition）：合成關係表示「一個物件包含其他的物件作為其一部分，這些部分物件的生命週期也與包含物件相關聯。」如果該物件被銷毀，其部分物件也會被銷毀。合成關係建立了一種高強度的耦合，表示「部分物件」與「整體物件」之間的關係非常緊密，此外，部分物件不能獨立存在。例如在 RPG 遊戲中，一個【角色】Character 可能會包含【武器】Weapon、【盔甲】Armor 與【技能】Skill 作為其【角色】的一部分，這些部分物件隨著會【角色】的存在而存在，同時也會因為【角色】的消失而消失。
+【聚合關係】（Aggregation）：聚合關係表示一個「物件包含其他物件作為其部分，但這些部分物件的生命週期與包含物件無關。」即使完整物件被銷毀，其餘的部分物件仍然可以獨立存在。聚合建立了一種較為孱弱的鬆耦合，表示部分物件具有一定程度的獨立性。例如在一個 RPG 遊戲中，一個【公會】 Group 可以聚合多個【角色】Character 作為其部分，但如果【公會】消失了，【角色】仍然可以在公會之外繼續存在。
+「高層模組」應該儘量避免直接依賴於「低層模組」，而是通過合成或聚合的方式來使用低層模組。這種設計可以使撰寫出來的程式碼更富有彈性，也能相較容易地替換（或添加）新的低層模組。同時，低層模組也應該避免強依賴於高層模組，以確保模組之間的耦合度降低。在 RPG 遊戲的情境中，CARP 原則還可以這樣應用：假設遊戲中的【角色】是高層模組，而【裝備】是低層模組。【角色】可以包含多個【裝備】，這些【裝備】可以通過聚合關係與【角色】相關聯。同時，裝備也可以包含多個屬性（例如攻擊力、防禦力），這些屬性通過合成關係與【裝備】相關聯。
+class Attribute { private: string name; int value; public: Attribute(string name, int value) : name(name), value(value) {} public: void display() { cout &lt;&lt; name &lt;&lt; &#34;: &#34; &lt;&lt; value &lt;&lt; endl; } }; class Equipment { private: string name; vector&lt;Attribute*&gt; attributes; public: Equipment(string name) : name(name) {} public: void addAttribute(Attribute* attribute) { attributes.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="合成/聚合複用原則（Composite/Aggregate Reuse Principle）" />
+<meta property="og:description" content="合成/聚合複用原則（Composite/Aggregate Reuse Principle）#ChatGPT 的說明 合成/聚合複用原則（CARP）是一個軟體設計原則，旨在引導開發人員在設計類別之間的關係時，能更多地考慮「合成」和「聚合」關係，而不是過度依賴「繼承」。這個原則強調使用合成（Composition）和聚合（Aggregation）的關係來實現複用性和模組化，以增加程式碼的靈活性、可讀性和可維護性。
+【合成關係】（Composition）：合成關係表示「一個物件包含其他的物件作為其一部分，這些部分物件的生命週期也與包含物件相關聯。」如果該物件被銷毀，其部分物件也會被銷毀。合成關係建立了一種高強度的耦合，表示「部分物件」與「整體物件」之間的關係非常緊密，此外，部分物件不能獨立存在。例如在 RPG 遊戲中，一個【角色】Character 可能會包含【武器】Weapon、【盔甲】Armor 與【技能】Skill 作為其【角色】的一部分，這些部分物件隨著會【角色】的存在而存在，同時也會因為【角色】的消失而消失。
+【聚合關係】（Aggregation）：聚合關係表示一個「物件包含其他物件作為其部分，但這些部分物件的生命週期與包含物件無關。」即使完整物件被銷毀，其餘的部分物件仍然可以獨立存在。聚合建立了一種較為孱弱的鬆耦合，表示部分物件具有一定程度的獨立性。例如在一個 RPG 遊戲中，一個【公會】 Group 可以聚合多個【角色】Character 作為其部分，但如果【公會】消失了，【角色】仍然可以在公會之外繼續存在。
+「高層模組」應該儘量避免直接依賴於「低層模組」，而是通過合成或聚合的方式來使用低層模組。這種設計可以使撰寫出來的程式碼更富有彈性，也能相較容易地替換（或添加）新的低層模組。同時，低層模組也應該避免強依賴於高層模組，以確保模組之間的耦合度降低。在 RPG 遊戲的情境中，CARP 原則還可以這樣應用：假設遊戲中的【角色】是高層模組，而【裝備】是低層模組。【角色】可以包含多個【裝備】，這些【裝備】可以通過聚合關係與【角色】相關聯。同時，裝備也可以包含多個屬性（例如攻擊力、防禦力），這些屬性通過合成關係與【裝備】相關聯。
+class Attribute { private: string name; int value; public: Attribute(string name, int value) : name(name), value(value) {} public: void display() { cout &lt;&lt; name &lt;&lt; &#34;: &#34; &lt;&lt; value &lt;&lt; endl; } }; class Equipment { private: string name; vector&lt;Attribute*&gt; attributes; public: Equipment(string name) : name(name) {} public: void addAttribute(Attribute* attribute) { attributes." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/composite_aggregate_reuse_principle/" /><meta property="article:section" content="docs" />
+
+
+<title>合成/聚合複用原則（Composite/Aggregate Reuse Principle） | Fonu Site</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.ef8aba15fc3c96d7e294fdf955d3686086bf1d9ade8e677ae1a9e7260296eca3.js" integrity="sha256-74q6Ffw8ltfilP35VdNoYIa/HZrejmd64annJgKW7KM=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f4362153a9424eb450dd350e64dfffc7" class="toggle"  />
+    <label for="section-f4362153a9424eb450dd350e64dfffc7" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/to_do_list/" class="">［置頂］待辦事項</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5f16b5923caa653815be6bb5f018b2f0" class="toggle"  />
+    <label for="section-5f16b5923caa653815be6bb5f018b2f0" class="flex justify-between">
+      <a role="button" class="">人生節點</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/nodes/masters_degree/" class="">碩士的畢業證書</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-68339e45fbc633241628720af6b731c7" class="toggle"  />
+    <label for="section-68339e45fbc633241628720af6b731c7" class="flex justify-between">
+      <a role="button" class="">日常札記</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/xinxinmota/" class="">新新魔塔 v2.6.6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/heart_sutra_beforehand/" class="">一千份的手抄心經</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/japan/" class="">日本旅行 7 萬步</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
+      <a role="button" class="">閱讀心得</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/reading_experience/head_first_design_pattern/" class="">《深入淺出設計模式》</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資訊工程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/recommended_books/" class="">推薦書單</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3975d187eb6b0c47dcb29d31a654027a" class="toggle" checked />
+    <label for="section-3975d187eb6b0c47dcb29d31a654027a" class="flex justify-between">
+      <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/mediator_pattern/" class="">中介者模式（Mediator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/flyweight_pattern/" class="">享元模式（Flyweight Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/proxy_pattern/" class="">代理模式（Proxy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/prototype_pattern/" class="">原型模式（Prototype Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/command_pattern/" class="">命令模式（Command Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/singleton_pattern/" class="">單例模式（Singleton Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/facade_pattern/" class="">外觀模式（Facade Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/factory_method_pattern/" class="">工廠方法模式（Factory Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/abstract_factory_pattern/" class="">抽象工廠模式（Abstract Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/template_method_pattern/" class="">模板方法模式（Template Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/bridge_pattern/" class="">橋接模式（Bridge Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/state_pattern/" class="">狀態模式（State Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/builder_pattern/" class="">生成器模式（Builder Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/strategy_pattern/" class="">策略模式（Strategy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/simple_factory_pattern/" class="">簡單工廠模式（Simple Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_pattern/" class="">組合模式（Composite Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/decorator_pattern/" class="">裝飾器模式（Decorator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/observer_pattern/" class="">觀察者模式（Observer Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interpreter_pattern/" class="">解釋器模式（Interpreter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/visitor_pattern/" class="">訪問者模式（Visitor Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" class="">責任鏈模式（Chain of Responsibility Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/iterator_pattern/" class="">迭代器模式（Iterator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/adapter_pattern/" class="">適配器模式（Adapter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interface_segregation_principle/" class="">介面隔離原則（Interface Segregation Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/dependency_inversion_principle/" class="">依賴反轉原則（Dependency Inversion Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_aggregate_reuse_principle/" class="active">合成/聚合複用原則（Composite/Aggregate Reuse Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/single_responsibility_principle/" class="">單一職責原則（Single Responsibility Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/least_knowledge_principle/" class="">最少知識原則（Least Knowledge Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/liskov_substitution_principle/" class="">里式替換原則（Liskov Substitution Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/open_closed_principle/" class="">開放封閉原則（Open Closed Principle）</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
+      <a role="button" class="">宗教命理</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
+      <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/fortune_telling/tarot/daily_log/" class="">［置頂］每日一翻</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="toggle"  />
+    <label for="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="flex justify-between">
+      <a role="button" class="">自由創作</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>合成/聚合複用原則（Composite/Aggregate Reuse Principle）</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="合成聚合複用原則compositeaggregate-reuse-principle">
+  合成/聚合複用原則（Composite/Aggregate Reuse Principle）
+  <a class="anchor" href="#%e5%90%88%e6%88%90%e8%81%9a%e5%90%88%e8%a4%87%e7%94%a8%e5%8e%9f%e5%89%87compositeaggregate-reuse-principle">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>合成/聚合複用原則（CARP）是一個軟體設計原則，旨在引導開發人員在設計類別之間的關係時，能更多地考慮「合成」和「聚合」關係，而不是過度依賴「繼承」。這個原則強調使用合成（Composition）和聚合（Aggregation）的關係來實現複用性和模組化，以增加程式碼的靈活性、可讀性和可維護性。</p>
+<p>【<strong>合成關係</strong>】（Composition）：合成關係表示「一個物件包含其他的物件作為其一部分，這些部分物件的生命週期也與包含物件相關聯。」如果該物件被銷毀，其部分物件也會被銷毀。合成關係建立了一種高強度的耦合，表示「部分物件」與「整體物件」之間的關係非常緊密，此外，部分物件不能獨立存在。例如在 RPG 遊戲中，一個【角色】<code>Character</code> 可能會包含【武器】<code>Weapon</code>、【盔甲】<code>Armor</code> 與【技能】<code>Skill</code> 作為其【角色】的一部分，這些部分物件隨著會【角色】的存在而存在，同時也會因為【角色】的消失而消失。</p>
+<p>【<strong>聚合關係</strong>】（Aggregation）：聚合關係表示一個「物件包含其他物件作為其部分，但這些部分物件的生命週期與包含物件無關。」即使完整物件被銷毀，其餘的部分物件仍然可以獨立存在。聚合建立了一種較為孱弱的鬆耦合，表示部分物件具有一定程度的獨立性。例如在一個 RPG 遊戲中，一個【公會】 <code>Group</code> 可以聚合多個【角色】<code>Character</code> 作為其部分，但如果【公會】消失了，【角色】仍然可以在公會之外繼續存在。</p>
+<p>「高層模組」應該儘量避免直接依賴於「低層模組」，而是通過<strong>合成</strong>或<strong>聚合</strong>的方式來使用低層模組。這種設計可以使撰寫出來的程式碼更富有彈性，也能相較容易地替換（或添加）新的低層模組。同時，低層模組也應該避免強依賴於高層模組，以確保模組之間的耦合度降低。在 RPG 遊戲的情境中，CARP 原則還可以這樣應用：假設遊戲中的【角色】是高層模組，而【裝備】是低層模組。【角色】可以包含多個【裝備】，這些【裝備】可以通過聚合關係與【角色】相關聯。同時，裝備也可以包含多個屬性（例如攻擊力、防禦力），這些屬性通過合成關係與【裝備】相關聯。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Attribute</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        string name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> value<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        Attribute<span style="color:#f92672">(</span>string name<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> value<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">:</span> name<span style="color:#f92672">(</span>name<span style="color:#f92672">),</span> value<span style="color:#f92672">(</span>value<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">display</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> name <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> value <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Equipment</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        string name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>Attribute<span style="color:#f92672">*&gt;</span> attributes<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        Equipment<span style="color:#f92672">(</span>string name<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> name<span style="color:#f92672">(</span>name<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addAttribute</span><span style="color:#f92672">(</span>Attribute<span style="color:#f92672">*</span> attribute<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            attributes<span style="color:#f92672">.</span><span style="color:#a6e22e">push_back</span><span style="color:#f92672">(</span>attribute<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">displayAttributes</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;裝備名稱：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> name <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;屬性列表：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Attribute<span style="color:#f92672">*</span> attr <span style="color:#f92672">:</span> attributes<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                attr <span style="color:#f92672">-&gt;</span> display<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        string name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>Equipment<span style="color:#f92672">*&gt;</span> equipments<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        Character<span style="color:#f92672">(</span>string name<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> name<span style="color:#f92672">(</span>name<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addEquipment</span><span style="color:#f92672">(</span>Equipment<span style="color:#f92672">*</span> equipment<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            equipments<span style="color:#f92672">.</span><span style="color:#a6e22e">push_back</span><span style="color:#f92672">(</span>equipment<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">displayEquipments</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;角色名稱：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> name <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;裝備列表：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Equipment<span style="color:#f92672">*</span> equip <span style="color:#f92672">:</span> equipments<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                equip <span style="color:#f92672">-&gt;</span> displayAttributes<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> endl<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Equipment<span style="color:#f92672">*</span> sword <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Equipment<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;寶劍&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    sword <span style="color:#f92672">-&gt;</span> addAttribute<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Attribute<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;攻擊力&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Equipment<span style="color:#f92672">*</span> armor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Equipment<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;鎧甲&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    armor <span style="color:#f92672">-&gt;</span> addAttribute<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Attribute<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;防禦力&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">50</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Character <span style="color:#a6e22e">player</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;勇者&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    player<span style="color:#f92672">.</span><span style="color:#a6e22e">addEquipment</span><span style="color:#f92672">(</span>sword<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    player<span style="color:#f92672">.</span><span style="color:#a6e22e">addEquipment</span><span style="color:#f92672">(</span>armor<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    player<span style="color:#f92672">.</span><span style="color:#a6e22e">displayEquipments</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div></article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -283,6 +283,32 @@ class Character { public: virtual void attack() = 0; virtual void defend() = 0; 
     </item>
     
     <item>
+      <title>依賴反轉原則（Dependency Inversion Principle）</title>
+      <link>https://fonu195713.github.io/docs/computer_science/design_pattern/dependency_inversion_principle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/dependency_inversion_principle/</guid>
+      <description>依賴反轉原則（Dependency Inversion Principle）#ChatGPT 的說明 依賴反轉原則（Dependency Inversion Principle，簡稱DIP）眾多設計原則中的一個概念，它通過重新思考軟體設計中的「依賴」關係，提供了一種更具靈活性、擴展性、與可維護性的方式來組織程式碼。這個原則的核心思想在於「改變我們對依賴的看法」，將依賴關係的方向進行反轉，以減少耦合，增加彈性，並使系統更容易擴展和維護。在傳統的軟體設計中，&amp;ldquo;較低層級的模組&amp;rdquo; 通常依賴於 &amp;ldquo;較高層級的模組&amp;rdquo;。例如：如果你正在設計一個 RPG 遊戲，【技能】（低層模組）可能會依賴於【角色】（高層模組），因為【技能】需要知道它是被哪種類型的【角色】所使用。這種設計方式可能導致 &amp;ldquo;高層模組&amp;rdquo; 的變化影響到 &amp;ldquo;低層模組&amp;rdquo;，增加了系統的脆弱性和維護難度，並限制了系統的可擴展性。
+DIP的關鍵思想是：我們應.該.將.依.賴.關.係.的.方.向.反.過.來，使 &amp;ldquo;高層模組&amp;rdquo; 依賴於「&amp;ldquo;低層模組&amp;rdquo; 的抽象」，而不是依賴具體的低層細節。換句話說，我們要將控制權交給抽象類別，讓 &amp;ldquo;高層模組&amp;quot;依賴於【介面】【抽象類別】或其他抽象化的類型。這樣一來，可以帶來幾個好處是：首先是【減少耦合】：通過讓模組依賴於抽象，&amp;ldquo;高層模組&amp;rdquo; 和 &amp;ldquo;低層模組&amp;rdquo; 之間的耦合性便會降低。這意味著變更低層模組的實現不會影響高層模組的穩定性。
+此外，這樣做也可以【提升程式的可擴展性】：因為高層模組只依賴於抽象被別，所以低層模組可以更容易地被替換、被修改、或延展成新的低層類別，從而實現系統的擴展。此外，這樣的撰寫方式也有助於提升程式的【可測試性】：由於高層模組可以依賴於虛擬的、可測試的抽象，這將使得測試高層模組的難度變得更加容易。使高層依賴低層的抽象也可以【減少程式的細節】：因為通過依賴【抽象類別】或【介面】來實現功能，高層模組不再需要知道低層模組的具體實現細節，這有助於提高程式的可讀性和簡潔性。
+以下我們將透過一個 RPG 遊戲的情境，模擬「『低層模組』依賴『高層模組』」和「『高層模組』依賴『低層模組的抽象』」兩種程式的撰寫方式，在這個情境之下，低層模組指的是【技能】類別，而【高層】模組則是可以使用【技能】類別的其餘類別，也就是【角色】類別。首先，我們將低層模組【技能】依賴於高層模組【角色】。我們定義了【技能】的不同實現，而它們會根據【角色】的特性來調整技能的效果。
+class Character; class Skill { public: void fireBall(Character&amp;amp; character) { // only the magician can use this skill if(character.type == &amp;#34;Magician&amp;#34;) cout &amp;lt;&amp;lt; character.name &amp;lt;&amp;lt; &amp;#34; uses the skill &amp;#39;fire ball&amp;#39;.&amp;#34; &amp;lt;&amp;lt; endl; else cout &amp;lt;&amp;lt; character.name &amp;lt;&amp;lt; &amp;#34; wanted to try something, but there was no response.</description>
+    </item>
+    
+    <item>
+      <title>合成/聚合複用原則（Composite/Aggregate Reuse Principle）</title>
+      <link>https://fonu195713.github.io/docs/computer_science/design_pattern/composite_aggregate_reuse_principle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/composite_aggregate_reuse_principle/</guid>
+      <description>合成/聚合複用原則（Composite/Aggregate Reuse Principle）#ChatGPT 的說明 合成/聚合複用原則（CARP）是一個軟體設計原則，旨在引導開發人員在設計類別之間的關係時，能更多地考慮「合成」和「聚合」關係，而不是過度依賴「繼承」。這個原則強調使用合成（Composition）和聚合（Aggregation）的關係來實現複用性和模組化，以增加程式碼的靈活性、可讀性和可維護性。
+【合成關係】（Composition）：合成關係表示「一個物件包含其他的物件作為其一部分，這些部分物件的生命週期也與包含物件相關聯。」如果該物件被銷毀，其部分物件也會被銷毀。合成關係建立了一種高強度的耦合，表示「部分物件」與「整體物件」之間的關係非常緊密，此外，部分物件不能獨立存在。例如在 RPG 遊戲中，一個【角色】Character 可能會包含【武器】Weapon、【盔甲】Armor 與【技能】Skill 作為其【角色】的一部分，這些部分物件隨著會【角色】的存在而存在，同時也會因為【角色】的消失而消失。
+【聚合關係】（Aggregation）：聚合關係表示一個「物件包含其他物件作為其部分，但這些部分物件的生命週期與包含物件無關。」即使完整物件被銷毀，其餘的部分物件仍然可以獨立存在。聚合建立了一種較為孱弱的鬆耦合，表示部分物件具有一定程度的獨立性。例如在一個 RPG 遊戲中，一個【公會】 Group 可以聚合多個【角色】Character 作為其部分，但如果【公會】消失了，【角色】仍然可以在公會之外繼續存在。
+「高層模組」應該儘量避免直接依賴於「低層模組」，而是通過合成或聚合的方式來使用低層模組。這種設計可以使撰寫出來的程式碼更富有彈性，也能相較容易地替換（或添加）新的低層模組。同時，低層模組也應該避免強依賴於高層模組，以確保模組之間的耦合度降低。在 RPG 遊戲的情境中，CARP 原則還可以這樣應用：假設遊戲中的【角色】是高層模組，而【裝備】是低層模組。【角色】可以包含多個【裝備】，這些【裝備】可以通過聚合關係與【角色】相關聯。同時，裝備也可以包含多個屬性（例如攻擊力、防禦力），這些屬性通過合成關係與【裝備】相關聯。
+class Attribute { private: string name; int value; public: Attribute(string name, int value) : name(name), value(value) {} public: void display() { cout &amp;lt;&amp;lt; name &amp;lt;&amp;lt; &amp;#34;: &amp;#34; &amp;lt;&amp;lt; value &amp;lt;&amp;lt; endl; } }; class Equipment { private: string name; vector&amp;lt;Attribute*&amp;gt; attributes; public: Equipment(string name) : name(name) {} public: void addAttribute(Attribute* attribute) { attributes.</description>
+    </item>
+    
+    <item>
       <title>單一職責原則（Single Responsibility Principle）</title>
       <link>https://fonu195713.github.io/docs/computer_science/design_pattern/single_responsibility_principle/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -292,6 +318,20 @@ class Character { public: virtual void attack() = 0; virtual void defend() = 0; 
 違反 SRP 可能導致以下問題：首先是「複雜性增加」： 當一個類別承擔太多的職責時，會導致該類別的程式變得複雜、難以理解、和不易維護。再來，程式的「耦合程度也會變高」：將不同職責的程式混合在一起，會導致類別與類別的依賴加重，進而增加程式的耦合程度，這將使得當類別需要發生改變時，可能會連帶需要修改到其餘的類別，使影響範圍擴大。同時，違反單一職責也會使「程式的重用性下降」：與遵守單一職責的類別相比，具有當類別具有多重職責時，通常難以重用，因為其功能過於特定。此外，也可能發生多了類別具有相同或近似功能的重複性程式。最後，違反 SPR 的程式也會「增加程式變更的風險」： 當一個職責的變化，需要修改類別中的多個部分時，容易會發生撰寫的錯誤，進而引發程式的崩潰，此外也需要考慮是否存在「其他類別也擁有相同功能，因此需要一並修改」的可能性。簡而言之，單一職責原則有助於保持程式的清晰、可維護性和可擴展性，通過確保一個類別只有一個主要職責，可以使系統遍的更加靈活和易於改變。
 以下我們使用一個簡單的情境來解釋單一職責原則，我們假設在一個 RPG 遊戲中，角色可能會有「回復」「受到攻擊」與「升級」三種可能會發生的變化，如果我們使用 SRP 的程式原則，我們就會將這三種變化區別書寫成 takeDamage(), heal(), 和 levelUp() 三種方法。但如果不使用 SRP 的撰寫原則，程式就會全部擠在 update() 裡面，使得程式變得繁冗與複雜：
 // Adhering to SRP (Single Responsibility Principle) // Adhering to SRP (Single Responsibility Principle) // Adhering to SRP (Single Responsibility Principle) class Character { private: string name; int health; int level; public: Character(string name) : name(name), health(100), level(1) {} public: void takeDamage(int amount) { health -= amount; cout &amp;lt;&amp;lt; name &amp;lt;&amp;lt; &amp;#34; takes &amp;#34; &amp;lt;&amp;lt; amount &amp;lt;&amp;lt; &amp;#34; damage.</description>
+    </item>
+    
+    <item>
+      <title>最少知識原則（Least Knowledge Principle）</title>
+      <link>https://fonu195713.github.io/docs/computer_science/design_pattern/least_knowledge_principle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/least_knowledge_principle/</guid>
+      <description>最少知識原則（Least Knowledge Principle）#ChatGPT 的說明 最少知識原則（Principle of Least Knowledge，縮寫為 LKP），又稱作迪米特原則（Law of Demeter，縮寫為LoD），是一個軟體設計原則，該原則旨在「降低系統中各個組件之間的耦合度，從而提高系統的可讀性、可維護性和可擴展性」。最少知識原則的核心思想是「只與你直接的朋友通信」，意即「一個對象應該只認識它的直接朋友，不應該直接認識其他類別的內部結構。」這個原則強調了組件與組件之間的鬆耦合，避免了不必要的依賴關係，從而降低了系統的複雜度。最少知識原則可以透過以下幾個關鍵點來理解：
+只與直接朋友通信 在可允許的情況下，一個類別的方法，應該只可以調用以下的方法：「這個類別本身的方法」「被當作參數給傳遞進來的物件的方法」和「在該方法內，被創建（或被實例）的物件的方法。」一個類別的方法應該儘量只依賴於自己的內部實現，而不是去調用其他類別的內部方法。這樣可以確保當一個類別的實現變化時，其他類別不會因此受到影響。這也有助於隔離變化，使系統更加穩定
+此外「該方法的參數」可以被視為該方法的直接朋友。如果一個方法需要訪問另一個物件的方法，最好是將該物件作為參數傳遞給方法，而不是在方法內部直接訪問。這樣可以明確地傳遞相關資訊，並減少方法之間的隱含耦合；而當一個類別創建了（或實例化）另一個物件時，通常只應該調用該物件的公開介面方法（因為直接訪問該物件的內部方法，可能會導致類別之間的耦合增加）。透過只調用公開介面方法，可以保持類別之間的解耦。
+避免深層次的依賴 【類別】不應該調用【其他類別】的內部方法，特別是深層次的內部方法。因為這樣的依賴關係會使系統的耦合度增加，導致代碼難以維護。例如在以下的範例中，我們有一個名為 Ability 的基礎類別，並有兩個子類別（Fireball 和 Icebolt），它們繼承自 Ability。然後我們有一個 Character 類別，它包含一個 Ability* 的成員，並有一個 performAbility() 方法用於執行能力。
+進一步地 Mage 類別繼承自 Character ，並且在 Mage 的構造函數中創建了一個 Fireball 的能力。最後，我們有一個 Game 類別，該類別創建了一個 Mage 的實例，然後在 play() 方法中執行了法師的能力。這個範例中， Game 的 play() 方法就存在深層次的依賴關係。（Game &amp;gt; Mage &amp;gt; Ability &amp;gt; perform()）
+class Ability { public: virtual void perform() { cout &amp;lt;&amp;lt; &amp;#34;Performing basic ability!&amp;#34; &amp;lt;&amp;lt; endl; } }; class Fireball : public Ability { public: void perform() override { cout &amp;lt;&amp;lt; &amp;#34;Casting fireball!</description>
     </item>
     
     <item>
