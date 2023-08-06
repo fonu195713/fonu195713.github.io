@@ -270,6 +270,19 @@ class DailyQuest { public: virtual void execute() = 0; }; class HuntingQuest : p
     </item>
     
     <item>
+      <title>介面隔離原則（Interface Segregation Principle）</title>
+      <link>https://fonu195713.github.io/docs/computer_science/design_pattern/interface_segregation_principle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/interface_segregation_principle/</guid>
+      <description>介面隔離原則（Interface Segregation Principle）#ChatGPT 的說明 介面隔離原則（ISP - Interface Segregation Principle）是 SOLID 原則中的一個，SOLID 是一個首字母縮略詞，代表著五個不同的設計原則：單一職責原則（Single Responsibility Principle，SRP）、開放封閉原則（Open/Closed Principle，OCP）、里氏替換原則（Liskov Substitution Principle，LSP）、介面隔離原則（Interface Segregation Principle，ISP）、依賴反轉原則（Dependency Inversion Principle，DIP）。介面隔離原則（ISP）主要關注在設計【介面】（interface）時的合理性和適切性。ISP 的核心理念是「【客戶端】不該被迫依賴它不需要的【介面】」，這意味著【介面】應該要被分割成小的、細微的、特定的部分，以便客戶端在依賴【介面】時，不會包含到那些他們不需要的方法。更具體地說，ISP 強調以下兩個信條：「介面應該小而精簡」以及「用多個特定介面替換一個通用介面」。
+【介面應該小而精簡】 在軟體開發中（特別是物件導向程式設計），設計一個適宜的【介面】是非常重要的。「介面應該小而精簡」是指一個介面應該只包含客戶端所需的要方法，不應該包含多餘的、繁冗的、不必要的方法。這條訊息鼓勵程式設計師在設計面時，將「大的、通用」的介面分割成「小的、特定的」的部分，從而使【客戶端】只需要實現（或使用）他們所需要的方法，以助於減少依賴性、提高程式的可讀性，同時也確保每個【介面】的方法都具有清晰的用途和職責。
+接下來我們使用一個例子來說明「介面應該小而精簡」的想法：想像一個 RPG（角色扮演遊戲）遊戲中，我們需要設計不同【角色】的能力介面。這些角色可以是【戰士】【法師】【弓箭手】&amp;hellip;等。每個【角色】都有一些共同的行動，比如攻擊（attack）、防禦（defend）等，但也有些角色特有的行動，例如法師的魔法攻擊（magicAttack）。一個不遵循「介面應該小而精簡」信條的設計可能會如下：
+class Character { public: virtual void attack() = 0; virtual void defend() = 0; virtual void magicAttack() = 0; }; 在這種情況下，即使某些角色不具備魔法攻擊能力（比如戰士），它們仍然需要實現 magicAttack 方法，這對於這些角色來說是多餘的。但如果我們有遵循「介面應該小而精簡」的原則，我們便可以將原本的程式，改成下面這樣的設計：
+class Character { public: virtual void attack() = 0; virtual void defend() = 0; }; class Mage : public Character { public: void attack() override {} void defend() override {} public: void magicAttack() {} }; 這樣的設計遵循了「介面應該小而精簡」的信條，因為每個【角色】都只需要實現他們所需的行動，而不需要實現多餘的方法。比如說：【戰士】角色在這樣的設計情況下，只需要實現 attack() 方法和 defend() 方法，而不需要去實現魔法攻擊相關的方法。而【法師】除了 attack() 方法和 defend() 方法之外，因為還擁有魔法攻擊相關的方法，因此多了一個 magicAttack() 的相關方法。</description>
+    </item>
+    
+    <item>
       <title>單一職責原則（Single Responsibility Principle）</title>
       <link>https://fonu195713.github.io/docs/computer_science/design_pattern/single_responsibility_principle/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

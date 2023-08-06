@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="介面隔離原則（Interface Segregation Principle）#ChatGPT 的說明 介面隔離原則（ISP - Interface Segregation Principle）是 SOLID 原則中的一個，SOLID 是一個首字母縮略詞，代表著五個不同的設計原則：單一職責原則（Single Responsibility Principle，SRP）、開放封閉原則（Open/Closed Principle，OCP）、里氏替換原則（Liskov Substitution Principle，LSP）、介面隔離原則（Interface Segregation Principle，ISP）、依賴反轉原則（Dependency Inversion Principle，DIP）。介面隔離原則（ISP）主要關注在設計【介面】（interface）時的合理性和適切性。ISP 的核心理念是「【客戶端】不該被迫依賴它不需要的【介面】」，這意味著【介面】應該要被分割成小的、細微的、特定的部分，以便客戶端在依賴【介面】時，不會包含到那些他們不需要的方法。更具體地說，ISP 強調以下兩個信條：「介面應該小而精簡」以及「用多個特定介面替換一個通用介面」。
+【介面應該小而精簡】 在軟體開發中（特別是物件導向程式設計），設計一個適宜的【介面】是非常重要的。「介面應該小而精簡」是指一個介面應該只包含客戶端所需的要方法，不應該包含多餘的、繁冗的、不必要的方法。這條訊息鼓勵程式設計師在設計面時，將「大的、通用」的介面分割成「小的、特定的」的部分，從而使【客戶端】只需要實現（或使用）他們所需要的方法，以助於減少依賴性、提高程式的可讀性，同時也確保每個【介面】的方法都具有清晰的用途和職責。
+接下來我們使用一個例子來說明「介面應該小而精簡」的想法：想像一個 RPG（角色扮演遊戲）遊戲中，我們需要設計不同【角色】的能力介面。這些角色可以是【戰士】【法師】【弓箭手】&hellip;等。每個【角色】都有一些共同的行動，比如攻擊（attack）、防禦（defend）等，但也有些角色特有的行動，例如法師的魔法攻擊（magicAttack）。一個不遵循「介面應該小而精簡」信條的設計可能會如下：
+class Character { public: virtual void attack() = 0; virtual void defend() = 0; virtual void magicAttack() = 0; }; 在這種情況下，即使某些角色不具備魔法攻擊能力（比如戰士），它們仍然需要實現 magicAttack 方法，這對於這些角色來說是多餘的。但如果我們有遵循「介面應該小而精簡」的原則，我們便可以將原本的程式，改成下面這樣的設計：
+class Character { public: virtual void attack() = 0; virtual void defend() = 0; }; class Mage : public Character { public: void attack() override {} void defend() override {} public: void magicAttack() {} }; 這樣的設計遵循了「介面應該小而精簡」的信條，因為每個【角色】都只需要實現他們所需的行動，而不需要實現多餘的方法。比如說：【戰士】角色在這樣的設計情況下，只需要實現 attack() 方法和 defend() 方法，而不需要去實現魔法攻擊相關的方法。而【法師】除了 attack() 方法和 defend() 方法之外，因為還擁有魔法攻擊相關的方法，因此多了一個 magicAttack() 的相關方法。">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="介面隔離原則（Interface Segregation Principle）" />
+<meta property="og:description" content="介面隔離原則（Interface Segregation Principle）#ChatGPT 的說明 介面隔離原則（ISP - Interface Segregation Principle）是 SOLID 原則中的一個，SOLID 是一個首字母縮略詞，代表著五個不同的設計原則：單一職責原則（Single Responsibility Principle，SRP）、開放封閉原則（Open/Closed Principle，OCP）、里氏替換原則（Liskov Substitution Principle，LSP）、介面隔離原則（Interface Segregation Principle，ISP）、依賴反轉原則（Dependency Inversion Principle，DIP）。介面隔離原則（ISP）主要關注在設計【介面】（interface）時的合理性和適切性。ISP 的核心理念是「【客戶端】不該被迫依賴它不需要的【介面】」，這意味著【介面】應該要被分割成小的、細微的、特定的部分，以便客戶端在依賴【介面】時，不會包含到那些他們不需要的方法。更具體地說，ISP 強調以下兩個信條：「介面應該小而精簡」以及「用多個特定介面替換一個通用介面」。
+【介面應該小而精簡】 在軟體開發中（特別是物件導向程式設計），設計一個適宜的【介面】是非常重要的。「介面應該小而精簡」是指一個介面應該只包含客戶端所需的要方法，不應該包含多餘的、繁冗的、不必要的方法。這條訊息鼓勵程式設計師在設計面時，將「大的、通用」的介面分割成「小的、特定的」的部分，從而使【客戶端】只需要實現（或使用）他們所需要的方法，以助於減少依賴性、提高程式的可讀性，同時也確保每個【介面】的方法都具有清晰的用途和職責。
+接下來我們使用一個例子來說明「介面應該小而精簡」的想法：想像一個 RPG（角色扮演遊戲）遊戲中，我們需要設計不同【角色】的能力介面。這些角色可以是【戰士】【法師】【弓箭手】&hellip;等。每個【角色】都有一些共同的行動，比如攻擊（attack）、防禦（defend）等，但也有些角色特有的行動，例如法師的魔法攻擊（magicAttack）。一個不遵循「介面應該小而精簡」信條的設計可能會如下：
+class Character { public: virtual void attack() = 0; virtual void defend() = 0; virtual void magicAttack() = 0; }; 在這種情況下，即使某些角色不具備魔法攻擊能力（比如戰士），它們仍然需要實現 magicAttack 方法，這對於這些角色來說是多餘的。但如果我們有遵循「介面應該小而精簡」的原則，我們便可以將原本的程式，改成下面這樣的設計：
+class Character { public: virtual void attack() = 0; virtual void defend() = 0; }; class Mage : public Character { public: void attack() override {} void defend() override {} public: void magicAttack() {} }; 這樣的設計遵循了「介面應該小而精簡」的信條，因為每個【角色】都只需要實現他們所需的行動，而不需要實現多餘的方法。比如說：【戰士】角色在這樣的設計情況下，只需要實現 attack() 方法和 defend() 方法，而不需要去實現魔法攻擊相關的方法。而【法師】除了 attack() 方法和 defend() 方法之外，因為還擁有魔法攻擊相關的方法，因此多了一個 magicAttack() 的相關方法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/interface_segregation_principle/" /><meta property="article:section" content="docs" />
+
+
+<title>介面隔離原則（Interface Segregation Principle） | Fonu Site</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.45ed40e7dac37338694ad73db808ab5cece20535db85f64272801cc393722fc1.js" integrity="sha256-Re1A59rDczhpStc9uAirXOziBTXbhfZCcoAcw5NyL8E=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f4362153a9424eb450dd350e64dfffc7" class="toggle"  />
+    <label for="section-f4362153a9424eb450dd350e64dfffc7" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/to_do_list/" class="">［置頂］待辦事項</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5f16b5923caa653815be6bb5f018b2f0" class="toggle"  />
+    <label for="section-5f16b5923caa653815be6bb5f018b2f0" class="flex justify-between">
+      <a role="button" class="">人生節點</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/nodes/masters_degree/" class="">碩士的畢業證書</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-68339e45fbc633241628720af6b731c7" class="toggle"  />
+    <label for="section-68339e45fbc633241628720af6b731c7" class="flex justify-between">
+      <a role="button" class="">日常札記</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/xinxinmota/" class="">新新魔塔 v2.6.6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/heart_sutra_beforehand/" class="">一千份的手抄心經</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/notes/japan/" class="">日本旅行 7 萬步</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
+      <a role="button" class="">閱讀心得</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/daily_life/reading_experience/head_first_design_pattern/" class="">《深入淺出設計模式》</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資訊工程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/recommended_books/" class="">推薦書單</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3975d187eb6b0c47dcb29d31a654027a" class="toggle" checked />
+    <label for="section-3975d187eb6b0c47dcb29d31a654027a" class="flex justify-between">
+      <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/mediator_pattern/" class="">中介者模式（Mediator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/flyweight_pattern/" class="">享元模式（Flyweight Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/proxy_pattern/" class="">代理模式（Proxy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/prototype_pattern/" class="">原型模式（Prototype Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/command_pattern/" class="">命令模式（Command Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/singleton_pattern/" class="">單例模式（Singleton Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/facade_pattern/" class="">外觀模式（Facade Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/factory_method_pattern/" class="">工廠方法模式（Factory Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/abstract_factory_pattern/" class="">抽象工廠模式（Abstract Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/template_method_pattern/" class="">模板方法模式（Template Method Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/bridge_pattern/" class="">橋接模式（Bridge Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/state_pattern/" class="">狀態模式（State Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/builder_pattern/" class="">生成器模式（Builder Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/strategy_pattern/" class="">策略模式（Strategy Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/simple_factory_pattern/" class="">簡單工廠模式（Simple Factory Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/composite_pattern/" class="">組合模式（Composite Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/decorator_pattern/" class="">裝飾器模式（Decorator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/observer_pattern/" class="">觀察者模式（Observer Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interpreter_pattern/" class="">解釋器模式（Interpreter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/visitor_pattern/" class="">訪問者模式（Visitor Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" class="">責任鏈模式（Chain of Responsibility Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/iterator_pattern/" class="">迭代器模式（Iterator Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/adapter_pattern/" class="">適配器模式（Adapter Pattern）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/interface_segregation_principle/" class="active">介面隔離原則（Interface Segregation Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/single_responsibility_principle/" class="">單一職責原則（Single Responsibility Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/liskov_substitution_principle/" class="">里式替換原則（Liskov Substitution Principle）</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/open_closed_principle/" class="">開放封閉原則（Open Closed Principle）</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
+      <a role="button" class="">宗教命理</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
+      <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/fortune_telling/tarot/daily_log/" class="">［置頂］每日一翻</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="toggle"  />
+    <label for="section-757e6157ed0a4d3981b7c5e4754c7bc2" class="flex justify-between">
+      <a role="button" class="">自由創作</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>介面隔離原則（Interface Segregation Principle）</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="介面隔離原則interface-segregation-principle">
+  介面隔離原則（Interface Segregation Principle）
+  <a class="anchor" href="#%e4%bb%8b%e9%9d%a2%e9%9a%94%e9%9b%a2%e5%8e%9f%e5%89%87interface-segregation-principle">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>介面隔離原則（ISP - Interface Segregation Principle）是 SOLID 原則中的一個，SOLID 是一個首字母縮略詞，代表著五個不同的設計原則：單一職責原則（Single Responsibility Principle，SRP）、開放封閉原則（Open/Closed Principle，OCP）、里氏替換原則（Liskov Substitution Principle，LSP）、介面隔離原則（Interface Segregation Principle，ISP）、依賴反轉原則（Dependency Inversion Principle，DIP）。介面隔離原則（ISP）主要關注在設計【介面】（interface）時的合理性和適切性。ISP 的核心理念是「【客戶端】不該被迫依賴它不需要的【介面】」，這意味著【介面】應該要被分割成小的、細微的、特定的部分，以便客戶端在依賴【介面】時，不會包含到那些他們不需要的方法。更具體地說，ISP 強調以下兩個信條：「介面應該小而精簡」以及「用多個特定介面替換一個通用介面」。</p>
+<ul>
+<li>【<strong>介面應該小而精簡</strong>】</li>
+</ul>
+<p>在軟體開發中（特別是物件導向程式設計），設計一個適宜的【介面】是非常重要的。「介面應該小而精簡」是指一個介面應該只包含客戶端所需的要方法，不應該包含多餘的、繁冗的、不必要的方法。這條訊息鼓勵程式設計師在設計面時，將「大的、通用」的介面分割成「小的、特定的」的部分，從而使【客戶端】只需要實現（或使用）他們所需要的方法，以助於減少依賴性、提高程式的可讀性，同時也確保每個【介面】的方法都具有清晰的用途和職責。</p>
+<p>接下來我們使用一個例子來說明「介面應該小而精簡」的想法：想像一個 RPG（角色扮演遊戲）遊戲中，我們需要設計不同【角色】的能力介面。這些角色可以是【戰士】【法師】【弓箭手】&hellip;等。每個【角色】都有一些共同的行動，比如攻擊（attack）、防禦（defend）等，但也有些角色特有的行動，例如法師的魔法攻擊（magicAttack）。一個不遵循「介面應該小而精簡」信條的設計可能會如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">defend</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">magicAttack</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><p>在這種情況下，即使某些角色不具備魔法攻擊能力（比如戰士），它們仍然需要實現 magicAttack 方法，這對於這些角色來說是多餘的。但如果我們有遵循「介面應該小而精簡」的原則，我們便可以將原本的程式，改成下面這樣的設計：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">defend</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Mage</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">defend</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    public:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">magicAttack</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><p>這樣的設計遵循了「介面應該小而精簡」的信條，因為每個【角色】都只需要實現他們所需的行動，而不需要實現多餘的方法。比如說：【戰士】角色在這樣的設計情況下，只需要實現 <code>attack()</code> 方法和 <code>defend()</code> 方法，而不需要去實現魔法攻擊相關的方法。而【法師】除了 <code>attack()</code> 方法和 <code>defend()</code> 方法之外，因為還擁有魔法攻擊相關的方法，因此多了一個 <code>magicAttack()</code> 的相關方法。</p>
+<ul>
+<li>【<strong>用多個特定介面替換一個通用介面</strong>】</li>
+</ul>
+<p>第二個信條是「用多個特定介面替換一個通用介面」。該信條是指在設計【介面】時，相對於定義一個「大而通用」的介面，將該【介面】拆分成「多個」「小而特定」的部分【介面】更能夠滿足客戶端的特定需求。這個信條鼓勵將通用的功能分解成更加具體、更專業化的【介面】，以便【客戶端】只需要實現（或使用）他們真正所需要的方法，而不需要去考慮那些不會被使用到，但仍然被介面所包含的冗餘方法。</p>
+<p>接下來我們使用一個角色扮演遊戲（RPG）來說明該信條的應用方式：考慮一個 RPG 遊戲，我們需要處理【角色】的不同技能和特性。遊戲中可能會有各種不同的職業，如【戰士】【法師】【弓箭手】等。每個職業都有其獨特的技能和特性，但也有一些共同的屬性，如攻擊（attack）、防禦（defend）等。如果不遵循「用多個特定介面替換一個通用介面」的設計方式，我們可能會得到類似以下的設計：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">defend</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">castSpell</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">shootArrow</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ... other methids
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><p>這種情況下，即使某些職業並不需要這些所有的方法，例如【戰士】不需要 <code>castSpell()</code> 方法、【法師】無法理解什麼是 <code>shootArrow()</code> 方法&hellip;等，它們（這些所有的職業）仍然會需要實現這些不必要的方法，從而增加了類別本身的複雜性。但相反地，如果我們遵循「用多個特定介面替換一個通用介面」的設計方式，我們可以將上述的程式改為以下這樣的設計：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">defend</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Spellcaster</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">castSpell</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Archer</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        virtual <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">shootArrow</span><span style="color:#f92672">()</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Warrior</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">defend</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Mage</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character<span style="color:#f92672">,</span> <span style="color:#66d9ef">public</span> Spellcaster <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">defend</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">castSpell</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ArcherCharacter</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Character<span style="color:#f92672">,</span> <span style="color:#66d9ef">public</span> Archer <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">defend</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">shootArrow</span><span style="color:#f92672">()</span> override <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span></code></pre></div><p>透過將原本的 <code>Character</code> 介面切分成了更細小、更特定的 <code>Character</code>, <code>Spellcaster</code>, <code>Archer</code> 介面，這樣的設計即是遵循了「用多個特定介面替換一個通用介面」的原則。現在每個【職業】只需實現他們所需的方法，並且可以通過組合特定【介面】的方式來達到所需的特性。這使得設計更加模組化和可擴展，【客戶端】只需實現他們所需要的介面，減少了不必要的依賴和複雜性，同時也增加了程式的可讀性和維護性。</p>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
