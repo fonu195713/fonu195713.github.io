@@ -3,15 +3,29 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="［置頂］工作日誌#2023, 7 月...日期 標題 分類 備註 07-07 《深入淺出設計模式》 心得 . 07-08 設計模式 分類 . 07-09 策略模式 內容 . 07-10 模板方法模式 內容 . 07-11 享元模式 內容 . 07-12 狀態模式 內容 . 07-13 單例模式 內容 . 07-14 簡單工廠模式 內容 . 07-14 工作日誌 內容 . 07-14 文章留言板 功能 . 07-15 工廠方法模式 內容 . 07-16 抽象工廠模式 內容 . 07-17 生成器模式 內容 . 07-18 原型模式 內容 . 07-21 適配器模式 內容 .">
+<meta name="description" content="《灰階思考》閱讀心得#2023-08-14
+背景 會知道這本書，是因為我有在聽一個名叫股癌的 podcast 節目，同時也是主委的忠實聽眾。節目的主持人叫做謝孟恭（也就是我們的主委），裡面主要會分享一些他的生活經驗（像是跟老婆、小孩、其他朋友的相處&hellip;等），以及一些他工作內容（全職操盤手），也因為他是一個全職操盤手，因此工作上面的分享內容就會是一些公司的營收狀況、預期的潛在獲利、或者是對於局勢的看法（像這陣子的 AI 或者是之前的疫苗股、海運股 &hellip;等），也會跟我們分享一些他平常的興趣跟嗜好（看 Netflix 影集、聽獨立樂團的音樂 &hellip;等）。
+這本《灰階思考》就是主委寫的，裡面大致上總結了他前 200 集 podcast 有講到的股票內容，算是跟財經高度相關的書，但裡面沒有分享比較基本面、技術面、或籌碼面的東西，也就是 不.會. 跟你說「遇到 xxx 就可以買入」「看到 yyy 就記得加碼」「有發現 zzz 就要準備出場了」這類的話語，裡面的內容比較像是跟心法、意識、觀念有關的東西。除了因為主委的個人魅力，所以我決定寫下這本書的心得之外，更大一部份的原因是真的有從這裡面學到了很多，雖然大部分都是直接聽 podcast 裡面的內容啦，買書比較像是一個支持的行為 XDD
+內容 書本的內容總共分成三個部分：用書裡面的寫法的話，分別叫做「掃雷」「備糧」以及「上陣」。我自己的方式做理解的話，這三個段落分別是在介紹「建構股市中的基本知識和概念」「建立一個專屬於自己的交易策略或邏輯」以及「嘗試、監測、和改進自己的策略與邏輯」三種。【掃雷】就是「掃除雷點」，也就是破解一些股市裡面比較常見的迷思，自己比較有印象的點有「」「」和「」這三點：
+心得
+評分
+閱讀難度：★☆☆☆☆ （需要有基本的物件導向程式觀念）
+推薦指數：★★★★☆">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="［置頂］工作日誌" />
-<meta property="og:description" content="［置頂］工作日誌#2023, 7 月...日期 標題 分類 備註 07-07 《深入淺出設計模式》 心得 . 07-08 設計模式 分類 . 07-09 策略模式 內容 . 07-10 模板方法模式 內容 . 07-11 享元模式 內容 . 07-12 狀態模式 內容 . 07-13 單例模式 內容 . 07-14 簡單工廠模式 內容 . 07-14 工作日誌 內容 . 07-14 文章留言板 功能 . 07-15 工廠方法模式 內容 . 07-16 抽象工廠模式 內容 . 07-17 生成器模式 內容 . 07-18 原型模式 內容 . 07-21 適配器模式 內容 ." />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="《灰階思考》" />
+<meta property="og:description" content="《灰階思考》閱讀心得#2023-08-14
+背景 會知道這本書，是因為我有在聽一個名叫股癌的 podcast 節目，同時也是主委的忠實聽眾。節目的主持人叫做謝孟恭（也就是我們的主委），裡面主要會分享一些他的生活經驗（像是跟老婆、小孩、其他朋友的相處&hellip;等），以及一些他工作內容（全職操盤手），也因為他是一個全職操盤手，因此工作上面的分享內容就會是一些公司的營收狀況、預期的潛在獲利、或者是對於局勢的看法（像這陣子的 AI 或者是之前的疫苗股、海運股 &hellip;等），也會跟我們分享一些他平常的興趣跟嗜好（看 Netflix 影集、聽獨立樂團的音樂 &hellip;等）。
+這本《灰階思考》就是主委寫的，裡面大致上總結了他前 200 集 podcast 有講到的股票內容，算是跟財經高度相關的書，但裡面沒有分享比較基本面、技術面、或籌碼面的東西，也就是 不.會. 跟你說「遇到 xxx 就可以買入」「看到 yyy 就記得加碼」「有發現 zzz 就要準備出場了」這類的話語，裡面的內容比較像是跟心法、意識、觀念有關的東西。除了因為主委的個人魅力，所以我決定寫下這本書的心得之外，更大一部份的原因是真的有從這裡面學到了很多，雖然大部分都是直接聽 podcast 裡面的內容啦，買書比較像是一個支持的行為 XDD
+內容 書本的內容總共分成三個部分：用書裡面的寫法的話，分別叫做「掃雷」「備糧」以及「上陣」。我自己的方式做理解的話，這三個段落分別是在介紹「建構股市中的基本知識和概念」「建立一個專屬於自己的交易策略或邏輯」以及「嘗試、監測、和改進自己的策略與邏輯」三種。【掃雷】就是「掃除雷點」，也就是破解一些股市裡面比較常見的迷思，自己比較有印象的點有「」「」和「」這三點：
+心得
+評分
+閱讀難度：★☆☆☆☆ （需要有基本的物件導向程式觀念）
+推薦指數：★★★★☆" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/daily_life/working_log/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="https://fonu195713.github.io/docs/daily_life/reading_experience/gray_thinking/" /><meta property="article:section" content="docs" />
 
 
-<title>［置頂］工作日誌 | Fonu Site</title>
+<title>《灰階思考》 | Fonu Site</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
@@ -87,7 +101,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/daily_life/working_log/" class="active">［置頂］工作日誌</a>
+    <a href="/docs/daily_life/working_log/" class="">［置頂］工作日誌</a>
   
 
         </li>
@@ -207,7 +221,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle"  />
+    <input type="checkbox" id="section-37b9dc15f655a4535748c0ebbd58c56b" class="toggle" checked />
     <label for="section-37b9dc15f655a4535748c0ebbd58c56b" class="flex justify-between">
       <a role="button" class="">閱讀心得</a>
     </label>
@@ -249,7 +263,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/daily_life/reading_experience/gray_thinking/" class="">《灰階思考》</a>
+    <a href="/docs/daily_life/reading_experience/gray_thinking/" class="active">《灰階思考》</a>
   
 
         </li>
@@ -874,7 +888,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>［置頂］工作日誌</strong>
+  <strong>《灰階思考》</strong>
 
   <label for="toc-control">
     
@@ -888,311 +902,31 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="置頂工作日誌">
-  ［置頂］工作日誌
-  <a class="anchor" href="#%e7%bd%ae%e9%a0%82%e5%b7%a5%e4%bd%9c%e6%97%a5%e8%aa%8c">#</a>
+  <article class="markdown"><h1 id="灰階思考閱讀心得">
+  《灰階思考》閱讀心得
+  <a class="anchor" href="#%e7%81%b0%e9%9a%8e%e6%80%9d%e8%80%83%e9%96%b1%e8%ae%80%e5%bf%83%e5%be%97">#</a>
 </h1>
 <hr>
-
-<div class="book-expand">
-  <label>
-    <div class="book-expand-head flex justify-between">
-      <span>2023, 7 月</span>
-      <span>...</span>
-    </div>
-    <input type="checkbox" class="hidden" />
-    <div class="book-expand-content markdown-inner">
-      <table>
-<thead>
-<tr>
-<th style="text-align:center">日期</th>
-<th style="text-align:center">標題</th>
-<th style="text-align:center">分類</th>
-<th style="text-align:center">備註</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">07-07</td>
-<td style="text-align:center"><a href="/docs/daily_life/reading_experience/head_first_design_pattern/">《深入淺出設計模式》</a></td>
-<td style="text-align:center">心得</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-08</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/">設計模式</a></td>
-<td style="text-align:center">分類</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-09</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/strategy_pattern/">策略模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-10</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/template_method_pattern/">模板方法模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-11</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/flyweight_pattern/">享元模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-12</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/state_pattern/">狀態模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-13</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/singleton_pattern/">單例模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-14</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/simple_factory_pattern/">簡單工廠模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-14</td>
-<td style="text-align:center"><a href="/docs/daily_life/notes/working_log/">工作日誌</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-14</td>
-<td style="text-align:center">文章留言板</td>
-<td style="text-align:center">功能</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-15</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/factory_method_pattern/">工廠方法模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-16</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/abstract_factory_pattern/">抽象工廠模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-17</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/builder_pattern/">生成器模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-18</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/prototype_pattern/">原型模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-21</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/adapter_pattern/">適配器模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-22</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/bridge_pattern/">橋接模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-22</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/decorator_pattern/">裝飾者模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-22</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/facade_pattern/">外觀模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-23</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/proxy_pattern/">代理模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-23</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/composite_pattern/">組合模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-24</td>
-<td style="text-align:center"><a href="/docs/fortune_telling/tarot/">塔羅牌</a></td>
-<td style="text-align:center">分類</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-25</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/observer_pattern/">觀察者模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">07-27</td>
-<td style="text-align:center"><a href="/docs/daily_life/notes/xinxinmota/">新新魔塔</a></td>
-<td style="text-align:center">札記</td>
-<td style="text-align:center">.</td>
-</tr>
-</tbody>
-</table>
-
-    </div>
-  </label>
-</div>
-
-
-<div class="book-expand">
-  <label>
-    <div class="book-expand-head flex justify-between">
-      <span>2023, 8 月</span>
-      <span>...</span>
-    </div>
-    <input type="checkbox" class="hidden" />
-    <div class="book-expand-content markdown-inner">
-      <table>
-<thead>
-<tr>
-<th style="text-align:center">日期</th>
-<th style="text-align:center">標題</th>
-<th style="text-align:center">分類</th>
-<th style="text-align:center">備註</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">08-01</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/command_pattern/">命令模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-02</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/chain_of_responsibility_pattern/">責任鏈模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-03</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/visitor_pattern/">訪問者模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-04</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/mediator_pattern/">中介者模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-05</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/interpreter_pattern/">解釋器模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-05</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/iterator_pattern/">迭代器模式</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-05</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/single_responsibility_principle/">單一職責原則</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-05</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/open_closed_principle/">開放封閉原則</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-05</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/liskov_substitution_principle/">里氏替換原則</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-06</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/interface_segregation_principle/">介面隔離原則</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-06</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/dependency_inversion_principle/">依賴反轉原則</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-06</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/composite_aggregate_reuse_principle/">合成/聚合複用原則</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-06</td>
-<td style="text-align:center"><a href="/docs/computer_science/design_pattern/least_knowledge_principle/">最少知識原則</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-06</td>
-<td style="text-align:center"><a href="/docs/daily_life/notes/heart_sutra_beforehand/">一千份的手抄心經</a></td>
-<td style="text-align:center">內容</td>
-<td style="text-align:center">.</td>
-</tr>
-<tr>
-<td style="text-align:center">08-13</td>
-<td style="text-align:center"><a href="/docs/fortune_telling/tarot/">偉特塔羅牌</a></td>
-<td style="text-align:center">分類</td>
-<td style="text-align:center">更新內文</td>
-</tr>
-<tr>
-<td style="text-align:center">08-14</td>
-<td style="text-align:center">[牌意解析][38]</td>
-<td style="text-align:center">分類</td>
-<td style="text-align:center">.</td>
-</tr>
-</tbody>
-</table>
-
-    </div>
-  </label>
-</div>
-
-
-<div class="book-expand">
-  <label>
-    <div class="book-expand-head flex justify-between">
-      <span>2023, 9 月（無內容）</span>
-      <span>...</span>
-    </div>
-    <input type="checkbox" class="hidden" />
-    <div class="book-expand-content markdown-inner">
-      
-    </div>
-  </label>
-</div>
-
+<p><code>2023-08-14</code></p>
+<ul>
+<li><strong>背景</strong></li>
+</ul>
+<p>會知道這本書，是因為我有在聽一個名叫<a href="https://www.youtube.com/@Gooaye">股癌</a>的 podcast 節目，<del>同時也是主委的忠實聽眾</del>。節目的主持人叫做<a href="https://zh.wikipedia.org/zh-tw/%E8%AC%9D%E5%AD%9F%E6%81%AD">謝孟恭</a>（也就是我們的主委），裡面主要會分享一些他的生活經驗（像是跟老婆、小孩、其他朋友的相處&hellip;等），以及一些他工作內容（全職操盤手），也因為他是一個全職操盤手，因此工作上面的分享內容就會是一些公司的營收狀況、預期的潛在獲利、或者是對於局勢的看法（像這陣子的 AI 或者是之前的疫苗股、海運股 &hellip;等），也會跟我們分享一些他平常的興趣跟嗜好（看 Netflix 影集、聽獨立樂團的音樂 &hellip;等）。</p>
+<p>這本《<a href="https://www.books.com.tw/products/0010888435">灰階思考</a>》就是主委寫的，裡面大致上總結了他前 200 集 podcast 有講到的股票內容，算是跟財經高度相關的書，但裡面沒有分享比較基本面、技術面、或籌碼面的東西，也就是 <strong>不.會.</strong> 跟你說「遇到 xxx 就可以買入」「看到 yyy 就記得加碼」「有發現 zzz 就要準備出場了」這類的話語，裡面的內容比較像是跟心法、意識、觀念有關的東西。除了因為主委的個人魅力，所以我決定寫下這本書的心得之外，更大一部份的原因是真的有從這裡面學到了很多，雖然大部分都是直接聽 podcast 裡面的內容啦，買書比較像是一個支持的行為 XDD</p>
+<ul>
+<li><strong>內容</strong></li>
+</ul>
+<p>書本的內容總共分成三個部分：用書裡面的寫法的話，分別叫做「掃雷」「備糧」以及「上陣」。我自己的方式做理解的話，這三個段落分別是在介紹「建構股市中的基本知識和概念」「建立一個專屬於自己的交易策略或邏輯」以及「嘗試、監測、和改進自己的策略與邏輯」三種。【掃雷】就是「掃除雷點」，也就是破解一些股市裡面比較常見的迷思，自己比較有印象的點有「」「」和「」這三點：</p>
+<ul>
+<li>
+<p><strong>心得</strong></p>
+</li>
+<li>
+<p><strong>評分</strong></p>
+</li>
+</ul>
+<p>閱讀難度：★☆☆☆☆ （需要有基本的物件導向程式觀念）</p>
+<p>推薦指數：★★★★☆</p>
 </article>
  
       <div id="gitalk-container"></div>
