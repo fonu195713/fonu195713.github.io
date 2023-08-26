@@ -2,13 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://fonu195713.github.io/docs/creative_writing/novel/worldview/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/creative_writing/note/</loc>
+  </url><url>
     <loc>https://fonu195713.github.io/docs/daily_life/working_log/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/daily_life/to_do_list/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/note/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/_docs/example/</loc>
   </url><url>
@@ -64,6 +66,8 @@
   </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/adapter_pattern/</loc>
   </url><url>
+    <loc>https://fonu195713.github.io/docs/creative_writing/novel/note/</loc>
+  </url><url>
     <loc>https://fonu195713.github.io/_docs/example/table-of-contents/without-toc/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/interface_segregation_principle/</loc>
@@ -105,6 +109,8 @@
     <loc>https://fonu195713.github.io/docs/daily_life/notes/heart_sutra_beforehand/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/daily_life/notes/osaka_3_days/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/daily_life/notes/ask_buddha_for_advice/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/_docs/example/collapsed/3rd-level/4th-level/</loc>
   </url><url>
@@ -156,6 +162,12 @@
   </url><url>
     <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230822/</loc>
   </url><url>
+    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230823/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230825/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230826/</loc>
+  </url><url>
     <loc>https://fonu195713.github.io/_docs/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/categories/</loc>
@@ -178,7 +190,7 @@
   </url><url>
     <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/meaning/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/projects/</loc>
+    <loc>https://fonu195713.github.io/docs/creative_writing/code_projects/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/</loc>
   </url><url>
