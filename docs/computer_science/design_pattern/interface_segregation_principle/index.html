@@ -1,34 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="介面隔離原則（Interface Segregation Principle）#ChatGPT 的說明 介面隔離原則（ISP - Interface Segregation Principle）是 SOLID 原則中的一個，SOLID 是一個首字母縮略詞，代表著五個不同的設計原則：單一職責原則（Single Responsibility Principle，SRP）、開放封閉原則（Open/Closed Principle，OCP）、里氏替換原則（Liskov Substitution Principle，LSP）、介面隔離原則（Interface Segregation Principle，ISP）、依賴反轉原則（Dependency Inversion Principle，DIP）。介面隔離原則（ISP）主要關注在設計【介面】（interface）時的合理性和適切性。ISP 的核心理念是「【客戶端】不該被迫依賴它不需要的【介面】」，這意味著【介面】應該要被分割成小的、細微的、特定的部分，以便客戶端在依賴【介面】時，不會包含到那些他們不需要的方法。更具體地說，ISP 強調以下兩個信條：「介面應該小而精簡」以及「用多個特定介面替換一個通用介面」。
-【介面應該小而精簡】 在軟體開發中（特別是物件導向程式設計），設計一個適宜的【介面】是非常重要的。「介面應該小而精簡」是指一個介面應該只包含客戶端所需的要方法，不應該包含多餘的、繁冗的、不必要的方法。這條訊息鼓勵程式設計師在設計面時，將「大的、通用」的介面分割成「小的、特定的」的部分，從而使【客戶端】只需要實現（或使用）他們所需要的方法，以助於減少依賴性、提高程式的可讀性，同時也確保每個【介面】的方法都具有清晰的用途和職責。
-接下來我們使用一個例子來說明「介面應該小而精簡」的想法：想像一個 RPG（角色扮演遊戲）遊戲中，我們需要設計不同【角色】的能力介面。這些角色可以是【戰士】【法師】【弓箭手】&hellip;等。每個【角色】都有一些共同的行動，比如攻擊（attack）、防禦（defend）等，但也有些角色特有的行動，例如法師的魔法攻擊（magicAttack）。一個不遵循「介面應該小而精簡」信條的設計可能會如下：
-class Character { public: virtual void attack() = 0; virtual void defend() = 0; virtual void magicAttack() = 0; }; 在這種情況下，即使某些角色不具備魔法攻擊能力（比如戰士），它們仍然需要實現 magicAttack 方法，這對於這些角色來說是多餘的。但如果我們有遵循「介面應該小而精簡」的原則，我們便可以將原本的程式，改成下面這樣的設計：
-class Character { public: virtual void attack() = 0; virtual void defend() = 0; }; class Mage : public Character { public: void attack() override {} void defend() override {} public: void magicAttack() {} }; 這樣的設計遵循了「介面應該小而精簡」的信條，因為每個【角色】都只需要實現他們所需的行動，而不需要實現多餘的方法。比如說：【戰士】角色在這樣的設計情況下，只需要實現 attack() 方法和 defend() 方法，而不需要去實現魔法攻擊相關的方法。而【法師】除了 attack() 方法和 defend() 方法之外，因為還擁有魔法攻擊相關的方法，因此多了一個 magicAttack() 的相關方法。">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="介面隔離原則（Interface Segregation Principle）" />
-<meta property="og:description" content="介面隔離原則（Interface Segregation Principle）#ChatGPT 的說明 介面隔離原則（ISP - Interface Segregation Principle）是 SOLID 原則中的一個，SOLID 是一個首字母縮略詞，代表著五個不同的設計原則：單一職責原則（Single Responsibility Principle，SRP）、開放封閉原則（Open/Closed Principle，OCP）、里氏替換原則（Liskov Substitution Principle，LSP）、介面隔離原則（Interface Segregation Principle，ISP）、依賴反轉原則（Dependency Inversion Principle，DIP）。介面隔離原則（ISP）主要關注在設計【介面】（interface）時的合理性和適切性。ISP 的核心理念是「【客戶端】不該被迫依賴它不需要的【介面】」，這意味著【介面】應該要被分割成小的、細微的、特定的部分，以便客戶端在依賴【介面】時，不會包含到那些他們不需要的方法。更具體地說，ISP 強調以下兩個信條：「介面應該小而精簡」以及「用多個特定介面替換一個通用介面」。
-【介面應該小而精簡】 在軟體開發中（特別是物件導向程式設計），設計一個適宜的【介面】是非常重要的。「介面應該小而精簡」是指一個介面應該只包含客戶端所需的要方法，不應該包含多餘的、繁冗的、不必要的方法。這條訊息鼓勵程式設計師在設計面時，將「大的、通用」的介面分割成「小的、特定的」的部分，從而使【客戶端】只需要實現（或使用）他們所需要的方法，以助於減少依賴性、提高程式的可讀性，同時也確保每個【介面】的方法都具有清晰的用途和職責。
-接下來我們使用一個例子來說明「介面應該小而精簡」的想法：想像一個 RPG（角色扮演遊戲）遊戲中，我們需要設計不同【角色】的能力介面。這些角色可以是【戰士】【法師】【弓箭手】&hellip;等。每個【角色】都有一些共同的行動，比如攻擊（attack）、防禦（defend）等，但也有些角色特有的行動，例如法師的魔法攻擊（magicAttack）。一個不遵循「介面應該小而精簡」信條的設計可能會如下：
-class Character { public: virtual void attack() = 0; virtual void defend() = 0; virtual void magicAttack() = 0; }; 在這種情況下，即使某些角色不具備魔法攻擊能力（比如戰士），它們仍然需要實現 magicAttack 方法，這對於這些角色來說是多餘的。但如果我們有遵循「介面應該小而精簡」的原則，我們便可以將原本的程式，改成下面這樣的設計：
-class Character { public: virtual void attack() = 0; virtual void defend() = 0; }; class Mage : public Character { public: void attack() override {} void defend() override {} public: void magicAttack() {} }; 這樣的設計遵循了「介面應該小而精簡」的信條，因為每個【角色】都只需要實現他們所需的行動，而不需要實現多餘的方法。比如說：【戰士】角色在這樣的設計情況下，只需要實現 attack() 方法和 defend() 方法，而不需要去實現魔法攻擊相關的方法。而【法師】除了 attack() 方法和 defend() 方法之外，因為還擁有魔法攻擊相關的方法，因此多了一個 magicAttack() 的相關方法。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/interface_segregation_principle/" /><meta property="article:section" content="docs" />
 
 
-<title>介面隔離原則（Interface Segregation Principle） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -309,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -851,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -880,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -896,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -909,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -922,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -935,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -948,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -966,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -982,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -995,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1008,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

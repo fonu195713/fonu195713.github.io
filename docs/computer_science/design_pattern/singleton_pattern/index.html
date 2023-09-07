@@ -1,32 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="單例模式（Singleton Pattern）#說明 ChatGPT：單例模式（Singleton Pattern）是一種創建型設計模式，它確保一個類別只有一個唯一的實例，並提供一個全局的訪問點來訪問該實例。單例模式確保一個類別只有一個實例，並且提供全局的訪問點來訪問該實例。實現單例模式的一種常見方式是使用一個私有的靜態成員變量來存儲類別的唯一實例，並提供一個公共的靜態方法來獲取這個實例。在這個方法中，方法首先會檢查實例是否已經存在？如果存在，則返回該實例，否則創建一個新的實例並返回。此外，為了防止通過其他途徑創建額外的實例。單例模式會將類別的構造函數設為私有。
-維基百科：單例模式（Singleton Pattern）也叫單子模式，是一種常用的軟體設計模式，屬於創建型模式的一種。在應用這個模式時，單例對象的類必須保證只有一個實例存在。實現單例模式的思路是：一個類僅能返回對象一個引用（永遠是同一個）和一個獲得該實例的方法（必須是靜態方法，通常使用 getInstance() 這個名稱）；當我們調用這個方法時，如果類持有的引用不為空就返回這個引用，如果類保持的引用為空就創建該類的實例，並將實例的引用賦予該類保持的引用；同時我們還將該類的構造函數定義為私有方法，這樣其他處的代碼就無法通過調用該類的構造函數來實例化該類的對象，只有通過該類提供的靜態方法來得到該類的唯一實例。
-特點 可以確保一個類別只會生成一個物件 提供簡易的接口，讓程式對實例的訪問與操作更為簡單 可以延遲實例，僅在需要時才創建，節省資源使用 UML Graphic classDiagramclass Singleton {static Singleton obj;static Singleton* getInstance();}內文 單例模式是一個很簡單的概念，就是「單一類別，只會生成單一物件（也就是單一實例）的一種設計模式。」雖說概念很簡單，但實作起來，還是有點眉角在裡面的。在直覺上的想法中，「透過私有的建構子，讓生成物件的權限只限制給類別本身」「『靜態變數』是讓類別中所有物件共用的一個變數」這兩個想法，就可以生成一個簡單的單例模式的程式了，就如下方所示：
-class Singleton { static Singleton* obj; private: Singleton() {} public: static Singleton* getInstance() { if(obj == nullptr) { obj = new Singleton(); } return obj; } }; Singleton::obj = nullptr; 在上方的程式中，透過將 Singleton() 建構子宣告成私有的方式，來讓「生成物件」這項工作只有 Singleton 類本身能夠做到，接著讓 obj 初始化成 nullptr，並在 getInstance() 中做一個 obj 的判斷，如果 obj == nullptr，那就生成一個 obj，否則就直接回傳 obj 的記憶體位址。透過這樣的寫法，可以保證 obj 只要一被生成，那麼 obj = new Singleton(); 這件事情就不會被執行，也就代表了一定程度上的「單一類別只會有單一實例」的任務。">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="單例模式（Singleton Pattern）" />
-<meta property="og:description" content="單例模式（Singleton Pattern）#說明 ChatGPT：單例模式（Singleton Pattern）是一種創建型設計模式，它確保一個類別只有一個唯一的實例，並提供一個全局的訪問點來訪問該實例。單例模式確保一個類別只有一個實例，並且提供全局的訪問點來訪問該實例。實現單例模式的一種常見方式是使用一個私有的靜態成員變量來存儲類別的唯一實例，並提供一個公共的靜態方法來獲取這個實例。在這個方法中，方法首先會檢查實例是否已經存在？如果存在，則返回該實例，否則創建一個新的實例並返回。此外，為了防止通過其他途徑創建額外的實例。單例模式會將類別的構造函數設為私有。
-維基百科：單例模式（Singleton Pattern）也叫單子模式，是一種常用的軟體設計模式，屬於創建型模式的一種。在應用這個模式時，單例對象的類必須保證只有一個實例存在。實現單例模式的思路是：一個類僅能返回對象一個引用（永遠是同一個）和一個獲得該實例的方法（必須是靜態方法，通常使用 getInstance() 這個名稱）；當我們調用這個方法時，如果類持有的引用不為空就返回這個引用，如果類保持的引用為空就創建該類的實例，並將實例的引用賦予該類保持的引用；同時我們還將該類的構造函數定義為私有方法，這樣其他處的代碼就無法通過調用該類的構造函數來實例化該類的對象，只有通過該類提供的靜態方法來得到該類的唯一實例。
-特點 可以確保一個類別只會生成一個物件 提供簡易的接口，讓程式對實例的訪問與操作更為簡單 可以延遲實例，僅在需要時才創建，節省資源使用 UML Graphic classDiagramclass Singleton {static Singleton obj;static Singleton* getInstance();}內文 單例模式是一個很簡單的概念，就是「單一類別，只會生成單一物件（也就是單一實例）的一種設計模式。」雖說概念很簡單，但實作起來，還是有點眉角在裡面的。在直覺上的想法中，「透過私有的建構子，讓生成物件的權限只限制給類別本身」「『靜態變數』是讓類別中所有物件共用的一個變數」這兩個想法，就可以生成一個簡單的單例模式的程式了，就如下方所示：
-class Singleton { static Singleton* obj; private: Singleton() {} public: static Singleton* getInstance() { if(obj == nullptr) { obj = new Singleton(); } return obj; } }; Singleton::obj = nullptr; 在上方的程式中，透過將 Singleton() 建構子宣告成私有的方式，來讓「生成物件」這項工作只有 Singleton 類本身能夠做到，接著讓 obj 初始化成 nullptr，並在 getInstance() 中做一個 obj 的判斷，如果 obj == nullptr，那就生成一個 obj，否則就直接回傳 obj 的記憶體位址。透過這樣的寫法，可以保證 obj 只要一被生成，那麼 obj = new Singleton(); 這件事情就不會被執行，也就代表了一定程度上的「單一類別只會有單一實例」的任務。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/singleton_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>單例模式（Singleton Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -307,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -849,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -878,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -894,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -907,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -920,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -933,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -946,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -964,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -980,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -993,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1006,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

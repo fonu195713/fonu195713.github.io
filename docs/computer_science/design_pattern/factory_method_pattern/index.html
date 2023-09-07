@@ -1,34 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="工廠方法模式（Factory Method Pattern）#說明 ChatGPT：工廠方法模式（Factory Method Pattern）是一種軟體設計模式，屬於創建型模式之一。它提供了一種「分離物件的創建與使用」的方式，通過使用工廠類別內的方法來創建物件，而不是直接在客戶端代碼中使用 new 關鍵字。 在工廠方法模式中，工廠會定義了一個接口（或抽象類別），其中包含了創建產品物件的抽象方法，具體的物件創建則由實現該接口的具體工廠類別來實現。這樣一來，客戶端代碼只需要和工廠接口進行交互，而不需要知道具體的物件創建細節。工廠方法模式的核心思想是：「將物件的創建延遲到子類別中」，使得客戶端的程式與具體的物件創建解耦。這樣做的好處是，當需要新增一種具體的產品時，只需要擴展相應的具體工廠類別即可，不需要額外修改客戶端代碼，因此符合設計原則中的「開放封閉原則」。
-維基百科：在物件導向程式設計中，工廠方法模式（Factory Method Pattern）是一種創建型模式，它使用工廠方法來處理創建物件的問題，而不需要明確指定將要創建的物件的確切類別。這是通過調用工廠中的方法來創建物件來實現的，而不是通過調用構造函數來實現。其中，工廠中的方法可以在介面中抽象化，並由子類實現，或者在類別本身中實現，並由子類別選擇性地覆蓋。創建物件通常會擁有一個複雜的流程，該流程並不適合再複合類別中實現。物件的創建可能導致代碼的重複、可能需要組合物件無法訪問的資訊、可能無法提供足夠的抽象層次、或者可能與組合物件的關注點無關。因此，工廠方法模式通過「定義一個獨立的方法來創建物件」來解決這些問題，子類可以覆蓋該方法以指定將要創建的衍生類型。
-特點 將物件的「創建」與「使用」分離 可以輕易擴展 符合開放封閉原則 UML Graphic classDiagramclass EnchantingFactory~Interface~ {Sword* createSword();}class KnockbackFactory {Sword* createSword() return KnockbackSword();}class FireAspectFactory {Sword* createSword() return FireAspectSword();}EnchantingFactory~Interface~ &lt;|-- KnockbackFactoryEnchantingFactory~Interface~ &lt;|-- FireAspectFactory內文 小建議：可以先看過簡單工廠模式，再回來看這個「工廠方法模式」會比較好。
-如同簡單工廠模式所述：在四人幫的著作裡面，工廠模式共分為簡單工廠模式、工廠方法模式、和抽象工廠模式這三種。相對於「在【工廠】中直接建立【產品】」的簡單工廠模式，工廠方法模式更在乎「其他的『工廠』有沒有依循著同樣的『方法』」來建立物件。通常來說，工廠方法會先定義出一個『工廠介面』，再讓其他的【工廠】去繼承這個工廠介面，從而確保所有的【工廠】都有類似或相同的產品製造方法。用另外一個 RPG 遊戲來做舉例，假設在一個遊戲中，我們想要實作出不同附魔類別的劍，簡單工廠的方法可能會像是下面的樣子：
-class SimpleFactory { public: static Sword* enchantSword(Enchantments enchantments) { Sword* sword = nullptr; switch(enchantments) { case Knockback: sword = new KnockbackSword(); break; case FireAspect: sword = new FireAspectSword(); break; // other codes .">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="工廠方法模式（Factory Method Pattern）" />
-<meta property="og:description" content="工廠方法模式（Factory Method Pattern）#說明 ChatGPT：工廠方法模式（Factory Method Pattern）是一種軟體設計模式，屬於創建型模式之一。它提供了一種「分離物件的創建與使用」的方式，通過使用工廠類別內的方法來創建物件，而不是直接在客戶端代碼中使用 new 關鍵字。 在工廠方法模式中，工廠會定義了一個接口（或抽象類別），其中包含了創建產品物件的抽象方法，具體的物件創建則由實現該接口的具體工廠類別來實現。這樣一來，客戶端代碼只需要和工廠接口進行交互，而不需要知道具體的物件創建細節。工廠方法模式的核心思想是：「將物件的創建延遲到子類別中」，使得客戶端的程式與具體的物件創建解耦。這樣做的好處是，當需要新增一種具體的產品時，只需要擴展相應的具體工廠類別即可，不需要額外修改客戶端代碼，因此符合設計原則中的「開放封閉原則」。
-維基百科：在物件導向程式設計中，工廠方法模式（Factory Method Pattern）是一種創建型模式，它使用工廠方法來處理創建物件的問題，而不需要明確指定將要創建的物件的確切類別。這是通過調用工廠中的方法來創建物件來實現的，而不是通過調用構造函數來實現。其中，工廠中的方法可以在介面中抽象化，並由子類實現，或者在類別本身中實現，並由子類別選擇性地覆蓋。創建物件通常會擁有一個複雜的流程，該流程並不適合再複合類別中實現。物件的創建可能導致代碼的重複、可能需要組合物件無法訪問的資訊、可能無法提供足夠的抽象層次、或者可能與組合物件的關注點無關。因此，工廠方法模式通過「定義一個獨立的方法來創建物件」來解決這些問題，子類可以覆蓋該方法以指定將要創建的衍生類型。
-特點 將物件的「創建」與「使用」分離 可以輕易擴展 符合開放封閉原則 UML Graphic classDiagramclass EnchantingFactory~Interface~ {Sword* createSword();}class KnockbackFactory {Sword* createSword() return KnockbackSword();}class FireAspectFactory {Sword* createSword() return FireAspectSword();}EnchantingFactory~Interface~ &lt;|-- KnockbackFactoryEnchantingFactory~Interface~ &lt;|-- FireAspectFactory內文 小建議：可以先看過簡單工廠模式，再回來看這個「工廠方法模式」會比較好。
-如同簡單工廠模式所述：在四人幫的著作裡面，工廠模式共分為簡單工廠模式、工廠方法模式、和抽象工廠模式這三種。相對於「在【工廠】中直接建立【產品】」的簡單工廠模式，工廠方法模式更在乎「其他的『工廠』有沒有依循著同樣的『方法』」來建立物件。通常來說，工廠方法會先定義出一個『工廠介面』，再讓其他的【工廠】去繼承這個工廠介面，從而確保所有的【工廠】都有類似或相同的產品製造方法。用另外一個 RPG 遊戲來做舉例，假設在一個遊戲中，我們想要實作出不同附魔類別的劍，簡單工廠的方法可能會像是下面的樣子：
-class SimpleFactory { public: static Sword* enchantSword(Enchantments enchantments) { Sword* sword = nullptr; switch(enchantments) { case Knockback: sword = new KnockbackSword(); break; case FireAspect: sword = new FireAspectSword(); break; // other codes ." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/factory_method_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>工廠方法模式（Factory Method Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -309,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -851,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -880,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -896,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -909,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -922,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -935,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -948,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -966,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -982,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -995,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1008,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

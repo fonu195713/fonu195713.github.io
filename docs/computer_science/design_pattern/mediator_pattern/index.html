@@ -1,32 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="中介者模式（Mediator Pattern）#說明 ChatGPT：中介者模式（Mediator Pattern）是一種行為型設計模式，用於降低多個物件之間的直接溝通。物件會透過一個名為【中介者】的物件來進行通信。中介者模式有助於減少物件之間的耦合性，使得物件之間的交互更加靈活和可維護。在中介者模式中，多個物件（也稱為同事物件）不再直接相互溝通，而是通過【中介者】進行間接通訊。當其中一個物件需要與其他物件進行交互時，它不會直接調用其他物件的方法，而是通過中介者的方法來進行調用請求，然後中介者再將請求訊息傳遞給該物件。這樣一來，各個物件之間的相互依賴關係就減少了，它們只需要依賴於【中介者】這個抽象介面，而不需要知道彼此的存在。這樣不僅降低了物件之間的耦合性，同時也使得程式的結構更加清晰，易於維護和擴展。中介者模式適用於以下情況：「當多個物件之間的交互複雜且互相依賴時，使用中介者模式可以簡化物件之間的耦和與依賴，使得物件之間的關係更加清晰。」；「當物件之間的耦合性過高，導致修改一個物件可能影響到其他物件時，可以使用中介者模式將這些物件的交互集中在中介者中，從而降低耦合性」；「當一個物件需要和多個其他物件進行通信時，使用中介者模式可以避免物件之間建立大量的相互引用關係，從而提高程式的可讀性和可維護性。」
-維基百科：在軟體工程中，中介者模式定義了一個「封裝了一組物件互動方式」的物件。由於這種模式可以改變程式的運行行為，因此被認為是一種行為型設計模式。在物件導向程式設計中，程序通常會由許多的類別組成，各種邏輯和計算會在這些類別之間分散和互相調用。然而，隨著在程式中添加更多的類別或方法，在維護或重構程式期間，因為類別之間相互的高度耦和，使得維護與重構程式需要耗費巨大的時間成本。此外，由於任何更改都可能影響到其他幾個類別中的程式邏輯，因此更改程式會變得更為困難。因此中介者模式會將物件之間的通信，封裝在一個【中介者】物件中。讓其餘物件不再直接通信，而是通過【中介者】進行通信。這減少了物件之間的相依性，從而減少了耦合。中介者模式是 23 種著名的設計模式之一，該模式可以解決的問題有：「對高度耦和的物件進行解耦的動作」「讓物件彼此的行為各自獨立，而不依賴於其餘類別。」中介者模式描述的解決方案是：定義一個單獨的【中介者】物件，讓該物件封裝「物件之間的互動」。其餘物件將其互動的請求委派給【中介者】，而不是直接物件進行互動。物件通過一個 &ldquo;控制&rdquo; 和 &ldquo;協調互動&rdquo; 的種介者物件間接地與彼此互動。使得物件之間可以維持鬆散地耦合。
-特點 封裝物件的互動，讓物件只透過【中介者】進行溝通與調節 將物件的行為集中控制，從而避免混亂的調用 減少物件與物件之間的耦和，降低程式的維護成本 UML Graphic classDiagramclass Mid內文 中介者模式的用途就是「在多個物件之中提供一個協調的『管道』或『平台』」，透過一個【中介者】類別，【物件】可以直接將所需要的請求託付給【中介者】處理，或者是經由【中介者】取得其他【物件】所回傳過來的回應或參數。我們可以用一個 RPG 遊戲來解釋「中介者模式」的運作方式：假設在一個 RPG 遊戲中，我們要實作一個回合制的戰鬥場景。戰鬥總共分為兩方陣營（主角方與怪物方），如果沒有使用中介者模式的話，程式有可能會像是下面的這個樣子：
-class Character { public: string name; int hp; int atk; public: Character(string name, int hp, int atk) : name(name), hp(hp), atk(atk) {} public: string getName() { return name; } public: virtual void attack(Character* target) = 0; virtual void takeDamage(int atk) = 0; }; class Player : public Character { public: Player(string name) : name(name) {} public: void attack(Character* target) override { cout &lt;&lt; name &lt;&lt; &#34; attacked &#34; &lt;&lt; (targrt -&gt; name) &lt;&lt; &#34;.">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="中介者模式（Mediator Pattern）" />
-<meta property="og:description" content="中介者模式（Mediator Pattern）#說明 ChatGPT：中介者模式（Mediator Pattern）是一種行為型設計模式，用於降低多個物件之間的直接溝通。物件會透過一個名為【中介者】的物件來進行通信。中介者模式有助於減少物件之間的耦合性，使得物件之間的交互更加靈活和可維護。在中介者模式中，多個物件（也稱為同事物件）不再直接相互溝通，而是通過【中介者】進行間接通訊。當其中一個物件需要與其他物件進行交互時，它不會直接調用其他物件的方法，而是通過中介者的方法來進行調用請求，然後中介者再將請求訊息傳遞給該物件。這樣一來，各個物件之間的相互依賴關係就減少了，它們只需要依賴於【中介者】這個抽象介面，而不需要知道彼此的存在。這樣不僅降低了物件之間的耦合性，同時也使得程式的結構更加清晰，易於維護和擴展。中介者模式適用於以下情況：「當多個物件之間的交互複雜且互相依賴時，使用中介者模式可以簡化物件之間的耦和與依賴，使得物件之間的關係更加清晰。」；「當物件之間的耦合性過高，導致修改一個物件可能影響到其他物件時，可以使用中介者模式將這些物件的交互集中在中介者中，從而降低耦合性」；「當一個物件需要和多個其他物件進行通信時，使用中介者模式可以避免物件之間建立大量的相互引用關係，從而提高程式的可讀性和可維護性。」
-維基百科：在軟體工程中，中介者模式定義了一個「封裝了一組物件互動方式」的物件。由於這種模式可以改變程式的運行行為，因此被認為是一種行為型設計模式。在物件導向程式設計中，程序通常會由許多的類別組成，各種邏輯和計算會在這些類別之間分散和互相調用。然而，隨著在程式中添加更多的類別或方法，在維護或重構程式期間，因為類別之間相互的高度耦和，使得維護與重構程式需要耗費巨大的時間成本。此外，由於任何更改都可能影響到其他幾個類別中的程式邏輯，因此更改程式會變得更為困難。因此中介者模式會將物件之間的通信，封裝在一個【中介者】物件中。讓其餘物件不再直接通信，而是通過【中介者】進行通信。這減少了物件之間的相依性，從而減少了耦合。中介者模式是 23 種著名的設計模式之一，該模式可以解決的問題有：「對高度耦和的物件進行解耦的動作」「讓物件彼此的行為各自獨立，而不依賴於其餘類別。」中介者模式描述的解決方案是：定義一個單獨的【中介者】物件，讓該物件封裝「物件之間的互動」。其餘物件將其互動的請求委派給【中介者】，而不是直接物件進行互動。物件通過一個 &ldquo;控制&rdquo; 和 &ldquo;協調互動&rdquo; 的種介者物件間接地與彼此互動。使得物件之間可以維持鬆散地耦合。
-特點 封裝物件的互動，讓物件只透過【中介者】進行溝通與調節 將物件的行為集中控制，從而避免混亂的調用 減少物件與物件之間的耦和，降低程式的維護成本 UML Graphic classDiagramclass Mid內文 中介者模式的用途就是「在多個物件之中提供一個協調的『管道』或『平台』」，透過一個【中介者】類別，【物件】可以直接將所需要的請求託付給【中介者】處理，或者是經由【中介者】取得其他【物件】所回傳過來的回應或參數。我們可以用一個 RPG 遊戲來解釋「中介者模式」的運作方式：假設在一個 RPG 遊戲中，我們要實作一個回合制的戰鬥場景。戰鬥總共分為兩方陣營（主角方與怪物方），如果沒有使用中介者模式的話，程式有可能會像是下面的這個樣子：
-class Character { public: string name; int hp; int atk; public: Character(string name, int hp, int atk) : name(name), hp(hp), atk(atk) {} public: string getName() { return name; } public: virtual void attack(Character* target) = 0; virtual void takeDamage(int atk) = 0; }; class Player : public Character { public: Player(string name) : name(name) {} public: void attack(Character* target) override { cout &lt;&lt; name &lt;&lt; &#34; attacked &#34; &lt;&lt; (targrt -&gt; name) &lt;&lt; &#34;." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/mediator_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>中介者模式（Mediator Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -307,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -849,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -878,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -894,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -907,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -920,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -933,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -946,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -964,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -980,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -993,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1006,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

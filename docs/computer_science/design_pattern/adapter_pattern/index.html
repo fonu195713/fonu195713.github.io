@@ -1,30 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="適配器模式（Adapter Pattern）#說明 ChatGPT：適配器模式（Adapter Pattern）是一種軟體設計模式，屬於結構型模式的一種。它主要用於「將一個類別的接口」轉換成另一個「客戶端所期望的接口」，從而使原本不兼容的類別能夠一起工作。在軟體設計中，有時候因為歷史原因、不同的介面設計或第三方庫的使用，可能會出現一些類別之間接口不匹配的情況。這時候就可以使用適配器模式來解決這種問題，而無需修改原有的類別。適配器模式的核心概念是引入一個適配器（Adapter）類別，這個類別負責將不兼容的接口轉換成目標接口，使得客戶端可以通過適配器使用原本不兼容的類別。適配器可分為類別適配器和物件適配器兩種：其中類別適配器使用「繼承」的方式來進行接口轉換，物件適配器則使用「組合」的方式來進行接口轉換，通過調用原始類別的方法來實現目標接口的方法。適配器模式的優點是能夠提高程式碼的重用性和靈活性，同時也能夠保護現有程式碼，無需修改原始類別。
-維基百科：在設計模式中，適配器模式（Adapter Pattern）有時候也稱包裝模式（Wrapper Pattern）。適配器模式用來將一個類別的介面轉接成使用者所期待的另一種介面。一個適配器可以讓「因程式不相容而不能在一起工作的類別」能在一起工作，其中的做法是將類別自己的介面包裹在一個已存在的類別中。適配器模式的結構通常分為兩種類型：「物件型適配器」（在適配器本身中包含一個呼叫對象的物件）和「類別型適配器」（新增一個適配器類別，繼承自原類別，並用擴增的方式使程式可以運作）。適配器模式（Adapter Pattern）是 23 個著名的設計模式之一，它通常用以解決以下的幾種問題：如何將以棄用（或很少使用）的舊型接口更新為一個新形態的程式接口、如何將原本不兼容的兩種接口相互兼容、如何為某個（或某些）類別提供替代接口、和如何將舊有的接口設計為客戶所要求的新型接口。
-特點 a bb ccccc UML Graphic classDiagramclass MonsterAttackAdapter {void attack();}class Zombie {void bite();}class ZombieAttackAdapter {Zombie* zombievoid attack();}ZombieAttackAdapter --&gt; Zombieclass Goblin {void knock();}Monster &lt;|-- ZombieMonster &lt;|-- Goblinclass GoblinAttackAdapter {Goblin* goblinvoid attack();}GoblinAttackAdapter --&gt; GoblinMonsterAttackAdapter &lt;|-- ZombieAttackAdapterMonsterAttackAdapter &lt;|-- GoblinAttackAdapterclassDiagramclass CharacterAttackAdapter {void attack();}class Warrior {void chop();}class WarriorAttackAdapter {Warrior* warrior;void attack;}WarriorAttackAdapter --&gt; WarriorCharacter &lt;|-- Warriorclass Magician {void magic_attack();}class MagicianAttackAdapter {Magician* magician;void attack();}MagicianAttackAdapter --&gt; MagicianCharacter &lt;|-- MagicianCharacterAttackAdapter &lt;|-- WarriorAttackAdapterCharacterAttackAdapter &lt;|-- MagicianAttackAdapter內文 如果要用一句話來作總結的話，適配器模式的用途就是用於「將兩組原本互不兼容的程式可以相互兼容」。我們用 RPG 遊戲來舉個例子：假設我們正在製作一個簡單 RPG 遊戲，在這個 RPG 遊戲中，我們將【戰鬥】的環節設計在一個 Battle 類別的靜態方法 battle() 中，其中 battle() 方法帶有兩個參數，分別是角色物件 Character 和怪物物件 Monster，如果用「主角與魔王要進行最後的決戰」作為例子，程式大致上會像是下面的這個樣子：">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="適配器模式（Adapter Pattern）" />
-<meta property="og:description" content="適配器模式（Adapter Pattern）#說明 ChatGPT：適配器模式（Adapter Pattern）是一種軟體設計模式，屬於結構型模式的一種。它主要用於「將一個類別的接口」轉換成另一個「客戶端所期望的接口」，從而使原本不兼容的類別能夠一起工作。在軟體設計中，有時候因為歷史原因、不同的介面設計或第三方庫的使用，可能會出現一些類別之間接口不匹配的情況。這時候就可以使用適配器模式來解決這種問題，而無需修改原有的類別。適配器模式的核心概念是引入一個適配器（Adapter）類別，這個類別負責將不兼容的接口轉換成目標接口，使得客戶端可以通過適配器使用原本不兼容的類別。適配器可分為類別適配器和物件適配器兩種：其中類別適配器使用「繼承」的方式來進行接口轉換，物件適配器則使用「組合」的方式來進行接口轉換，通過調用原始類別的方法來實現目標接口的方法。適配器模式的優點是能夠提高程式碼的重用性和靈活性，同時也能夠保護現有程式碼，無需修改原始類別。
-維基百科：在設計模式中，適配器模式（Adapter Pattern）有時候也稱包裝模式（Wrapper Pattern）。適配器模式用來將一個類別的介面轉接成使用者所期待的另一種介面。一個適配器可以讓「因程式不相容而不能在一起工作的類別」能在一起工作，其中的做法是將類別自己的介面包裹在一個已存在的類別中。適配器模式的結構通常分為兩種類型：「物件型適配器」（在適配器本身中包含一個呼叫對象的物件）和「類別型適配器」（新增一個適配器類別，繼承自原類別，並用擴增的方式使程式可以運作）。適配器模式（Adapter Pattern）是 23 個著名的設計模式之一，它通常用以解決以下的幾種問題：如何將以棄用（或很少使用）的舊型接口更新為一個新形態的程式接口、如何將原本不兼容的兩種接口相互兼容、如何為某個（或某些）類別提供替代接口、和如何將舊有的接口設計為客戶所要求的新型接口。
-特點 a bb ccccc UML Graphic classDiagramclass MonsterAttackAdapter {void attack();}class Zombie {void bite();}class ZombieAttackAdapter {Zombie* zombievoid attack();}ZombieAttackAdapter --&gt; Zombieclass Goblin {void knock();}Monster &lt;|-- ZombieMonster &lt;|-- Goblinclass GoblinAttackAdapter {Goblin* goblinvoid attack();}GoblinAttackAdapter --&gt; GoblinMonsterAttackAdapter &lt;|-- ZombieAttackAdapterMonsterAttackAdapter &lt;|-- GoblinAttackAdapterclassDiagramclass CharacterAttackAdapter {void attack();}class Warrior {void chop();}class WarriorAttackAdapter {Warrior* warrior;void attack;}WarriorAttackAdapter --&gt; WarriorCharacter &lt;|-- Warriorclass Magician {void magic_attack();}class MagicianAttackAdapter {Magician* magician;void attack();}MagicianAttackAdapter --&gt; MagicianCharacter &lt;|-- MagicianCharacterAttackAdapter &lt;|-- WarriorAttackAdapterCharacterAttackAdapter &lt;|-- MagicianAttackAdapter內文 如果要用一句話來作總結的話，適配器模式的用途就是用於「將兩組原本互不兼容的程式可以相互兼容」。我們用 RPG 遊戲來舉個例子：假設我們正在製作一個簡單 RPG 遊戲，在這個 RPG 遊戲中，我們將【戰鬥】的環節設計在一個 Battle 類別的靜態方法 battle() 中，其中 battle() 方法帶有兩個參數，分別是角色物件 Character 和怪物物件 Monster，如果用「主角與魔王要進行最後的決戰」作為例子，程式大致上會像是下面的這個樣子：" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/adapter_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>適配器模式（Adapter Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -305,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -847,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -876,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -892,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -905,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -918,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -931,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -944,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -962,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -978,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -991,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1004,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

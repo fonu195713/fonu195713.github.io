@@ -1,30 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="命令模式（Command Pattern）#說明 ChatGPT：命令模式（Command Pattern）是一種行為型設計模式，它將請求（request）或操作封裝成一個獨立的對象，使得能夠將客戶端的請求參數化、延遲執行或者將請求排入佇列中。這樣可以使請求的發送者和接收者解耦。在命令模式中，主要包含以下角色：【命令】（Command）：它是一個抽象類或接口，聲明了執行請求的方法 execute()。【具體命令】（Concrete Command）：具體命令實現了命令接口，包含了具體的操作和接收者。通常會持有接收者的實例，用來執行實際的請求。【接收者】（Receiver）：接收者知道如何執行真正的操作，接收者會被具體命令所調用。【調用者】（Invoker）：調用者持有命令對象，並在需要的時候調用命令的 execute() 方法。【客戶端】（Client）：創建具體命令對象，設置命令的接收者，並將命令對象設置給調用者。命令模式的核心思想是將「操作」和「操作的執行」解耦，將它們封裝成對象，從而實現請求的發送者和接收者之間的解耦。這使得我們可以輕鬆地增加新的請求類型，或進行撤銷、重做等功能，，對於實現複雜的交互操作和請求發送的場景非常有用。
-維基百科：在物件導向程式設計中，命令模式是一種行為型設計模式，它使用一個物件來封裝所有執行動作或稍後觸發事件所需的資訊。這些資訊包括方法名稱、擁有該方法的物件和該方法的參數值。命令模式通常與四個術語相關，它們是命令（Command）、接收者（Receiver）、調用者（Invoker）和客戶端（Client）。一個【命令】了解接收者並調用接收者的方法，該方法的參數值會存儲在命令中。【接收者】用於執行這些方法。當調用【命令】中的 execute() 方法時，【接收者】便開始執行工作。【調用者】物件知道如何執行一個命令，並可以選擇性地進行有關命令執行的記錄。【調用者】不知道具體的命令，只知道【命令】的介面。【客戶端】持有【調用者】、【命令】和【接收者】。【客戶端】決定將哪些【接收者】指派給【命令】，以及將哪些【命令】指派給【調用者】。【客戶端】決定在何時執行哪些命令。為了執行一個命令，它將【命令】傳遞給【調用者】。使用【命令】可以更容易地構建通用元件，這些元件需要在它們選擇的時間點委派、序列化、或執行方法的呼叫，而無需了解方法的類別或方法的參數。這個設計模式的核心思想與「函數式程式設計」中的「一等函數」和「高階函數」的語義非常相似，具體來說，【調用者】是高階函數，而【命令】是一等參數。
-特點 將請求封裝成【命令】，使得命令可以參數化 可以將【調用者】和【接收者】解耦 容易進行擴展操作，且支持命令的延遲執行 UML Graphic classDiagramclass Command~Interface~ {Character* charactervoid execute();void undo();}Command &lt;|-- AttackCommandCommand &lt;|-- DefenceCommandclass AttackCommand {void execute() : character.attack();void undo() : character.cancelAttack();}class DefenceCommand {void execute() : character.defence();void undo() : character.cancelDefence();}classDiagramclass Character~Interace~Character &lt;|-- WarriorCharacter &lt;|-- BowmanCharacter &lt;|-- MagicianCharacter &lt;|-- Thiefclass Character {void attack();void cancelAttack();void defence();void cancelDefence();}class CommandInvoker {Command* commandvoid setCommand(Command* cmd);void execute() : cmd.">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="命令模式（Command Pattern）" />
-<meta property="og:description" content="命令模式（Command Pattern）#說明 ChatGPT：命令模式（Command Pattern）是一種行為型設計模式，它將請求（request）或操作封裝成一個獨立的對象，使得能夠將客戶端的請求參數化、延遲執行或者將請求排入佇列中。這樣可以使請求的發送者和接收者解耦。在命令模式中，主要包含以下角色：【命令】（Command）：它是一個抽象類或接口，聲明了執行請求的方法 execute()。【具體命令】（Concrete Command）：具體命令實現了命令接口，包含了具體的操作和接收者。通常會持有接收者的實例，用來執行實際的請求。【接收者】（Receiver）：接收者知道如何執行真正的操作，接收者會被具體命令所調用。【調用者】（Invoker）：調用者持有命令對象，並在需要的時候調用命令的 execute() 方法。【客戶端】（Client）：創建具體命令對象，設置命令的接收者，並將命令對象設置給調用者。命令模式的核心思想是將「操作」和「操作的執行」解耦，將它們封裝成對象，從而實現請求的發送者和接收者之間的解耦。這使得我們可以輕鬆地增加新的請求類型，或進行撤銷、重做等功能，，對於實現複雜的交互操作和請求發送的場景非常有用。
-維基百科：在物件導向程式設計中，命令模式是一種行為型設計模式，它使用一個物件來封裝所有執行動作或稍後觸發事件所需的資訊。這些資訊包括方法名稱、擁有該方法的物件和該方法的參數值。命令模式通常與四個術語相關，它們是命令（Command）、接收者（Receiver）、調用者（Invoker）和客戶端（Client）。一個【命令】了解接收者並調用接收者的方法，該方法的參數值會存儲在命令中。【接收者】用於執行這些方法。當調用【命令】中的 execute() 方法時，【接收者】便開始執行工作。【調用者】物件知道如何執行一個命令，並可以選擇性地進行有關命令執行的記錄。【調用者】不知道具體的命令，只知道【命令】的介面。【客戶端】持有【調用者】、【命令】和【接收者】。【客戶端】決定將哪些【接收者】指派給【命令】，以及將哪些【命令】指派給【調用者】。【客戶端】決定在何時執行哪些命令。為了執行一個命令，它將【命令】傳遞給【調用者】。使用【命令】可以更容易地構建通用元件，這些元件需要在它們選擇的時間點委派、序列化、或執行方法的呼叫，而無需了解方法的類別或方法的參數。這個設計模式的核心思想與「函數式程式設計」中的「一等函數」和「高階函數」的語義非常相似，具體來說，【調用者】是高階函數，而【命令】是一等參數。
-特點 將請求封裝成【命令】，使得命令可以參數化 可以將【調用者】和【接收者】解耦 容易進行擴展操作，且支持命令的延遲執行 UML Graphic classDiagramclass Command~Interface~ {Character* charactervoid execute();void undo();}Command &lt;|-- AttackCommandCommand &lt;|-- DefenceCommandclass AttackCommand {void execute() : character.attack();void undo() : character.cancelAttack();}class DefenceCommand {void execute() : character.defence();void undo() : character.cancelDefence();}classDiagramclass Character~Interace~Character &lt;|-- WarriorCharacter &lt;|-- BowmanCharacter &lt;|-- MagicianCharacter &lt;|-- Thiefclass Character {void attack();void cancelAttack();void defence();void cancelDefence();}class CommandInvoker {Command* commandvoid setCommand(Command* cmd);void execute() : cmd." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/command_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>命令模式（Command Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -305,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -847,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -876,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -892,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -905,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -918,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -931,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -944,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -962,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -978,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -991,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1004,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

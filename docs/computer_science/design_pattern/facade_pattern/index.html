@@ -1,30 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="外觀模式（Facade Pattern）#說明 ChatGPT：外觀模式（Facade Pattern）是一種結構型設計模式，它提供了一個簡單的介面（外觀），用於封裝一組複雜的子系統，使得客戶端可以通過這個簡單的介面來訪問子系統的功能，而不需要直接與子系統的細節互動。外觀模式的目的是「簡化客戶端和子系統之間的交互」，降低客戶端對於子系統的依賴程度，同時提供了一個高層次的介面來統一訪問子系統的功能。這樣的設計有助於降低整個系統的複雜性，提高程式的可讀性和可維護性。在外觀模式中，通常有以下兩個角色：Facade（外觀）：這是外觀模式的核心類別，它負責提供了一個簡單的介面，用於封裝子系統的複雜操作。客戶端通常只與外觀類進行交互，而不需要直接訪問子系統。Subsystem（子系統）：這是一組相互關聯的類別或功能，它們共同實現了一個（或一些）複雜的功能。外觀模式將這些子系統封裝起來，使得客戶端不需要了解子系統的細節，只需通過外觀類來使用子系統的功能。
-維基百科：外觀模式（Facade pattern），是軟體工程中常用的一種軟體設計模式，它為子系統中的一組介面提供一個統一的高層介面，使得子系統更容易使用。外觀模式是一個物件導向程式設計中常用的設計模式。類似於一個建築學中的立面，該立面作為一個前端接口，來屏蔽更複雜的底層或結構代碼。外觀模式可以提供以下功能：「通用簡化的 API 屏蔽與更複雜的內部組件和結構，以提高 Software library 的可讀性和可用性」「為更通用的功能提供上下文特定的接口」「為 Monolithic System 或 Tight coupling 的軟體系統提供一個簡化的啟動點，更有利於更多的鬆耦合程式」。當一個系統非常複雜或難以理解時，開發人員通常會使用外觀模式，因為原系統通常有許多相互依賴的類別，或者因為其它的原因，使得直接調用原始程式碼會耗費極大的成本。Facade pattern 隱藏了更大系統的複雜性，為客戶端提供了一個更簡單的接口。
-特點 定義了一個算法族 封裝算法族中的每一個算法 不同的算法可以互相替換 UML Graphic classDiagramclass SkillFacade {void show();}class Swordman {void chop();void hack();void parry();}class Magician {void fire_magic_attack();void earth_magic_attack();void wind_magic_attack();void water_magic_attack();void heal();}class Bowman {void aim();void throw();void toss();void shoot();}class Thief {void poke();void kick();void evade();void counter_attack();void ninjutsu();}SkillFacade --&gt; SwordmanSkillFacade --&gt; MagicianSkillFacade --&gt; BowmanSkillFacade --&gt; Thiefnote &#34;">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="外觀模式（Facade Pattern）" />
-<meta property="og:description" content="外觀模式（Facade Pattern）#說明 ChatGPT：外觀模式（Facade Pattern）是一種結構型設計模式，它提供了一個簡單的介面（外觀），用於封裝一組複雜的子系統，使得客戶端可以通過這個簡單的介面來訪問子系統的功能，而不需要直接與子系統的細節互動。外觀模式的目的是「簡化客戶端和子系統之間的交互」，降低客戶端對於子系統的依賴程度，同時提供了一個高層次的介面來統一訪問子系統的功能。這樣的設計有助於降低整個系統的複雜性，提高程式的可讀性和可維護性。在外觀模式中，通常有以下兩個角色：Facade（外觀）：這是外觀模式的核心類別，它負責提供了一個簡單的介面，用於封裝子系統的複雜操作。客戶端通常只與外觀類進行交互，而不需要直接訪問子系統。Subsystem（子系統）：這是一組相互關聯的類別或功能，它們共同實現了一個（或一些）複雜的功能。外觀模式將這些子系統封裝起來，使得客戶端不需要了解子系統的細節，只需通過外觀類來使用子系統的功能。
-維基百科：外觀模式（Facade pattern），是軟體工程中常用的一種軟體設計模式，它為子系統中的一組介面提供一個統一的高層介面，使得子系統更容易使用。外觀模式是一個物件導向程式設計中常用的設計模式。類似於一個建築學中的立面，該立面作為一個前端接口，來屏蔽更複雜的底層或結構代碼。外觀模式可以提供以下功能：「通用簡化的 API 屏蔽與更複雜的內部組件和結構，以提高 Software library 的可讀性和可用性」「為更通用的功能提供上下文特定的接口」「為 Monolithic System 或 Tight coupling 的軟體系統提供一個簡化的啟動點，更有利於更多的鬆耦合程式」。當一個系統非常複雜或難以理解時，開發人員通常會使用外觀模式，因為原系統通常有許多相互依賴的類別，或者因為其它的原因，使得直接調用原始程式碼會耗費極大的成本。Facade pattern 隱藏了更大系統的複雜性，為客戶端提供了一個更簡單的接口。
-特點 定義了一個算法族 封裝算法族中的每一個算法 不同的算法可以互相替換 UML Graphic classDiagramclass SkillFacade {void show();}class Swordman {void chop();void hack();void parry();}class Magician {void fire_magic_attack();void earth_magic_attack();void wind_magic_attack();void water_magic_attack();void heal();}class Bowman {void aim();void throw();void toss();void shoot();}class Thief {void poke();void kick();void evade();void counter_attack();void ninjutsu();}SkillFacade --&gt; SwordmanSkillFacade --&gt; MagicianSkillFacade --&gt; BowmanSkillFacade --&gt; Thiefnote &#34;" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/facade_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>外觀模式（Facade Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -305,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -847,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -876,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -892,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -905,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -918,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -931,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -944,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -962,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -978,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -991,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1004,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

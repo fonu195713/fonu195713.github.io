@@ -1,30 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="原型模式（Prototype Pattern）#說明 ChatGPT：原型模式（Prototype Pattern）是一種軟體設計模式，屬於創建型模式的一種。它的主要目的是「通過複製現有的物件」來創建新的物件，而不需要知道具體的建構過程。這種方式可以避免重複性的建構過程，特別是當物件建構較為複雜或耗時的時候。在原型模式中，每個物件都是一個原型（prototype），可以通過複製（clone）來創建新的物件。這裡的「複製」不僅僅是複製物件的內容，而是將整個物件的狀態複製一份給新建的物件，新物件與原物件是相互獨立的，對其中一個物件的修改不會影響另一個。原型模式的核心概念是基於現有物件（原型）來創建新物件，而不是從頭開始創建。這樣可以節省建構時間和資源，同時提高程式碼的效率和可讀性。原型模式通常需要實現一個拷貝方法（Clone Method），用於複製物件。這個拷貝方法可以是淺拷貝（Shallow Copy）或深拷貝（Deep Copy），具體取決於物件的需求和關聯性。
-維基百科：原型模式是一種創建型設計模式。當要創建的物件類型由原型實例確定時，可以通過拷貝（clone）該原型來產生新的物件。該模式的使用可以避免在客戶端應用程式中對物件創建者進行子類別化，就像工廠方法模式所做的那樣，並且可以避免以標準方式（例如使用 &ldquo;new&rdquo; 關鍵字）創建新物件時所帶來的固有成本，尤其是對於某些應用程式來說這樣做代價過高的情況。要實現這種模式，客戶端先聲明一個原型基類，其中定義了一個 clone() 方法。任何需要具備「多型建構子」功能的類別都要繼承該類別，並實作 clone() 方法。客戶端不再直接在程式中使用 new 來建立物件，而是呼叫原型的 clone() 方法，一個常見的原型模式的例子是細胞的有絲分裂，一個細胞可以產生兩個相同的細胞，彼此相同，但彼此並不相關聯，就是原型模式的一個例子。
-特點 通過複製物件快速得到新物件，而不需重新執行建構的過程 將物件的建構細節隱藏在物件內部。 動態地增減物件，通過複製不同類型的原型來創建物件 UML Graphic classDiagramclass World {string nameMap* maps[]void add_map();}class Map {Item* items[]}class Monster {Monster* clone();}World &lt;|-- MapMap &lt;|-- BuildingMap &lt;|-- NPCMap &lt;|-- MonsterMonster &lt;|-- ZombieMonster &lt;|-- Skeleton內文 簡單來說，原型模式就是透過 clone() 函數來代替用 new 的方法創立物件。這麼做有幾種好處，同樣用製作一個 RPG 遊戲來做舉例：首先是「快速初始化」，如果我們想要快速地創建多個相同類別的怪物物件的時候，雖然用 new 是一個不錯的方法，但如果考慮到怪物也許在某些地方會有某些加成，像是殭屍在靠近墓地的時候，會比一般殭屍高出一點點攻擊、防禦、和血量。這時候相對於「用 new 新增一個原本的殭屍，再微調每一個殭屍的所有數值。」，用 clone() 的方法複製第一個已經調整好參數的殭屍會來的更加簡潔。">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="原型模式（Prototype Pattern）" />
-<meta property="og:description" content="原型模式（Prototype Pattern）#說明 ChatGPT：原型模式（Prototype Pattern）是一種軟體設計模式，屬於創建型模式的一種。它的主要目的是「通過複製現有的物件」來創建新的物件，而不需要知道具體的建構過程。這種方式可以避免重複性的建構過程，特別是當物件建構較為複雜或耗時的時候。在原型模式中，每個物件都是一個原型（prototype），可以通過複製（clone）來創建新的物件。這裡的「複製」不僅僅是複製物件的內容，而是將整個物件的狀態複製一份給新建的物件，新物件與原物件是相互獨立的，對其中一個物件的修改不會影響另一個。原型模式的核心概念是基於現有物件（原型）來創建新物件，而不是從頭開始創建。這樣可以節省建構時間和資源，同時提高程式碼的效率和可讀性。原型模式通常需要實現一個拷貝方法（Clone Method），用於複製物件。這個拷貝方法可以是淺拷貝（Shallow Copy）或深拷貝（Deep Copy），具體取決於物件的需求和關聯性。
-維基百科：原型模式是一種創建型設計模式。當要創建的物件類型由原型實例確定時，可以通過拷貝（clone）該原型來產生新的物件。該模式的使用可以避免在客戶端應用程式中對物件創建者進行子類別化，就像工廠方法模式所做的那樣，並且可以避免以標準方式（例如使用 &ldquo;new&rdquo; 關鍵字）創建新物件時所帶來的固有成本，尤其是對於某些應用程式來說這樣做代價過高的情況。要實現這種模式，客戶端先聲明一個原型基類，其中定義了一個 clone() 方法。任何需要具備「多型建構子」功能的類別都要繼承該類別，並實作 clone() 方法。客戶端不再直接在程式中使用 new 來建立物件，而是呼叫原型的 clone() 方法，一個常見的原型模式的例子是細胞的有絲分裂，一個細胞可以產生兩個相同的細胞，彼此相同，但彼此並不相關聯，就是原型模式的一個例子。
-特點 通過複製物件快速得到新物件，而不需重新執行建構的過程 將物件的建構細節隱藏在物件內部。 動態地增減物件，通過複製不同類型的原型來創建物件 UML Graphic classDiagramclass World {string nameMap* maps[]void add_map();}class Map {Item* items[]}class Monster {Monster* clone();}World &lt;|-- MapMap &lt;|-- BuildingMap &lt;|-- NPCMap &lt;|-- MonsterMonster &lt;|-- ZombieMonster &lt;|-- Skeleton內文 簡單來說，原型模式就是透過 clone() 函數來代替用 new 的方法創立物件。這麼做有幾種好處，同樣用製作一個 RPG 遊戲來做舉例：首先是「快速初始化」，如果我們想要快速地創建多個相同類別的怪物物件的時候，雖然用 new 是一個不錯的方法，但如果考慮到怪物也許在某些地方會有某些加成，像是殭屍在靠近墓地的時候，會比一般殭屍高出一點點攻擊、防禦、和血量。這時候相對於「用 new 新增一個原本的殭屍，再微調每一個殭屍的所有數值。」，用 clone() 的方法複製第一個已經調整好參數的殭屍會來的更加簡潔。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/prototype_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>原型模式（Prototype Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -305,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -847,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -876,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -892,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -905,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -918,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -931,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -944,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -962,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -978,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -991,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1004,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

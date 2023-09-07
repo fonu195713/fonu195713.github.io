@@ -1,32 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="代理模式（Proxy Pattern）#說明 ChatGPT：代理模式（Proxy Pattern）是一種結構型設計模式，它允許通過使用一個「代理對象」來代表真實對象，從而控制對真實對象的訪問。代理模式提供了一個額外的層次，用於處理對真實對象的訪問，並可以在不改變真實對象的情況下，為其添加一些額外的功能。代理模式的核心思想是：「在【客戶端】和【真實對象】之間引入一個【代理對象】」，這個代理對象充當了客戶端和真實對象之間的中間人。當客戶端想要訪問真實對象時，它不直接與真實對象進行交互，而是通過代理對象來進行訪問。代理對象在接收到客戶端的訪問請求後，可以選擇是否轉發請求給真實對象，並可以在轉發請求前後執行一些額外的操作。代理模式主要包含以下幾個角色：Subject（主題）：主題定義了真實對象和代理對象之間的共同接口，這樣在任何使用真實對象的地方都可以使用代理對象。RealSubject（真實主題）：真實對象實現了 Subject 定義的接口，也就是真實對象，客戶端並不直接與它進行交互。Proxy（代理）：代理同樣也實現了 Subject 定義的接口，內部包含一個真實對象的引用，客戶端通過訪問該對象來代替訪問真實對象。
-維基百科：代理模式（英語：Proxy Pattern）是軟體工程中的一種設計模式。所謂的【代理者】是指一個類別可以作為其它東西的介面。【代理者】可以作任何東西的介面：例如網路連接、記憶體中的大物件、某些特定檔案、或其它昂貴或無法複製的資源。著名的代理模式例子為參照計數（英語：reference counting）指標物件。此外，當一個複雜物件的多份副本須存在時，代理模式可以結合享元模式以減少記憶體用量，典型的作法是建立一個複雜物件及多個代理者，每個代理者都會參照到原本的複雜物件，而作用在代理者的運算會轉送到原本物件，而一旦所有的代理者都不存在時，該複雜物件將會被移除。
-特點 通過代理者減少對於實體對象的依賴 能夠保持真實對象的穩定與獨立 可以客製化地提供真實對象的擴充功能 UML Graphic classDiagramclass Serverclass ProxyServer &lt;|-- Proxyclass User {Proxy* proxyvoid call_server()}User --&gt; Proxynote &#34;void call_server() {\n　proxy.request();\n}&#34;內文 類似於「霧運算」或者是「邊緣計算」的概念，代理模式的功能是透過一個【代理者】類別，將【真實對象】的工作給區分出去，讓【客戶】有需要進行一些對於【真實對象】的存取時，可以透過【代理者】來進行，從而減少對【真實對象】的依賴或負擔。例如在一個 RPG 遊戲中，我們每次在創建線上遊戲的角色的時候，都會需要做一個「確認 ID 是否重複」的事情，在程式的撰寫上可能會有向下面這樣的例子：
-class GameServer { public: std::vector&lt;string&gt; id_vector; public: bool name_duplicated(string str) { auto it = std::find(id_vector.begin(), id_vector.end(), str); if(it != id_vector.end()) return true; else return false; } }; class Character { private: std::string name; public: void set_user_name() { GameServer server = new GameServer(); std::string tmp_name; std::cin &gt;&gt; tmp_name; while(server.">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="代理模式（Proxy Pattern）" />
-<meta property="og:description" content="代理模式（Proxy Pattern）#說明 ChatGPT：代理模式（Proxy Pattern）是一種結構型設計模式，它允許通過使用一個「代理對象」來代表真實對象，從而控制對真實對象的訪問。代理模式提供了一個額外的層次，用於處理對真實對象的訪問，並可以在不改變真實對象的情況下，為其添加一些額外的功能。代理模式的核心思想是：「在【客戶端】和【真實對象】之間引入一個【代理對象】」，這個代理對象充當了客戶端和真實對象之間的中間人。當客戶端想要訪問真實對象時，它不直接與真實對象進行交互，而是通過代理對象來進行訪問。代理對象在接收到客戶端的訪問請求後，可以選擇是否轉發請求給真實對象，並可以在轉發請求前後執行一些額外的操作。代理模式主要包含以下幾個角色：Subject（主題）：主題定義了真實對象和代理對象之間的共同接口，這樣在任何使用真實對象的地方都可以使用代理對象。RealSubject（真實主題）：真實對象實現了 Subject 定義的接口，也就是真實對象，客戶端並不直接與它進行交互。Proxy（代理）：代理同樣也實現了 Subject 定義的接口，內部包含一個真實對象的引用，客戶端通過訪問該對象來代替訪問真實對象。
-維基百科：代理模式（英語：Proxy Pattern）是軟體工程中的一種設計模式。所謂的【代理者】是指一個類別可以作為其它東西的介面。【代理者】可以作任何東西的介面：例如網路連接、記憶體中的大物件、某些特定檔案、或其它昂貴或無法複製的資源。著名的代理模式例子為參照計數（英語：reference counting）指標物件。此外，當一個複雜物件的多份副本須存在時，代理模式可以結合享元模式以減少記憶體用量，典型的作法是建立一個複雜物件及多個代理者，每個代理者都會參照到原本的複雜物件，而作用在代理者的運算會轉送到原本物件，而一旦所有的代理者都不存在時，該複雜物件將會被移除。
-特點 通過代理者減少對於實體對象的依賴 能夠保持真實對象的穩定與獨立 可以客製化地提供真實對象的擴充功能 UML Graphic classDiagramclass Serverclass ProxyServer &lt;|-- Proxyclass User {Proxy* proxyvoid call_server()}User --&gt; Proxynote &#34;void call_server() {\n　proxy.request();\n}&#34;內文 類似於「霧運算」或者是「邊緣計算」的概念，代理模式的功能是透過一個【代理者】類別，將【真實對象】的工作給區分出去，讓【客戶】有需要進行一些對於【真實對象】的存取時，可以透過【代理者】來進行，從而減少對【真實對象】的依賴或負擔。例如在一個 RPG 遊戲中，我們每次在創建線上遊戲的角色的時候，都會需要做一個「確認 ID 是否重複」的事情，在程式的撰寫上可能會有向下面這樣的例子：
-class GameServer { public: std::vector&lt;string&gt; id_vector; public: bool name_duplicated(string str) { auto it = std::find(id_vector.begin(), id_vector.end(), str); if(it != id_vector.end()) return true; else return false; } }; class Character { private: std::string name; public: void set_user_name() { GameServer server = new GameServer(); std::string tmp_name; std::cin &gt;&gt; tmp_name; while(server." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/proxy_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>代理模式（Proxy Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -307,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -849,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -878,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -894,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -907,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -920,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -933,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -946,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -964,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -980,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -993,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1006,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

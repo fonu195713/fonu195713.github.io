@@ -1,30 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="享元模式（Flyweight Pattern）#說明 ChatGPT：享元模式（Flyweight Pattern）是一種結構型設計模式，旨在通過共享對象来最大程度地减少資源消耗和提高性能。該模式適用於存在大量相同或近似對象的情况，通過共享對象的方式，減少對象的創建和記憶體開銷。在享元模式中，對象共分為兩種類型：共享對象（Flyweight）：是可以被共享的對象，包含內部狀態和外部狀態。內部狀態是不變的，因此可以被多個相同的對象共享；外部狀態是可變的，需要在使用時傳遞给共享對象。非共享對象（Unshared Flyweight）：是不可共享的對象，每個對象都是獨立的。通過將對象的狀態分為內部狀態和外部狀態，享元模式可以實現共享內部狀態，減少對象的數量，並通過傳遞外部狀態來保持對象的獨立性。
-維基百科：享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用物件用來儘可能減少記憶體使用量；於相似物件中分享儘可能多的資訊，共享數據結構的概念稱為「哈希共享」。當大量物件近乎重複方式存在，因而使用大量記憶體時，此法適用。通常物件中的部分狀態（state）能夠共享。常見做法是把它們放在資料結構外部，當需要使用時再將它們傳遞給享元。典型的享元模式的例子為文書處理器中以圖形結構來表示字符：每個字形有其字型外觀、字模、和其它格式資訊，如果要全部儲存，會使每個字符就耗用掉上千位元組。因此，我們會使用享元模式，將每個字符參照到一個【共享字形】物件，此物件會被其它有共同特質的字符所分享和使用；只有每個字符的獨特資訊（例如位置訊息）才需要另外儲存。享元模式（Flyweight Pattern）指的是通過與其他相似對象共享一部分數據，來最小化記憶體使用的一種程式設計模式。
-特點 將物件定義為「內部狀態」與外部狀態 同一物件的內部狀態會完全相同，外部狀態會因物件而異 物件的內部狀態可以被定義為一個共同的參照 減少大量的記憶體消耗 通常會與「工廠模式」一併使用 UML Graphic classDiagramclass Map {TreeFactory* tree_factory;Tree[] tree_arycreateMap() : create tree and buildingcreateTree() : tree_factory.createTree()}class TreeFactory {Tree* tree_records[]createTree();}Map --&gt; TreeFactorynote &#34;Tree* createTree() {\n　Tree tree = Rnd.tree(name)\n　if(tree in tree_records) {\n　return tree;\n　}else{\n　Tree* t = new Tree(name);\n　tree_records.add(t);\n　return t;\n　}\n}&#34;">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="享元模式（Flyweight Pattern）" />
-<meta property="og:description" content="享元模式（Flyweight Pattern）#說明 ChatGPT：享元模式（Flyweight Pattern）是一種結構型設計模式，旨在通過共享對象来最大程度地减少資源消耗和提高性能。該模式適用於存在大量相同或近似對象的情况，通過共享對象的方式，減少對象的創建和記憶體開銷。在享元模式中，對象共分為兩種類型：共享對象（Flyweight）：是可以被共享的對象，包含內部狀態和外部狀態。內部狀態是不變的，因此可以被多個相同的對象共享；外部狀態是可變的，需要在使用時傳遞给共享對象。非共享對象（Unshared Flyweight）：是不可共享的對象，每個對象都是獨立的。通過將對象的狀態分為內部狀態和外部狀態，享元模式可以實現共享內部狀態，減少對象的數量，並通過傳遞外部狀態來保持對象的獨立性。
-維基百科：享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用物件用來儘可能減少記憶體使用量；於相似物件中分享儘可能多的資訊，共享數據結構的概念稱為「哈希共享」。當大量物件近乎重複方式存在，因而使用大量記憶體時，此法適用。通常物件中的部分狀態（state）能夠共享。常見做法是把它們放在資料結構外部，當需要使用時再將它們傳遞給享元。典型的享元模式的例子為文書處理器中以圖形結構來表示字符：每個字形有其字型外觀、字模、和其它格式資訊，如果要全部儲存，會使每個字符就耗用掉上千位元組。因此，我們會使用享元模式，將每個字符參照到一個【共享字形】物件，此物件會被其它有共同特質的字符所分享和使用；只有每個字符的獨特資訊（例如位置訊息）才需要另外儲存。享元模式（Flyweight Pattern）指的是通過與其他相似對象共享一部分數據，來最小化記憶體使用的一種程式設計模式。
-特點 將物件定義為「內部狀態」與外部狀態 同一物件的內部狀態會完全相同，外部狀態會因物件而異 物件的內部狀態可以被定義為一個共同的參照 減少大量的記憶體消耗 通常會與「工廠模式」一併使用 UML Graphic classDiagramclass Map {TreeFactory* tree_factory;Tree[] tree_arycreateMap() : create tree and buildingcreateTree() : tree_factory.createTree()}class TreeFactory {Tree* tree_records[]createTree();}Map --&gt; TreeFactorynote &#34;Tree* createTree() {\n　Tree tree = Rnd.tree(name)\n　if(tree in tree_records) {\n　return tree;\n　}else{\n　Tree* t = new Tree(name);\n　tree_records.add(t);\n　return t;\n　}\n}&#34;" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/flyweight_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>享元模式（Flyweight Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -305,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -847,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -876,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -892,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -905,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -918,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -931,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -944,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -962,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -978,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -991,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1004,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

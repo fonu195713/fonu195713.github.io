@@ -1,32 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="裝飾器模式（Decorator Pattern）#說明 ChatGPT：裝飾器模式（Decorator Pattern）是一種結構型設計模式，它允許動態地為對象添加額外的功能，並且不需要修改其代碼。這種模式通常用於擴展一個類的功能，並且提供了比繼承更靈活的解決方案。 在裝飾器模式中，將功能的實現分成核心部分和裝飾部分。核心部分代表原始類，它可以是一個抽象類或接口，裝飾部分則是一系列具體的裝飾器類，用於擴展核心部分的功能。裝飾器模式的典型應用場景是在不改變原始類的情況下，動態地擴展功能。例如，可以用來為一個圖形繪製程式添加不同的效果，如邊框、陰影、填充等，這些效果可以在運行時動態地添加，且不影響圖形本身的類結構。通常來說，一個裝飾器模式的基本結構包含以下角色：Component（組件）：定義了核心功能的接口，可以是抽象類或接口。Concrete Component（具體組件）：實現了 Component 接口的具體類，代表原始類。Decorator（裝飾器）：維持一個指向 Component 的引用，並實現 Component 接口，這樣可以動態地添加功能。ConcreteDecorator（具體裝飾器）：擴展 Decorator 的功能，並實現具體的裝飾行為。
-維基百科：裝飾器模式又叫做「修飾模式」，是物件導向程式領域中，一種動態地往一個類別中添加新的行為的設計模式。就功能而言，裝飾器模式相比生成子類別更為靈活，這樣可以給某個對象而不是整個類別添加一些功能。通過使用裝飾器模式，可以在程式運行時，動態地擴充一個類別的功能。原理是：增加一個「修飾類」去包裹原來的類別，包裹的方式是在修飾類的構造函數中將原來的類以參數的形式傳入。裝飾類實現新的功能，但是，在不需要用到新功能的地方，它可以直接調用原來的類別中的方法。此外，修飾類必須和原來的類別有相同的接口。裝飾器模式是類別繼承的另外一種選擇。類繼承在編譯時候增加行為，而裝飾器模式則是在程式運行時增加行為。當有幾個相互獨立的功能需要擴充時，這個區別就變得很重要。在有些物件導向的程式語言中，類別不能在運行時被創建，通常在設計的時候也不能預測到有哪幾種功能組合。這就意味著要為每一種組合創建一個新類別。相反，裝飾器模式是在程式運行時候的實例化物件的，這樣就可以在程式運行的時後，根據需要進行不同地組合。
-特點 可以通過裝飾器類，動態地擴展物件的功能 可以對物件任意組合功能，使得系統的擴展性更好 遵從設計原則中的「開放封閉原則」 UML Graphic classDiagramWeapon &lt;|-- SwordWeapon &lt;|-- AxeWeapon &lt;|-- Daggerclass Decorator~Interface~ {Decorator(Weapon* w)}Weapon &lt;|-- Decorator~Interface~Decorator~Interface~ &lt;|-- AttackBuffDecorator~Interface~ &lt;|-- CritBuffDecorator~Interface~ &lt;|-- PenetratingBuff#內文 裝飾器模式是一種比較特別的設計模式，它的核心用途是「利用『非繼承』的方式，擴增原本的類別」。因為裝飾器模式可以遞迴執行（或者說它的本質就是遞迴執行），因此也適用在「重複疊加某一種效果的需求」的情境上。讓我們用一個 RPG 遊戲來當例子：假設我們在實現一個【武器強化】的功能，可以針對不同的武器（像是劍、斧頭、匕首&hellip;等）進行不同種的強化（增益攻擊、爆擊、或護甲穿透&hellip;等），如果我們用「繼承」的方式來寫的話，可能會寫出類似於下面這樣的程式碼：
-class Weapon {}; class Sword : public Weapon {}; class Attack_Buff_Sword : public Sword {}; class Crit_Buff_Sword : public Sword {}; class Penetrating_Buff_Sword : public Sword {}; class Axe : public Weapon {}; class Attack_Buff_Axe : public Axe {}; class Crit_Buff_Axe : public Axe {}; class Penetrating_Buff_Axe : public Axe {}; class Dagger : public Weapon {}; class Attack_Buff_Dagger : public Dagger {}; class Crit_Buff_Dagger : public Dagger {}; class Penetrating_Buff_Dagger : public Dagger {}; 這樣子的做法有幾個壞處：首先是程式的類別會依照【武器】與【增益效果】的變多而快速增加。在當前的狀況下，如果我們想要新增兩種武器（長槍、弓箭）那麼我們除了新增 Lance, Bow 兩種類別之外，我們還要根據不同的類別分別實作攻擊增益、爆及增益、以及穿透護甲增益三種類別。那如果再之後我們打算多新增 \(x\)種武器和 \(y\)種增益效果，類別的數量就會以驚人的速度成長了。">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="裝飾器模式（Decorator Pattern）" />
-<meta property="og:description" content="裝飾器模式（Decorator Pattern）#說明 ChatGPT：裝飾器模式（Decorator Pattern）是一種結構型設計模式，它允許動態地為對象添加額外的功能，並且不需要修改其代碼。這種模式通常用於擴展一個類的功能，並且提供了比繼承更靈活的解決方案。 在裝飾器模式中，將功能的實現分成核心部分和裝飾部分。核心部分代表原始類，它可以是一個抽象類或接口，裝飾部分則是一系列具體的裝飾器類，用於擴展核心部分的功能。裝飾器模式的典型應用場景是在不改變原始類的情況下，動態地擴展功能。例如，可以用來為一個圖形繪製程式添加不同的效果，如邊框、陰影、填充等，這些效果可以在運行時動態地添加，且不影響圖形本身的類結構。通常來說，一個裝飾器模式的基本結構包含以下角色：Component（組件）：定義了核心功能的接口，可以是抽象類或接口。Concrete Component（具體組件）：實現了 Component 接口的具體類，代表原始類。Decorator（裝飾器）：維持一個指向 Component 的引用，並實現 Component 接口，這樣可以動態地添加功能。ConcreteDecorator（具體裝飾器）：擴展 Decorator 的功能，並實現具體的裝飾行為。
-維基百科：裝飾器模式又叫做「修飾模式」，是物件導向程式領域中，一種動態地往一個類別中添加新的行為的設計模式。就功能而言，裝飾器模式相比生成子類別更為靈活，這樣可以給某個對象而不是整個類別添加一些功能。通過使用裝飾器模式，可以在程式運行時，動態地擴充一個類別的功能。原理是：增加一個「修飾類」去包裹原來的類別，包裹的方式是在修飾類的構造函數中將原來的類以參數的形式傳入。裝飾類實現新的功能，但是，在不需要用到新功能的地方，它可以直接調用原來的類別中的方法。此外，修飾類必須和原來的類別有相同的接口。裝飾器模式是類別繼承的另外一種選擇。類繼承在編譯時候增加行為，而裝飾器模式則是在程式運行時增加行為。當有幾個相互獨立的功能需要擴充時，這個區別就變得很重要。在有些物件導向的程式語言中，類別不能在運行時被創建，通常在設計的時候也不能預測到有哪幾種功能組合。這就意味著要為每一種組合創建一個新類別。相反，裝飾器模式是在程式運行時候的實例化物件的，這樣就可以在程式運行的時後，根據需要進行不同地組合。
-特點 可以通過裝飾器類，動態地擴展物件的功能 可以對物件任意組合功能，使得系統的擴展性更好 遵從設計原則中的「開放封閉原則」 UML Graphic classDiagramWeapon &lt;|-- SwordWeapon &lt;|-- AxeWeapon &lt;|-- Daggerclass Decorator~Interface~ {Decorator(Weapon* w)}Weapon &lt;|-- Decorator~Interface~Decorator~Interface~ &lt;|-- AttackBuffDecorator~Interface~ &lt;|-- CritBuffDecorator~Interface~ &lt;|-- PenetratingBuff#內文 裝飾器模式是一種比較特別的設計模式，它的核心用途是「利用『非繼承』的方式，擴增原本的類別」。因為裝飾器模式可以遞迴執行（或者說它的本質就是遞迴執行），因此也適用在「重複疊加某一種效果的需求」的情境上。讓我們用一個 RPG 遊戲來當例子：假設我們在實現一個【武器強化】的功能，可以針對不同的武器（像是劍、斧頭、匕首&hellip;等）進行不同種的強化（增益攻擊、爆擊、或護甲穿透&hellip;等），如果我們用「繼承」的方式來寫的話，可能會寫出類似於下面這樣的程式碼：
-class Weapon {}; class Sword : public Weapon {}; class Attack_Buff_Sword : public Sword {}; class Crit_Buff_Sword : public Sword {}; class Penetrating_Buff_Sword : public Sword {}; class Axe : public Weapon {}; class Attack_Buff_Axe : public Axe {}; class Crit_Buff_Axe : public Axe {}; class Penetrating_Buff_Axe : public Axe {}; class Dagger : public Weapon {}; class Attack_Buff_Dagger : public Dagger {}; class Crit_Buff_Dagger : public Dagger {}; class Penetrating_Buff_Dagger : public Dagger {}; 這樣子的做法有幾個壞處：首先是程式的類別會依照【武器】與【增益效果】的變多而快速增加。在當前的狀況下，如果我們想要新增兩種武器（長槍、弓箭）那麼我們除了新增 Lance, Bow 兩種類別之外，我們還要根據不同的類別分別實作攻擊增益、爆及增益、以及穿透護甲增益三種類別。那如果再之後我們打算多新增 \(x\)種武器和 \(y\)種增益效果，類別的數量就會以驚人的速度成長了。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/decorator_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>裝飾器模式（Decorator Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -307,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -849,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -878,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -894,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -907,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -920,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -933,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -946,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -964,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -980,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -993,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1006,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 
@@ -1131,7 +1241,7 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li><strong>UML Graphic</strong></li>
 </ul>
-<h2 id="hahahugoshortcode55s0hbhb">
+<h2 id="hahahugoshortcode59s0hbhb">
   
 
 <script type="module">
@@ -1165,7 +1275,7 @@ classDiagram
     Decorator~Interface~ <|-- PenetratingBuff
 </p>
 
-  <a class="anchor" href="#hahahugoshortcode55s0hbhb">#</a>
+  <a class="anchor" href="#hahahugoshortcode59s0hbhb">#</a>
 </h2>
 <ul>
 <li><strong>內文</strong></li>

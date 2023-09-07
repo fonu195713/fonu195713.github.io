@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java 相關 on Fonu Site</title>
+    <link>https://fonu195713.github.io/docs/computer_science/java/</link>
+    <description>Recent content in Java 相關 on Fonu Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://fonu195713.github.io/docs/computer_science/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JAVA 相關的面試題</title>
+      <link>https://fonu195713.github.io/docs/computer_science/java/job_interview_questions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/java/job_interview_questions/</guid>
+      <description>JAVA 相關的面試題#mySQL 使用 innoDB 引擎，请简述 mySQL 索引的最左前缀如何优化 order by 语句 參考連結 參考連結 </description>
+    </item>
+    
+  </channel>
+</rss>

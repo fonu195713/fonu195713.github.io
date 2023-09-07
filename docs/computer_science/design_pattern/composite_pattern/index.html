@@ -1,30 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="組合模式（Composite Pattern）#說明 ChatGPT：組合模式（Composite Pattern）是一種結構型設計模式，它允許將對象組織成樹狀結構以表示「部分 - 整體」的層次結構。組合模式使得用戶可以一致地處理單個對象和組合的對象，並且無需對它們進行區分。在組合模式中，有以下幾個角色：Component（組件）：組件定義了組合中所有對象的通用接口，它可以是接口或抽象類別。它聲明了一些管理和訪問子組件的方法，並可以提供默認的實例方法。Leaf（葉子）：表示組合中的葉子節點，即沒有子節點的對象。葉子對象實現了 Component 接口。Composite（組合）：表示組合中的複合節點，即包含子節點的對象。組合對象實現了 Component 接口，並保存了一個子節點的列表。組合模式的核心思想是「讓用戶對『單個對象』和『組合的對象』進行統一處理」，從而降低了用戶程式的複雜性。用戶不需要區分當前處理的是單個對象還是組合的對象，而是統一通過 Component 接口來進行操作。
-維基百科：在軟體工程中，組合模式是一種結構型模式。組合模式描述了一組對象，這些對象的處理方式與同一類型對象的單個實例相同。組合的目的是將對象「組合」成樹結構，以表示「部分 - 整體」層次結構。實現組合模式可以讓客戶端統一處理單個對象和組合。組合模式是 23 個著名的設計模式之一，它描述瞭如何解決重複出現的設計問題，以靈活的設計且可重用的物件導向程式解決問題，意即更容易實現、更改、測試和重用的對象。組合模式可以解決什麼問題？：組合模式利用了部分 - 整體的層次結構，讓客戶端可以統一對待部分和整體對象。組合模式描述了什麼解決方案？ 組合模式會將物件的部分（Leaf）和整體（Composite）定義一個統一的組件接口。各個 Leaf 直接實例 Component，而 Composite 則將請求轉發到其子組件（可能是 Leaf 或 Composite）。這使得客戶端能夠通過 Component 的接口來統一處理所有程式使得客戶端更容易實現、更改、測試和重用。
-特點 利用「部分 - 整體」的遞迴結構實現單一操作的功能 UML Graphic classDiagramclass Character~Interface~ {void attack();}Character &lt;|-- Monster~Interface~Character &lt;|-- Player~Interface~Character &lt;|-- Team~Interface~class Team {Character[] teammate}Team --&gt; Character內文 組合模式所強調的「部分 - 整體」有點類似一即全，全即一的感覺，透過對於「單個物件的操作」可以遞迴影響到「整個物件群組」舊式組合模式想要解釋的概念。我們可以用一個 RPG 遊戲的例子來解釋組合模式：在一個 RPG 遊戲中，我們想要設定一個「主角可以與一同前行的人物組成『隊伍』，並透過與不同的『怪物們』相互對戰之後，最終打敗大 BOSS 取得勝利」作為一個核心的遊戲戰鬥機制。在這個機制下，所有的「成員」都是「隊伍」的一部分。而「隊伍」即是所有「成員」的組成。">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="組合模式（Composite Pattern）" />
-<meta property="og:description" content="組合模式（Composite Pattern）#說明 ChatGPT：組合模式（Composite Pattern）是一種結構型設計模式，它允許將對象組織成樹狀結構以表示「部分 - 整體」的層次結構。組合模式使得用戶可以一致地處理單個對象和組合的對象，並且無需對它們進行區分。在組合模式中，有以下幾個角色：Component（組件）：組件定義了組合中所有對象的通用接口，它可以是接口或抽象類別。它聲明了一些管理和訪問子組件的方法，並可以提供默認的實例方法。Leaf（葉子）：表示組合中的葉子節點，即沒有子節點的對象。葉子對象實現了 Component 接口。Composite（組合）：表示組合中的複合節點，即包含子節點的對象。組合對象實現了 Component 接口，並保存了一個子節點的列表。組合模式的核心思想是「讓用戶對『單個對象』和『組合的對象』進行統一處理」，從而降低了用戶程式的複雜性。用戶不需要區分當前處理的是單個對象還是組合的對象，而是統一通過 Component 接口來進行操作。
-維基百科：在軟體工程中，組合模式是一種結構型模式。組合模式描述了一組對象，這些對象的處理方式與同一類型對象的單個實例相同。組合的目的是將對象「組合」成樹結構，以表示「部分 - 整體」層次結構。實現組合模式可以讓客戶端統一處理單個對象和組合。組合模式是 23 個著名的設計模式之一，它描述瞭如何解決重複出現的設計問題，以靈活的設計且可重用的物件導向程式解決問題，意即更容易實現、更改、測試和重用的對象。組合模式可以解決什麼問題？：組合模式利用了部分 - 整體的層次結構，讓客戶端可以統一對待部分和整體對象。組合模式描述了什麼解決方案？ 組合模式會將物件的部分（Leaf）和整體（Composite）定義一個統一的組件接口。各個 Leaf 直接實例 Component，而 Composite 則將請求轉發到其子組件（可能是 Leaf 或 Composite）。這使得客戶端能夠通過 Component 的接口來統一處理所有程式使得客戶端更容易實現、更改、測試和重用。
-特點 利用「部分 - 整體」的遞迴結構實現單一操作的功能 UML Graphic classDiagramclass Character~Interface~ {void attack();}Character &lt;|-- Monster~Interface~Character &lt;|-- Player~Interface~Character &lt;|-- Team~Interface~class Team {Character[] teammate}Team --&gt; Character內文 組合模式所強調的「部分 - 整體」有點類似一即全，全即一的感覺，透過對於「單個物件的操作」可以遞迴影響到「整個物件群組」舊式組合模式想要解釋的概念。我們可以用一個 RPG 遊戲的例子來解釋組合模式：在一個 RPG 遊戲中，我們想要設定一個「主角可以與一同前行的人物組成『隊伍』，並透過與不同的『怪物們』相互對戰之後，最終打敗大 BOSS 取得勝利」作為一個核心的遊戲戰鬥機制。在這個機制下，所有的「成員」都是「隊伍」的一部分。而「隊伍」即是所有「成員」的組成。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/composite_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>組合模式（Composite Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -305,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -847,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -876,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -892,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -905,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -918,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -931,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -944,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -962,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -978,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -991,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1004,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

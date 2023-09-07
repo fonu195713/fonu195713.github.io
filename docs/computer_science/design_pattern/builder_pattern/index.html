@@ -1,30 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="生成器模式（Builder Pattern）#說明 ChatGPT：生成器模式（Builder Pattern）是一種軟體設計模式，用於創建複雜物件時，將建構過程和表示分離，使得同樣的建構過程可以創建不同的表示。這種模式通常用於創建具有多個可選屬性的物件，以及具有多個步驟或配置過程的物件。通常來說，一個創建者模式裡面，主要包含以下幾個元素：產品（Product）：這是要建構的複雜物件，通常包含多個屬性。它可以是一個複雜的類別或結構。建構者（Builder）：建構者通常是一個介面（或抽象類別），它定義了建構產品的各個步驟，並且可能包含設置屬性的方法。具體建構者（Concrete Builder）：實現建構者介面的類別，負責實際建構物件並設置其屬性。指揮官（Director）：可選元素，對於複雜的建構過程，可以使用指揮者來將建構過程進行組織和管理，以確保生成符合需求的物件。
-維基百科：生成器模式（Builder Pattern）是一種設計模式，又名：建造者模式、創建者模式，是一種對象構建模式。它可以將對象的建造過程，利用一系列抽象的步驟提取出來，使這個抽象過程的不同實現方法可以構造出不同表現（屬性）的對象。生成器模式解決了以下的幾問題：一個類別如何擁有類似的建構過程，但又可以創建出具有不同屬性的物件？一個類別如果包含大量的屬性，它該如何簡化包含建構複雜物件的類別？生成器設計模式描述了如何解決這些問題的方法：將「創建」和「組裝複雜物件」的部分封裝在一個獨立的建構者（Builder）物件中。類別將物件的建構委託給建構者，而不是直接創建物件。
-特點 可以分離生成物件的過程 相對於建構子，具有有更佳的彈性和擴展性 支援不同種類的物件生成方式 UML Graphic classDiagramclass Character {string nameRole* roleWeapon* weaponArmor* armorElement* element}class CharacterBuilder {void setName()void setRole()void setWeapon()void setArmor()void setElement()Character* getCharacter()}CharacterBuilder &lt;|-- WarriorBuilderCharacterBuilder &lt;|-- MagicianBuilderCharacterBuilder &lt;|-- ArcherBuilderCharacterBuilder &lt;|-- AssassinBuilderclass CharacterDirector {CharacterDirector(CharacterBuilder* b)}Character --&gt; CharacterDirectorCharacterDirector o-- CharacterBuilder內文 假設我們在製作一款 RPG 遊戲，其中在「創建角色」的過程，角色可以選定「戰士、弓箭手、法師、盜賊」其中一種職業遊玩。角色的屬性主要分成以下四種類型：【名稱】名稱由玩家自行填寫，不可為空。【武器】武器會根據角色所選的職業有所不同，戰士可以手持劍或斧、弓箭手固定為弓、法師的武器固定為長杖、盜賊固定為匕首。【護具】護具同樣由職業做綁定：戰士使用鐵製護具，弓箭手使用皮革護具、盜賊同樣使用皮革護具，法師則沒有護具。【元素屬性】元素屬性也是綁定職業：戰士不具有任何元素屬性（純物理攻擊）、弓箭手固定為風屬性、盜賊可以選擇不持有屬性或持有風屬性的能力、法師則可以在火土風水之中選擇一種主要屬性使用。">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="生成器模式（Builder Pattern）" />
-<meta property="og:description" content="生成器模式（Builder Pattern）#說明 ChatGPT：生成器模式（Builder Pattern）是一種軟體設計模式，用於創建複雜物件時，將建構過程和表示分離，使得同樣的建構過程可以創建不同的表示。這種模式通常用於創建具有多個可選屬性的物件，以及具有多個步驟或配置過程的物件。通常來說，一個創建者模式裡面，主要包含以下幾個元素：產品（Product）：這是要建構的複雜物件，通常包含多個屬性。它可以是一個複雜的類別或結構。建構者（Builder）：建構者通常是一個介面（或抽象類別），它定義了建構產品的各個步驟，並且可能包含設置屬性的方法。具體建構者（Concrete Builder）：實現建構者介面的類別，負責實際建構物件並設置其屬性。指揮官（Director）：可選元素，對於複雜的建構過程，可以使用指揮者來將建構過程進行組織和管理，以確保生成符合需求的物件。
-維基百科：生成器模式（Builder Pattern）是一種設計模式，又名：建造者模式、創建者模式，是一種對象構建模式。它可以將對象的建造過程，利用一系列抽象的步驟提取出來，使這個抽象過程的不同實現方法可以構造出不同表現（屬性）的對象。生成器模式解決了以下的幾問題：一個類別如何擁有類似的建構過程，但又可以創建出具有不同屬性的物件？一個類別如果包含大量的屬性，它該如何簡化包含建構複雜物件的類別？生成器設計模式描述了如何解決這些問題的方法：將「創建」和「組裝複雜物件」的部分封裝在一個獨立的建構者（Builder）物件中。類別將物件的建構委託給建構者，而不是直接創建物件。
-特點 可以分離生成物件的過程 相對於建構子，具有有更佳的彈性和擴展性 支援不同種類的物件生成方式 UML Graphic classDiagramclass Character {string nameRole* roleWeapon* weaponArmor* armorElement* element}class CharacterBuilder {void setName()void setRole()void setWeapon()void setArmor()void setElement()Character* getCharacter()}CharacterBuilder &lt;|-- WarriorBuilderCharacterBuilder &lt;|-- MagicianBuilderCharacterBuilder &lt;|-- ArcherBuilderCharacterBuilder &lt;|-- AssassinBuilderclass CharacterDirector {CharacterDirector(CharacterBuilder* b)}Character --&gt; CharacterDirectorCharacterDirector o-- CharacterBuilder內文 假設我們在製作一款 RPG 遊戲，其中在「創建角色」的過程，角色可以選定「戰士、弓箭手、法師、盜賊」其中一種職業遊玩。角色的屬性主要分成以下四種類型：【名稱】名稱由玩家自行填寫，不可為空。【武器】武器會根據角色所選的職業有所不同，戰士可以手持劍或斧、弓箭手固定為弓、法師的武器固定為長杖、盜賊固定為匕首。【護具】護具同樣由職業做綁定：戰士使用鐵製護具，弓箭手使用皮革護具、盜賊同樣使用皮革護具，法師則沒有護具。【元素屬性】元素屬性也是綁定職業：戰士不具有任何元素屬性（純物理攻擊）、弓箭手固定為風屬性、盜賊可以選擇不持有屬性或持有風屬性的能力、法師則可以在火土風水之中選擇一種主要屬性使用。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/builder_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>生成器模式（Builder Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -305,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -847,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -876,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -892,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -905,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -918,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -931,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -944,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -962,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -978,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -991,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1004,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

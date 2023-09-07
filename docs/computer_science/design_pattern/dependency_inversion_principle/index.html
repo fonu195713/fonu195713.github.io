@@ -1,34 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="依賴反轉原則（Dependency Inversion Principle）#ChatGPT 的說明 依賴反轉原則（Dependency Inversion Principle，簡稱DIP）眾多設計原則中的一個概念，它通過重新思考軟體設計中的「依賴」關係，提供了一種更具靈活性、擴展性、與可維護性的方式來組織程式碼。這個原則的核心思想在於「改變我們對依賴的看法」，將依賴關係的方向進行反轉，以減少耦合，增加彈性，並使系統更容易擴展和維護。在傳統的軟體設計中，&ldquo;較低層級的模組&rdquo; 通常依賴於 &ldquo;較高層級的模組&rdquo;。例如：如果你正在設計一個 RPG 遊戲，【技能】（低層模組）可能會依賴於【角色】（高層模組），因為【技能】需要知道它是被哪種類型的【角色】所使用。這種設計方式可能導致 &ldquo;高層模組&rdquo; 的變化影響到 &ldquo;低層模組&rdquo;，增加了系統的脆弱性和維護難度，並限制了系統的可擴展性。
-DIP的關鍵思想是：我們應.該.將.依.賴.關.係.的.方.向.反.過.來，使 &ldquo;高層模組&rdquo; 依賴於「&ldquo;低層模組&rdquo; 的抽象」，而不是依賴具體的低層細節。換句話說，我們要將控制權交給抽象類別，讓 &ldquo;高層模組&quot;依賴於【介面】【抽象類別】或其他抽象化的類型。這樣一來，可以帶來幾個好處是：首先是【減少耦合】：通過讓模組依賴於抽象，&ldquo;高層模組&rdquo; 和 &ldquo;低層模組&rdquo; 之間的耦合性便會降低。這意味著變更低層模組的實現不會影響高層模組的穩定性。
-此外，這樣做也可以【提升程式的可擴展性】：因為高層模組只依賴於抽象被別，所以低層模組可以更容易地被替換、被修改、或延展成新的低層類別，從而實現系統的擴展。此外，這樣的撰寫方式也有助於提升程式的【可測試性】：由於高層模組可以依賴於虛擬的、可測試的抽象，這將使得測試高層模組的難度變得更加容易。使高層依賴低層的抽象也可以【減少程式的細節】：因為通過依賴【抽象類別】或【介面】來實現功能，高層模組不再需要知道低層模組的具體實現細節，這有助於提高程式的可讀性和簡潔性。
-以下我們將透過一個 RPG 遊戲的情境，模擬「『低層模組』依賴『高層模組』」和「『高層模組』依賴『低層模組的抽象』」兩種程式的撰寫方式，在這個情境之下，低層模組指的是【技能】類別，而【高層】模組則是可以使用【技能】類別的其餘類別，也就是【角色】類別。首先，我們將低層模組【技能】依賴於高層模組【角色】。我們定義了【技能】的不同實現，而它們會根據【角色】的特性來調整技能的效果。
-class Character; class Skill { public: void fireBall(Character&amp; character) { // only the magician can use this skill if(character.type == &#34;Magician&#34;) cout &lt;&lt; character.name &lt;&lt; &#34; uses the skill &#39;fire ball&#39;.&#34; &lt;&lt; endl; else cout &lt;&lt; character.name &lt;&lt; &#34; wanted to try something, but there was no response.">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="依賴反轉原則（Dependency Inversion Principle）" />
-<meta property="og:description" content="依賴反轉原則（Dependency Inversion Principle）#ChatGPT 的說明 依賴反轉原則（Dependency Inversion Principle，簡稱DIP）眾多設計原則中的一個概念，它通過重新思考軟體設計中的「依賴」關係，提供了一種更具靈活性、擴展性、與可維護性的方式來組織程式碼。這個原則的核心思想在於「改變我們對依賴的看法」，將依賴關係的方向進行反轉，以減少耦合，增加彈性，並使系統更容易擴展和維護。在傳統的軟體設計中，&ldquo;較低層級的模組&rdquo; 通常依賴於 &ldquo;較高層級的模組&rdquo;。例如：如果你正在設計一個 RPG 遊戲，【技能】（低層模組）可能會依賴於【角色】（高層模組），因為【技能】需要知道它是被哪種類型的【角色】所使用。這種設計方式可能導致 &ldquo;高層模組&rdquo; 的變化影響到 &ldquo;低層模組&rdquo;，增加了系統的脆弱性和維護難度，並限制了系統的可擴展性。
-DIP的關鍵思想是：我們應.該.將.依.賴.關.係.的.方.向.反.過.來，使 &ldquo;高層模組&rdquo; 依賴於「&ldquo;低層模組&rdquo; 的抽象」，而不是依賴具體的低層細節。換句話說，我們要將控制權交給抽象類別，讓 &ldquo;高層模組&quot;依賴於【介面】【抽象類別】或其他抽象化的類型。這樣一來，可以帶來幾個好處是：首先是【減少耦合】：通過讓模組依賴於抽象，&ldquo;高層模組&rdquo; 和 &ldquo;低層模組&rdquo; 之間的耦合性便會降低。這意味著變更低層模組的實現不會影響高層模組的穩定性。
-此外，這樣做也可以【提升程式的可擴展性】：因為高層模組只依賴於抽象被別，所以低層模組可以更容易地被替換、被修改、或延展成新的低層類別，從而實現系統的擴展。此外，這樣的撰寫方式也有助於提升程式的【可測試性】：由於高層模組可以依賴於虛擬的、可測試的抽象，這將使得測試高層模組的難度變得更加容易。使高層依賴低層的抽象也可以【減少程式的細節】：因為通過依賴【抽象類別】或【介面】來實現功能，高層模組不再需要知道低層模組的具體實現細節，這有助於提高程式的可讀性和簡潔性。
-以下我們將透過一個 RPG 遊戲的情境，模擬「『低層模組』依賴『高層模組』」和「『高層模組』依賴『低層模組的抽象』」兩種程式的撰寫方式，在這個情境之下，低層模組指的是【技能】類別，而【高層】模組則是可以使用【技能】類別的其餘類別，也就是【角色】類別。首先，我們將低層模組【技能】依賴於高層模組【角色】。我們定義了【技能】的不同實現，而它們會根據【角色】的特性來調整技能的效果。
-class Character; class Skill { public: void fireBall(Character&amp; character) { // only the magician can use this skill if(character.type == &#34;Magician&#34;) cout &lt;&lt; character.name &lt;&lt; &#34; uses the skill &#39;fire ball&#39;.&#34; &lt;&lt; endl; else cout &lt;&lt; character.name &lt;&lt; &#34; wanted to try something, but there was no response." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/dependency_inversion_principle/" /><meta property="article:section" content="docs" />
 
 
-<title>依賴反轉原則（Dependency Inversion Principle） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -309,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -851,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -880,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -896,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -909,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -922,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -935,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -948,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -966,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -982,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -995,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1008,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

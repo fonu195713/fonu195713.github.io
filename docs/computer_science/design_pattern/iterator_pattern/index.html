@@ -1,30 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="迭代器模式（Iterator Pattern）#說明 ChatGPT：迭代器模式（Iterator Pattern）是一種行為型設計模式，它主要用於提供一種訪問集合元素（如列表、數組、樹等）的方法，而不需要暴露該集合的內部表示。通過迭代器模式，我們可以透過統一的接口來遍歷（iterate()）集合中的元素，無需關心底層的數據結構。「迭代器模式」的主要目標是「分離集合的『遍歷行為』與『程式實現』」。這樣可以提供更好的解耦和靈活性。該模式通常包含以下主要元素：【迭代器】（Iterator）：用於定義「訪問」和「遍歷」集合元素的介面。迭代器通常包含方法如 next()（返回下一個元素）、hasNext()（檢查是否還有下一個元素）等。【具體迭代器】（Concrete Iterator）：具體迭代器實現了【迭代器】的接口，並提供了對具體集合的元素遍歷實現。不同的集合可能需要不同的具體迭代器。【集合】（Collection）： 定義了管理元素的方法，如添加、刪除元素&hellip;等。可以是列表、數組、樹&hellip;等。【具體集合】（Concrete Collection）：實現了【集合】的接口，提供了實際的元素管理方式。不同的具體集合可能有不同的存儲結構。通過使用迭代器模式，客戶端的程式可以僅通過【迭代器】來訪問集合的元素，而無需關心程式的底層細節。這樣可以使程式更具可讀性、可維護性，並且支持在不改變客戶端程式的情況下更改集合的實現方式。
-維基百科：在物件導向程式設計中，「迭代器模式」是一種設計模式，其中使用【迭代器】來遍歷容器，並訪問容器的逐個元素。迭代器模式嘗試將「遍歷的演算法」與「容器」解耦；「迭代器模式能解決哪些問題？」該模式可以讓聚合物件（列表、數組&hellip;等）的元素，在不暴露其表示資料結構的情況下，進行訪問和遍歷。同時也可以為聚合物件定義新的遍歷操作，而不改變其介面。在一般情況下，直接再聚合介面中定義「訪問」和「遍歷」操作是不靈活的，因為這樣的程式撰寫方式會使得聚合受限於特定的訪問和遍歷操作，且無法在不更改聚合介面的前提下添加新操作。「迭代器模式如何解決此問題方案？」迭代器模式會定義一個獨立的【迭代器】物件，並封裝「訪問」和「遍歷」的方法，讓聚合物件各自繼承並實例。客戶端使用可以直接使用【迭代器】來訪問方法和遍歷方法來檢視聚合物件，而不需要了解其物件內真實的資料結構。不同的迭代器可以以不同的方式訪問和遍歷聚合。可以通過定義新的迭代器來獨立地定義新的訪問和遍歷操作。
-特點 分離「集合」本身的資料結構與「迭代」的程式邏輯 可以隱藏集合的資料結構，使客戶端不須依賴特定的程式操作 提供統一的遍歷程式，提高程式的可重用性 UML Graphic classDiagramclass Iterator {bool hasNext();void next();}Iterator &lt;|-- CharacterTeamIteratorIterator &lt;|-- MonsterTeamIteratorclass CharacterTeam {Iterator* iteratorCharacter teammate[]}class MonsterTeam {Iterator* iteratorMonsterNode head}CharacterTeam &lt;|-- Characterclass MonsterNode {Monster* monsterMonsterNode* next}MonsterTeam --&gt; MonsterNodeMonsterNode --&gt; Monster#內文 迭代器模式是個相對簡單的設計模式。該模式的用途是「讓所有不同的容器，都可以有一個統一的『遍歷』方法。」通常來說，一個迭代器模式裡面總共會包含著四種類別：【迭代器介面】【具體迭代器】【集合介面】和【具體集合】。讓我們用一個 RPG 遊戲來做舉例：假設再一個 RPG 的戰鬥中，總共分為「主角方」和「怪物方」兩方的陣容。在程式的撰寫上分別由工程師 A 和工程師 B 進行工作。工程師 A 在主角（Character）的地方，新增了一個 CharacterTeam 的類別，用以紀錄主角的隊伍成員，以及它們各自的資訊；工程師 B 則同樣使用了類似的做法，在怪物方（Monster）新增了一個 MonsterTeam 類別，同樣也是記錄怪物的編隊與各自的訊息，如下述的程式所示：">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="迭代器模式（Iterator Pattern）" />
-<meta property="og:description" content="迭代器模式（Iterator Pattern）#說明 ChatGPT：迭代器模式（Iterator Pattern）是一種行為型設計模式，它主要用於提供一種訪問集合元素（如列表、數組、樹等）的方法，而不需要暴露該集合的內部表示。通過迭代器模式，我們可以透過統一的接口來遍歷（iterate()）集合中的元素，無需關心底層的數據結構。「迭代器模式」的主要目標是「分離集合的『遍歷行為』與『程式實現』」。這樣可以提供更好的解耦和靈活性。該模式通常包含以下主要元素：【迭代器】（Iterator）：用於定義「訪問」和「遍歷」集合元素的介面。迭代器通常包含方法如 next()（返回下一個元素）、hasNext()（檢查是否還有下一個元素）等。【具體迭代器】（Concrete Iterator）：具體迭代器實現了【迭代器】的接口，並提供了對具體集合的元素遍歷實現。不同的集合可能需要不同的具體迭代器。【集合】（Collection）： 定義了管理元素的方法，如添加、刪除元素&hellip;等。可以是列表、數組、樹&hellip;等。【具體集合】（Concrete Collection）：實現了【集合】的接口，提供了實際的元素管理方式。不同的具體集合可能有不同的存儲結構。通過使用迭代器模式，客戶端的程式可以僅通過【迭代器】來訪問集合的元素，而無需關心程式的底層細節。這樣可以使程式更具可讀性、可維護性，並且支持在不改變客戶端程式的情況下更改集合的實現方式。
-維基百科：在物件導向程式設計中，「迭代器模式」是一種設計模式，其中使用【迭代器】來遍歷容器，並訪問容器的逐個元素。迭代器模式嘗試將「遍歷的演算法」與「容器」解耦；「迭代器模式能解決哪些問題？」該模式可以讓聚合物件（列表、數組&hellip;等）的元素，在不暴露其表示資料結構的情況下，進行訪問和遍歷。同時也可以為聚合物件定義新的遍歷操作，而不改變其介面。在一般情況下，直接再聚合介面中定義「訪問」和「遍歷」操作是不靈活的，因為這樣的程式撰寫方式會使得聚合受限於特定的訪問和遍歷操作，且無法在不更改聚合介面的前提下添加新操作。「迭代器模式如何解決此問題方案？」迭代器模式會定義一個獨立的【迭代器】物件，並封裝「訪問」和「遍歷」的方法，讓聚合物件各自繼承並實例。客戶端使用可以直接使用【迭代器】來訪問方法和遍歷方法來檢視聚合物件，而不需要了解其物件內真實的資料結構。不同的迭代器可以以不同的方式訪問和遍歷聚合。可以通過定義新的迭代器來獨立地定義新的訪問和遍歷操作。
-特點 分離「集合」本身的資料結構與「迭代」的程式邏輯 可以隱藏集合的資料結構，使客戶端不須依賴特定的程式操作 提供統一的遍歷程式，提高程式的可重用性 UML Graphic classDiagramclass Iterator {bool hasNext();void next();}Iterator &lt;|-- CharacterTeamIteratorIterator &lt;|-- MonsterTeamIteratorclass CharacterTeam {Iterator* iteratorCharacter teammate[]}class MonsterTeam {Iterator* iteratorMonsterNode head}CharacterTeam &lt;|-- Characterclass MonsterNode {Monster* monsterMonsterNode* next}MonsterTeam --&gt; MonsterNodeMonsterNode --&gt; Monster#內文 迭代器模式是個相對簡單的設計模式。該模式的用途是「讓所有不同的容器，都可以有一個統一的『遍歷』方法。」通常來說，一個迭代器模式裡面總共會包含著四種類別：【迭代器介面】【具體迭代器】【集合介面】和【具體集合】。讓我們用一個 RPG 遊戲來做舉例：假設再一個 RPG 的戰鬥中，總共分為「主角方」和「怪物方」兩方的陣容。在程式的撰寫上分別由工程師 A 和工程師 B 進行工作。工程師 A 在主角（Character）的地方，新增了一個 CharacterTeam 的類別，用以紀錄主角的隊伍成員，以及它們各自的資訊；工程師 B 則同樣使用了類似的做法，在怪物方（Monster）新增了一個 MonsterTeam 類別，同樣也是記錄怪物的編隊與各自的訊息，如下述的程式所示：" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/iterator_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>迭代器模式（Iterator Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -305,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -847,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -876,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -892,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -905,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -918,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -931,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -944,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -962,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -978,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -991,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1004,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 
@@ -1129,7 +1241,7 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li><strong>UML Graphic</strong></li>
 </ul>
-<h2 id="hahahugoshortcode62s0hbhb">
+<h2 id="hahahugoshortcode66s0hbhb">
   
 
 <script type="module">
@@ -1178,7 +1290,7 @@ classDiagram
     MonsterNode --> Monster
 </p>
 
-  <a class="anchor" href="#hahahugoshortcode62s0hbhb">#</a>
+  <a class="anchor" href="#hahahugoshortcode66s0hbhb">#</a>
 </h2>
 <ul>
 <li><strong>內文</strong></li>

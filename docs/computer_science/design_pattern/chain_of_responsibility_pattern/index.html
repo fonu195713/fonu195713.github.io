@@ -1,32 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="責任鏈模式（Chain of Responsibility Pattern）#說明 ChatGPT：責任鏈模式（Chain of Responsibility Pattern）是一種行為型設計模式，它允許多個物件依序處理請求，這些物件會被連成一條「鏈」（chain），每個物件都有可能處理請求，如果某個物件無法處理，則將請求傳遞給下一個物件來處理，直到有物件處理成功或者整個鏈都無法處理為止，責任鏈模式允許程式在運行時不確定哪個物件將處理這個請求。在責任鏈模式中，通常每個處理器（Handler）都會有一個指向下一個處理器的指標，從而形成了一條鏈。當一個請求進入這個鏈時，從第一個處理器開始依序檢查是否可以處理該請求？如果可以，則處理器會進行處理，但如果不行，則傳遞給下一個處理器，依此類推&hellip;，直到找到能夠處理請求的處理器，或者整個鏈都無法處理為止。責任鏈模式可以將請求的發送者和接收者解耦，讓不同的處理器對請求進行獨立的處理，增加了系統的靈活性和可擴展性。同時也支持在運行時動態地組織「鏈」，方便新增或者移除處理器。責任鏈模式的主要角色有：處理器（Handler）：定義一個處理請求的接口，並且持有下一個處理器的指標，以便將請求傳遞給下一個處理器。具體處理器（Concrete Handler）：具體處理器會實現具體的【處理器】接口，並且能夠處理特定類型的請求，如果無法處理則將請求傳遞給下一個【具體處理器】。請求（Request）：定義需要處理的請求。在責任鏈模式中，【請求】將依序經過每個具體處理器，直到找到能夠處理的具體處理器為止。責任鏈模式可以達到動態組織處理器的目的，也提高了系統的靈活性和可維護性。
-維基百科：在物件導向程式設計中，責任鏈模式（Chain of Responsibility Pattern）是一種行為型設計模式，該模式由【命令對象】和一系列的【處理對象】所組成。每個【處理對象】都包含（與定義）它可以處理的命令類型；如果【命令】無法被該【處理對象】執行，【命令】則會被傳遞到責任鏈中的下一個【處理對象】。此外，該模式也存在一種「將新的【處理對象】添加到該鏈末尾」的機制或方法，可以對鏈做一些刪除或擴展。此外，對於責任鏈模型的變體中，一些處理程序可以充當調度程序，向多個方向發送命令，形成一顆責任樹。在某些狀況下，這可能會產生遞歸的情況：【處理對象】使用【命令】調用更高層的【處理對象】，試圖解決問題的較小部分這種模式提倡鬆散耦合的思想。責任鏈模式（Chain of Responsibility Pattern）在結構上與裝飾器模式（Decorator Pattern）幾乎相同，不同之處在於：對於裝飾器來說，所有的類別都會處理請求；可對於責任鏈來說，只有鏈中的一個類別（也就是【處理對象】）會處理請求。
-特點 aaa UML Graphic classDiagramclass Quest {void execute();}Quest &lt;|-- HuntingQuestQuest &lt;|-- GatheringQuestQuest &lt;|-- DungeonQuestclassDiagramclass Handler {Handler* next;void setNext(Handler* handeler);}Handler &lt;|-- MondayHandlerHandler &lt;|-- TuesdayHandlerHandler &lt;|-- WednesdayHandler內文 『責任鏈模式』可以用來解決客戶端「類別依賴」的問題。在一個普通的責任鏈模式中，總共會有是處理器（Handler）與客戶端（Client）兩種不同的角色，如果用 RPG 遊戲來做舉例的話，我們假設【玩家】可以依照不同的「星期」來進行不同的【活動任務】，分別是星期一的【魔物狩獵】（HuntingQuest）、星期二的【藥材採集】（GatheringQuest）、星期三的【地下城探險】（DungeonQuest）、星期四的【跑腿送信】（CourierQuest）、與星期五的【地下城探險】（DungeonQuest）&hellip;，在不使用『責任鏈模式』的狀況下，程式可能會撰寫成以下的樣子：
-class DailyQuest { public: virtual void execute() = 0; }; class HuntingQuest : public DailyQuest { public: void execute() override { // Monster hunting .">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="責任鏈模式（Chain of Responsibility Pattern）" />
-<meta property="og:description" content="責任鏈模式（Chain of Responsibility Pattern）#說明 ChatGPT：責任鏈模式（Chain of Responsibility Pattern）是一種行為型設計模式，它允許多個物件依序處理請求，這些物件會被連成一條「鏈」（chain），每個物件都有可能處理請求，如果某個物件無法處理，則將請求傳遞給下一個物件來處理，直到有物件處理成功或者整個鏈都無法處理為止，責任鏈模式允許程式在運行時不確定哪個物件將處理這個請求。在責任鏈模式中，通常每個處理器（Handler）都會有一個指向下一個處理器的指標，從而形成了一條鏈。當一個請求進入這個鏈時，從第一個處理器開始依序檢查是否可以處理該請求？如果可以，則處理器會進行處理，但如果不行，則傳遞給下一個處理器，依此類推&hellip;，直到找到能夠處理請求的處理器，或者整個鏈都無法處理為止。責任鏈模式可以將請求的發送者和接收者解耦，讓不同的處理器對請求進行獨立的處理，增加了系統的靈活性和可擴展性。同時也支持在運行時動態地組織「鏈」，方便新增或者移除處理器。責任鏈模式的主要角色有：處理器（Handler）：定義一個處理請求的接口，並且持有下一個處理器的指標，以便將請求傳遞給下一個處理器。具體處理器（Concrete Handler）：具體處理器會實現具體的【處理器】接口，並且能夠處理特定類型的請求，如果無法處理則將請求傳遞給下一個【具體處理器】。請求（Request）：定義需要處理的請求。在責任鏈模式中，【請求】將依序經過每個具體處理器，直到找到能夠處理的具體處理器為止。責任鏈模式可以達到動態組織處理器的目的，也提高了系統的靈活性和可維護性。
-維基百科：在物件導向程式設計中，責任鏈模式（Chain of Responsibility Pattern）是一種行為型設計模式，該模式由【命令對象】和一系列的【處理對象】所組成。每個【處理對象】都包含（與定義）它可以處理的命令類型；如果【命令】無法被該【處理對象】執行，【命令】則會被傳遞到責任鏈中的下一個【處理對象】。此外，該模式也存在一種「將新的【處理對象】添加到該鏈末尾」的機制或方法，可以對鏈做一些刪除或擴展。此外，對於責任鏈模型的變體中，一些處理程序可以充當調度程序，向多個方向發送命令，形成一顆責任樹。在某些狀況下，這可能會產生遞歸的情況：【處理對象】使用【命令】調用更高層的【處理對象】，試圖解決問題的較小部分這種模式提倡鬆散耦合的思想。責任鏈模式（Chain of Responsibility Pattern）在結構上與裝飾器模式（Decorator Pattern）幾乎相同，不同之處在於：對於裝飾器來說，所有的類別都會處理請求；可對於責任鏈來說，只有鏈中的一個類別（也就是【處理對象】）會處理請求。
-特點 aaa UML Graphic classDiagramclass Quest {void execute();}Quest &lt;|-- HuntingQuestQuest &lt;|-- GatheringQuestQuest &lt;|-- DungeonQuestclassDiagramclass Handler {Handler* next;void setNext(Handler* handeler);}Handler &lt;|-- MondayHandlerHandler &lt;|-- TuesdayHandlerHandler &lt;|-- WednesdayHandler內文 『責任鏈模式』可以用來解決客戶端「類別依賴」的問題。在一個普通的責任鏈模式中，總共會有是處理器（Handler）與客戶端（Client）兩種不同的角色，如果用 RPG 遊戲來做舉例的話，我們假設【玩家】可以依照不同的「星期」來進行不同的【活動任務】，分別是星期一的【魔物狩獵】（HuntingQuest）、星期二的【藥材採集】（GatheringQuest）、星期三的【地下城探險】（DungeonQuest）、星期四的【跑腿送信】（CourierQuest）、與星期五的【地下城探險】（DungeonQuest）&hellip;，在不使用『責任鏈模式』的狀況下，程式可能會撰寫成以下的樣子：
-class DailyQuest { public: virtual void execute() = 0; }; class HuntingQuest : public DailyQuest { public: void execute() override { // Monster hunting ." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/chain_of_responsibility_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>責任鏈模式（Chain of Responsibility Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -307,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -849,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -878,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -894,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -907,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -920,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -933,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -946,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -964,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -980,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -993,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1006,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

@@ -1,32 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="單一職責原則（Single Responsibility Principle）#ChatGPT 的說明 單一職責原則（Single Responsibility Principle，簡稱 SRP）是物件導向程式設計中的一個基本原則，它強調「每個類別（或方法）應該都只有一個職責」，意即「只有『一個』理由可以導致該類別或方法產生」。換句話說，一個類別或方法應該只具有一個主要的功能或職責，而不應該承擔過多的功能。這有助於使程式更容易理解、更容易維護和更容易擴展。SRP 的核心思想是「將不同的功能隔離到不同的位置」，從而實現高內聚（High Cohesion）和低耦合（Low Coupling）。這樣做可以使程式更加模組化，且當需求發生變化時，只需要負責該變化的部分，而不會影響到其他的程式與功能。
-違反 SRP 可能導致以下問題：首先是「複雜性增加」： 當一個類別承擔太多的職責時，會導致該類別的程式變得複雜、難以理解、和不易維護。再來，程式的「耦合程度也會變高」：將不同職責的程式混合在一起，會導致類別與類別的依賴加重，進而增加程式的耦合程度，這將使得當類別需要發生改變時，可能會連帶需要修改到其餘的類別，使影響範圍擴大。同時，違反單一職責也會使「程式的重用性下降」：與遵守單一職責的類別相比，具有當類別具有多重職責時，通常難以重用，因為其功能過於特定。此外，也可能發生多了類別具有相同或近似功能的重複性程式。最後，違反 SPR 的程式也會「增加程式變更的風險」： 當一個職責的變化，需要修改類別中的多個部分時，容易會發生撰寫的錯誤，進而引發程式的崩潰，此外也需要考慮是否存在「其他類別也擁有相同功能，因此需要一並修改」的可能性。簡而言之，單一職責原則有助於保持程式的清晰、可維護性和可擴展性，通過確保一個類別只有一個主要職責，可以使系統遍的更加靈活和易於改變。
-以下我們使用一個簡單的情境來解釋單一職責原則，我們假設在一個 RPG 遊戲中，角色可能會有「回復」「受到攻擊」與「升級」三種可能會發生的變化，如果我們使用 SRP 的程式原則，我們就會將這三種變化區別書寫成 takeDamage(), heal(), 和 levelUp() 三種方法。但如果不使用 SRP 的撰寫原則，程式就會全部擠在 update() 裡面，使得程式變得繁冗與複雜：
-// Adhering to SRP (Single Responsibility Principle) // Adhering to SRP (Single Responsibility Principle) // Adhering to SRP (Single Responsibility Principle) class Character { private: string name; int health; int level; public: Character(string name) : name(name), health(100), level(1) {} public: void takeDamage(int amount) { health -= amount; cout &lt;&lt; name &lt;&lt; &#34; takes &#34; &lt;&lt; amount &lt;&lt; &#34; damage.">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="單一職責原則（Single Responsibility Principle）" />
-<meta property="og:description" content="單一職責原則（Single Responsibility Principle）#ChatGPT 的說明 單一職責原則（Single Responsibility Principle，簡稱 SRP）是物件導向程式設計中的一個基本原則，它強調「每個類別（或方法）應該都只有一個職責」，意即「只有『一個』理由可以導致該類別或方法產生」。換句話說，一個類別或方法應該只具有一個主要的功能或職責，而不應該承擔過多的功能。這有助於使程式更容易理解、更容易維護和更容易擴展。SRP 的核心思想是「將不同的功能隔離到不同的位置」，從而實現高內聚（High Cohesion）和低耦合（Low Coupling）。這樣做可以使程式更加模組化，且當需求發生變化時，只需要負責該變化的部分，而不會影響到其他的程式與功能。
-違反 SRP 可能導致以下問題：首先是「複雜性增加」： 當一個類別承擔太多的職責時，會導致該類別的程式變得複雜、難以理解、和不易維護。再來，程式的「耦合程度也會變高」：將不同職責的程式混合在一起，會導致類別與類別的依賴加重，進而增加程式的耦合程度，這將使得當類別需要發生改變時，可能會連帶需要修改到其餘的類別，使影響範圍擴大。同時，違反單一職責也會使「程式的重用性下降」：與遵守單一職責的類別相比，具有當類別具有多重職責時，通常難以重用，因為其功能過於特定。此外，也可能發生多了類別具有相同或近似功能的重複性程式。最後，違反 SPR 的程式也會「增加程式變更的風險」： 當一個職責的變化，需要修改類別中的多個部分時，容易會發生撰寫的錯誤，進而引發程式的崩潰，此外也需要考慮是否存在「其他類別也擁有相同功能，因此需要一並修改」的可能性。簡而言之，單一職責原則有助於保持程式的清晰、可維護性和可擴展性，通過確保一個類別只有一個主要職責，可以使系統遍的更加靈活和易於改變。
-以下我們使用一個簡單的情境來解釋單一職責原則，我們假設在一個 RPG 遊戲中，角色可能會有「回復」「受到攻擊」與「升級」三種可能會發生的變化，如果我們使用 SRP 的程式原則，我們就會將這三種變化區別書寫成 takeDamage(), heal(), 和 levelUp() 三種方法。但如果不使用 SRP 的撰寫原則，程式就會全部擠在 update() 裡面，使得程式變得繁冗與複雜：
-// Adhering to SRP (Single Responsibility Principle) // Adhering to SRP (Single Responsibility Principle) // Adhering to SRP (Single Responsibility Principle) class Character { private: string name; int health; int level; public: Character(string name) : name(name), health(100), level(1) {} public: void takeDamage(int amount) { health -= amount; cout &lt;&lt; name &lt;&lt; &#34; takes &#34; &lt;&lt; amount &lt;&lt; &#34; damage." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/single_responsibility_principle/" /><meta property="article:section" content="docs" />
 
 
-<title>單一職責原則（Single Responsibility Principle） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -307,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -849,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -878,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -894,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -907,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -920,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -933,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -946,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -964,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -980,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -993,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1006,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

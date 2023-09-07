@@ -1,40 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="開放封閉原則（Open Closed Principle）#ChatGPT 的說明 開放封閉原則（Open Closed Principle，簡稱 OCP）是物件導向程式設計中的一個重要原則，由著名的軟體工程師 Bertrand Meyer 在其著作《[物件、函數和C&#43;&#43;]》中首次提出。該原則強調軟體實體（像是類別、模組、函數方法&hellip;等）應該對擴展開放，對修改封閉。換句話說，程式應該可以在「不修改現有程式」的情況下，擴展其系統的功能，同時程式也應防止在改變功能時，對現有的程式進行修改。
-開放封閉原則的核心思想是：當系統需要引入新的功能或變化時，不應該修改已存在的程式，而是通過擴展（例如增添新的類別、新的方法&hellip;等）來實現。這樣可以保證原有代碼的穩定性，同時在不影響現有功能的基礎上進行擴展。要遵守開放封閉原則，通常可以採取以下策略：【使用抽象類別或抽象接口】：通過使用抽象類別或抽象接口，我們可以建立起一個（或一些）泛用的方法和屬性，並在子別類中實現這些方法的具體功能。這樣，當系統需要擴展功能時，只需添加新的子類別即可完成功能，而不需要修改現有的程式。
-此外【使用多態性（polymorphism）】也可以使程式遵循開放封閉原則：通過使用 polymorphism 的程式，我們可以讓程式在運行時，根據具體的對象類別，調用不同的方法。這樣，即使新增了新的功能，只需創建新的對象與新的多態方法即可完成功能，而不需要修改原有的程式和邏輯。此外，【使用策略模式等設計模式】也可以有效地達成開放封閉原則。一些設計模式（例如策略模式）可以幫助我們實現開放封閉原則。這些模式將不同的行為封裝成獨立的策略類，並通過替換不同的策略類來實現功能的擴展。
-另外，如果不遵守「開放封閉原則」，可能會導致程式產生以下的問題：首先是【程式的修改風險增加】，當系統需要引入新的功能或新的變化時，如果原程式不遵守開放封閉原則，可能會產生「添增新的功能外，同時也需要修改既存的程式，才能完成功能升級」的情況，這可能導致現有的程式功能產生錯誤或影響。可能引入新的錯誤、增加更多的複雜度、提高耦合&hellip;等，增加了整個系統的風險。
-此外，沒有遵守「開放封閉原則」的程式也可能會有【測試困難】的狀況發生：修改現有的程式，可能會需要重新測試整個系統，在這樣的情況下，因為程式的高度改變，可能會導致測試的困難、測試覆蓋率降低&hellip;等負面影響。測試新的功能可能影響到現有的測試案例，也因此增加了測試的複雜性。此外，違反原則的程式也會使得「程式的耦合增加」：不遵守開放封閉原則的程式，可能會導致不同的功能、不同的方法、或不同的類別之間出現耦合，一旦其中一個功能發生變動，可能會連帶影響到其他功能（或類別）的正常運作。
-同時，不遵守開放封閉原則也可能導致【程式的複雜性增加】【可擴展性下降】【程式的重用性下降】&hellip;等問題。因此建議程式在撰寫的時候，要遵守開放封閉原則規範，才能有助於降低這些問題的風險，保持程式的靈活性和可維護性。
-以下我們使用一個簡單的情境來解釋單一職責原則，我們假設在一個 RPG 遊戲中，角色（Character）可以使出「火球術 fireBallSkill」「冰錐術 iceShardSkill」和「治癒術 healSkill」三種不同的攻擊，在遵循 OCP（開放封閉原則）的情況下，角色在進行技能的選擇與擴充的時候，並不會影響到原 Character 的程式，只需要增添新的 Skill 即可，但在不遵守 OCP 的情況下，若有需要做【技能】的擴充與修改，則會連帶影響到【角色】原本的程式內容：
-// Adhering to OCP (Open Closed Principle) // Adhering to OCP (Open Closed Principle) // Adhering to OCP (Open Closed Principle) class Skill { public: virtual void use() = 0; }; class FireballSkill : public Skill { public: void use() override { cout &lt;&lt; &#34;Casting Fireball!">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="開放封閉原則（Open Closed Principle）" />
-<meta property="og:description" content="開放封閉原則（Open Closed Principle）#ChatGPT 的說明 開放封閉原則（Open Closed Principle，簡稱 OCP）是物件導向程式設計中的一個重要原則，由著名的軟體工程師 Bertrand Meyer 在其著作《[物件、函數和C&#43;&#43;]》中首次提出。該原則強調軟體實體（像是類別、模組、函數方法&hellip;等）應該對擴展開放，對修改封閉。換句話說，程式應該可以在「不修改現有程式」的情況下，擴展其系統的功能，同時程式也應防止在改變功能時，對現有的程式進行修改。
-開放封閉原則的核心思想是：當系統需要引入新的功能或變化時，不應該修改已存在的程式，而是通過擴展（例如增添新的類別、新的方法&hellip;等）來實現。這樣可以保證原有代碼的穩定性，同時在不影響現有功能的基礎上進行擴展。要遵守開放封閉原則，通常可以採取以下策略：【使用抽象類別或抽象接口】：通過使用抽象類別或抽象接口，我們可以建立起一個（或一些）泛用的方法和屬性，並在子別類中實現這些方法的具體功能。這樣，當系統需要擴展功能時，只需添加新的子類別即可完成功能，而不需要修改現有的程式。
-此外【使用多態性（polymorphism）】也可以使程式遵循開放封閉原則：通過使用 polymorphism 的程式，我們可以讓程式在運行時，根據具體的對象類別，調用不同的方法。這樣，即使新增了新的功能，只需創建新的對象與新的多態方法即可完成功能，而不需要修改原有的程式和邏輯。此外，【使用策略模式等設計模式】也可以有效地達成開放封閉原則。一些設計模式（例如策略模式）可以幫助我們實現開放封閉原則。這些模式將不同的行為封裝成獨立的策略類，並通過替換不同的策略類來實現功能的擴展。
-另外，如果不遵守「開放封閉原則」，可能會導致程式產生以下的問題：首先是【程式的修改風險增加】，當系統需要引入新的功能或新的變化時，如果原程式不遵守開放封閉原則，可能會產生「添增新的功能外，同時也需要修改既存的程式，才能完成功能升級」的情況，這可能導致現有的程式功能產生錯誤或影響。可能引入新的錯誤、增加更多的複雜度、提高耦合&hellip;等，增加了整個系統的風險。
-此外，沒有遵守「開放封閉原則」的程式也可能會有【測試困難】的狀況發生：修改現有的程式，可能會需要重新測試整個系統，在這樣的情況下，因為程式的高度改變，可能會導致測試的困難、測試覆蓋率降低&hellip;等負面影響。測試新的功能可能影響到現有的測試案例，也因此增加了測試的複雜性。此外，違反原則的程式也會使得「程式的耦合增加」：不遵守開放封閉原則的程式，可能會導致不同的功能、不同的方法、或不同的類別之間出現耦合，一旦其中一個功能發生變動，可能會連帶影響到其他功能（或類別）的正常運作。
-同時，不遵守開放封閉原則也可能導致【程式的複雜性增加】【可擴展性下降】【程式的重用性下降】&hellip;等問題。因此建議程式在撰寫的時候，要遵守開放封閉原則規範，才能有助於降低這些問題的風險，保持程式的靈活性和可維護性。
-以下我們使用一個簡單的情境來解釋單一職責原則，我們假設在一個 RPG 遊戲中，角色（Character）可以使出「火球術 fireBallSkill」「冰錐術 iceShardSkill」和「治癒術 healSkill」三種不同的攻擊，在遵循 OCP（開放封閉原則）的情況下，角色在進行技能的選擇與擴充的時候，並不會影響到原 Character 的程式，只需要增添新的 Skill 即可，但在不遵守 OCP 的情況下，若有需要做【技能】的擴充與修改，則會連帶影響到【角色】原本的程式內容：
-// Adhering to OCP (Open Closed Principle) // Adhering to OCP (Open Closed Principle) // Adhering to OCP (Open Closed Principle) class Skill { public: virtual void use() = 0; }; class FireballSkill : public Skill { public: void use() override { cout &lt;&lt; &#34;Casting Fireball!" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/open_closed_principle/" /><meta property="article:section" content="docs" />
 
 
-<title>開放封閉原則（Open Closed Principle） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -315,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -857,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -886,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -902,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -915,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -928,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -941,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -954,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -972,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -988,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -1001,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1014,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 

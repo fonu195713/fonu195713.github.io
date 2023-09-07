@@ -1,32 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
+  
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="解釋器模式（Interpreter Pattern）#說明 ChatGPT：解釋器模式（Interpreter Pattern）是一種行為型設計模式，它主要用於「定義一種語言文法的表示」，並提供一個【解釋器】來解釋這種語言中的句子。該模式通常用於解決特定領域中的問題，例如解釋語言、數學表達式或查詢語句等。解釋器模式的主要組件包括：抽象表達式（Abstract Expression）、終端表達式（Terminal Expression）、非終端表達式（Non-terminal Expression）、上下文（Context）、和解釋器（Interpreter）。【抽象表達式】會定義一個抽象的介面，包含一個 interpret() 方法，這個方法會根據特定語言文法進行解釋。【終端表達式】實現了抽象表達式的 interpret() 方法，代表該語言中的終端符號，不能再分解成更小的元素。【非終端表達式】也同樣會實現【抽象表達式】的 interpret() 方法，用於組合多個終端表達式，形成複雜的語句。【上下文】包含要解釋的語句，通常由解釋器進行操作。【解釋器】則會根據語言文法對表達式進行解釋。 解釋器模式的工作流程如下：首先我們需要定義「語言文法」，並將其分解成【終端表達式】和【非終端表達式】。接下來，我們會創建對應的【表達式】類別，實現 interpret() 方法，根據語言文法進行解釋。然後，會構建一個語句的抽象語法樹（AST - Abstract Syntax Tree），將表達式組合成複雜的語句。再創建上下文，傳遞要解釋的語句。最後創建解釋器，根據語句的 AST 對其進行解釋，生成結果。
-維基百科：在物件導向程式設計中，「解譯器模式」是一種行為型設計模式，用於指定「如何評估一種『語言』中的句子」。基本思想是為專門的電腦語言中的每個符號建立一個（或一些）類別，其中包含【終端類別】與【非終端類別】。該語言中，「句子」的語法樹是組合模式的實例，用於為客戶端「解釋」該句子。解譯器設計模式是 23 種著名的 GoF 設計模式之一，GoF 設計模式描述了如何解決反復出現的設計問題，以設計靈活且可重用的物件導向程式，即更容易實施、更容易變更、更容易測試和重用的對象。「解譯器設計模式可以解決哪些問題？」解釋器模式透過定義一種簡單語言的語法，讓程式可以簡單地「解釋」該語法中的不同語句。當某種問題經常一類似的結構發生時，我們可以考慮將其表示為一種新的、簡單的語言中的句子，以便【解譯器】可以通過解釋該語句來解決問題。例如：當需要指定許多不同或複雜的搜索表達式時。將它們直接硬編寫到類別中是不靈活的，因為它會使類別受限於特定的表達式，並且無法獨立於類別之外的新的表達式或更改現有的表達式。因此在這樣的情況下，透過新增一個【解釋器】，並將語句定義為各種【終端語句】與【非終端語句】會更為靈活與彈性。
-特點 可以通過「語言解釋」將複雜的語句轉變為一系列的程式邏輯 可以解耦【語法】和【程式執行】，使其更為彈性 可以自由組合不同的語句，形成各種多樣語靈活的表示方法 UML Graphic classDiagramclass Character {void spellcast()}class Expression~Interface~ {interpret();}Expression &lt;|-- FixedExpressionExpression &lt;|-- GodExpressionExpression &lt;|-- StateExpression#內文 從體感上來看，個人認為解釋器模式是 23 種常見的設計模式裡最難讓人搞懂得一個模式。有學過「編譯器」這門課的人對於解釋器在做的工作應該會比較能夠有感：整體而言，解釋器模式的工作就是在「拆分」與「分析」一段句子是否符合邏輯？和他想要表達什麼樣的意思。讓我們用一個 RPG 遊戲來舉例：假設在一個 RPG 遊戲中，我們打算實踐一個「咒文詠唱系統」。其功能是讓玩家（一個法師）在進行戰鬥的時候，可以透過『輸入一串咒文』來達成「強力施法」這件事情。並且在這樣的情況下，我們定義了一個「傷害反彈」的詠唱詞：「誠惶誠恐呼喚日不見神，先祖之產土神。領受已久之山河，誠惶誠恐，僅此奉還於。(註１)」如果成功在某一特定的秒數內詠唱該詞句，便可以增加玩家的防禦力。在不使用「解釋器模式」的狀況下：可能會撰寫出類似下面的程式：
-class Character { public: string name; int defense; public: Player(string name) : name(name) : defense(20) {} void spellCasting(string prayer) { if (prayer == &#34;誠惶誠恐呼喚日不見神，先祖之產土神。領受已久之山河，誠惶誠恐，僅此奉還於爾&#34;) { defense &#43;= 10; cout &lt;&lt; &#34;defense &#43;= 10&#34; &lt;&lt; endl; } else { cout &lt;&lt; &#34;.">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="解釋器模式（Interpreter Pattern）" />
-<meta property="og:description" content="解釋器模式（Interpreter Pattern）#說明 ChatGPT：解釋器模式（Interpreter Pattern）是一種行為型設計模式，它主要用於「定義一種語言文法的表示」，並提供一個【解釋器】來解釋這種語言中的句子。該模式通常用於解決特定領域中的問題，例如解釋語言、數學表達式或查詢語句等。解釋器模式的主要組件包括：抽象表達式（Abstract Expression）、終端表達式（Terminal Expression）、非終端表達式（Non-terminal Expression）、上下文（Context）、和解釋器（Interpreter）。【抽象表達式】會定義一個抽象的介面，包含一個 interpret() 方法，這個方法會根據特定語言文法進行解釋。【終端表達式】實現了抽象表達式的 interpret() 方法，代表該語言中的終端符號，不能再分解成更小的元素。【非終端表達式】也同樣會實現【抽象表達式】的 interpret() 方法，用於組合多個終端表達式，形成複雜的語句。【上下文】包含要解釋的語句，通常由解釋器進行操作。【解釋器】則會根據語言文法對表達式進行解釋。 解釋器模式的工作流程如下：首先我們需要定義「語言文法」，並將其分解成【終端表達式】和【非終端表達式】。接下來，我們會創建對應的【表達式】類別，實現 interpret() 方法，根據語言文法進行解釋。然後，會構建一個語句的抽象語法樹（AST - Abstract Syntax Tree），將表達式組合成複雜的語句。再創建上下文，傳遞要解釋的語句。最後創建解釋器，根據語句的 AST 對其進行解釋，生成結果。
-維基百科：在物件導向程式設計中，「解譯器模式」是一種行為型設計模式，用於指定「如何評估一種『語言』中的句子」。基本思想是為專門的電腦語言中的每個符號建立一個（或一些）類別，其中包含【終端類別】與【非終端類別】。該語言中，「句子」的語法樹是組合模式的實例，用於為客戶端「解釋」該句子。解譯器設計模式是 23 種著名的 GoF 設計模式之一，GoF 設計模式描述了如何解決反復出現的設計問題，以設計靈活且可重用的物件導向程式，即更容易實施、更容易變更、更容易測試和重用的對象。「解譯器設計模式可以解決哪些問題？」解釋器模式透過定義一種簡單語言的語法，讓程式可以簡單地「解釋」該語法中的不同語句。當某種問題經常一類似的結構發生時，我們可以考慮將其表示為一種新的、簡單的語言中的句子，以便【解譯器】可以通過解釋該語句來解決問題。例如：當需要指定許多不同或複雜的搜索表達式時。將它們直接硬編寫到類別中是不靈活的，因為它會使類別受限於特定的表達式，並且無法獨立於類別之外的新的表達式或更改現有的表達式。因此在這樣的情況下，透過新增一個【解釋器】，並將語句定義為各種【終端語句】與【非終端語句】會更為靈活與彈性。
-特點 可以通過「語言解釋」將複雜的語句轉變為一系列的程式邏輯 可以解耦【語法】和【程式執行】，使其更為彈性 可以自由組合不同的語句，形成各種多樣語靈活的表示方法 UML Graphic classDiagramclass Character {void spellcast()}class Expression~Interface~ {interpret();}Expression &lt;|-- FixedExpressionExpression &lt;|-- GodExpressionExpression &lt;|-- StateExpression#內文 從體感上來看，個人認為解釋器模式是 23 種常見的設計模式裡最難讓人搞懂得一個模式。有學過「編譯器」這門課的人對於解釋器在做的工作應該會比較能夠有感：整體而言，解釋器模式的工作就是在「拆分」與「分析」一段句子是否符合邏輯？和他想要表達什麼樣的意思。讓我們用一個 RPG 遊戲來舉例：假設在一個 RPG 遊戲中，我們打算實踐一個「咒文詠唱系統」。其功能是讓玩家（一個法師）在進行戰鬥的時候，可以透過『輸入一串咒文』來達成「強力施法」這件事情。並且在這樣的情況下，我們定義了一個「傷害反彈」的詠唱詞：「誠惶誠恐呼喚日不見神，先祖之產土神。領受已久之山河，誠惶誠恐，僅此奉還於。(註１)」如果成功在某一特定的秒數內詠唱該詞句，便可以增加玩家的防禦力。在不使用「解釋器模式」的狀況下：可能會撰寫出類似下面的程式：
-class Character { public: string name; int defense; public: Player(string name) : name(name) : defense(20) {} void spellCasting(string prayer) { if (prayer == &#34;誠惶誠恐呼喚日不見神，先祖之產土神。領受已久之山河，誠惶誠恐，僅此奉還於爾&#34;) { defense &#43;= 10; cout &lt;&lt; &#34;defense &#43;= 10&#34; &lt;&lt; endl; } else { cout &lt;&lt; &#34;." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fonu195713.github.io/docs/computer_science/design_pattern/interpreter_pattern/" /><meta property="article:section" content="docs" />
 
 
-<title>解釋器模式（Interpreter Pattern） | Fonu Site</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
-  <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.a75be86e3885ea00b702c989884decdbdd8592d99baa52527bcd31e47440aecc.js" integrity="sha256-p1vobjiF6gC3AsmJiE3s292FktmbqlJSe80x5HRArsw=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
+
+
+
+
+
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
@@ -307,6 +294,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
+    <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
+      <a href="/docs/computer_science/java/" class="">Java 相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/java/job_interview_questions/" class="">JAVA 相關的面試題</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -849,22 +870,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/note/" class="">［置頂］0 號手稿的筆記</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-60d4ebcd6c164d340b1d7189c38a8df4" class="toggle"  />
-    <label for="section-60d4ebcd6c164d340b1d7189c38a8df4" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/" class="">套牢仔的新連載</a>
+    <input type="checkbox" id="section-879f5799590c093ff52304e8f33512ff" class="toggle"  />
+    <label for="section-879f5799590c093ff52304e8f33512ff" class="flex justify-between">
+      <a role="button" class="">創作區</a>
     </label>
   
 
@@ -878,8 +886,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-cb235bd036abdb9662e3601dcf76f3e0" class="toggle"  />
-    <label for="section-cb235bd036abdb9662e3601dcf76f3e0" class="flex justify-between">
+    <input type="checkbox" id="section-8617da275bbe10f5283d9269f2d0fc8b" class="toggle"  />
+    <label for="section-8617da275bbe10f5283d9269f2d0fc8b" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/" class="">套牢仔的新連載</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9712863e3d359500a5a62e1824c280c5" class="toggle"  />
+    <label for="section-9712863e3d359500a5a62e1824c280c5" class="flex justify-between">
       <a role="button" class="">第 01 章</a>
     </label>
   
@@ -894,7 +918,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/01/" class="">不速之客的打擾 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/01/" class="">不速之客的打擾 - 1</a>
   
 
         </li>
@@ -907,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/02/" class="">不速之客的打擾 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/02/" class="">不速之客的打擾 - 2</a>
   
 
         </li>
@@ -920,7 +944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/03/" class="">白髮精靈 - 1</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/03/" class="">白髮精靈 - 1</a>
   
 
         </li>
@@ -933,7 +957,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/04/" class="">白髮精靈 - 2</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/04/" class="">白髮精靈 - 2</a>
   
 
         </li>
@@ -946,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/ch01/05/" class="">白髮精靈 - 3</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/ch01/05/" class="">白髮精靈 - 3</a>
   
 
         </li>
@@ -964,9 +988,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3c2cdaded05b3242a7bd0b086945efa1" class="toggle"  />
-    <label for="section-3c2cdaded05b3242a7bd0b086945efa1" class="flex justify-between">
-      <a role="button" class="">劇透區</a>
+    <input type="checkbox" id="section-86e88ce07ac14251fa09cf0be2eb89df" class="toggle"  />
+    <label for="section-86e88ce07ac14251fa09cf0be2eb89df" class="flex justify-between">
+      <a role="button" class="">設定、劇透、相關筆記</a>
     </label>
   
 
@@ -980,7 +1004,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/worldview/" class="">（據透）小說世界觀</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/worldview/" class="">（據透）小說世界觀</a>
   
 
         </li>
@@ -993,7 +1017,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/creative_writing/novel/new_write/note/note/" class="">（據透）筆記區</a>
+    <a href="/docs/creative_writing/novel/workspace/faith/note/note/" class="">（據透）筆記區</a>
   
 
         </li>
@@ -1006,19 +1030,105 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7ff3a1315befa34720796dd8959dd1aa" class="toggle"  />
-    <label for="section-7ff3a1315befa34720796dd8959dd1aa" class="flex justify-between">
-      <a href="/docs/creative_writing/novel/new_write/note/character/" class="">人物列表</a>
+    <input type="checkbox" id="section-577c3e0654496050113483536c2ef249" class="toggle"  />
+    <label for="section-577c3e0654496050113483536c2ef249" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/workspace/faith/note/character/" class="">人物列表</a>
     </label>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/" class="">格雷瑪·貝魯貝斯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/" class="">阿洛蕾·佴瑠斯·貝魯貝斯</a>
+  
+
+        </li>
+      
     
   </ul>
 
         </li>
       
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a03c09d0e1d437b1beeccd445de67d0" class="toggle"  />
+    <label for="section-3a03c09d0e1d437b1beeccd445de67d0" class="flex justify-between">
+      <a role="button" class="">筆記區</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/creative_writing/novel/notebook/note_of_manuscript_0/" class="">［置頂］0 號手稿的筆記</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="toggle"  />
+    <label for="section-b7ebda4a1cbe66b62a8a23d1a0f5f663" class="flex justify-between">
+      <a href="/docs/creative_writing/novel/notebook/45_master_characters/" class="">45 個人格原型</a>
+    </label>
+  
+
+          
+  <ul>
     
   </ul>
 
@@ -1131,7 +1241,7 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li><strong>UML Graphic</strong></li>
 </ul>
-<h2 id="hahahugoshortcode61s0hbhb">
+<h2 id="hahahugoshortcode65s0hbhb">
   
 
 <script type="module">
@@ -1164,7 +1274,7 @@ classDiagram
     Expression <|-- StateExpression
 </p>
 
-  <a class="anchor" href="#hahahugoshortcode61s0hbhb">#</a>
+  <a class="anchor" href="#hahahugoshortcode65s0hbhb">#</a>
 </h2>
 <ul>
 <li><strong>內文</strong></li>

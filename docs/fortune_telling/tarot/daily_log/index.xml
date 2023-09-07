@@ -142,11 +142,15 @@
     
     <item>
       <title></title>
-      <link>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230828/</link>
+      <link>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230907/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230828/</guid>
-      <description>2023/08/28 每日一翻#抽牌：錢幣三（正）#解析：#123</description>
+      <guid>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230907/</guid>
+      <description>2023/09/07 每日一翻#抽牌：隱者（正）#解析：#正位的隱者，代表找尋、徬徨、迷茫、濃霧、沒有方向性、靜止、或者是獨自一人。此外，因為【隱者】為大牌的一員，因此它也可以代表在心靈上有著比較深刻的體悟。那套用在今天的感想的話&amp;hellip; 無論是哪一種解釋，大概都有 8-9 成左右的準確度，因此整體而言算是非常、非常準確的一張每日塔羅。也因為如此，才給了自從記事以來的第一次滿分 5/5 顆星，也是我休息了這麼久的每日記事之後，覺得一定要寫出來的一天。
+今天比較大的事情有幾項：第一個是我格式化了學校的電腦，算是更近一步地拉遠了我跟碩士生活的距離（也就是更脫離了研究室一點點）。這點在隱者上並沒有什麼特別突出的 match 或者是連結，因此它只能算是一個比較小的事件。第二個是我格式化了自己的電腦，因為原本筆電裡面的內容有點雜亂，一時間也不知道要怎麼整理，所以就選擇了最簡單（但也最暴力）的「整理」方法，但這也還好，沒有到特別 match。
+最後一件大事，也是促成我現在即便快三點了（02:55），但還坐在電腦前面的原因：我初步理解了「spring」「spring framework」和「spring boot」三者之間的關聯，也對於「java」「javac」「jar」「javap」&amp;hellip;等不同的命令列指令有了更深的理解，還對於 Java 中的「import」「package」有了一進一步的認識。這也是今天我覺得會開出【隱者】牌的原因。簡單來說，我重新體會了一次 打程式超級無敵燒腦 和 debug 是一個超痛苦的過程 這兩件事情。
+靠著自己的努力，重新抓 spring 的 jar、重新寫 spring framework 的程式、不用任何套件（STS - Spring Tool Suite），找不到任何直接的幫助，幾乎是靠著自己的努力重現出了最基本的 spring 語法，從 0 開始理解 jar, javac, javap, class 檔和 jar 檔的用途與區別，然後再花一點時間理解 package 和 import 的細節用法，再被 javac 中的 -cp 拖了近 1 小時的時間&amp;hellip; 最後成功執行，比起成就感，更多的是「終於成功了」的如釋重負的感覺。
+真的很有隱者那種「在迷霧中前進」「找不到方向」「獨自一個人行走著」的那種徬徨、不確定、孤單、但堅定、持續努力、不放棄 &amp;hellip; 的那種感覺。也很高興今天的隱者是正位的（也代表著前進的路雖然看不清，但大致上的路徑都是對的），如果是逆位&amp;hellip; 可能現在的我還卡在某一個 bug 裡面吧&amp;hellip; 想想就覺得好累。但也很高興最後有成功跑出東西來了，明天就繼續之前看的教學影片，繼續往前走吧。</description>
     </item>
     
   </channel>
