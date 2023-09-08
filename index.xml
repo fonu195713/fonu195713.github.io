@@ -38,24 +38,6 @@
     </item>
     
     <item>
-      <title>［置頂］工作日誌</title>
-      <link>https://fonu195713.github.io/docs/daily_life/working_log/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fonu195713.github.io/docs/daily_life/working_log/</guid>
-      <description>［置頂］工作日誌#2023, 7 月...日期 標題 分類 備註 07-07 《深入淺出設計模式》 心得 . 07-08 設計模式 分類 . 07-09 策略模式 內容 . 07-10 模板方法模式 內容 . 07-11 享元模式 內容 . 07-12 狀態模式 內容 . 07-13 單例模式 內容 . 07-14 簡單工廠模式 內容 . 07-14 工作日誌 內容 . 07-14 文章留言板 功能 . 07-15 工廠方法模式 內容 . 07-16 抽象工廠模式 內容 . 07-17 生成器模式 內容 . 07-18 原型模式 內容 . 07-21 適配器模式 內容 .</description>
-    </item>
-    
-    <item>
-      <title>［置頂］待辦事項</title>
-      <link>https://fonu195713.github.io/docs/daily_life/to_do_list/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fonu195713.github.io/docs/daily_life/to_do_list/</guid>
-      <description>［置頂］待辦事項#日本的心得文 小說 </description>
-    </item>
-    
-    <item>
       <title>With ToC</title>
       <link>https://fonu195713.github.io/_docs/example/table-of-contents/with-toc/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -932,6 +914,17 @@ Lorem markdownum insigne. Olympo signis Delphis!</description>
     
     <item>
       <title></title>
+      <link>https://fonu195713.github.io/docs/computer_science/java/self_study_spring_framework/handmade_spring_framework/day01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/java/self_study_spring_framework/handmade_spring_framework/day01/</guid>
+      <description>Day01 - Simple Core Container#Day 01, 筆記#前言 整個 Spring 的模組大概就是上面的那些。扣掉最底層的 Test 層(?)，整個 Spring 的框架基本上是被 Core Container 裡面的 Beans, Core, Context, 和 SpEL 這四個東西所建立起來的，所以今天的目標就是嘗試只用這 4 個東西，去做一個簡單的程式出來。對於什麼功能上的要求都先忽略，只要先確定程式能夠跑起來就好。所以今天的目標是：透過 Spring 裡面的這四個東西，做出一個 Hello world 的程式來。
+結果（成功） 過程 整個過程可以說是非常克難&amp;hellip; 幾乎可以理解成重新學了一次 Java 從編譯到執行的流程。首先的第一個工作是「把 Spring 的 jar 檔丟給我要的程式吃」。因為在此之前並沒有學習到關於 jar 檔案的觀念，所以算是理解了一次 .jar, .java, .class 三者之間的關係，也複習和新學到了 javac, javap, jar, java 等不同的 cmd 指令的用途。這裡算是第一個在學習 Spring 的過程中，有收穫新東西的地方。
+程式整體的專案結構如上圖，所有的檔案都被放在一個「day01」的資料夾裡面，然後 day01 裡面只有一支 TestByBean.java，作為整個專案的&amp;hellip;入口？然後 day01 裡面還有 3 個資料夾，分別是 conf, human, 和 spring。conf 裡面放的是設定檔，設定什麼的等等會說，human 裡面有一個 Person 的檔案，是很簡單的類別內容，在專案中嚴格來說並不需要這樣割（可以把 Person 跟 TestByBean 放在同一層），但因為我想練習一下 package 的語法，就這樣切了。</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230813/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -1075,6 +1068,17 @@ Lorem markdownum insigne. Olympo signis Delphis!</description>
 最後一件大事，也是促成我現在即便快三點了（02:55），但還坐在電腦前面的原因：我初步理解了「spring」「spring framework」和「spring boot」三者之間的關聯，也對於「java」「javac」「jar」「javap」&amp;hellip;等不同的命令列指令有了更深的理解，還對於 Java 中的「import」「package」有了一進一步的認識。這也是今天我覺得會開出【隱者】牌的原因。簡單來說，我重新體會了一次 打程式超級無敵燒腦 和 debug 是一個超痛苦的過程 這兩件事情。
 靠著自己的努力，重新抓 spring 的 jar、重新寫 spring framework 的程式、不用任何套件（STS - Spring Tool Suite），找不到任何直接的幫助，幾乎是靠著自己的努力重現出了最基本的 spring 語法，從 0 開始理解 jar, javac, javap, class 檔和 jar 檔的用途與區別，然後再花一點時間理解 package 和 import 的細節用法，再被 javac 中的 -cp 拖了近 1 小時的時間&amp;hellip; 最後成功執行，比起成就感，更多的是「終於成功了」的如釋重負的感覺。
 真的很有隱者那種「在迷霧中前進」「找不到方向」「獨自一個人行走著」的那種徬徨、不確定、孤單、但堅定、持續努力、不放棄 &amp;hellip; 的那種感覺。也很高興今天的隱者是正位的（也代表著前進的路雖然看不清，但大致上的路徑都是對的），如果是逆位&amp;hellip; 可能現在的我還卡在某一個 bug 裡面吧&amp;hellip; 想想就覺得好累。但也很高興最後有成功跑出東西來了，明天就繼續之前看的教學影片，繼續往前走吧。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230908/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230908/</guid>
+      <description>2023/09/08 每日一翻#抽牌：錢幣七（正）#解析：#作為相對理性、相對注重實務面的錢幣系列，正位的錢幣七在這邊可以理解成小收獲、等待、成熟、或者是短暫的休息。套用在今天的情況的話，大致上都還算吻合：多向前推了約 2-3 小時的 Spring 教學、學到了 Java 中相互 import 的編譯寫法（這段其實應該是複習？）、新補充了一些部落格的內容，主要是 Spring 相關的，然後抄了兩份心經、偷偷休息玩了一下 LoL、解麻將的每日任務、睡了約 1 小時的午覺 &amp;hellip;，整體而言算是有來有回的一天，不是整天的衝刺，但也不是整天的頹廢。
+這也蠻符合錢幣七的意象的，一個撐在樹叢邊休息的人，樹叢裡面包含了一些錢幣，其中也有一個金幣落在腳下。樹叢裡面的金幣代表著「收穫」或者是「成果」，代表著一些進度、一些成就、一些回報、或者是一些期待中的回饋（通常偏務實面），但整體而言牌面的男生是在休息的，或者是說在思考、在等待 &amp;hellip; 等，總之不是在努力，所以也代表著一定程度上的停滯、等待、或者是一些靜態類型的意象。
+整體而言，就是有來有回、有努力但也有懶散的一天。</description>
     </item>
     
     <item>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>練習 - 手刻 Spring 專案 on Fonu Site</title>
+    <link>https://fonu195713.github.io/docs/computer_science/java/self_study_spring_framework/handmade_spring_framework/</link>
+    <description>Recent content in 練習 - 手刻 Spring 專案 on Fonu Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://fonu195713.github.io/docs/computer_science/java/self_study_spring_framework/handmade_spring_framework/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://fonu195713.github.io/docs/computer_science/java/self_study_spring_framework/handmade_spring_framework/day01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/java/self_study_spring_framework/handmade_spring_framework/day01/</guid>
+      <description>Day01 - Simple Core Container#Day 01, 筆記#前言 整個 Spring 的模組大概就是上面的那些。扣掉最底層的 Test 層(?)，整個 Spring 的框架基本上是被 Core Container 裡面的 Beans, Core, Context, 和 SpEL 這四個東西所建立起來的，所以今天的目標就是嘗試只用這 4 個東西，去做一個簡單的程式出來。對於什麼功能上的要求都先忽略，只要先確定程式能夠跑起來就好。所以今天的目標是：透過 Spring 裡面的這四個東西，做出一個 Hello world 的程式來。
+結果（成功） 過程 整個過程可以說是非常克難&amp;hellip; 幾乎可以理解成重新學了一次 Java 從編譯到執行的流程。首先的第一個工作是「把 Spring 的 jar 檔丟給我要的程式吃」。因為在此之前並沒有學習到關於 jar 檔案的觀念，所以算是理解了一次 .jar, .java, .class 三者之間的關係，也複習和新學到了 javac, javap, jar, java 等不同的 cmd 指令的用途。這裡算是第一個在學習 Spring 的過程中，有收穫新東西的地方。
+程式整體的專案結構如上圖，所有的檔案都被放在一個「day01」的資料夾裡面，然後 day01 裡面只有一支 TestByBean.java，作為整個專案的&amp;hellip;入口？然後 day01 裡面還有 3 個資料夾，分別是 conf, human, 和 spring。conf 裡面放的是設定檔，設定什麼的等等會說，human 裡面有一個 Person 的檔案，是很簡單的類別內容，在專案中嚴格來說並不需要這樣割（可以把 Person 跟 TestByBean 放在同一層），但因為我想練習一下 package 的語法，就這樣切了。</description>
+    </item>
+    
+  </channel>
+</rss>
