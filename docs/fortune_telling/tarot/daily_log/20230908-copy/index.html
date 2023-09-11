@@ -247,7 +247,7 @@
   
 
   
-    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle"  />
     <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
       <a role="button" class="">資訊工程</a>
     </label>
@@ -281,7 +281,7 @@
   
 
   
-    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle" checked />
+    <input type="checkbox" id="section-10b5a139ec55d8afd64b999d4fd4a707" class="toggle"  />
     <label for="section-10b5a139ec55d8afd64b999d4fd4a707" class="flex justify-between">
       <a href="/docs/computer_science/java/" class="">Java 相關</a>
     </label>
@@ -310,7 +310,7 @@
   
 
   
-    <input type="checkbox" id="section-f982ac6149a3c620f2c5a1eeb91b09a1" class="toggle" checked />
+    <input type="checkbox" id="section-f982ac6149a3c620f2c5a1eeb91b09a1" class="toggle"  />
     <label for="section-f982ac6149a3c620f2c5a1eeb91b09a1" class="flex justify-between">
       <a href="/docs/computer_science/java/self_study_spring_framework/" class="">自學 Spring 框架</a>
     </label>
@@ -770,7 +770,7 @@
   
 
   
-    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle"  />
+    <input type="checkbox" id="section-1a4dbc7dea1f032b131bd8b36ee77901" class="toggle" checked />
     <label for="section-1a4dbc7dea1f032b131bd8b36ee77901" class="flex justify-between">
       <a role="button" class="">宗教命理</a>
     </label>
@@ -786,7 +786,7 @@
   
 
   
-    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle"  />
+    <input type="checkbox" id="section-19690d2784a95bdc527a8beb46f9ad15" class="toggle" checked />
     <label for="section-19690d2784a95bdc527a8beb46f9ad15" class="flex justify-between">
       <a href="/docs/fortune_telling/tarot/" class="">偉特塔羅</a>
     </label>
@@ -1217,7 +1217,7 @@
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Day01</strong>
+  <strong>20230908 Copy</strong>
 
   <label for="toc-control">
     
@@ -1231,98 +1231,23 @@
 
       
       
-  <article class="markdown"><h1 id="day01---simple-core-container">
-  Day01 - Simple Core Container
-  <a class="anchor" href="#day01---simple-core-container">#</a>
+  <article class="markdown"><h1 id="20230911-每日一翻">
+  2023/09/11 每日一翻
+  <a class="anchor" href="#20230911-%e6%af%8f%e6%97%a5%e4%b8%80%e7%bf%bb">#</a>
 </h1>
 <hr>
-<p><img src="/image/spring_framework/day01/spring_framework.png" alt="框架圖" /></p>
-<h3 id="day-01-筆記">
-  <strong>Day 01, 筆記</strong>
-  <a class="anchor" href="#day-01-%e7%ad%86%e8%a8%98">#</a>
+<h3 id="抽牌寶劍八逆">
+  抽牌：寶劍八（逆）
+  <a class="anchor" href="#%e6%8a%bd%e7%89%8c%e5%af%b6%e5%8a%8d%e5%85%ab%e9%80%86">#</a>
 </h3>
-<ul>
-<li>前言</li>
-</ul>
-<p>整個 Spring 的模組大概就是上面的那些。扣掉最底層的 Test 層(?)，整個 Spring 的框架基本上是被 Core Container 裡面的 <code>Beans</code>, <code>Core</code>, <code>Context</code>, 和 <code>SpEL</code> 這四個東西所建立起來的，所以今天的目標就是嘗試只用這 4 個東西，去做一個簡單的程式出來。對於什麼功能上的要求都先忽略，只要先確定程式能夠跑起來就好。所以今天的目標是：透過 Spring 裡面的這四個東西，做出一個 Hello world 的程式來。</p>
-<ul>
-<li>結果（成功）</li>
-</ul>
-<p><img src="/image/spring_framework/day01/result01.png" alt="程式結果" /></p>
-<ul>
-<li>過程</li>
-</ul>
-<p>整個過程可以說是非常克難&hellip; 幾乎可以理解成重新學了一次 Java 從編譯到執行的流程。首先的第一個工作是「把 Spring 的 jar 檔丟給我要的程式吃」。因為在此之前並沒有學習到關於 jar 檔案的觀念，所以算是理解了一次 <code>.jar</code>, <code>.java</code>, <code>.class</code> 三者之間的關係，也複習和新學到了 <code>javac</code>, <code>javap</code>, <code>jar</code>, <code>java</code> 等不同的 cmd 指令的用途。這裡算是第一個在學習 Spring 的過程中，有收穫新東西的地方。</p>
-<p><img src="/image/spring_framework/day01/result02.png" alt="檔案結構" /></p>
-<p>程式整體的專案結構如上圖，所有的檔案都被放在一個「day01」的資料夾裡面，然後 day01 裡面只有一支 <code>TestByBean.java</code>，作為整個專案的&hellip;入口？然後 day01 裡面還有 3 個資料夾，分別是 <code>conf</code>, <code>human</code>, 和 <code>spring</code>。<code>conf</code>  裡面放的是設定檔，設定什麼的等等會說，<code>human</code> 裡面有一個 <code>Person</code> 的檔案，是很簡單的類別內容，在專案中嚴格來說並不需要這樣割（可以把 <code>Person</code> 跟 <code>TestByBean</code> 放在同一層），但因為我想練習一下 package 的語法，就這樣切了。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> human<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String name<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer age<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setName</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setAge</span><span style="color:#f92672">(</span>Integer age<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">age</span> <span style="color:#f92672">=</span> age<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">toString</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Person [name=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">name</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;, age=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">age</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;]&#34;</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">greeting</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hello! My name is &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">name</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;I&#39;m &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">age</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; years old.&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><p>然後是 <code>spring</code> 的資料夾，裡面有 5 個不同的 .jar 檔，分別是架構圖上，Core container 裡面的字個模組（Bean, core, Context, 和 SpEL（SpEL = expression））以及一個 logging 檔，用來生成一些 console 的 log。這邊的重點是需要「把這些 jar 餵給最外層的 <code>TestByBean</code>」，所以就會用到 <code>javac -cp</code> 這個東西，也算是小小的碰撞學習（不能用 <code>*.jar</code> 要用 <code>*</code>、不加 <code>.</code> 吃不到當前路徑&hellip;等）。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>javac -cp <span style="color:#e6db74">&#34;.:springs/*:human/*&#34;</span> TestBySpring.java
-</span></span><span style="display:flex;"><span>java -cp <span style="color:#e6db74">&#34;.:springs/*:human/*&#34;</span> TestBySpring
-</span></span></code></pre></div><p>把檔案丟給程式吃之後，接下來要透過這些 Spring 的檔案跑一次簡單的程式。本質上，這份專案是一個很簡單很簡單的程式，主要由 <code>TestByBean.java</code> 這個檔案作為專案的主要入口，所以 <code>main()</code> 是寫在這邊。Spring 的概念有點像是相對於「直接使用 <code>new</code>」生成物件，改而透過所謂的「容器」來幫助、管理 Java 中的各種物件。在這支程式中，容器指的就是 <code>ac</code>，也就是第 9 行程式的內容。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ApplicationContext ac <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ClassPathXmlApplicationContext<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;conf/applicationContext.xml&#34;</span><span style="color:#f92672">);</span>
-</span></span></code></pre></div><p>容器在產生之前，會需要先吃一個設定檔（configuration file），這邊的設定檔就是參數裡面的 <code>xml</code> 檔。接下來把 <code>new</code> 出來的容器放在名為 <code>ac</code> 的變數上，最後透過設定檔本身的內容，讓 <code>ac</code> 用一個 <code>getBean</code> 去抓一個 <code>Person</code> 物件，最後讓那個 <code>Person</code> 做事情（say hello），就是整隻程式裡面在做的事情了。值得注意的事情是：程式本身並沒有什麼比較特別的內容，但 xml 裡面就有一些可以說的東西了：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- applicationContext.xml --&gt;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;beans</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd&#34;</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;person&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;human.Person&#34;</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;name&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;Ming&#34;</span><span style="color:#f92672">&gt;&lt;/property&gt;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;age&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;15&#34;</span><span style="color:#f92672">&gt;&lt;/property&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/bean&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/beans&gt;</span>
-</span></span></code></pre></div><p>最外層的 beans 標籤是固定寫法，為什麼裡面會有那些內容目前還在研究中，但總之可以知道的是：如果要讓 Spring 正常運作的話，就必須先這樣寫，我目前的想法是把這個 beans 當成所謂的「容器」。容器裡面目前只包了一個 bean 標籤（沒有 s），基本上，可以把一個 bean 當作是一個「物件」，所以這個設定檔本質上，就是在描述「一個只放了一個物件在裡面的容器」，我是這麼理解的，可能有誤？但沒關係，先記憶起來。</p>
-<p>該物件的類別是 <code>human.Person</code>，也就是那個被我拉進 human 資料夾裡面的 Person，該物件的 <code>id</code> 是 person，這個 <code>id</code> 可以自己隨便取，叫做小明 <code>id=&quot;ming&quot;</code> 小華 <code>id=&quot;hua&quot;</code> 或者是小美 <code>id=&quot;mei&quot;</code> 之類的都行，但跟 html 一樣，整份檔案裡的 id 必須要唯一，不可重複。此外，物件裡面包含了兩個的 <code>property</code>，也就是 &hellip; 屬性？用以對物件做一些初始賦值，裡面的 <code>name</code> 是 getter 的名稱，<code>value</code> 則是要丟進去的值，因此 <code>&lt;property name=&quot;name&quot; value=&quot;Ming&quot;&gt;</code> 這句話的意思就是：丟入參數 <code>Ming</code> 到 <code>human.Person</code> 類別裡面的 <code>setName</code> 方法中。<code>&lt;property name=&quot;age&quot; value=&quot;15&quot;&gt;</code> 同理，就是把 15 丟進 <code>setAge</code> 的方法裡面。那因為是這樣的邏輯，所以如果 Person.java 跟 xml 改成下面這樣 &hellip;</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String name<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setAsd</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- applicationContext.xml --&gt;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;beans</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd&#34;</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;person&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;human.Person&#34;</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;asd&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;Ming&#34;</span><span style="color:#f92672">&gt;&lt;/property&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/bean&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/beans&gt;</span>
-</span></span></code></pre></div><p>程式其實還是可以順利運行，但極度反直覺就是了。</p>
+<hr>
+<h3 id="解析">
+  解析：
+  <a class="anchor" href="#%e8%a7%a3%e6%9e%90">#</a>
+</h3>
+<p>寶劍八，代表著停頓、不安、等待、遲疑、或者是猶豫、站著不動的一張牌。在每日塔羅上可以用很簡單的「裹足不前」四個字來形容。不過今天的寶劍八既然是逆位的，也就代表了情況是反過來的，意即前進、直走、邁出一步、向前、破除恐懼、堅定、或者是心無旁騖的行動。套用在今天的狀況的話&hellip; 就是我成功地把「第一天」的 Spring 教學給看完了吧？前幾天的確都還蠻排斥繼續看下去的，但老實說也不知道是為什麼？</p>
+<p>今天成功地把第一天的 Spring 內容給看完了，整體而言算是很充足的份量，大約有 4-5 小時左右的影片長度吧？也許還更久&hellip;，但毫無疑問，Spring 的授課老師是真的講得超級清楚、超級細節、也超級淺顯易懂的。扣掉最一開始「架環境」比較卡住之外，後續的一些內容基本上就是在複習之前的 Java，以及承接一些基本觀念所延伸出來的其餘的東西罷了，難度老實說沒有最一開始想像中的那麼高。</p>
+<p>整體而言，準確度大概有 4 顆星。</p>
 </article>
  
       <div id="gitalk-container"></div>

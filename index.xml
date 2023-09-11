@@ -925,6 +925,17 @@ Lorem markdownum insigne. Olympo signis Delphis!</description>
     
     <item>
       <title></title>
+      <link>https://fonu195713.github.io/docs/computer_science/java/self_study_spring_framework/handmade_spring_framework/day02/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/java/self_study_spring_framework/handmade_spring_framework/day02/</guid>
+      <description>Day02 - bean and Collections#Day 02, 筆記#【前言】 雖然說是 day 2，但實際上距離 day 1 應該已經過去 3-4 天了。沒什麼特別的原因，純粹就只是自己比較懶惰所以沒有快速補進度這樣（有點不好&amp;hellip; 以後希望可以再努力一點）。總之 day 2 的內容基本上是延續 day 1 再往下的，大致上沒有什麼程式上面的新語法，更多的是注重在 xml 上面的&amp;hellip; 物件宣告(?) 也就是各種 &amp;lt;bean&amp;gt; 標籤的生成語法，以及物件的賦值，包含基本資料型態（int, float, char, boolean&amp;hellip;）以及參考資料型態（String, Object, Class&amp;hellip;），還有集合類型（Array, List, Map &amp;hellip;）的宣告。
+【結果】（成功） 【過程】 相較於第 1 天的內容，第 2 的內容算是簡單很多，因為主要都是在介紹一些宣告方式、物件的賦值方法、以及 xml 標籤的一些介紹或定義之類的。程式碼的部分相對少了很多，取而代之的是一系列的、五花八門的、各式各樣不同的物件（&amp;lt;bean&amp;gt;）宣告方式，但在講有哪些做法之前，先說明一下這次的檔案結構：為了自己的方便理解，我稍微複雜化了原本的檔案結構，主要是在 human 資料夾裡面做一些更動，圖示如下：
+主要改動有兩個：第一個是 human 資料夾的內容從原本的 Person 變成了 Human, Student 以及 Teacher 三種類別。Human 是學生跟老師的父類別，該類別裡面只有一個成員變數 name，以及它的 setter setName()；學生（Student）繼承自 Human，除了擁有姓名之外，還多擁有一個分數 score 的變數，用來記錄不同科目（Subject）的考試分數；最後是老師 Teacher，同樣繼承自 Human 因此擁有姓名，此外老師也有一份學生名單 List&amp;lt;students&amp;gt; 用來存放該老師是負責哪幾位學生的。</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230813/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -1068,6 +1079,17 @@ Lorem markdownum insigne. Olympo signis Delphis!</description>
 最後一件大事，也是促成我現在即便快三點了（02:55），但還坐在電腦前面的原因：我初步理解了「spring」「spring framework」和「spring boot」三者之間的關聯，也對於「java」「javac」「jar」「javap」&amp;hellip;等不同的命令列指令有了更深的理解，還對於 Java 中的「import」「package」有了一進一步的認識。這也是今天我覺得會開出【隱者】牌的原因。簡單來說，我重新體會了一次 打程式超級無敵燒腦 和 debug 是一個超痛苦的過程 這兩件事情。
 靠著自己的努力，重新抓 spring 的 jar、重新寫 spring framework 的程式、不用任何套件（STS - Spring Tool Suite），找不到任何直接的幫助，幾乎是靠著自己的努力重現出了最基本的 spring 語法，從 0 開始理解 jar, javac, javap, class 檔和 jar 檔的用途與區別，然後再花一點時間理解 package 和 import 的細節用法，再被 javac 中的 -cp 拖了近 1 小時的時間&amp;hellip; 最後成功執行，比起成就感，更多的是「終於成功了」的如釋重負的感覺。
 真的很有隱者那種「在迷霧中前進」「找不到方向」「獨自一個人行走著」的那種徬徨、不確定、孤單、但堅定、持續努力、不放棄 &amp;hellip; 的那種感覺。也很高興今天的隱者是正位的（也代表著前進的路雖然看不清，但大致上的路徑都是對的），如果是逆位&amp;hellip; 可能現在的我還卡在某一個 bug 裡面吧&amp;hellip; 想想就覺得好累。但也很高興最後有成功跑出東西來了，明天就繼續之前看的教學影片，繼續往前走吧。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230908-copy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230908-copy/</guid>
+      <description>2023/09/11 每日一翻#抽牌：寶劍八（逆）#解析：#寶劍八，代表著停頓、不安、等待、遲疑、或者是猶豫、站著不動的一張牌。在每日塔羅上可以用很簡單的「裹足不前」四個字來形容。不過今天的寶劍八既然是逆位的，也就代表了情況是反過來的，意即前進、直走、邁出一步、向前、破除恐懼、堅定、或者是心無旁騖的行動。套用在今天的狀況的話&amp;hellip; 就是我成功地把「第一天」的 Spring 教學給看完了吧？前幾天的確都還蠻排斥繼續看下去的，但老實說也不知道是為什麼？
+今天成功地把第一天的 Spring 內容給看完了，整體而言算是很充足的份量，大約有 4-5 小時左右的影片長度吧？也許還更久&amp;hellip;，但毫無疑問，Spring 的授課老師是真的講得超級清楚、超級細節、也超級淺顯易懂的。扣掉最一開始「架環境」比較卡住之外，後續的一些內容基本上就是在複習之前的 Java，以及承接一些基本觀念所延伸出來的其餘的東西罷了，難度老實說沒有最一開始想像中的那麼高。
+整體而言，準確度大概有 4 顆星。</description>
     </item>
     
     <item>
