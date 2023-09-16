@@ -6,6 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+
+
 
 <link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
 
@@ -1346,7 +1349,7 @@
 <ul>
 <li>【bean】</li>
 </ul>
-<p>解釋完檔案結構跟內容之後，接下來就可以進入到 day 2 的主軸了。前面說過，day 2 的主要內容在於各種不同的 <code>&lt;bean&gt;</code> 標籤的物件生成和賦值方式，主要有「setter 賦值」「建構子創建」「p-namespace 創建」「ref 參考賦值」「p-namespace-ref」「內部 bean」「生成單例物件」和「集合類型的創建」幾種不同的物件生成和賦值方式。</p>
+<p>解釋完檔案結構跟內容之後，接下來就可以進入到 day 2 的主軸了。前面說過，day 2 的主要內容在於各種不同的 <code>&lt;bean&gt;</code> 標籤的物件生成和賦值方式，主要有「setter 賦值」「建構子創建」「p-namespace 創建」「ref 參考賦值」「p-namespace-ref」「內部 bean」「工廠模式」「生成單例物件」和「集合類型的創建」幾種不同的物件生成和賦值方式。</p>
 <ul>
 <li>setter 賦值</li>
 </ul>
@@ -1443,6 +1446,10 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/property&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/bean&gt;</span>
 </span></span></code></pre></div><ul>
+<li>工廠模式</li>
+</ul>
+<p>工廠模式是透過一個 facroty 生成 bean 的方法。需要在 Java 檔案中的類別實例化一個名為 <code>FactoryBean&lt;T&gt;</code> 的介面。該介面主要包含三種方法，分別是用以取得物件的 <code>getObject()</code> 方法、用以辨識物件類別的 <code>getObjectType()</code> 方法，以及判斷該類別是否為單例的 <code>isSingleton()</code> 方法。只要在 Java 中實例 <code>FactoryBean&lt;T&gt;</code> 的介面，就可以透過 FactoryBean 創建新的物件。</p>
+<ul>
 <li>生成單例物件</li>
 </ul>
 <p>在某些時候，我們會期望某一個類別只能生成唯一的一個物件，這時候就可以用單例的寫法：我們假設 <code>Classroom</code> 這個類別在整個程式執行的過程中，只可以有一個。那這樣的話我們就可以用下面的寫法（<code>scope=&quot;singleton&quot;</code>）來確保 <code>Classroom</code> 的類別只會出現一個實例物件：</p>
