@@ -2,127 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/faith/note/worldview/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/notebook/note_of_manuscript_0/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/</loc>
-  </url><url>
     <loc>https://fonu195713.github.io/_docs/example/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/_docs/example/table-of-contents/with-toc/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/mediator_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/flyweight_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/proxy_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/prototype_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/command_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/singleton_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/facade_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/factory_method_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/abstract_factory_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/recommended_books/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/template_method_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/bridge_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/state_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/builder_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/daily_life/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/faith/ch01/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/strategy_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/simple_factory_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/composite_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/decorator_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/observer_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/interpreter_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/visitor_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/faith/note/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/daily_life/nodes/finance/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/chain_of_responsibility_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/iterator_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/adapter_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/faith/note/note/</loc>
-  </url><url>
     <loc>https://fonu195713.github.io/_docs/example/table-of-contents/without-toc/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/faith/ch01/01/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/faith/ch01/02/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/interface_segregation_principle/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/dependency_inversion_principle/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/composite_aggregate_reuse_principle/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/single_responsibility_principle/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/least_knowledge_principle/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/liskov_substitution_principle/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/open_closed_principle/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/faith/ch01/03/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/faith/ch01/04/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/faith/ch01/05/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/_docs/example/table-of-contents/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/_docs/example/collapsed/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/daily_life/reading_experience/head_first_design_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/_trash/strategy/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/_trash/template_method_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/_trash/flyweight_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/daily_life/notes/xinxinmota/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/daily_life/notes/heart_sutra_beforehand/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/daily_life/notes/ask_buddha_for_advice/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/daily_life/nodes/masters_degree/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/daily_life/notes/osaka_3_days/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/_docs/example/collapsed/3rd-level/4th-level/</loc>
   </url><url>
@@ -154,90 +42,12 @@
   </url><url>
     <loc>https://fonu195713.github.io/_docs/shortcodes/tabs/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/docs/_trash/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/java/self_study_spring_framework/handmade_spring_framework/day01/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/java/self_study_spring_framework/handmade_spring_framework/day02/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230813/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230814/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230815/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230816/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230818/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230819/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230820/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230821/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230822/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230823/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230825/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230826/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230907/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230908-copy/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/daily_log/20230908/</loc>
-  </url><url>
     <loc>https://fonu195713.github.io/_docs/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/notebook/45_master_characters/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/categories/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/docs/</loc>
-  </url><url>
     <loc>https://fonu195713.github.io/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/java/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/java/job_interview_questions/</loc>
-  </url><url>
     <loc>https://fonu195713.github.io/tags/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/faith/note/character/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/daily_life/nodes/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/faith/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/daily_life/notes/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/faith/note/character/grema_berubes/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/fortune_telling/tarot/meaning/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/code_projects/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/notebook/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/java/self_study_spring_framework/handmade_spring_framework/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/java/self_study_spring_framework/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/daily_life/nodes/finance/fin_202308/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/daily_life/reading_experience/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/docs/creative_writing/novel/workspace/faith/note/character/alorei_nairus_berubes/</loc>
   </url>
 </urlset>
