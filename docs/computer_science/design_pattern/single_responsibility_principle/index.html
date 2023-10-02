@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>單一職責原則 | Fonu Site</title>
+
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+
+
+
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+
+
+
+
+
+
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1376ea1b520a8e81fc96bc8980784b7c" class="toggle"  />
+    <label for="section-1376ea1b520a8e81fc96bc8980784b7c" class="flex justify-between">
+      <a role="button" class="">理財規劃</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c54e93a8e594e3d620021aa873f937a8" class="toggle"  />
+    <label for="section-c54e93a8e594e3d620021aa873f937a8" class="flex justify-between">
+      <a role="button" class="">個人記帳</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/finance/track_expenses/202308/" class="">記帳 2023/08</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/finance/track_expenses/202309/" class="">記帳 2023/09</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資工相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>單一職責原則</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="單一職責原則">
+  單一職責原則
+  <a class="anchor" href="#%e5%96%ae%e4%b8%80%e8%81%b7%e8%b2%ac%e5%8e%9f%e5%89%87">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>單一職責原則（Single Responsibility Principle，簡稱 <strong>SRP</strong>）是物件導向程式設計和軟體設計的基本原則之一，該原則由羅伯特·C·馬丁（Robert C. Martin）所提出。該原則強調一個類別（或一個模組）應該只有一個修改的理由。換句話說，一個類別應該只負責 個主要的功能或職責。SRP 的主要思想是將一個類別的職責限制在一個狹窄的範圍內，以確保類別的內部變化原因不會過多，從而提高程式的可維護性、可擴展性、和可讀性。當一個類別具有多個不同的職責時，它就會變得複雜、變得難以理解，並且容易因多個原因而需要修改，從而降低開發程式的效率。</p>
+<p>以下是 SRP 的主要目標：［<strong>每個類別應該都只負責一個主要職責</strong>］一個類別的 &ldquo;主要職責&rdquo; 即是它的核心任務，該類別應該專注於執行這份任務，而不需要干預（或處理）其他不關核心任務的事情。［<strong>分離不同的職責</strong>］如果一個類別的 &ldquo;主要職責&rdquo; 可能包含多項不同面向的 &ldquo;子職責&rdquo;，設計師應該考慮將這些職責分離為不同的類別或模組，以確保每個類別只處理一個不與它類重合的職責。 ［<strong>職責的改變，不應影響到其他的職責</strong>］在前 2 點成立的情況下，當我們需要修改一個類別的內容時，我們就是在針對「一個」「特定的」功能進行調整，因此在理論上來說，該功能不應與其他功能產生衝突或影響。SRP 有助於保持代碼的可讀性和可維護性，並促使開發人員設計更小、更簡單的類別，從而降低代碼的複雜性。它也是其他設計原則和設計模式的基礎之一，有助於建立高質量的軟體系統。</p>
+<ul>
+<li><strong>簡單整理</strong></li>
+</ul>
+<p>簡單來說，SRP 在說的就是「一個類別，只負責一組類似的事情」</p>
+<ul>
+<li><strong>程式碼範例</strong></li>
+</ul>
+<p>情境思考：假設我們受某校的教務處所委託，需要製作一個針對學生使用的「簡易學生管理系統」，裡面需要針對「學生」這一項身份完成以下幾個功能：學生資料管理（包含增刪改查學生的各種資料），課程管理（提供學生加退選課程，查看課程細節），成績查詢（包含歷年成績、當學期成績、生成成績單&hellip;等），以及文件下載（包含各式各樣的學校文件，諸如學費繳費單、各式申請書、或者各處室的相關文件&hellip;等）。在最最不推薦的狀況下，我們可以寫出類似於下面的程式碼：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StudentManagementSystem</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">registerStudent</span><span style="color:#f92672">(</span>Student student<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 修改學生資料
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 記錄學生的最後的更新時間
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 向學生的家長發送通知
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 向學生的導師發送通知
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">enrollCourse</span><span style="color:#f92672">(</span>Student student<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> courseId<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 獲得學生資料
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 查詢學生的所有修課記錄
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 添加新課程
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Student <span style="color:#a6e22e">getGrades</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> studentId<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 查詢學生資料
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 查詢學生的所有修課記錄
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 查詢學生的各式成績
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">downloadFiles</span><span style="color:#f92672">(</span>String fileName<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 查詢某一份學校文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 生成該份文件的 PDF 檔
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 匯出 PDF
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他[簡易學生管理系統]的方法與功能
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他[簡易學生管理系統]的方法與功能
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他[簡易學生管理系統]的方法與功能
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>從程式的邏輯和功能來說，這份程式並沒有太大的問題。所有的功能都可以順利運行，且相關的程式邏輯都很正確。如果把這份程式直接提交給教務處的話，我想他們應該也不會有什麼太大的問題或者是意見才對。但是，雖然一切的一切都很順利，這份程式碼還是有著一點小小的改善空間：也就是它並沒有符合「單一職責原則」所規範的內容：意即「<strong>一個類別，只可以由一種『原因』而改變</strong>」。</p>
+<p>在這個 <code>StudentManagementSystem</code> 的類別中，我們同時實作了 <code>updateStudent()</code>, <code>addCourse()</code>, <code>getGrades()</code>, <code>downloadFiles()</code> &hellip;等不同學生管理系統中的方法。可想而知，這會是一個非常龐大的類別，也許在這個類別裡，共有上百個不同的成員變數與方法也說不定。那在這樣的情況下，如果我們想要對程式進行一些操作或修改，就會顯得比較麻煩：因為<strong>所有的東西</strong>，<strong>都被放在同一個地方裡</strong>。就像是一間堆滿東西的倉庫一樣，剛整理倉庫的時候，或許還可以知道東西的正確位置，但日子久了、時間長了，或者是之後又對倉庫做了一些調整 &hellip;，程式的維護成本就會逐漸提高。</p>
+<p>此外，可能導致 <code>StudentManagementSystem</code> 需要修改的原因也有很多，無論是對「學生」相關資料的編輯、對「成績」的計算方式需要修正、或者是「課程」有一些類別需要做添加或移除，抑或是「文件」的編輯或更改，都是能夠成 &ldquo;影響到 <code>StudentManagementSystem</code>&rdquo; 的原因（因為這個類別需要負責太多東西了），因此，在這樣的情況下，單一職責原則提供我們對這個「倉庫」做改善的方法：我們整理一下整份系統。系統中共有 4 大項不同的功能，分別與「學生」「課程」「成績」和「文件檔案」有關，因此在這裡，我們可以先對所有的方法進行一個分類：也就是「新增這 4 個類別，並將所屬的方法添加到類別裡面」。簡單來說，可以寫成下面的這個樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StudentManager</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 學生註冊
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">register</span><span style="color:#f92672">(</span>Student student<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 修改資料
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">modify</span><span style="color:#f92672">(</span>Student student<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 註銷學生
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cancel</span><span style="color:#f92672">(</span>Student student<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他和[學生]有關的相關方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他和[學生]有關的相關方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CourseManager</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 加選課程
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">enroll</span><span style="color:#f92672">(</span>Student student<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> courseId<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 退選課程
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drop</span><span style="color:#f92672">(</span>Student student<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> courseId<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 修課列表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show</span><span style="color:#f92672">(</span>Student student<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他和[課程]有關的相關方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他和[課程]有關的相關方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GradeManager</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 單一課程成績
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getSingle</span><span style="color:#f92672">(</span>Student student<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> courseId<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 單一學期成績
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getSemester</span><span style="color:#f92672">(</span>Student student<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> semesterId<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 歷史修課成績
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getAll</span><span style="color:#f92672">(</span>Student student<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他和[成績]有關的相關方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他和[成績]有關的相關方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FileManager</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 下載特定文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">download</span><span style="color:#f92672">(</span>Student fileName<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> courseId<span style="color:#f92672">)</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他和[文件]有關的相關方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他和[文件]有關的相關方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StudentManagementSystem</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    StudentManager studentManager<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    GradeManager gradeManager<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    CourseManager courseManager<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    FileManager fileManager<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 建構子
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">StudentManagementSystem</span><span style="color:#f92672">(</span>StudentManager studentManager<span style="color:#f92672">,</span> GradeManager gradeManager<span style="color:#f92672">,</span> CourseManager courseManager<span style="color:#f92672">,</span> FileManager fileManager<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">studentManager</span> <span style="color:#f92672">=</span> studentManager<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">gradeManager</span> <span style="color:#f92672">=</span> gradeManager<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">courseManager</span> <span style="color:#f92672">=</span> courseManager<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">fileManager</span> <span style="color:#f92672">=</span> fileManager<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 學生註冊
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">register</span><span style="color:#f92672">(</span>Student student<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        studentManager<span style="color:#f92672">.</span><span style="color:#a6e22e">register</span><span style="color:#f92672">(</span>student<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 加選課程
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">enroll</span><span style="color:#f92672">(</span>Student student<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> courseId<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        courseManager<span style="color:#f92672">.</span><span style="color:#a6e22e">enroll</span><span style="color:#f92672">(</span>student<span style="color:#f92672">,</span> courseId<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他[簡易學生管理系統]的方法與功能
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他[簡易學生管理系統]的方法與功能
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>透過將所有的功能分離出來，我們就算是「整理」了一次這個倉庫，比起之前的程式，現在的學生管理系統只需要負責監督和調用底下的 Manager 們即可，它的職責現在就只有「管理」。而其他業務呢？「學生」的工作有 <code>StudentManaer</code> 負責，「成績」的工作是 <code>GradeManager</code> 的強項，<code>CourseManager</code> 專注於任何跟「課程」有關的事物，<code>FileManager</code> 則準備好了跟文件有關的工作等著我們去使用。</p>
+<p>一個類別，只處理一種類型的工作。就是 SRP 想要說明的內容。</p>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>開放封閉原則 | Fonu Site</title>
+
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+
+
+
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+
+
+
+
+
+
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1376ea1b520a8e81fc96bc8980784b7c" class="toggle"  />
+    <label for="section-1376ea1b520a8e81fc96bc8980784b7c" class="flex justify-between">
+      <a role="button" class="">理財規劃</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c54e93a8e594e3d620021aa873f937a8" class="toggle"  />
+    <label for="section-c54e93a8e594e3d620021aa873f937a8" class="flex justify-between">
+      <a role="button" class="">個人記帳</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/finance/track_expenses/202308/" class="">記帳 2023/08</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/finance/track_expenses/202309/" class="">記帳 2023/09</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資工相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>開放封閉原則</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="開放封閉原則">
+  開放封閉原則
+  <a class="anchor" href="#%e9%96%8b%e6%94%be%e5%b0%81%e9%96%89%e5%8e%9f%e5%89%87">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>開放封閉原則（Open-Closed Principle，OCP）是物件導向程式設計中的一個重要原則，由著名的軟體工程師貝瑞·波 (Bertrand Meyer) 在他的著作《Object-Oriented Software Construction》中首次提出。該原則強調軟體實體（例如類別、模組、函數 &hellip;等）應該對擴展保持開放，對修改保持封閉。這樣做可以實現程式碼的可擴展性和可維護性。具體來說，開放封閉原則有以下兩個重要概念：首先是［<strong>開放性</strong>］：開放性表示<strong>軟體應該在不需要修改現有程式碼的前提下</strong>，<strong>允許新增新的功能或新的特性</strong>。當系統需要新增功能時，應該通過擴展現有的實體，而不是修改原有的程式來完成。這有助於防止對現有程式碼的不必要修改，降低了引入錯誤的風險。其次是［<strong>封閉性</strong>］：封閉性說明程式實現某一功能後，程式本身應該被封閉，即不應該再對其內容進行修改。當一個實體達到預期的功能時，應該停止對它的修改，而是應該通過擴展或建立新的實體來添加新功能。</p>
+<p>開放封閉原則的優勢包括下列幾項：首先是<strong>可擴展性</strong>，當需要新增功能時，開發人員可以通過創建新的子類別、新的模組或擴展介面來實現，而不需要修改原有的程式碼，這有助於降低風險，並維護程式碼的穩定性。其次是<strong>可維護性</strong>，因為不需要經常修改原有的程式碼，所以程式碼變得更容易維護。每個功能都位於獨立的模組、類別、或者介面之中，使得錯誤的追蹤與修復能變得更加容易。此外<strong>程式的重用性</strong>也會被提高，因為功能被分割成獨立的實體，我們可以更容易地重用這些已經撰寫完成的程式碼，這有助於提高程式的效率和一致性。</p>
+<ul>
+<li><strong>簡單整理</strong></li>
+</ul>
+<p>OCP 在說的就是：寫好的程式需要有『容易擴展』和『不再需要更改』兩種特性</p>
+<ul>
+<li><strong>程式碼範例</strong></li>
+</ul>
+<p>開放封閉原則算是一個蠻好理解的設計原則，基本上就是「寫好的程式碼，盡量保持在不需要頻繁編輯的狀態」跟「寫好的程式碼，要容易被後來的程式碼飲用或擴充」這兩句話。用一個比較常見的舉例方式來解釋的話，讓我們考慮以下的情境：假設我們需要撰寫一支程式，該程式需要能夠透過不同參數，生成不同的圖形（圓形、正方形、長方形 &hellip;等），並且程式也要能夠計算該圖形的面積。如果不使用開放封閉原則的話，可能會寫出以下的程式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 定義各種不同的圖形
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Circle</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Double radius<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Circle</span><span style="color:#f92672">(</span>Double radius<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">radius</span> <span style="color:#f92672">=</span> radius<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Square</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Double sideLength<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Square</span><span style="color:#f92672">(</span>Double sideLength<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">sideLength</span> <span style="color:#f92672">=</span> sideLength<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Double width<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    Double height<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Rectangle</span><span style="color:#f92672">(</span>Double width<span style="color:#f92672">,</span> Double height<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> width<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">height</span> <span style="color:#f92672">=</span> height<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 定義一個用來計算圖形面積的類別
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AreaCalculator</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Double <span style="color:#a6e22e">getArea</span><span style="color:#f92672">(</span>Object shape<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape <span style="color:#66d9ef">instanceof</span> Circle<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">((</span>Circle<span style="color:#f92672">)</span>shape<span style="color:#f92672">).</span><span style="color:#a6e22e">radius</span> <span style="color:#f92672">*</span> <span style="color:#f92672">((</span>Circle<span style="color:#f92672">)</span>shape<span style="color:#f92672">).</span><span style="color:#a6e22e">radius</span> <span style="color:#f92672">*</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">PI</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape <span style="color:#66d9ef">instanceof</span> Square<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">((</span>Square<span style="color:#f92672">)</span>shape<span style="color:#f92672">).</span><span style="color:#a6e22e">sideLength</span> <span style="color:#f92672">*</span> <span style="color:#f92672">((</span>Square<span style="color:#f92672">)</span>shape<span style="color:#f92672">).</span><span style="color:#a6e22e">sideLength</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape <span style="color:#66d9ef">instanceof</span> Rectangle<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">((</span>Rectangle<span style="color:#f92672">)</span>shape<span style="color:#f92672">).</span><span style="color:#a6e22e">width</span> <span style="color:#f92672">*</span> <span style="color:#f92672">((</span>Rectangle<span style="color:#f92672">)</span>shape<span style="color:#f92672">).</span><span style="color:#a6e22e">height</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> ShapeAreaCalculationException<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>程式在邏輯上本身沒有什麼問題，但在可擴展性和可讀性上就有可以著墨的地方了：雖然對於各種不同的圖形（<code>Circle</code>, <code>Square</code>, 或 <code>Rectanle</code> &hellip;等）我們都可以利用 <code>AreaCalculator</code> 類別中的 <code>getArea()</code> 方法進行面積計算，同時這個方法也幫我們寫好了非圖形類別時的例外處理，但 <code>getArea()</code> 本身的內容卻重度依賴著各種不同的圖形。在可預想的範圍內，我們不難思考出：之後每在程式裡面新增一個圖形，<code>getArea()</code> 這個方法就會需要重新被修改一次。因此，對於 <code>getArea()</code> 這個方法來說，就沒有很好地遵守「開放封閉原則」了。</p>
+<p>修改的方法其實很簡單，在類似於上述的狀況下，我們通常會使用「共同的介面」或者是「繼承同一個父類別」來做改進：先在共同的介面（或父類別）裡面定義一個所有子類別都可以使用的方法，再讓其繼承的類別去改寫該方法，就能夠避免其他調用者需要重複調整程式的情況了，就像是下面的這個樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 定義一個所有圖形都共同繼承的父類別
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Shape</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 定義父類別中的共同方法 &#39;getArea()&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> Double <span style="color:#a6e22e">getArea</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> ShapeAreaCalculationException<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 定義各種不同的圖形
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Circle</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Double radius<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Circle</span><span style="color:#f92672">(</span>Double radius<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">radius</span> <span style="color:#f92672">=</span> radius<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 改寫父類別的 getArea() 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Double <span style="color:#a6e22e">getArea</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">radius</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">radius</span> <span style="color:#f92672">*</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">PI</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Square</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Double sideLength<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Square</span><span style="color:#f92672">(</span>Double sideLength<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">sideLength</span> <span style="color:#f92672">=</span> sideLength<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 改寫父類別的 getArea() 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Double <span style="color:#a6e22e">getArea</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">sideLength</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">sideLength</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Double width<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    Double height<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Rectangle</span><span style="color:#f92672">(</span>Double width<span style="color:#f92672">,</span> Double height<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> width<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">height</span> <span style="color:#f92672">=</span> height<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 改寫父類別的 getArea() 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Overrie</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Double <span style="color:#a6e22e">getArea</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">width</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">height</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 定義一個用來計算圖形面積的類別
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AreaCalculator</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Double <span style="color:#a6e22e">getArea</span><span style="color:#f92672">(</span>Object obj<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>obj <span style="color:#66d9ef">instanceof</span> Shape<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">((</span>Shape<span style="color:#f92672">)</span> obj<span style="color:#f92672">).</span><span style="color:#a6e22e">getArea</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> ObjectIsNotInheritedFromShapeException<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>透過定義一個共同的父類別 <code>Shape</code>，並在各個子類別中改寫原父類別的 <code>getArea()</code> 方法，往後如果我們需要再創建其他不同的形狀（像是三角形、橢圓形 &hellip;等），我們只需要讓該形狀繼承 <code>Shape</code> 類別，然後重寫一次類別中的 <code>getArea()</code>，就可以保證能夠被 <code>AreaCalculator</code> 正確地計算面積，也就達成了程式裡「便於擴展」的需求了（開放性(v)）；此外，往後無論我們再增加哪怕是數十種、甚至是數百種不同的形狀，只要那個形狀記得繼承 <code>Shape</code> 類別，<code>AreaCalculator</code> 裡面的 <code>getArea()</code> 都不再需要進行任何的調整，也能夠正確計算出該圖形的面積。也就達到了「寫完程式之後，就不需要再更動這個程式」的需求（封閉性(v)）。</p>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

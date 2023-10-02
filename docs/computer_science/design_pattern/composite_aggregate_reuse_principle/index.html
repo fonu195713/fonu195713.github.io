@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>Docs | Fonu Site</title>
+    <title>合成/聚合複用原則 | Fonu Site</title>
 
     <link rel="icon" href="/favicon.png" type="image/x-icon">
 
@@ -134,7 +134,7 @@
   
 
   
-    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle"  />
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
     <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
       <a role="button" class="">資工相關</a>
     </label>
@@ -202,32 +202,39 @@
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Docs</strong>
+  <strong>合成/聚合複用原則</strong>
 
   <label for="toc-control">
-    
-    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
 
 
   
-  <aside class="hidden clearfix">
-    
-  
-
-
-
-
-  </aside>
-  
  
       </header>
 
       
       
-  <article class="markdown"></article>
+  <article class="markdown"><h1 id="合成聚合複用原則">
+  合成/聚合複用原則
+  <a class="anchor" href="#%e5%90%88%e6%88%90%e8%81%9a%e5%90%88%e8%a4%87%e7%94%a8%e5%8e%9f%e5%89%87">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>合成/聚合復用原則（Composition/Aggregation Reuse Principle）通常簡稱為 CARP，是物件導向設計中的一個原則，它與繼承有關，但專注於透過「組合」（也就是『合成』或『聚合』）的方式來實現程式碼的複用，而不是透過「繼承」的方式來復用程式碼。具體來說，CARP 強調了物件之間的關係應該是 &ldquo;鬆耦合&rdquo; 的，以便更容易進行維護和擴展。如果要使程式維持鬆耦合的狀態，比起利用「繼承」關係，更應該多使用「合成」關係或「聚合」關係：［<strong>合成</strong>］英文為 composition，指的是一個物件包含了另一個物件作為其一部分，從屬物件的生命週期通常受主要物件的生命週期限制。如果一個物件是另一個物件的一部分，並且當主要物件被銷毀時，從屬物件也會被銷毀。另一種關係是［<strong>聚合</strong>］聚合的英文稱作 aggregation，是指一個物件包含了另一個物件，但從屬物件的生命週期並不受限於主要物件的生命週期。</p>
+<p>與繼承相比，組合關係具有許多優勢，主要是因為它們提供了更靈活、低耦合和可維護的程式碼復用方式。主要的優勢如下：［<strong>靈活性</strong>］組合關係提供了更大的靈活性。透過使用組合關係的程式撰寫方式，使得程式可以在執行時動態地改變物件之間的關係，而不需要修改類別的結構。這允許系統更容易應對變化和需求的變更，而無需深度更改整個類別層次結構。［<strong>鬆耦合</strong>］繼承有時會導致緊密的耦合，因為子類別依賴父類別的實作細節，而組合關係則通常擁有 &ldquo;鬆耦合&rdquo; 的關係，因為父類別和子類別之間的依賴性較少。這降低了物件之間的耦合度，使得程式碼更容易理解、維護、和擴展。</p>
+<p>［<strong>避免繼承的限制</strong>］繼承有時後會引入一些程式上的限制，例如單一繼承限制（一個類別只能繼承一個父類別）和父類別的不穩定性（如果父類別的實作發生變化，所有子類別都會受到影響）。組合關係不受這些限制，使得類別可以輕鬆地組合多個類別的功能。［<strong>可維護性</strong>］組合關係有助於提高程式碼的可維護性。當需要程式修改或擴充功能時，你只需要專注於特定的類別或元件，而不需要涉及整個繼承層次結構。這簡化了程式碼的維護過程。［<strong>測試和調試</strong>］使用組合關係的程式編寫方式，通常更容易進行單元測試和調試，因為可以更容易地模擬和隔離組件，而不會受到繼承關係的複雜性的干擾。［<strong>程式碼可讀性</strong>］組合關係通常會使程式更加簡潔、更加清晰、和更加易於理解，因為它們強調了物件之間的協作關係，而不是混雜在一起的層次結構。</p>
+<ul>
+<li><strong>簡單整理</strong></li>
+</ul>
+<p>多用組合、少用繼承</p>
+<ul>
+<li><strong>程式碼範例</strong></li>
+</ul>
+</article>
  
       <div id="gitalk-container"></div>
 
@@ -252,22 +259,15 @@
 
       
   
+  <div class="book-comments">
+
+</div>
+  
  
 
       <label for="menu-control" class="hidden book-menu-overlay"></label>
     </div>
 
-    
-    <aside class="book-toc">
-      <div class="book-toc-content">
-        
-  
-
-
-
- 
-      </div>
-    </aside>
     
   </main>
 

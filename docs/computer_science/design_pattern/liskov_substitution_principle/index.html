@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>里氏替換原則 | Fonu Site</title>
+
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+
+
+
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+
+
+
+
+
+
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1376ea1b520a8e81fc96bc8980784b7c" class="toggle"  />
+    <label for="section-1376ea1b520a8e81fc96bc8980784b7c" class="flex justify-between">
+      <a role="button" class="">理財規劃</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c54e93a8e594e3d620021aa873f937a8" class="toggle"  />
+    <label for="section-c54e93a8e594e3d620021aa873f937a8" class="flex justify-between">
+      <a role="button" class="">個人記帳</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/finance/track_expenses/202308/" class="">記帳 2023/08</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/finance/track_expenses/202309/" class="">記帳 2023/09</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資工相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>里氏替換原則</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="里氏替換原則">
+  里氏替換原則
+  <a class="anchor" href="#%e9%87%8c%e6%b0%8f%e6%9b%bf%e6%8f%9b%e5%8e%9f%e5%89%87">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>里氏替換原則（Liskov Substitution Principle，LSP）是 SOLID 設計原則中的一項原則，由電腦科學家芭芭拉·利斯科夫（Barbara Liskov）於 1987 年首次提出。里氏替換原則強調了「子類別應該能夠取代其基底類別，而不會影響程式的正確性。」簡而言之，該原則表明：如果一個類型是某個抽象類型的子類型，那麼它應該可以取代該抽象類型的任何實例而不引發錯誤。</p>
+<p>LSP 的核心觀點包括以下幾個面向：首先，［<strong>子類別必須保留基底類別的所有行為</strong>］這代表子類別在繼承基底類別時，必須保留基底類別的行為。也就是子類別應該實作基底類別中所定義的方法，並且這些方法的行為不應該與基底類別不同。其次，［<strong>子類別可以加強基底類別的行為</strong>］雖然子類別必須保留基底類別的行為，但是子類別可以透過覆寫基底類別方法（或添加新的方法）來加強（或擴展）基底類別的行為。這也代表著子類別可以提供相對於基底類別更多的功能，但不應該改變基底類別的行為。此外，［<strong>子類別可以限制基底類別的行為</strong>］子類別可以限制基底類別的行為，但不能擴展或改變基底類別的行為。這意味著子類別可以透過覆蓋基類方法來限制某些操作的效果，但不能使這些操作變得更強或更複雜。最後，［<strong>子類別的方法參數和傳回值要與基底類別一致</strong>］子類別的方法參數類型要與基底類別一致（或更為具體），而傳回值類型要與基底類別一致或（更通用）。</p>
+<p>這些面謝確保了客戶端程式碼可以放心地使用子類別對象，而不必擔心類型不匹配的問題。LSP 的遵循有助於保持程式碼的一致性、可維護性和可擴充性。它還有助於實現多態性，使得客戶端程式碼可以處理多個子類別物件而不需要知道特定的子類別類型。LSP 在物件導向程式設計中非常重要，它幫助我們建立穩健的繼承體系，使程式碼更容易理解和維護。</p>
+<ul>
+<li><strong>簡單整理</strong></li>
+</ul>
+<p>父類別的方法，如果換成子類別來做，應該要得出一樣的結果</p>
+<ul>
+<li><strong>程式碼範例</strong></li>
+</ul>
+<p>在所有的設計原則中，里氏替換原則應該是最難懂的（至少在我自己理解的過程中 XD），作為設計原則中的其中一項原則，里氏替換原則所討論，是關於類別與類別間的繼承（inherit）和改寫（override）的問題。里氏替換原則的核心，就是在確保簡單整理中的那句話：「父類別的方法，如果換成子類別來做，應該要得出一樣的結果。」也就是說，如果在一個程式裡面我們看到了 <code>Parent.method(arg)</code> 這樣的語句。里氏替換原則要求的，就是希望如果我們寫成 <code>Child.method(arg)</code> 時，程式同樣也可以呈現出原本的結果，不應該換了一個子類別執行，程式的結果就發生改變。</p>
+<p>更仔細一點的說，雖然我們在學習的過程中，被告知了「『繼承』即是包含了 <code>is-a</code> 的概念的兩個類別」，但該原則告訴了我們：嚴格一點來說，我們並不能夠單純地因為 <code>A is-a B</code>，就讓 <code>A</code> 跟 <code>B</code> 使用繼承（像是正方形 is-a 矩形，企鵝 is-a 鳥類 &hellip;等），在使用繼承的時候，應該要更加嚴謹，更加小心。里氏替換原則包含以下幾個想法：子類別的參數數量和順序應該與父類別完全相同、子類別的前置條件不應該比父類別嚴格、子類別的後續條件不應該比父類別寬鬆、以及在父類別中沒有被改變的參數，子類別也應該對其保持不變。</p>
+<p>我們用一個簡單的例子，快速了解這之中的差別：在數學的定義上，我們可以知道「矩形」是四個角都是直角的四邊形，「正方形」是四個角都是直角、且四個邊都有相同長度的四邊形。因此，在數學的分類上，我們可以說「正方形是一種矩形」也就是「Sruare is a Rectangle」，那在程式上，我們同樣也能說出「Sruare is a Rectangle」嗎？讓我們用程式來觀察觀察，我們先假設正方形是長方形的一種：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 長方形
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">int</span> width<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">int</span> height<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 建構子
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Rectangle</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 長方形的 setter (getter 就先省略了)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setWidth</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> width<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> width<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setHeight</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> height<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">height</span> <span style="color:#f92672">=</span> height<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 長方形中的一些方法（以面積為例子）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getArea</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> width <span style="color:#f92672">*</span> height<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Square</span> <span style="color:#66d9ef">extends</span> Rectangle <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 建構子
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Square</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 描述一下正方形裡更嚴格的定義 ... 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 改寫一下原來的方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 設定「寬」就等於設定「高」
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setWidth</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> width<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> width<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">height</span> <span style="color:#f92672">=</span> width<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 改寫一下原來的方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 設定「高」就等於設定「寬」
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setHeight</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> height<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> height<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">height</span> <span style="color:#f92672">=</span> height<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 方法 &#39;getArea()&#39; 可以不用改，畢竟也是長 x 寬沒錯
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// public int getArea() {
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//     return width * height;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>看起來沒什麼問題？我們試著執行一次：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        Rectangle rectangle <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Rectangle<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        rectangle<span style="color:#f92672">.</span><span style="color:#a6e22e">setHeight</span><span style="color:#f92672">(</span><span style="color:#ae81ff">3</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        rectangle<span style="color:#f92672">.</span><span style="color:#a6e22e">setWidth</span><span style="color:#f92672">(</span><span style="color:#ae81ff">7</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;area: &#34;</span> <span style="color:#f92672">+</span> rectangle<span style="color:#f92672">.</span><span style="color:#a6e22e">getArea</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Square square <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Square<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        square<span style="color:#f92672">.</span><span style="color:#a6e22e">setHeight</span><span style="color:#f92672">(</span><span style="color:#ae81ff">5</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;area: &#34;</span> <span style="color:#f92672">+</span> square<span style="color:#f92672">.</span><span style="color:#a6e22e">getArea</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>area: 21
+</span></span><span style="display:flex;"><span>area: 25
+</span></span></code></pre></div><p>結果也很符合預期，那麼應該就沒有什麼問題了吧？的確，如果單純從「程式本身的執行邏輯」還有「繼承的特性」去做切入的話，這支程式無論是在設定還是在執行上面，都沒有什麼需要挑惕的地方，但重點就在於「它在某些情況下『人的預期』和『實際的程式』會不一樣」，什麼意思呢？意思是如果我們之後寫了一組「設定/測試矩形的相關係數」的程式，人的預期和實際的程式就會產生誤差，就像是下面的這個樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 測試程式
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String args<span style="color:#f92672">[])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        Test obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Test<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        obj<span style="color:#f92672">.</span><span style="color:#a6e22e">testRectangle</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Rectangle<span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>        obj<span style="color:#f92672">.</span><span style="color:#a6e22e">testRectangle</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Square<span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testRectangle</span><span style="color:#f92672">(</span>Rectangle rectangle<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;測試類別 &#34;</span> <span style="color:#f92672">+</span> rectangle<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        rectangle<span style="color:#f92672">.</span><span style="color:#a6e22e">setHeight</span><span style="color:#f92672">(</span><span style="color:#ae81ff">7</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        rectangle<span style="color:#f92672">.</span><span style="color:#a6e22e">setWidth</span><span style="color:#f92672">(</span><span style="color:#ae81ff">13</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>rectangle<span style="color:#f92672">.</span><span style="color:#a6e22e">getArea</span><span style="color:#f92672">()</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">91</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            String message <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;area != 91&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> AreaCalculationException<span style="color:#f92672">(</span>message<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>測試類別 class Rectangle
+</span></span><span style="display:flex;"><span>測試類別 class Square
+</span></span><span style="display:flex;"><span>Exception in thread <span style="color:#e6db74">&#34;main&#34;</span> AreaCalculationException: class Squarearea != 91
+</span></span><span style="display:flex;"><span>        at Test.testRectangle(Test.java:71)
+</span></span><span style="display:flex;"><span>        at Test.main(Test.java:57)
+</span></span></code></pre></div><p>到這邊為止，可能有一部分的人會有「這&hellip;好啦它是有一點問題沒錯，但不就只是一個 Square 或者是一個 Rectangle 的面積嗎？事情是能夠嚴重到哪裡去？」的想法，那讓我們再舉一個比較實際一點的例子：我們假設現在在做一個公司的登入系統，預設密碼不能為空的，然後我們想要讓不同的人（ex. 員工、經理、老闆、客戶 &hellip;等）有各自的類別，於是工程師寫成了以下的樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 類別 [系統]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LogInSystem</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 負責登入的主要函數 &#39;logIn()&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">logIn</span><span style="color:#f92672">(</span>String account<span style="color:#f92672">,</span> String password<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// pseudo code 用來假設一個獲取資料的情境
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Database database <span style="color:#f92672">=</span> Database<span style="color:#f92672">.</span><span style="color:#a6e22e">getDatabase</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;company_members&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 假設 table 會回傳像是 &#34;老闆&#34; &#34;經理&#34; &#34;員工&#34; &#34;客戶&#34;... 等不同種類的資料表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 這邊同樣假設了不同表之間的帳號不會重複
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 所以 &#39;getTable()&#39; 可以依照帳號去判斷要回傳哪個表格
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Table table <span style="color:#f92672">=</span> database<span style="color:#f92672">.</span><span style="color:#a6e22e">getTable</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;position&#34;</span><span style="color:#f92672">,</span> account<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 回傳登入的結果，但 &#39;要怎麼判斷能不能登入&#39; 則依照表格自己的方法決定
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> table<span style="color:#f92672">.</span><span style="color:#a6e22e">loginTest</span><span style="color:#f92672">(</span>account<span style="color:#f92672">,</span> password<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 抽象類別 [資料表]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Table</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 資料表名稱
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">protected</span> String name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 驗證登入的方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">loginTest</span><span style="color:#f92672">(</span>String account<span style="color:#f92672">,</span> String password<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 密碼想當然不可以是空的
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>password<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 拿到 account 對應的 password
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        String sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;SELECT `password` from &#34;</span> <span style="color:#f92672">+</span> name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; where `account` = &#34;</span> account<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 檢查密碼是否一致
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        String result <span style="color:#f92672">=</span> Table<span style="color:#f92672">.</span><span style="color:#a6e22e">getResult</span><span style="color:#f92672">(</span>sql<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 回傳結果
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>password <span style="color:#f92672">==</span> result<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>現在，公司聘用了好幾個工程師，分別負責不同資料表的登入功能（也許員工登入之前，需要主管給予權限？也許客戶在登入的時候，只允許某些時段 &hellip;等），然後，負責 <code>BossTable</code> 的工程師其實是老闆的兒子，他爸爸跟他說「我就不設密碼了，反正看到是我的帳號，就直接讓我登入就好」所以 <code>BossTable</code> 的程式就變成了類似下面的樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BossTable</span> <span style="color:#66d9ef">extends</span> Table <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">loginTest</span><span style="color:#f92672">(</span>String account<span style="color:#f92672">,</span> String password<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>然後 Boss 的資料表實際上長這個樣子</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>+-------+--------+
+</span></span><span style="display:flex;"><span>|account|password|
+</span></span><span style="display:flex;"><span>+-------+--------+
+</span></span><span style="display:flex;"><span>|   boss|    NULL|
+</span></span><span style="display:flex;"><span>+-------+--------+
+</span></span></code></pre></div><p>到這裡為止，如果單看程式邏輯的話，一切都還在很合理的範疇，但接下來問題出現了：公司在原來執行「撤銷離職員工的帳密」的操作的時候，因為一些原因，他們決定「撤銷」這個動作，並不是直接把員工資料刪掉，而是直接把離職員工的密碼刷成 NULL。然後再在 <code>table.loginTest()</code> 裡面寫上一個「如果密碼是 <code>NULL</code>，則直接回傳登入失敗」的語句（畢竟在正常情況下，沒有會把密碼設成 <code>NULL</code>，而且 <code>Table</code> 原本的判斷也防止了有人想要把密碼設成 <code>NULL</code> 的狀況）。</p>
+<p>然後又過了 3-5 年，負責資料庫的主管發現「誒？最近離職員工的資料好像越來越佔空間了欸」所以他就在主管開會的時候，提議了「把離職員工的資料從資料庫中清除」的提案，想當然提案毫無阻礙地通過了。所以他就跟下面的工程師說「幫我寫個程式，檢查一下所有的表格，把離職的員工資料都刪一刪。」然後，因為該員工很直覺的理解成「哦？離職員工，密碼是 NULL 的那些嘛～」，所以 &hellip;沒錯 &hellip;你們想像中的事情就發生了 &hellip;，</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Database</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 上面有一些 `getDatabase`, `getTable()` 之類的方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 上面有一些 `getDatabase`, `getTable()` 之類的方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 上面有一些 `getDatabase`, `getTable()` 之類的方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">deleteDepartedEmployeeData</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 取出所有資料表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        List<span style="color:#f92672">&lt;</span>Table<span style="color:#f92672">&gt;</span> tables <span style="color:#f92672">=</span> Database<span style="color:#f92672">.</span><span style="color:#a6e22e">getAllTables</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 對所有的資料表逐一進行操作
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Table table<span style="color:#f92672">:</span> tables<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 取出資料表內所有的帳號和密碼
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            List<span style="color:#f92672">&lt;</span>Data<span style="color:#f92672">&gt;</span> data <span style="color:#f92672">=</span> table<span style="color:#f92672">.</span><span style="color:#a6e22e">getAllData</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;account&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;password&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 逐一檢查資料表內的內容
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Data row_data<span style="color:#f92672">:</span> data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 判斷資料中的密碼欄位是否為 &#39;NULL&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>row_data<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;password&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">isNull</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// 刪除資料
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    String account <span style="color:#f92672">=</span> row_data<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;account&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                    String sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;delete from &#34;</span> <span style="color:#f92672">+</span> table<span style="color:#f92672">.</span><span style="color:#a6e22e">name</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; where `account` = &#34;</span> account<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                    table<span style="color:#f92672">.</span><span style="color:#a6e22e">update</span><span style="color:#f92672">(</span>sql<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>嗯&hellip; 或許接下來我們就可以探討「老闆在發現自己的資料都消失後，會有怎樣的反應」以及「誰該負責這件事情」的問題，但在那之前，我們或許可以從程式上的角度上來思考，為什麼這樣的問題會發生？這跟最一開始的長方形、正方形又有什麼關係？可能有些人覺得沒有關係，可能有些人會有自己的解釋或說法，不過在這邊呢，畢竟文章還是跟設計原則有關，所以我會給出的答案是：「它們都沒有達成『父類別的方法，如果換成子類別來做，應該要得出一樣的結果』。」也就是「它們都沒有遵守『里氏替換原則』」。</p>
+<p>說得仔細一點，矩形的案例犯的錯是「明明 <code>Rectangle</code> 的 <code>setWidth()</code> 和 <code>setHeight()</code> 都只有對特定變數行操作，但在 <code>Square()</code> 裡面，無論是  <code>setWidth()</code> 還是 <code>setHeight()</code> 都還有對其他變數進行操作。」而老闆密碼的案例則是「明明 <code>Table</code> 都已經先說了『密碼不可以是 <code>NULL</code>』，但是在 <code>BossTable</code> 那邊卻還是讓 <code>NULL</code> 通過。」</p>
+<p>那麼，如果要系統化一點的說，既然我們知道了他們的錯是「沒有遵守『父類別的方法，如果 &hellip; 的結果』」，那怎麼樣寫才能避免這種事情呢？畢竟在正常思考下，「正方形 is a 長方形」跟「老闆説他不要設密碼，我們就放 <code>NULL</code> 在密碼裡面」都是很人性化也很直覺的邏輯。也因此，里氏替換原則為了讓我們能快速搞懂哪些東西是「乍看之下很有邏輯，實際上在程式裡面會出問題」的寫法，它列舉了好幾項大注意事項。</p>
+<p>而簡單來說，我們只要遵循以下的幾個條件，就可以確保我們的程式能遵守里氏替換原則了，它們分別是「參數的數量跟順序要保持一致」「子類別的輸入，不能減去原本可以的選擇」「子類別的輸出，不能多出原本沒有的選擇」以及「父類別在方法中沒有修改的變數，子類別也不要修改。」聽起來可能有點饒口？直接用一個例子來做說明可能會更好一點，下面我們用一個簡單的計算機父類別（<code>Calculator</code>）來做舉例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Calculator</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 自定義的數字類別
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">protected</span> RationalNumber <span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>NaturalNumber x<span style="color:#f92672">,</span> PrimeNumber y<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NumberOverflowException<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        RationalNumber result <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> y<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><ol>
+<li>參數的數量跟順序要保持一致</li>
+</ol>
+<p>這個沒什麼好說的，很直觀、很好懂。數量要相同、順序不能換。</p>
+<ol start="2">
+<li>子類別的輸入，不能減去原本可以的選擇</li>
+</ol>
+<p>用字面上的例子理解：在 <code>Calculator.add()</code> 中，參數可以進到程式主體的條件有三個：分別是 x 為自然數、 y 為質數、以及 x, y 都要小於等於 100。所以如果有一個<code>Calculator</code> 的子類別想要改寫 <code>add()</code> 方法，那這個 <code>add()</code> 的輸入，就不可以少掉原本的這些，像是設定 x 成奇數（讓原本的偶數不見了）、設定 y 成<a href="https://en.wikipedia.org/wiki/Twin_prime">孿生質數</a>（讓原本的非孿生質數不見了）、或者是限制 x,y 都得小於等於 70（讓原本 70-100 的選擇不見了）&hellip;等。</p>
+<ol start="3">
+<li>子類別的輸出，不能多出原本沒有的選擇</li>
+</ol>
+<p>理解 2 之後，3 應該就會比較好懂了：輸出選擇一般指的是回傳，或執行回傳的條件。在 <code>Calculator.add()</code> 中，該方法實際上有兩個回傳：分別是比較直觀的 <code> return result</code> 以及例外處理中的 <code>Exception</code>。先從一般的 return 來看，<code>result</code> 的回傳是一個有理數（<code>RationalNumber</code>），所以在想要改寫 <code>add()</code> 的子類別中，我們可以輸出的東西，最多最多就是原定的那些有理數的範圍，因此像無理數、實數、複數&hellip;等，就不可以拿來被回傳。</p>
+<p>但是輸出的選擇可以維持原樣（或者變得更少），所以回傳有理數、整數、自然數、或質數 &hellip;等都是可以的。此外 <code>Exception</code> 的情況是「只要 x 或 y 大於 100，就輸出例外」，因此如果子類別想要改寫這個條件的話，就至少要維持 if 內的判斷可以包含所有 100 以上的數字（因此 x &gt; 101 之類的就不允許）。此外，這一點也是老闆密碼案例裡違反的項目：父類別中並不允許遇到 <code>NULL</code> 可以回傳 <code>true</code>，但這句話 <code>BossTable</code> 那邊被修改了。</p>
+<ol start="4">
+<li>父類別在有修改的變數，子類別也不要修改</li>
+</ol>
+<p>這個「變數」指的是父類別和子類別共同擁有的變數，像是在 <code>Rectangle</code> 和 <code>Square</code> 中共有的 <code>width</code>, <code>height</code> &hellip;等。在父類別中，如果我們沒在方法裡對參數進行修改，那麼在子類別的改寫方法中，就不可以對那些沒動的參數進行修改。而這也是矩形案例裡違反原則的原因：在 <code>Rectenglr.setWidth()</code> 中，我們只有對 <code>width</code> 這個變數進行修改，沒有對 <code>height</code> 做操作，但 <code>Square.setWidth()</code> 就犯規了。</p>
+<p>因此，如果我們想要寫出一的類別，讓它繼承 <code>Calculator</code>，並改寫 <code>add()</code> 方法，就可以寫成：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 繼承了 [計算機] 類別的 [子計算機]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SubCalculator</span> <span style="color:#66d9ef">extends</span> Calculator <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> PosisiveInteger <span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>NaturalNumber x<span style="color:#f92672">,</span> PositiveNumber y<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NumberOverflowException<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        PosisiveInteger result <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> y<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>稍微檢查一下：［<strong>參數的數量跟順序要保持一致</strong>］沒什麼問題，都是 2 個參數、都是數字類型。［<strong>子類別的輸入，不能減去原本可以的選擇</strong>］沒有問題，x 維持在自然數沒有調整，而 y 從質數變成了任何大於 0 的正數，也沒有變少（反而還變多！）。［<strong>子類別的輸出，不能多出原本沒有的選擇</strong>］同樣成立～原本輸出的類型是任意實數，現在我們把它變成了正整數，雖然減去了一些，但正整數原本就有包含在實數裡面。［<strong>父類別在有修改的變數，子類別也不要修改</strong>］兩個類別都沒有修改變數，自然就沒有違反囉。</p>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

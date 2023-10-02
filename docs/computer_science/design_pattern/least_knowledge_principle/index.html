@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>最少知識原則 | Fonu Site</title>
+
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+
+
+
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+
+
+
+
+
+
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1376ea1b520a8e81fc96bc8980784b7c" class="toggle"  />
+    <label for="section-1376ea1b520a8e81fc96bc8980784b7c" class="flex justify-between">
+      <a role="button" class="">理財規劃</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c54e93a8e594e3d620021aa873f937a8" class="toggle"  />
+    <label for="section-c54e93a8e594e3d620021aa873f937a8" class="flex justify-between">
+      <a role="button" class="">個人記帳</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/finance/track_expenses/202308/" class="">記帳 2023/08</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/finance/track_expenses/202309/" class="">記帳 2023/09</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資工相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>最少知識原則</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="最少知識原則">
+  最少知識原則
+  <a class="anchor" href="#%e6%9c%80%e5%b0%91%e7%9f%a5%e8%ad%98%e5%8e%9f%e5%89%87">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>最少知識原則（Least Knowledge Principle），又被稱為迪米特法則（Law of Demeter，LoD），是物件導向程式設計中的一個設計原則。它的核心思想是「一個物件應該<strong>盡量減少</strong>與其他物件」的交互，只與其直接的 &ldquo;朋友&rdquo; 進行通信或配合，不應該暴露過多的內部細節、或與其他物件產生過多的依賴關係。利用最少知識原則，程式設計師可以減少系統中各個類別之間的耦合度，從而提高程式碼的可維護性和可擴展性。該原則強調了 &ldquo;封裝&rdquo; 的重要性，每個物件應該對其他物件知道得越少越好，只暴露必要的介面供其他物件使用。這個原則的一個常見範例是「在一個類別的方法中，避免直接存取其他物件的屬性，而應該透過該物件的方法來實現所需的操作。」這樣可以降低類別之間的依賴關係，使系統更容易維護和擴展。最少知識原則的主要目標是降低系統的複雜性，改善程式碼的可讀性和可維護性，以及減少潛在的錯誤和問題。它是物件導向設計的重要原則，有助於創造更健壯可靠的軟體系統。</p>
+<p>此外在物件導向程式設計中，一個物件的 &ldquo;朋友&rdquo; 是指那些與之有直接關聯的類別或對象。以下是一些可以被視為物件的 &ldquo;朋友&rdquo; 的範例：［<strong>自身的成員變數</strong>］一個物件可以直接存取自身的成員變數或屬性。［<strong>傳入方法的參數</strong>］一個物件（或方法）可以直接存取傳遞進來的參數，但不包含該參數的其他成員變數或方法。［<strong>方法內部建立的對象</strong>］如果一個方法內部創建了新的對象，那麼這些對象通常可以被認為是呼叫該方法的對象的 &ldquo;朋友&rdquo;。［<strong>關聯關係的物件</strong>］如果一個物件與其他物件有關聯關係（例如，組合、聚合、依賴關係等），那麼這些相關物件也可以被視為該物件的 &ldquo;朋友&rdquo;。但是，應該盡量避免直接存取關聯對象的內部細節，而是透過公共介面進行通訊。［<strong>從其他物件獲得的回傳值</strong>］如果一個物件呼叫了另一個物件的方法，並且接收到了該方法的回傳值，那麼該傳回值的物件可以被視為呼叫物件的 &ldquo;朋友&rdquo;。 需要注意的是，儘管可以與這些 &ldquo;朋友&rdquo; 進行交互，但也要確保不過度依賴它們的內部細節，以保持物件之間的鬆散耦合關係。透過僅與必要的物件通信，可以提高系統的可維護性和可擴展性，使系統更有彈性、更容易維護。</p>
+<ul>
+<li><strong>簡單整理</strong></li>
+</ul>
+<p>只跟足夠親近的「朋友」交流，不要跟朋友的朋友說話。</p>
+<ul>
+<li><strong>程式碼範例</strong></li>
+</ul>
+<p>「最少知識原則」又稱作「迪米特法則」（後面統一用『迪米特法則』稱呼～），該原則的核心思想是「盡可能地減少需要依賴的類別和方法」，它透過定義「朋友」與「非朋友」這兩種不同的關係，將類別與類別、方法與方法、或類別與方法之間的調用加以分類，進而減少對於過量類別和過量方法的嚴重依賴。我們一個簡單的例子來做說明：假設我們正在製作一個「資料庫管理系統」，裡面的其中一項功能是「<code>Customer</code> 可以修改 x 資料庫中， y 資料表的內容」簡單來說就是一個 <code>UPDATE</code> 方法，程式的實作方式如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// [使用者] 類別
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 私有變數 system, 用來獲取 &#39;資料庫系統&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> DatabaseManagementSystem system<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// update 方法，用來更新資料庫中的資料
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> State <span style="color:#a6e22e">update</span><span style="color:#f92672">(</span>String db_name<span style="color:#f92672">,</span> String table_name<span style="color:#f92672">,</span> String query<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 首先利用 connectToSystem() 與資料庫系統建立連線
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">system</span><span style="color:#f92672">.</span><span style="color:#a6e22e">connectToSystem</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 接著利用 getDatabase() 來取得想要操作的資料庫
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 然後利用 getPermission() 取得資料庫得操作權限
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 再來利用 getTable() 獲取想要操作的資料表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 最後利用 setQuery() 進行資料上的修改
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">system</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getDatabase</span><span style="color:#f92672">(</span>db_name<span style="color:#f92672">).</span><span style="color:#a6e22e">getPermission</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getTable</span><span style="color:#f92672">(</span>table_name<span style="color:#f92672">).</span><span style="color:#a6e22e">putQuery</span><span style="color:#f92672">(</span>query<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>我們可以看到：雖然只是一個簡單的 <code>User.update()</code> 方法，裡面卻至少依賴了 4-5 種不同的物件方法（像是 <code>getDatabase()</code>, <code>getPermission()</code>, <code>getTable()</code>, <code>setQuery()</code> &hellip;等）。在這樣的程式邏輯下，應該不難想像：如果這一串呼叫中的其中一個環節出了狀況（例如 <code>getTable()</code> 這個方法突然壞掉了？），那麼整個 <code>User.update()</code> 就沒有無法正確地回應預期的結果。這就是沒有使用到「迪米特原則」可能會對程式帶來的潛在風險。</p>
+<ul>
+<li>朋友</li>
+</ul>
+<p>知道了違反原則可能會造成的問題之後，接下來就可以來說明迪米特原則的程式風格了。但在直接進入到程式範例之前，我們要先來解決另外一個問題：因為迪米特原則的核心是「應該只與你自己的『朋友』建立依賴」，所以我們要先解釋所謂的「朋友」到底是什麼？一般來說，常見對於「朋友」的定義有以下四種：「類別本身的成員變數」「類別本身的方法」「父類別的所有成員與方法」「傳入方法中的所有參數」以及「在方法中建立的任何物件」。可以發現到朋友的類型能夠根據是類別還是方法有所不同，這也是該原則比較特別的一個地方：不僅適用於類別的角度，也適用於方法的角度。</p>
+<ol>
+<li>類別本身的成員變數</li>
+</ol>
+<p>這個應該蠻好理解的？畢竟是「自己本身就有的東西」。「類別本身的成員變數」可以視為是一個自己的親近朋友，無論是 &ldquo;基本資料型態&rdquo;（像是 <code>int</code>, <code>float</code>, <code>long</code>, <code>double</code> &hellip;等），或者是 &ldquo;參考資料型態&rdquo;（各種類別：諸如 <code>Object</code>, <code>System</code>, <code>Database</code>, <code>Table</code> &hellip;等），只要是自己持有的成員變數，都可以視為自己的朋友，這點也包含類別本身的父類別、父父類別、父父父類別 &hellip;等。此外，成員變數如果是 &ldquo;參考資料型態&rdquo; 的話，那麼它封裝成 <code>public</code> 的方法也可以算是「朋友」。</p>
+<ol start="2">
+<li>類別本身的方法</li>
+</ol>
+<p>同理於 1.，類別本身的方法也算是「自己本身就有的東西」，所以類別裡面的所有方法無論是哪一種封裝等級（<code>public</code>, <code>pritected</code>, <code>private</code>）無論是哪一種回傳型態（<code>int</code>, <code>String</code>, <code>Object</code>, <code>Book</code> &hellip;等），無論該方法需不需要參數 &hellip;等，它們都可以視為是自己的朋友。因此在進行這類的呼叫時上不用太過擔心，雖說不上是肆無忌憚，但大體而言，還是可以放心使用。</p>
+<ol start="3">
+<li>傳入方法中的所有參數</li>
+</ol>
+<p>接下來從方法的角度去做切入：在 &ldquo;方法&rdquo; 的程式細節中，除了可以利用到上述的兩種朋友（所屬類別的成員變數、所屬類別的其他方法）之外，還可以將「傳入方法中的所有參數」都視為是自己的朋友，也跟 1 同理，無論是 <code>int</code>, <code>float</code> &hellip;等基本資料型態，還是 <code>Object</code>, <code>String</code> &hellip;等參考資料型態，只要是傳進來的參數，都可以視為是方法本身的「朋友」，此外，邏輯同樣也跟 1 一樣，傳入方法的參數如果是某一個物件的話，該物件封裝成 <code>public</code> 的方法也可以被視為「朋友」。</p>
+<ol start="4">
+<li>在方法中建立的任何物件</li>
+</ol>
+<p>這算是對於類別或方法來說，最為彈性的一個「朋友」。建立物件的方式有兩種：第一種是透過最簡單的 <code>new</code> 關鍵字建立，像是在方法內直接使用 <code>Database db = new Database()</code> 這類的語句來生成新物件。另一種方式是透過回傳值建立起來的物件：可以透過類別本身建立物件、透過成員變數建立物件、或者是物件參數建立物件 &hellip;等，透過這些方式所獲得的物件，同樣可以也算是方法的「朋友」。</p>
+<p>綜上所述，程式的更新可以改寫成以下的樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// [使用者] 類別
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> DatabaseManagementSystem system<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> State <span style="color:#a6e22e">update</span><span style="color:#f92672">(</span>String db_name<span style="color:#f92672">,</span> String query<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">system</span><span style="color:#f92672">.</span><span style="color:#a6e22e">connectToSystem</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        State State <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">system</span><span style="color:#f92672">.</span><span style="color:#a6e22e">update</span><span style="color:#f92672">(</span>db_name<span style="color:#f92672">,</span> query<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> State<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他 User 中的方法 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他 User 中的方法 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他 User 中的方法 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// [資料庫系統] 類別
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DatabaseManagementSystem</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> Database<span style="color:#f92672">&gt;</span> databases<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">connectToSystem</span><span style="color:#f92672">(</span>User user<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 一些連接資料庫的程式 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> State <span style="color:#a6e22e">update</span><span style="color:#f92672">(</span>String db_name<span style="color:#f92672">,</span> String query<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        Database db <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getDatabase</span><span style="color:#f92672">(</span>db_name<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        State state <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span><span style="color:#a6e22e">putQuery</span><span style="color:#f92672">(</span>query<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> state<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Database <span style="color:#a6e22e">getDatabase</span><span style="color:#f92672">(</span>String db_name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 一些取得資料庫的程式 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他 DatabaseManagementSystem 中的方法 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他 DatabaseManagementSystem 中的方法 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他 DatabaseManagementSystem 中的方法 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// [資料庫] 類別
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Database</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> State <span style="color:#a6e22e">putQuery</span><span style="color:#f92672">(</span>String query<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 一些執行 query 的操作
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他 Database 中的方法 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他 Database 中的方法 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他 Database 中的方法 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>現在， <code>User</code> 的 <code>update</code> 方法只跟 <code>system</code> 這個變數，以及 <code>system.update()</code> 這個方法保持依賴，如果程式中的其他部分（例：<code>Database.putQuery()</code>）發生問題，雖然就結果而言，還是會使得 <code>User.update()</code> 無法順利運行，但是因為現在 <code>User</code> 已經沒有再依賴 <code>Database</code> 的相關方法了，因此即便 <code>putQuery()</code> 有需要修改細節上的程式內容、或者是修改傳入的參數 &hellip;等，都不會對 <code>User.update()</code> 方法造成影響。這就是「降低方法依賴」所帶來的好處，也是迪米特原則倡導的一個程式撰寫方法。</p>
+<hr>
+<ul>
+<li>鏈式呼叫</li>
+</ul>
+<p>最後，還有一個在該原則上很容易搞混的問題：鏈式呼叫。雖然在大部分的情況下，當我們想要看 Java 內的程式是否符合迪米特原則時，對直觀的方法會是「數一行程式上存在著多少個 <code>.</code>」，但不是所有「超過 1 個 <code>.</code> 的程式」就是需要修改、不符合迪米特法則的程式。一個最常見的例子是：<code>System.out.println()</code>，雖然程式裡面包含了兩個 <code>.</code>，但這句話本質上就是一個單純的輸出指令，不需要做任何的修改。</p>
+<p>還有一種常見情況是 <code>return this</code> 的時候，例如當一個 <code>Database</code> 需要創建一個新的 <code>Table</code> 時，他會不停地對某一個 <code>Table</code> 物件做修改和操作，雖然在視覺上，這個 <code>Database</code> 呼叫了很多不同種類的方法，但追根結底，對於這個 <code>Database</code> 來說，它所依賴的物件易始至終並沒有發生任何的變化，那這樣得情況下，即使呼叫了很多不同種類的方法，也還是可以視為一個「與朋友溝通」的操作，就像是下面這樣：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Database</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一些 Database 的成員變數
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 一些 Database 的成員變數
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">createTable</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        Table table <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Table<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Student&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        table<span style="color:#f92672">.</span><span style="color:#a6e22e">charSet</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;UTF-8&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">addColumn</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">,</span> Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">setUnique</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">setAutoIncrement</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">addColumn</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">,</span> String<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">addColumn</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;age&#34;</span><span style="color:#f92672">,</span> Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">addColumn</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sex&#34;</span><span style="color:#f92672">,</span> String<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">addColumn</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;teacher&#34;</span><span style="color:#f92672">,</span> Teacher<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">addColumn</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;parents&#34;</span><span style="color:#f92672">,</span> Person<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">addColumn</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;contact&#34;</span><span style="color:#f92672">,</span> String<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>對於 <code>createTable()</code> 這個方法來說，雖然在方法裡面出現了「一行程式裡面出現多個 <code>.</code>」的情況，但自始至終，這些方法在執行和操作的過程，都只會影響到最一開始那個被建立的 <code>table</code> 物件，而 <code>table</code> 物件是「方法中被建立的物件」，也就是法則裡面所定義的「朋友」，因此，即便這行程式裡面出現了許多方法間的呼叫，但就本質上而言，這個 <code>createTable()</code> 仍是沒有違反迪米特法則的。</p>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
