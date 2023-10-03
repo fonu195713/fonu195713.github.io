@@ -250,6 +250,23 @@ Log websiteInfo = boss.getInfo(&amp;#34;WebsiteUpdate&amp;#34;); 朋友 知道�
     </item>
     
     <item>
+      <title>簡單工廠模式</title>
+      <link>https://fonu195713.github.io/docs/computer_science/design_pattern/simple_factory_pattern/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/simple_factory_pattern/</guid>
+      <description>簡單工廠模式#ChatGPT 的說明 簡單工廠模式（Simple Factory Pattern）是一種創建型設計模式，屬於工廠模式的變體。它旨在提供一個通用的、用於創建物件的接口，而隱藏創建物件的具體細節。簡單工廠模式由三個主要部分組成：［客戶類別］（Client class）：客戶是使用工廠模式的程式碼部分。客戶透過呼叫簡單工廠裡的公開方法（例：getProduct()），請求工廠創建具體產品的物件。［工廠類別］（Factory Class）：工廠類別負責生成具體的物件。這個類別通常包含一個（或多個）靜態方法，根據輸入的參數或條件建立不同類型的物件。[具體產品類別]（Concrete Product Class）：具體產品類別是簡單工廠最後會產出的物件，工廠類別透過判斷條件或參數來建立不同的特定產品物件。［抽象產品類別］（Abstract Product Class）：在某些簡單工廠中還會定義一個抽象產品類別。該類別定義了產品物件的通用接口，它是所有特定產品類別的共同父類別或介面。
+簡單工廠模式的步驟如下：首先，定義一個抽象的產品類，讓該類別定義一些產品的共同介面或抽象方法，或者直接建立具體的產品類，實作抽象產品類別的介面或方法，定義具體產品的屬性與行為。接著，建立一個工廠類別，該工廠類別可以包含一個靜態方法或非靜態方法，根據輸入參數或條件建立並傳回特定產品的實例。最後，客戶端可以透過呼叫工廠類別的靜態（或非靜態）方法來取得所需的具體產品實例。
+簡單工廠模式包含著幾個優點：它可以封裝物件的建立過程。透過簡單工廠模式，客戶端可以在「不需要知道物件的具體建立細節」的前提下獲得物件。降低了客戶端與特定產品類別之間的耦合度。除此之外，這種做法也提升了程式的靈活性，因為客戶端只需要依賴於工廠所提供的方法或介面即可，不需要依賴任何的具體產品。再來，工廠可以根據不同的需要，動態切換回傳給客戶的具體產品類，而不影響需要客戶端的程式碼 &amp;hellip;。然而，簡單工廠模式還是有著一些缺點的：例如每次增加新的產品類型時，都需要修改工廠類，違反了開放封閉原則。除此之外，在一些複雜的場景下，可能會導致簡單工廠需要負責過多的產品細節，使得類別變得過與旁大過於臃腫，進而違反單一職責原則。
+簡單整理 問題描述：Client 對於 Product 有著高度的依賴
+解決方案：透過建立一個 Factory 類別，解決客戶與產品間的依賴
+程式細節：參照下面的段落
+UML 圖：
+程式碼範例 在常見的設計模式裡面，跟「工廠」有關的設計模式共有三種，分別是簡單工廠模式、工廠方法模式、和抽象工廠模式。簡單工廠模式顧名思義，就是透過一個工廠，來簡單地改寫程式碼的一種設計模式。讓我們來想像一種情境：假設我們正在製作一個「繪製不同圖型」的程式，裡面有一個一個用來繪製圖形的畫布 Canvas，以及一些預設的可繪製圖形 Circle, Square, Rectangle, Triangle, 和 Polygon &amp;hellip;等。我們首先假設所有的圖形都繼承於 Shape 類別，我們也假設只要呼叫 Canvas 裡面的 addShape() 方法，並透過傳入的 String 參數，該方法就會幫我們繪製圖形，如下所示：
+// 抽象父類別 [形狀] abstract class Shape {} // 各種繼承 [形狀] 的子類別們 class Circle extends Shape {} class Square extends Shape {} class Rectangle extends Shape {} class Triangle extends Shape {} class Polygon extends Shape {} // 繪圖類別 `Canvas` class Canvas { public void addShape(String shape) { // 建立圖形變數 &amp;#39;shape&amp;#39; Shape shape = null; // 把 &amp;#39;shape&amp;#39; 變成我們預設的其中一種形狀 if(shape.</description>
+    </item>
+    
+    <item>
       <title>記帳 2023/08</title>
       <link>https://fonu195713.github.io/docs/finance/track_expenses/202308/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

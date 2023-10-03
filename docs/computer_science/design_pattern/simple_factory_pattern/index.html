@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>簡單工廠模式 | Fonu Site</title>
+
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+
+
+
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+
+
+
+
+
+
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1376ea1b520a8e81fc96bc8980784b7c" class="toggle"  />
+    <label for="section-1376ea1b520a8e81fc96bc8980784b7c" class="flex justify-between">
+      <a role="button" class="">理財規劃</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/finance/track_expenses/" class="">個人記帳</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資工相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>簡單工廠模式</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="簡單工廠模式">
+  簡單工廠模式
+  <a class="anchor" href="#%e7%b0%a1%e5%96%ae%e5%b7%a5%e5%bb%a0%e6%a8%a1%e5%bc%8f">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>簡單工廠模式（Simple Factory Pattern）是一種創建型設計模式，屬於工廠模式的變體。它旨在提供一個通用的、用於創建物件的接口，而隱藏創建物件的具體細節。簡單工廠模式由三個主要部分組成：［<strong>客戶類別</strong>］（Client class）：客戶是使用工廠模式的程式碼部分。客戶透過呼叫簡單工廠裡的公開方法（例：<code>getProduct()</code>），請求工廠創建具體產品的物件。［<strong>工廠類別</strong>］（Factory Class）：工廠類別負責生成具體的物件。這個類別通常包含一個（或多個）靜態方法，根據輸入的參數或條件建立不同類型的物件。[<strong>具體產品類別</strong>]（Concrete Product Class）：具體產品類別是簡單工廠最後會產出的物件，工廠類別透過判斷條件或參數來建立不同的特定產品物件。［<strong>抽象產品類別</strong>］（Abstract Product Class）：在某些簡單工廠中還會定義一個抽象產品類別。該類別定義了產品物件的通用接口，它是所有特定產品類別的共同父類別或介面。</p>
+<p>簡單工廠模式的步驟如下：首先，定義一個抽象的產品類，讓該類別定義一些產品的共同介面或抽象方法，或者直接建立具體的產品類，實作抽象產品類別的介面或方法，定義具體產品的屬性與行為。接著，建立一個工廠類別，該工廠類別可以包含一個靜態方法或非靜態方法，根據輸入參數或條件建立並傳回特定產品的實例。最後，客戶端可以透過呼叫工廠類別的靜態（或非靜態）方法來取得所需的具體產品實例。</p>
+<p>簡單工廠模式包含著幾個優點：它可以封裝物件的建立過程。透過簡單工廠模式，客戶端可以在「不需要知道物件的具體建立細節」的前提下獲得物件。降低了客戶端與特定產品類別之間的耦合度。除此之外，這種做法也提升了程式的靈活性，因為客戶端只需要依賴於工廠所提供的方法或介面即可，不需要依賴任何的具體產品。再來，工廠可以根據不同的需要，動態切換回傳給客戶的具體產品類，而不影響需要客戶端的程式碼 &hellip;。然而，簡單工廠模式還是有著一些缺點的：例如每次增加新的產品類型時，都需要修改工廠類，違反了<a href="../open_closed_principle">開放封閉原則</a>。除此之外，在一些複雜的場景下，可能會導致簡單工廠需要負責過多的產品細節，使得類別變得過與旁大過於臃腫，進而違反<a href="../single_responsibility_principle">單一職責原則</a>。</p>
+<ul>
+<li><strong>簡單整理</strong></li>
+</ul>
+<p>問題描述：<code>Client</code> 對於 <code>Product</code> 有著高度的依賴</p>
+<p>解決方案：透過建立一個 <code>Factory</code> 類別，解決客戶與產品間的依賴</p>
+<p>程式細節：參照下面的段落</p>
+<p>UML 圖：</p>
+<p><img src="/image/design_pattern/simple_factory_uml.png" alt="image" /></p>
+<ul>
+<li><strong>程式碼範例</strong></li>
+</ul>
+<p>在常見的設計模式裡面，跟「工廠」有關的設計模式共有三種，分別是簡單工廠模式、工廠方法模式、和抽象工廠模式。簡單工廠模式顧名思義，就是透過一個工廠，來簡單地改寫程式碼的一種設計模式。讓我們來想像一種情境：假設我們正在製作一個「繪製不同圖型」的程式，裡面有一個一個用來繪製圖形的畫布 <code>Canvas</code>，以及一些預設的可繪製圖形 <code>Circle</code>, <code>Square</code>, <code>Rectangle</code>, <code>Triangle</code>, 和 <code>Polygon</code> &hellip;等。我們首先假設所有的圖形都繼承於 <code>Shape</code> 類別，我們也假設只要呼叫 <code>Canvas</code> 裡面的 <code>addShape()</code> 方法，並透過傳入的 String 參數，該方法就會幫我們繪製圖形，如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 抽象父類別 [形狀]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Shape</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 各種繼承 [形狀] 的子類別們
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Circle</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Square</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Triangle</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Polygon</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 繪圖類別 `Canvas`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Canvas</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addShape</span><span style="color:#f92672">(</span>String shape<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 建立圖形變數 &#39;shape&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Shape shape <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 把 &#39;shape&#39; 變成我們預設的其中一種形狀
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Circle&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            shape <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Circle<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Square&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            shape <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Square<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Rectangle&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            shape <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Rectangle<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Triangle&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            shape <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Triangle<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Polygon&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            shape <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Polygon<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 檢查 shape 是否為 null ?
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> ShapeIsNotExistException<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 畫圖
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">draw</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">draw</span><span style="color:#f92672">(</span>Shape shape<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 繪製圓形的方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他 Canvas 中的方法 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他 Canvas 中的方法 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他 Canvas 中的方法 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>從執行的角度來說，這支本身並沒有問題，基本上我們只要給定正確的參數（像是 <code>canvas.addShape(&quot;Circle&quot;)</code> 之類的），該繪製軟體就會正確地幫我們把圖形呈現在畫布上面。但從「設計原則」的角度來說，它其實已經違反<a href="../single_responsibility_principle">單一職責原則</a>了：因為現在 <code>Canvas</code> 類別不僅要管理「繪圖時的相關資訊」（像是設定繪圖板大小、長寬、設定各種背景參數 &hellip;等），它同時也需要管理「如何生成各種不同的圖形」（圓形怎麼畫？正方形多大？長方形要什麼顏色 &hellip;等）。</p>
+<p>因此，一個比較好的改寫方式是：先透過一個「形狀工廠」（<code>ShapeFactory</code>）來生產不同的形狀，並設定不同形狀的參數、顏色 &hellip;等。再將 <code>ShapeFactory</code> 製作好的形狀回傳給<code>Canvas</code>，讓 <code>Canvas</code> 透過類別裡面的 <code>draw()</code> 方法，直接將該工廠所生產的圖形放到使用者的畫布上面。這樣一來，就可以完成「<code>ShapeFactory</code> 負責生產圖形」「<code>Canvas</code> 類別負責設定畫布的相關資訊」的分工：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// [圖形] 類別，和剛剛一樣
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Shape</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Circle</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Square</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Triangle</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Polygon</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// [圖形工廠] 類別，用來生產不同的形狀
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ShapeFactory</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Shape <span style="color:#a6e22e">createShape</span><span style="color:#f92672">(</span>String shape<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        Shape shape <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Circle&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            shape <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Circle<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Square&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            shape <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Square<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Rectangle&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            shape <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Rectangle<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Triangle&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            shape <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Triangle<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Polygon&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            shape <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Polygon<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>shape <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> ShapeIsNotExistException<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> shape<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// [畫布] 類別，用來管理跟 &#34;畫布&#34; 有關的各種資訊
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Canvas</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ShapeFactory shapeFactory<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Shape <span style="color:#a6e22e">addShape</span><span style="color:#f92672">(</span>String shape<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        Shape shape <span style="color:#f92672">=</span> shapeFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">createShape</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">draw</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>透過簡單工廠模式，將不同類型的工作分離，進而讓程式達到<a href="../single_responsibility_principle.md">單一職責原則</a>的規範，就是簡單工廠模式最常見的使用情境。另外，因為簡單工廠模式<strong>通常</strong>都不會有什麼太過複雜的內容，因此相對於在不同的類別裡生成不同的 <code>SimpleFactory</code> 物件，如果是對於程式效率很注重的人，會將工廠裡面的方法直接加上一個 <code>static</code> 關鍵字，讓整個方法變成一個靜態方法，如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ShapeFactory</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Shape <span style="color:#a6e22e">createShape</span><span style="color:#f92672">(</span>String shape<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 生成圖型的程式細節 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Canvas</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Shape <span style="color:#a6e22e">addShape</span><span style="color:#f92672">(</span>String shape<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 不需要生成 factory 物件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 直接通過類別呼叫方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 可以節省一些 `Canvas` 所需的記憶體空間
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Shape shape <span style="color:#f92672">=</span> ShapeFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">createShape</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">draw</span><span style="color:#f92672">(</span>shape<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>透過將方法宣告成 <code>static</code>，使得其餘程式在調用 <code>createShape()</code> 方法時，不需要先創建一個 <code>ShapeFactory</code> 的物件，以節省更多的記憶體空間，就是這類作法的其中一個原因。而這種「透過工廠中的靜態方法，生成工廠中的產品」的程式撰寫方式，也可以被稱作「靜態工廠」。但需要注意的事情是：靜態工廠只是一種工廠模式的「優化方法」，而不是一種「設計模式」，工廠類型的設計模式只有簡單工廠、工廠方法、和抽象工廠三種。</p>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
