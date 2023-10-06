@@ -222,6 +222,54 @@ public class StudentManagementSystem { public void registerStudent(Student stude
     </item>
     
     <item>
+      <title>工廠方法模式</title>
+      <link>https://fonu195713.github.io/docs/_trash/factory_method_pattern/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/_trash/factory_method_pattern/</guid>
+      <description>工廠方法模式#ChatGPT 的說明 工廠方法模式（Factory Method Pattern）是一種創建型設計模式，它提供了一種創建物件的介面，但允許子類別決定要實例化的類別。這種模式的核心思想是「將物件的創建過程延遲到子類別中去實現。」從而達到物件的 &amp;ldquo;創建&amp;rdquo; 與 &amp;ldquo;使用&amp;rdquo; 分離，使得系統更加靈活和可擴展。工廠方法模式的主要組成部分包括以下角色：［抽象工廠］（Abstract Factory）：抽象工廠定義了一個抽象的工廠介面，包含一個用於建立產品物件的抽象方法。通常情況下，抽象工廠中可能會包含多個建立產品的方法，每個方法用於建立不同類型的產品。［具體工廠］（Concrete Factory）：具體工廠是實現抽象工廠介面的類別，負責創建具體產品。每個具體工廠對應於一種具體產品（或一組相關的特定產品）。［抽象產品］（Abstract Product）：抽象產品定義一個抽象的產品介面，通常包含了產品的通用方法或通用屬性。［具體產品］（Concrete Product）：具體產品是實現抽象產品介面的具體類別，用以表示不同類型的產品。
+工廠方法模式的關鍵點是「透過將物件的創建委託給子類的具體工廠來實現。」這樣客戶端程式碼不需要直接依賴特定的工廠類型，而只需要依賴抽象工廠和抽象產品介面。這種方式使得系統更容易擴展，可以輕鬆添加新的工廠類型或變體，而無需修改現有的客戶端程式碼。以下是工廠方法模式的一些優點：［可擴充性］：使用工廠方法模式，可以透過建立新的特定工廠類別，來新增新的產品類型，而不影響現有的程式碼。［封裝性］：客戶端程式碼與特定的工廠類別解耦，只依賴抽象工廠和抽象產品接口，隱藏了具體產品的實作細節。［靈活性］：不同的具體工廠可以選擇不同的產品實現方式，以適應不同的需求和不同的環境。
+簡單整理 問題描述：使用唯一的 Factory 可能會使該類別變得龐大
+解決方案：透過建立 AbstractFactory 類別，讓 Factory 變得更加靈活
+程式細節：參照下面的段落
+UML 圖：
+程式碼範例 貼心提醒：建議先看過簡單工廠模式會比較好。
+工廠方法模式，算是比簡單工廠模式再更複雜一點的程式。那也因為這個模式跟簡單工廠很類似，所以我們就用同樣的例子繼續做解釋：在簡單工廠模式中，我們假設正在製作一個「資料庫操作程式系統」，並且有著幾個比較重要的類別：分別是代表使用者的 User、代表資料庫的 Database、以及代表工廠的 QueryFactory。User 可以透過 Database 裡面的方法（通常為靜態？），進行像是 INSERT, SELECT ..等不同的資料庫操作，而 Database 在接收到 User 的 query 之後，會再轉手交給 QueryFactory 負責解析，而 factory 則會根據 query 的不同，回傳不同的結果。
+class User { public QueryResult query(String query) { QueryResult queryResult = Database.getQueryResult(query); return queryResult; } } class Database { public static QueryResult query(String query) { QueryResult queryResult = QueryFactory.</description>
+    </item>
+    
+    <item>
+      <title>工廠方法模式</title>
+      <link>https://fonu195713.github.io/docs/computer_science/design_pattern/factory_method_pattern/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/factory_method_pattern/</guid>
+      <description>工廠方法模式#ChatGPT 的說明 工廠方法模式（Factory Method Pattern）是一種創建型設計模式，它提供了一種創建物件的介面，但允許子類別決定要實例化的類別。這種模式的核心思想是「將物件的創建過程延遲到子類別中去實現。」從而達到物件的 &amp;ldquo;創建&amp;rdquo; 與 &amp;ldquo;使用&amp;rdquo; 分離，使得系統更加靈活和可擴展。工廠方法模式的主要組成部分包括以下角色：［抽象工廠］（Abstract Factory）：抽象工廠定義了一個抽象的工廠介面，包含一個用於建立產品物件的抽象方法。通常情況下，抽象工廠中可能會包含多個建立產品的方法，每個方法用於建立不同類型的產品。［具體工廠］（Concrete Factory）：具體工廠是實現抽象工廠介面的類別，負責創建具體產品。每個具體工廠對應於一種具體產品（或一組相關的特定產品）。［抽象產品］（Abstract Product）：抽象產品定義一個抽象的產品介面，通常包含了產品的通用方法或通用屬性。［具體產品］（Concrete Product）：具體產品是實現抽象產品介面的具體類別，用以表示不同類型的產品。
+工廠方法模式的關鍵點是「透過將物件的創建委託給子類的具體工廠來實現。」這樣客戶端程式碼不需要直接依賴特定的工廠類型，而只需要依賴抽象工廠和抽象產品介面。這種方式使得系統更容易擴展，可以輕鬆添加新的工廠類型或變體，而無需修改現有的客戶端程式碼。以下是工廠方法模式的一些優點：［可擴充性］：使用工廠方法模式，可以透過建立新的特定工廠類別，來新增新的產品類型，而不影響現有的程式碼。［封裝性］：客戶端程式碼與特定的工廠類別解耦，只依賴抽象工廠和抽象產品接口，隱藏了具體產品的實作細節。［靈活性］：不同的具體工廠可以選擇不同的產品實現方式，以適應不同的需求和不同的環境。
+簡單整理 問題描述：使用唯一的 Factory 可能會使該類別變得龐大
+解決方案：透過建立 AbstractFactory 類別，讓 Factory 變得更加靈活
+程式細節：參照下面的段落
+UML 圖：
+程式碼範例 工廠方法模式，是比[簡單工廠]模式還要再複雜一點點的設計模式。主要的使用情境是「當單的 simple Factory 變得過於龐大」的時候。同樣拿簡單工廠模式中的「傢俱系統」作為例子：假設我們的家俱利統中，除了可以展示各種不同類別的傢俱之外，它可以針對不同的傢俱分類（像是金屬製、實木製、塑膠製 &amp;hellip;等）展示出更加細節的傢俱種類（像是實木桌、橡木桌、組合木桌、大理石桌、塑膠桌 &amp;hellip;等），此外每個傢俱都有自己的材質組合（衣櫃不會有玻璃的、床架只有木頭跟金屬的 &amp;hellip;等），如果我們還是用原本的簡單工廠模式來實作這項功能的話，可能會變成下面這個樣子：
+class FurnutireFactory { // 靜態的 createFurniture() 方法 // 現在多了一個 [材質] 的參數 public static Furniture createFurniture(String material, String name) { Furniture furniture = null; if(name.equal(&amp;#34;chair&amp;#34;)) { if(material.equals(&amp;#34;Wooden&amp;#34;)) furniture = new WoodenChair(); else if(material.equals(&amp;#34;plastic&amp;#34;)) furniture = new PlasticChair(); else if(material.</description>
+    </item>
+    
+    <item>
+      <title>抽象工廠模式</title>
+      <link>https://fonu195713.github.io/docs/computer_science/design_pattern/abstract_factory_pattern/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/abstract_factory_pattern/</guid>
+      <description>抽象工廠模式#ChatGPT 的說明
+簡單整理
+問題描述：
+解決方案：
+程式細節：參照下面的段落
+UML 圖：
+程式碼範例 </description>
+    </item>
+    
+    <item>
       <title>最少知識原則</title>
       <link>https://fonu195713.github.io/docs/_trash/least_knowledge_principle/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -251,11 +299,11 @@ Log websiteInfo = boss.getInfo(&amp;#34;WebsiteUpdate&amp;#34;); 朋友 知道�
     
     <item>
       <title>簡單工廠模式</title>
-      <link>https://fonu195713.github.io/docs/computer_science/design_pattern/simple_factory_pattern/</link>
+      <link>https://fonu195713.github.io/docs/_trash/simple_factory_pattern_1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/simple_factory_pattern/</guid>
-      <description>簡單工廠模式#ChatGPT 的說明 簡單工廠模式（Simple Factory Pattern）是一種創建型設計模式，屬於工廠模式的變體。它旨在提供一個通用的、用於創建物件的接口，而隱藏創建物件的具體細節。簡單工廠模式由三個主要部分組成：［客戶類別］（Client class）：客戶是使用工廠模式的程式碼部分。客戶透過呼叫簡單工廠裡的公開方法（例：getProduct()），請求工廠創建具體產品的物件。［工廠類別］（Factory Class）：工廠類別負責生成具體的物件。這個類別通常包含一個（或多個）靜態方法，根據輸入的參數或條件建立不同類型的物件。[具體產品類別]（Concrete Product Class）：具體產品類別是簡單工廠最後會產出的物件，工廠類別透過判斷條件或參數來建立不同的特定產品物件。［抽象產品類別］（Abstract Product Class）：在某些簡單工廠中還會定義一個抽象產品類別。該類別定義了產品物件的通用接口，它是所有特定產品類別的共同父類別或介面。
+      <guid>https://fonu195713.github.io/docs/_trash/simple_factory_pattern_1/</guid>
+      <description>簡單工廠模式#ChatGPT 的說明 簡單工廠模式（Simple Factory Pattern）是一種創建型設計模式，屬於工廠模式的變體。它旨在提供一個通用的、用於創建物件的接口，而隱藏創建物件的具體細節。簡單工廠模式由三個主要部分組成：［客戶類別］（Client class）：客戶是使用工廠模式的程式碼部分。客戶透過呼叫簡單工廠裡的公開方法（例：getProduct()），請求工廠創建具體產品的物件。［工廠類別］（Factory Class）：工廠類別負責生成具體的物件。這個類別通常包含一個（或多個）靜態方法，根據輸入的參數或條件建立不同類型的物件。[具體產品類別]（Concrete Product Class）：具體產品類別是簡單工廠最後會產出的物件，工廠類別透過判斷條件或參數來建立不同的特定產品物件。（可選）［抽象產品類別］（Abstract Product Class）：在某些簡單工廠中還會定義一個抽象產品類別。該類別定義了產品物件的通用接口，它是所有特定產品類別的共同父類別或介面。
 簡單工廠模式的步驟如下：首先，定義一個抽象的產品類，讓該類別定義一些產品的共同介面或抽象方法，或者直接建立具體的產品類，實作抽象產品類別的介面或方法，定義具體產品的屬性與行為。接著，建立一個工廠類別，該工廠類別可以包含一個靜態方法或非靜態方法，根據輸入參數或條件建立並傳回特定產品的實例。最後，客戶端可以透過呼叫工廠類別的靜態（或非靜態）方法來取得所需的具體產品實例。
 簡單工廠模式包含著幾個優點：它可以封裝物件的建立過程。透過簡單工廠模式，客戶端可以在「不需要知道物件的具體建立細節」的前提下獲得物件。降低了客戶端與特定產品類別之間的耦合度。除此之外，這種做法也提升了程式的靈活性，因為客戶端只需要依賴於工廠所提供的方法或介面即可，不需要依賴任何的具體產品。再來，工廠可以根據不同的需要，動態切換回傳給客戶的具體產品類，而不影響需要客戶端的程式碼 &amp;hellip;。然而，簡單工廠模式還是有著一些缺點的：例如每次增加新的產品類型時，都需要修改工廠類，違反了開放封閉原則。除此之外，在一些複雜的場景下，可能會導致簡單工廠需要負責過多的產品細節，使得類別變得過與旁大過於臃腫，進而違反單一職責原則。
 簡單整理 問題描述：Client 對於 Product 有著高度的依賴
@@ -264,6 +312,57 @@ Log websiteInfo = boss.getInfo(&amp;#34;WebsiteUpdate&amp;#34;); 朋友 知道�
 UML 圖：
 程式碼範例 在常見的設計模式裡面，跟「工廠」有關的設計模式共有三種，分別是簡單工廠模式、工廠方法模式、和抽象工廠模式。簡單工廠模式顧名思義，就是透過一個工廠，來簡單地改寫程式碼的一種設計模式。讓我們來想像一種情境：假設我們正在製作一個「繪製不同圖型」的程式，裡面有一個一個用來繪製圖形的畫布 Canvas，以及一些預設的可繪製圖形 Circle, Square, Rectangle, Triangle, 和 Polygon &amp;hellip;等。我們首先假設所有的圖形都繼承於 Shape 類別，我們也假設只要呼叫 Canvas 裡面的 addShape() 方法，並透過傳入的 String 參數，該方法就會幫我們繪製圖形，如下所示：
 // 抽象父類別 [形狀] abstract class Shape {} // 各種繼承 [形狀] 的子類別們 class Circle extends Shape {} class Square extends Shape {} class Rectangle extends Shape {} class Triangle extends Shape {} class Polygon extends Shape {} // 繪圖類別 `Canvas` class Canvas { public void addShape(String shape) { // 建立圖形變數 &amp;#39;shape&amp;#39; Shape shape = null; // 把 &amp;#39;shape&amp;#39; 變成我們預設的其中一種形狀 if(shape.</description>
+    </item>
+    
+    <item>
+      <title>簡單工廠模式</title>
+      <link>https://fonu195713.github.io/docs/_trash/simple_factory_pattern_2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/_trash/simple_factory_pattern_2/</guid>
+      <description>簡單工廠模式#ChatGPT 的說明 簡單工廠模式（Simple Factory Pattern）是一種創建型設計模式，屬於工廠模式的變體。它旨在提供一個通用的、用於創建物件的接口，而隱藏創建物件的具體細節。簡單工廠模式由三個主要部分組成：［客戶類別］（Client class）：客戶是使用工廠模式的程式碼部分。客戶透過呼叫簡單工廠裡的公開方法（例：getProduct()），請求工廠創建具體產品的物件。［工廠類別］（Factory Class）：工廠類別負責生成具體的物件。這個類別通常包含一個（或多個）靜態方法，根據輸入的參數或條件建立不同類型的物件。[具體產品類別]（Concrete Product Class）：具體產品類別是簡單工廠最後會產出的物件，工廠類別透過判斷條件或參數來建立不同的特定產品物件。（可選）［抽象產品類別］（Abstract Product Class）：在某些簡單工廠中還會定義一個抽象產品類別。該類別定義了產品物件的通用接口，它是所有特定產品類別的共同父類別或介面。
+簡單工廠模式的步驟如下：首先，定義一個抽象的產品類，讓該類別定義一些產品的共同介面或抽象方法，或者直接建立具體的產品類，實作抽象產品類別的介面或方法，定義具體產品的屬性與行為。接著，建立一個工廠類別，該工廠類別可以包含一個靜態方法或非靜態方法，根據輸入參數或條件建立並傳回特定產品的實例。最後，客戶端可以透過呼叫工廠類別的靜態（或非靜態）方法來取得所需的具體產品實例。
+簡單工廠模式包含著幾個優點：它可以封裝物件的建立過程。透過簡單工廠模式，客戶端可以在「不需要知道物件的具體建立細節」的前提下獲得物件。降低了客戶端與特定產品類別之間的耦合度。除此之外，這種做法也提升了程式的靈活性，因為客戶端只需要依賴於工廠所提供的方法或介面即可，不需要依賴任何的具體產品。再來，工廠可以根據不同的需要，動態切換回傳給客戶的具體產品類，而不影響需要客戶端的程式碼 &amp;hellip;。然而，簡單工廠模式還是有著一些缺點的：例如每次增加新的產品類型時，都需要修改工廠類，違反了開放封閉原則。除此之外，在一些複雜的場景下，可能會導致簡單工廠需要負責過多的產品細節，使得類別變得過與旁大過於臃腫，進而違反單一職責原則。
+簡單整理 問題描述：Client 對於 Product 有著高度的依賴
+解決方案：透過建立一個 Factory 類別，解決客戶與產品間的依賴
+程式細節：參照下面的段落
+UML 圖：
+程式碼範例 在常見的設計模式裡，跟「工廠」有關的設計模式共有三種。它們從簡單到複雜分別是簡單工廠模式、工廠方法模式、和抽象工廠模式。簡單工廠模式顧名思義，就是透過生成一個「簡單的」工廠，來分離不同職責的程式碼，讓程式可以達到更好的靈活性、可讀性，和良好的封裝性。讓我們用一個簡單的例子來做說明：假設我們現在正在撰寫一個「資料庫操作程式系統」，該系統需要包含一些使用者對於資料庫的簡單操作，像是 SELECT, UPDATE&amp;hellip;等，在不使用簡單工廠模式的情況下，程式可能會寫成像是下面的這個樣子：
+// 資料庫系統中的 [使用者] 類別 class User { private Database database; private String account; private String password; public User(String account, String password) { this.account = account; this.password = password; } public QueryResult query(Database.operation operation, String query) { this.database = this.</description>
+    </item>
+    
+    <item>
+      <title>簡單工廠模式</title>
+      <link>https://fonu195713.github.io/docs/_trash/simple_factory_pattern_3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/_trash/simple_factory_pattern_3/</guid>
+      <description>簡單工廠模式#ChatGPT 的說明 簡單工廠模式（Simple Factory Pattern）是一種創建型設計模式，屬於工廠模式的變體。它旨在提供一個通用的、用於創建物件的接口，而隱藏創建物件的具體細節。簡單工廠模式由三個主要部分組成：［客戶類別］（Client class）：客戶是使用工廠模式的程式碼部分。客戶透過呼叫簡單工廠裡的公開方法（例：getProduct()），請求工廠創建具體產品的物件。［工廠類別］（Factory Class）：工廠類別負責生成具體的物件。這個類別通常包含一個（或多個）靜態方法，根據輸入的參數或條件建立不同類型的物件。[具體產品類別]（Concrete Product Class）：具體產品類別是簡單工廠最後會產出的物件，工廠類別透過判斷條件或參數來建立不同的特定產品物件。（可選）［抽象產品類別］（Abstract Product Class）：在某些簡單工廠中還會定義一個抽象產品類別。該類別定義了產品物件的通用接口，它是所有特定產品類別的共同父類別或介面。
+簡單工廠模式的步驟如下：首先，定義一個抽象的產品類，讓該類別定義一些產品的共同介面或抽象方法，或者直接建立具體的產品類，實作抽象產品類別的介面或方法，定義具體產品的屬性與行為。接著，建立一個工廠類別，該工廠類別可以包含一個靜態方法或非靜態方法，根據輸入參數或條件建立並傳回特定產品的實例。最後，客戶端可以透過呼叫工廠類別的靜態（或非靜態）方法來取得所需的具體產品實例。
+簡單工廠模式包含著幾個優點：它可以封裝物件的建立過程。透過簡單工廠模式，客戶端可以在「不需要知道物件的具體建立細節」的前提下獲得物件。降低了客戶端與特定產品類別之間的耦合度。除此之外，這種做法也提升了程式的靈活性，因為客戶端只需要依賴於工廠所提供的方法或介面即可，不需要依賴任何的具體產品。再來，工廠可以根據不同的需要，動態切換回傳給客戶的具體產品類，而不影響需要客戶端的程式碼 &amp;hellip;。然而，簡單工廠模式還是有著一些缺點的：例如每次增加新的產品類型時，都需要修改工廠類，違反了開放封閉原則。除此之外，在一些複雜的場景下，可能會導致簡單工廠需要負責過多的產品細節，使得類別變得過與旁大過於臃腫，進而違反單一職責原則。
+簡單整理 問題描述：Client 對於 Product 有著高度的依賴
+解決方案：透過建立一個 Factory 類別，解決客戶與產品間的依賴
+程式細節：參照下面的段落
+UML 圖：
+程式碼範例 在常見的設計模式當中，跟「工廠」有關的設計模式共有三種，它們從簡單到複雜分別是簡單工廠模式、工廠方法模式、和抽象工廠模式。簡單工廠模式顧名思義，就是透過一個結構「簡單」的工廠，來將程式碼拆分，以提高程式系統的可讀性、靈活性、和可擴展性。讓我們以一個簡單的例子來做說明：假設我們現在需要製作一個「網站架設系統」，該系統需要包含一些關於前後端的程式內容，而其中一項功能的描述如下：「使用者可以透過輸入不同的 SQL 語句，來取得不同的資料庫內容。」用程式來呈現的話，可能會像這個樣子：
+// 架站系統中的 [客戶端] 類別 class Client { private String account; private String password; public Object getDatabaseData(String query) { Database database = this.getDatabaseConnection(account, password); Object data = null; Database.Operation operation = database.getOperation(query); switch(operation) { case Database.Operation.INSERT: data = database.insertQuery(query); break; case Database.</description>
+    </item>
+    
+    <item>
+      <title>簡單工廠模式</title>
+      <link>https://fonu195713.github.io/docs/computer_science/design_pattern/simple_factory_pattern/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/simple_factory_pattern/</guid>
+      <description>簡單工廠模式#ChatGPT 的說明 簡單工廠模式（Simple Factory Pattern）是一種創建型設計模式，屬於工廠模式的變體。它旨在提供一個通用的、用於創建物件的接口，而隱藏創建物件的具體細節。簡單工廠模式由三個主要部分組成：［客戶類別］（Client class）：客戶是使用工廠模式的程式碼部分。客戶透過呼叫簡單工廠裡的公開方法（例：getProduct()），請求工廠創建具體產品的物件。［工廠類別］（Factory Class）：工廠類別負責生成具體的物件。這個類別通常包含一個（或多個）靜態方法，根據輸入的參數或條件建立不同類型的物件。[具體產品類別]（Concrete Product Class）：具體產品類別是簡單工廠最後會產出的物件，工廠類別透過判斷條件或參數來建立不同的特定產品物件。（可選）［抽象產品類別］（Abstract Product Class）：在某些簡單工廠中還會定義一個抽象產品類別。該類別定義了產品物件的通用接口，它是所有特定產品類別的共同父類別或介面。
+簡單工廠模式的步驟如下：首先，定義一個抽象的產品類，讓該類別定義一些產品的共同介面或抽象方法，或者直接建立具體的產品類，實作抽象產品類別的介面或方法，定義具體產品的屬性與行為。接著，建立一個工廠類別，該工廠類別可以包含一個靜態方法或非靜態方法，根據輸入參數或條件建立並傳回特定產品的實例。最後，客戶端可以透過呼叫工廠類別的靜態（或非靜態）方法來取得所需的具體產品實例。
+簡單工廠模式包含著幾個優點：它可以封裝物件的建立過程。透過簡單工廠模式，客戶端可以在「不需要知道物件的具體建立細節」的前提下獲得物件。降低了客戶端與特定產品類別之間的耦合度。除此之外，這種做法也提升了程式的靈活性，因為客戶端只需要依賴於工廠所提供的方法或介面即可，不需要依賴任何的具體產品。再來，工廠可以根據不同的需要，動態切換回傳給客戶的具體產品類，而不影響需要客戶端的程式碼 &amp;hellip;。然而，簡單工廠模式還是有著一些缺點的：例如每次增加新的產品類型時，都需要修改工廠類，違反了開放封閉原則。除此之外，在一些複雜的場景下，可能會導致簡單工廠需要負責過多的產品細節，使得類別變得過與旁大過於臃腫，進而違反單一職責原則。
+簡單整理 問題描述：Client 對於 Product 有著高度的依賴
+解決方案：透過建立一個 Factory 類別，解決客戶與產品間的依賴
+程式細節：參照下面的段落
+UML 圖：
+程式碼範例 在常見的設計模式當中，與「工廠」有關的設計模式共有三種，它們由間單到複雜依序是簡單工廠模式、工廠方法模式、以及抽象工廠模式。簡單工廠模式顧名思義，就是透過一個「工廠」類別，將比較「簡單的」程次區域給獨立出來，通常會配合單一職責原則進行程式碼的檢查，如果某一段程式不符合單一職責原則的話，就可以考慮用簡單工廠將程式給區分出來。讓我們用一個簡單的範例來做說明：假設我們正在開發一個「線上傢俱閱覽系統」，使用者可以根據不同的需要來瀏覽、比較、或購買傢俱，程式片段大致如下所述：
+// 系統中的 [顧客] 類別 class Customer { private String account; private String password; // 透過不同的關鍵字，取得不同傢俱 public Furniture getFurniture(String name) { Furniture furniture = null; if(name.equal(&amp;#34;chair&amp;#34;)) furniture = new Chair(); else if(name.equals(&amp;#34;desk&amp;#34;)) furniture = new Desk(); else if(name.equals(&amp;#34;sofa&amp;#34;)) furniture = new Sofa(); else if(name.</description>
     </item>
     
     <item>
