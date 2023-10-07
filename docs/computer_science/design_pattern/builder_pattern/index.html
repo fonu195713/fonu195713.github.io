@@ -195,20 +195,99 @@
 <ul>
 <li><strong>ChatGPT 的說明</strong></li>
 </ul>
-<p>創建者模式（Builder Pattern）是一種創建型設計模式，旨在透過將複雜物件的建置流程拆分為多個簡單物件的建置步驟，使得物件的建置流程更加靈活、可維護，同時提供更好的控制和自訂選項。創建者模式的主要想法是將一個複雜物件的建構與其表示分開。這使得客戶端程式碼可以更容易地配置和建立複雜對象，而無需了解對象的內部建置細節。創建者模式通常包括以下關鍵角色：［<strong>產品</strong>］（Product）：產品表示被建構的複雜物件。產品類別通常包含多個屬性或部分，這些部分的創建和組裝由創建者負責。［<strong>抽象創建者</strong>］（Abstract Builder）：抽象創建者定義了建構產品物件的抽象接口，包括各個部分的創建方法。抽象創建者通常包括一個獲取最終產品的方法。［<strong>具體創建者</strong>］（Concrete Builder）：具體創建者實現了「抽象創建者」的接口，負責構建產品的各個部分，同時提供了設置產品屬性的方法。每個特定創建者可以建立不同的產品變體。［<strong>指揮者</strong>］（Director）：指揮者負責依照「客戶端」的需求依照一定順序呼叫特定「創建者」的方法來建構產品物件。指揮者不負責特定產品的創建，而是協調創建者完成建造。［<strong>客戶端</strong>］（Client）：客戶端程式碼透過「指揮者」來建立複雜對象，客戶端可以根據需要選擇不同的特定創建者來建構不同的產品變體。</p>
+<p>創建者模式（Builder Pattern）是一種創建型設計模式，旨在透過將複雜物件的建置流程拆分為多個簡單物件的建置步驟，使得物件的建置流程更加靈活、可維護，同時提供更好的控制和自訂選項。創建者模式的主要想法是將一個複雜物件的建構與其表示分開。這使得客戶端程式碼可以更容易地配置和建立複雜對象，而無需了解對象的內部建置細節。創建者模式通常包括以下關鍵角色：［<strong>產品</strong>］（Product）：產品表示被建構的複雜物件。產品類別通常包含多個屬性或部分，這些部分的創建和組裝由創建者負責。［<strong>抽象創建者</strong>］（Abstract Builder）：抽象創建者定義了建構產品物件的抽象接口，包括各個部分的創建方法。抽象創建者通常包括一個獲取最終產品的方法。［<strong>具體創建者</strong>］（Concrete Builder）：具體創建者實現了「抽象創建者」的接口，負責構建產品的各個部分，同時提供了設置產品屬性的方法。每個特定創建者可以建立不同的產品變體。［<strong>指揮者</strong>］（Director）：指揮者負責依照客戶端的需求，按照一定順序呼叫特定創建者的方法來建構產品物件。指揮者不負責特定產品的創建，而是協調創建者完成建造。［<strong>客戶端</strong>］（Client）：客戶端程式碼透過指揮者來建立複雜對象，並可以根據需要選擇不同的特定創建者，來建構不同的產品變體。</p>
 <p>創建者模式的主要優點包括：分離建造過程和表示，允許更容易建造不同的產品變體；提供了更好的控制和客製化選項，客戶端可以自訂產品的建置流程；支援逐步建構複雜對象，使得建置過程更加靈活；提高了程式碼的可維護性，將複雜建置過程封裝在特定創建者中，使得客戶端不需要知道具體的創建細節；創建者模式在需要建立具有多個配置選項或參數的複雜物件時非常有用，例如建立圖形使用者介面中的視窗、建立文件物件、建立複雜的資料結構等情況。它幫助管理和組織複雜物件的建置過程，使程式碼更具可讀性和可維護性。</p>
 <ul>
 <li><strong>簡單整理</strong></li>
 </ul>
-<p>問題描述：複雜物件往往由許多不同的變因構成，使得建立起來非常複雜</p>
-<p>解決方案：封裝一系列的變因和設置，使得創建複雜物件不再麻煩</p>
+<p>問題描述：複雜物件往往由許多不同的必選/可選物件組成，使得建立起來非常複雜</p>
+<p>解決方案：封裝一系列的變數和設置，令創建複雜物件不再麻煩</p>
 <p>程式細節：參照下面的段落</p>
 <p>UML 圖：</p>
 <p><img src="/image/design_pattern/builder_uml.png" alt="image" /></p>
 <ul>
 <li><strong>程式碼範例</strong></li>
 </ul>
-<p>創建者模式是一種用來建立複雜物件的設計模式。</p>
+<p>所謂的複雜物件，在這邊指的是需要經由各個小物件進行合成（或聚合）之後，才可以被生成的物件。用現實生活來舉例的話，就像是一輛汽車（需要引擎、車輪、車殼、排氣管、油箱 &hellip;等部件組成）一棟房子（需要大門、牆壁、屋頂、水電、床鋪、書櫃 &hellip;等物件組成）或者是一台電腦（需要鍵盤、滑鼠、螢幕、主機板、CPU、記憶體、硬碟 &hellip;等元件組成）。就拿電腦來舉例好了：假設我們在程式中需要模擬一台電腦被創建的過程，大概會像是下面的這個樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String args<span style="color:#f92672">[])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 組成電腦的小物件們
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        MotherBoard motherBoard <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MotherBoard<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        CPU cpu <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CPU<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        Memory memory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Memory<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        Disk disk <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Disk<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        Power power <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Power<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        ComputerTower computerTower <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ComputerTower<span style="color:#f92672">(</span>motherBoard<span style="color:#f92672">,</span> cpu<span style="color:#f92672">,</span> memory<span style="color:#f92672">,</span> disk<span style="color:#f92672">,</span> power<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        Keyboard keyboard <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Keyboard<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        Mouse mouse <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Mouse<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        Monitor monitor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Monitor<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// [電腦] 本身
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Computer computer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Computer<span style="color:#f92672">(</span>computerTower<span style="color:#f92672">,</span> keyboard<span style="color:#f92672">,</span> mouse<span style="color:#f92672">,</span> monitor<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>接著我們繼續往下想：是全世界所有的電腦都不多不少，由這幾種元件所組成嗎？如果我今天只需要一台架站的伺服器電腦，那我是不是只需要主機就好？如果我今天是一個辦公室的文書機，我應該還要再加上一個印表機的連線吧？如果我今天是給阿公阿嬤用的電腦，他們會不會用到光碟機之類的元件？如果我今天是一個電競選手，是不是還需要 GPU 和幾個固態硬碟？如果我今天是一個實況主，那麼裝一個攝影機用來捕捉畫面應該很重要吧？如果&hellip; 如果&hellip; 如果&hellip;。假設我們要把所有可能的狀況全部都定義出來的話，那麼 <code>Computer</code> 的程式很有可能會長得像是下面這個樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Computer</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor<span style="color:#f92672">,</span> Keyboard keyboard<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor<span style="color:#f92672">,</span> Mouse mouse<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor<span style="color:#f92672">,</span> Keyboard keyboard<span style="color:#f92672">,</span> Mouse mouse<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor<span style="color:#f92672">,</span> Keyboard keyboard<span style="color:#f92672">,</span> Mouse mouse<span style="color:#f92672">,</span> GPU gpu<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor<span style="color:#f92672">,</span> Keyboard keyboard<span style="color:#f92672">,</span> Mouse mouse<span style="color:#f92672">,</span> Printer printer<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor1<span style="color:#f92672">,</span> Monitor monitor2<span style="color:#f92672">,</span> Keyboard keyboard<span style="color:#f92672">,</span> Mouse mouse<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他 100 種建構子 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>發現問題了嗎？我們根本定義不完所有可能的情況組合，對吧。這種「建構子過多」的情況在英文裡叫做 Telescoping constructor，中文可以譯成「伸縮式建構子」，是一個光聽名字感覺還好，但實際上非常令人頭疼的一種程式寫法。為什麼說它令人頭疼呢？主要有以下幾個原因：首先是［<strong>可讀性很差</strong>］，我們很難快速地看出創建出 <code>Computer</code> 的是哪一個建構子；其次是［<strong>低彈性</strong>］，因為我們必須要按照固定的參數順序填入，很難做比較動態的調整；再來是［<strong>null 的狀況</strong>］，因為不是所有的元件都需要被安裝到電腦上，因此在建構 <code>Computer</code> 的過程中，應該要允許部分參數可為 <code>null</code> 值，但這樣可能會導致建構子中有過多 <code>null</code> 的情況，更惡化可讀性的問題。因此，為了解決 Telescoping constructor 所帶來的問題，其中的一種方法是「把所有的參數都修改為可以透過 setter 設定」，就像是下面這樣：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Computer</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 電腦的不同元件們
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> ComputerTower computerTower<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Monitor monitor<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Keyboard keyboard<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Mouse mouse<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Printer printer<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> GPU gpu<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Speaker speaker<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Webcam webcam<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Microphone microphone<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 現在不再需要那麼多的建構子了，只需要這個
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">()</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 所有元件的 setter() 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setComputerTower</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computerTower</span> <span style="color:#f92672">=</span> computerTower<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setMonitor</span><span style="color:#f92672">(</span>Monitor monitor<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">monitor</span> <span style="color:#f92672">=</span> monitor<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setKeyboard</span><span style="color:#f92672">(</span>Keyboard keyboard<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">keyboard</span> <span style="color:#f92672">=</span> keyboard<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setMouse</span><span style="color:#f92672">(</span>Mouse mouse<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">mouse</span> <span style="color:#f92672">=</span> mouse<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setPrinter</span><span style="color:#f92672">(</span>Printer printer<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">printer</span> <span style="color:#f92672">=</span> printer<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他 setter() ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他 setter() ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String ags<span style="color:#f92672">[])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 創建一個 &#34;空電腦&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Computer computer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Computer<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 自己加想加的元件上去
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        computer<span style="color:#f92672">.</span><span style="color:#a6e22e">setComputerTower</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> ComputerTower<span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>        computer<span style="color:#f92672">.</span><span style="color:#a6e22e">setMonitor</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Monitor<span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>        computer<span style="color:#f92672">.</span><span style="color:#a6e22e">setKeyboard</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Keyboard<span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>        computer<span style="color:#f92672">.</span><span style="color:#a6e22e">setMouse</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Mouse<span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>看上去挺不錯的，對吧？至少我們現在不用再先寫出 20-30 個不同的 <code>Computer</code> 的建構子。但這麼做還是有一點點小問題：我們沒有辦法保證所有使用到 <code>Computer</code> 的類別，都有把所有必要的元件給加上去。如果今天有一支程式在創建 <code>Computer</code> 的時候，忘記把主機板（<code>MotherBoard</code>）給加上去，程式就無法順利運行了，對吧？畢竟這世界上的所有電腦，都需要使用到主機板。因此，我們需要更「系統性地」解決 &ldquo;創建物件&rdquo; 的問題，就可以使用到創建者模式了：</p>
 </article>
  
       <div id="gitalk-container"></div>
