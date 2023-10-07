@@ -195,6 +195,21 @@ classDiagram class Student 那如果系統中有很多類別呢？像是有 Stud
     </item>
     
     <item>
+      <title>創建者模式</title>
+      <link>https://fonu195713.github.io/docs/computer_science/design_pattern/builder_pattern/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/builder_pattern/</guid>
+      <description>創建者模式#ChatGPT 的說明 創建者模式（Builder Pattern）是一種創建型設計模式，旨在透過將複雜物件的建置流程拆分為多個簡單物件的建置步驟，使得物件的建置流程更加靈活、可維護，同時提供更好的控制和自訂選項。創建者模式的主要想法是將一個複雜物件的建構與其表示分開。這使得客戶端程式碼可以更容易地配置和建立複雜對象，而無需了解對象的內部建置細節。創建者模式通常包括以下關鍵角色：［產品］（Product）：產品表示被建構的複雜物件。產品類別通常包含多個屬性或部分，這些部分的創建和組裝由創建者負責。［抽象創建者］（Abstract Builder）：抽象創建者定義了建構產品物件的抽象接口，包括各個部分的創建方法。抽象創建者通常包括一個獲取最終產品的方法。［具體創建者］（Concrete Builder）：具體創建者實現了「抽象創建者」的接口，負責構建產品的各個部分，同時提供了設置產品屬性的方法。每個特定創建者可以建立不同的產品變體。［指揮者］（Director）：指揮者負責依照「客戶端」的需求依照一定順序呼叫特定「創建者」的方法來建構產品物件。指揮者不負責特定產品的創建，而是協調創建者完成建造。［客戶端］（Client）：客戶端程式碼透過「指揮者」來建立複雜對象，客戶端可以根據需要選擇不同的特定創建者來建構不同的產品變體。
+創建者模式的主要優點包括：分離建造過程和表示，允許更容易建造不同的產品變體；提供了更好的控制和客製化選項，客戶端可以自訂產品的建置流程；支援逐步建構複雜對象，使得建置過程更加靈活；提高了程式碼的可維護性，將複雜建置過程封裝在特定創建者中，使得客戶端不需要知道具體的創建細節；創建者模式在需要建立具有多個配置選項或參數的複雜物件時非常有用，例如建立圖形使用者介面中的視窗、建立文件物件、建立複雜的資料結構等情況。它幫助管理和組織複雜物件的建置過程，使程式碼更具可讀性和可維護性。
+簡單整理 問題描述：複雜物件往往由許多不同的變因構成，使得建立起來非常複雜
+解決方案：封裝一系列的變因和設置，使得創建複雜物件不再麻煩
+程式細節：參照下面的段落
+UML 圖：
+程式碼範例 創建者模式是一種用來建立複雜物件的設計模式。</description>
+    </item>
+    
+    <item>
       <title>合成/聚合複用原則</title>
       <link>https://fonu195713.github.io/docs/computer_science/design_pattern/composite_aggregate_reuse_principle/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -260,13 +275,14 @@ class FurnutireFactory { // 靜態的 createFurniture() 方法 // 現在多了�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/abstract_factory_pattern/</guid>
-      <description>抽象工廠模式#ChatGPT 的說明
+      <description>抽象工廠模式#ChatGPT 的說明
 簡單整理
-問題描述：
-解決方案：
+問題描述：當系統變得愈發龐大，即使將工廠進行抽象，也會導致程式高度耦合
+解決方案：對 Factory 和 Product 同時進行抽象
 程式細節：參照下面的段落
 UML 圖：
-程式碼範例 </description>
+程式碼範例 抽象工廠模式，是三個與「工廠」有關的設計模式中（簡單工廠模式、工廠方法模式、和抽象工廠模式），最為複雜的一個模式。也因此，在這三種設計模式當中，抽象工廠模式是使用在最為複雜的情境之中。我們同樣承接前兩個「工廠」中的情境，以一個傢俱系統作為例子：假設現在我們的系統除了需要呈現不同材質的傢俱之外，各種傢俱也有一些更微細項的分類，像是「床」有單人床、雙人床、單人床加大 &amp;hellip;等，書櫃有三層櫃、四層櫃 &amp;hellip;等，桌子也有分無抽屜、一個抽屜、兩個抽屜 &amp;hellip;等，如果同樣用工廠方法來處理的話，可能會變成下面這樣：
+// 抽象類別 [傢俱工廠] abstract class FurnitureFactory { // 在 createProduct() 方法中加入一個 &amp;#34;description&amp;#34; 的參數 public abstract Furniture createFurniture(String name, String description); } // 繼承 [傢俱工廠] 的 [木製傢俱工廠] class WoodenFurnitureFactory extends FurnitureFactory { @Override public Furniture createFurniture(String name, String description) { Furniture furniture = null; if(name.equal(&amp;#34;bed&amp;#34;)) { if(description.equals(&amp;#34;single bed&amp;#34;)) furniture = new SingleBed(); else if(description.</description>
     </item>
     
     <item>

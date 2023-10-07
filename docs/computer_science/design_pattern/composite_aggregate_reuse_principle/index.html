@@ -328,7 +328,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">brand</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Nissan&#34;</span><span style="color:#f92672">;</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><p>我們可以看到：雖然我們的目標僅僅是生成四種不同種類、不同的車子，但前前後後我們一共生成了 7 個大大小小的類別，不難想像如果我們今天要再多加幾台「銀色的特斯拉」「黃色的計程車」「紅色的法拉利」「深藍色的藍寶堅尼」&hellip;等，甚至再把所有的車子分成 2 人、5 人、7 人座 &hellip;等，都會對程式帶來許多額外的負擔。大概來要在創建個 &hellip; 20-30 個左右的類別，才可以滿足我們的所有需求吧？</p>
+</span></span></code></pre></div><p>我們可以看到：雖然我們的目標僅僅是生成四種不同種類、不同的車子，但前前後後我們一共生成了 7 個大大小小的類別，不難想像如果我們今天要再多加幾台「銀色的特斯拉」「黃色的計程車」「紅色的法拉利」「深藍色的藍寶堅尼」&hellip;等，甚至再把所有的車子分成 2 人、5 人、7 人座 &hellip;等，都會對程式帶來許多額外的負擔。大概還要再創建個 &hellip; 20-30 個左右的類別，才可以滿足我們的所有需求吧？</p>
 <p>不僅如此，繼承帶來的壞處還有「對於父類別的依賴」，這個因素更是不建議在所有情況都使用繼承來完成程式的原因。我們可以想像一下這種情況：雖然我們要對所有的車子都新增「顯示共有幾個座位」這個功能，但我們不用真的去創建類似 <code>WhiteToyotaWith_5_Seats</code>,  <code>WhiteToyotaWith_7_Seats</code> 這樣的類別，我們可以直接在最上面的 <code>Car</code> 裡面新增一個 <code>int seat</code> 就可以了，這樣就可以免去「超多類別」的困擾。</p>
 <p>但這種方式雖然可以避免「超多困擾」，卻無法避免「超多依賴」的情況：假設我們希望車子在一開始就決定好座位的數量，所以我們把建構子從 <code>Car(String id)</code> 修改成 <code>Car(String id, int seats)</code>。這樣一來，使用到 <code>Car</code> 建構子的 <code>WhiteCar</code> 和 <code>BlackCar</code> 就會需要一併修改 <code>super()</code> 的內容，然後繼承了 <code>WhiteCar</code> 和 <code>BlackCar</code> 的實體車輛又要繼續修改它們在建構子裡面的 <code>super</code> 內容 &hellip;。可想而知，超級麻煩。</p>
 <p>因此，在這樣的情境之下，與其使用「繼承」來解決問題，我們更建議可以使用「組合」的方式，來創建一個實體的車輛類別。無論是使用「合成」還是使用「聚合」的方式，相對來說，不管是在程式的撰寫、還是其他的方面，都會比使用「繼承」還要好上許多，就像是下面的這個樣子：</p>

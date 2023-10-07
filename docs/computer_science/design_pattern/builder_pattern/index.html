@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>創建者模式 | Fonu Site</title>
+
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+
+
+
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+
+
+
+
+
+
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1376ea1b520a8e81fc96bc8980784b7c" class="toggle"  />
+    <label for="section-1376ea1b520a8e81fc96bc8980784b7c" class="flex justify-between">
+      <a role="button" class="">理財規劃</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/finance/track_expenses/" class="">個人記帳</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資工相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>創建者模式</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="創建者模式">
+  創建者模式
+  <a class="anchor" href="#%e5%89%b5%e5%bb%ba%e8%80%85%e6%a8%a1%e5%bc%8f">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>創建者模式（Builder Pattern）是一種創建型設計模式，旨在透過將複雜物件的建置流程拆分為多個簡單物件的建置步驟，使得物件的建置流程更加靈活、可維護，同時提供更好的控制和自訂選項。創建者模式的主要想法是將一個複雜物件的建構與其表示分開。這使得客戶端程式碼可以更容易地配置和建立複雜對象，而無需了解對象的內部建置細節。創建者模式通常包括以下關鍵角色：［<strong>產品</strong>］（Product）：產品表示被建構的複雜物件。產品類別通常包含多個屬性或部分，這些部分的創建和組裝由創建者負責。［<strong>抽象創建者</strong>］（Abstract Builder）：抽象創建者定義了建構產品物件的抽象接口，包括各個部分的創建方法。抽象創建者通常包括一個獲取最終產品的方法。［<strong>具體創建者</strong>］（Concrete Builder）：具體創建者實現了「抽象創建者」的接口，負責構建產品的各個部分，同時提供了設置產品屬性的方法。每個特定創建者可以建立不同的產品變體。［<strong>指揮者</strong>］（Director）：指揮者負責依照「客戶端」的需求依照一定順序呼叫特定「創建者」的方法來建構產品物件。指揮者不負責特定產品的創建，而是協調創建者完成建造。［<strong>客戶端</strong>］（Client）：客戶端程式碼透過「指揮者」來建立複雜對象，客戶端可以根據需要選擇不同的特定創建者來建構不同的產品變體。</p>
+<p>創建者模式的主要優點包括：分離建造過程和表示，允許更容易建造不同的產品變體；提供了更好的控制和客製化選項，客戶端可以自訂產品的建置流程；支援逐步建構複雜對象，使得建置過程更加靈活；提高了程式碼的可維護性，將複雜建置過程封裝在特定創建者中，使得客戶端不需要知道具體的創建細節；創建者模式在需要建立具有多個配置選項或參數的複雜物件時非常有用，例如建立圖形使用者介面中的視窗、建立文件物件、建立複雜的資料結構等情況。它幫助管理和組織複雜物件的建置過程，使程式碼更具可讀性和可維護性。</p>
+<ul>
+<li><strong>簡單整理</strong></li>
+</ul>
+<p>問題描述：複雜物件往往由許多不同的變因構成，使得建立起來非常複雜</p>
+<p>解決方案：封裝一系列的變因和設置，使得創建複雜物件不再麻煩</p>
+<p>程式細節：參照下面的段落</p>
+<p>UML 圖：</p>
+<p><img src="/image/design_pattern/builder_uml.png" alt="image" /></p>
+<ul>
+<li><strong>程式碼範例</strong></li>
+</ul>
+<p>創建者模式是一種用來建立複雜物件的設計模式。</p>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
