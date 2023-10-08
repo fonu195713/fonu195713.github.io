@@ -7,6 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://fonu195713.github.io/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>創建者模式</title>
+      <link>https://fonu195713.github.io/docs/_trash/builder_pattern/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/_trash/builder_pattern/</guid>
+      <description>創建者模式#ChatGPT 的說明 創建者模式（Builder Pattern）是一種創建型設計模式，旨在透過將複雜物件的建置流程拆分為多個簡單物件的建置步驟，使得物件的建置流程更加靈活、可維護，同時提供更好的控制和自訂選項。創建者模式的主要想法是將一個複雜物件的建構與其表示分開。這使得客戶端程式碼可以更容易地配置和建立複雜對象，而無需了解對象的內部建置細節。創建者模式通常包括以下關鍵角色：［產品］（Product）：產品表示被建構的複雜物件。產品類別通常包含多個屬性或部分，這些部分的創建和組裝由創建者負責。［抽象創建者］（Abstract Builder）：抽象創建者定義了建構產品物件的抽象接口，包括各個部分的創建方法。抽象創建者通常包括一個獲取最終產品的方法。［具體創建者］（Concrete Builder）：具體創建者實現了「抽象創建者」的接口，負責構建產品的各個部分，同時提供了設置產品屬性的方法。每個特定創建者可以建立不同的產品變體。［指揮者］（Director）：指揮者負責依照客戶端的需求，按照一定順序呼叫特定創建者的方法來建構產品物件。指揮者不負責特定產品的創建，而是協調創建者完成建造。［客戶端］（Client）：客戶端程式碼透過指揮者來建立複雜對象，並可以根據需要選擇不同的特定創建者，來建構不同的產品變體。
+創建者模式的主要優點包括：分離建造過程和表示，允許更容易建造不同的產品變體；提供了更好的控制和客製化選項，客戶端可以自訂產品的建置流程；支援逐步建構複雜對象，使得建置過程更加靈活；提高了程式碼的可維護性，將複雜建置過程封裝在特定創建者中，使得客戶端不需要知道具體的創建細節；創建者模式在需要建立具有多個配置選項或參數的複雜物件時非常有用，例如建立圖形使用者介面中的視窗、建立文件物件、建立複雜的資料結構等情況。它幫助管理和組織複雜物件的建置過程，使程式碼更具可讀性和可維護性。
+簡單整理 問題描述：複雜物件往往由許多不同的必選/可選物件組成，使得建立起來非常複雜
+解決方案：封裝一系列的變數和設置，令創建複雜物件不再麻煩
+程式細節：參照下面的段落
+UML 圖：
+程式碼範例 所謂的複雜物件，在這邊指的是需要經由各個小物件進行合成（或聚合）之後，才可以被生成的物件。用現實生活來舉例的話，就像是一輛汽車（需要引擎、車輪、車殼、排氣管、油箱 &amp;hellip;等部件組成）一棟房子（需要大門、牆壁、屋頂、水電、床鋪、書櫃 &amp;hellip;等物件組成）或者是一台電腦（需要鍵盤、滑鼠、螢幕、主機板、CPU、記憶體、硬碟 &amp;hellip;等元件組成）。就拿電腦來舉例好了：假設我們在程式中需要模擬一台電腦被創建的過程，大概會像是下面的這個樣子：
+class Main { public static void main(String args[]) { // 組成電腦的小物件們 MotherBoard motherBoard = new MotherBoard(); CPU cpu = new CPU(); Memory memory = new Memory(); Disk disk = new Disk(); Power power = new Power(); ComputerTower computerTower = new ComputerTower(motherBoard, cpu, memory, disk, power); Keyboard keyboard = new Keyboard(); Mouse mouse = new Mouse(); Monitor monitor = new Monitor(); // [電腦] 本身 Computer computer = new Computer(computerTower, keyboard, mouse, monitor); } } 接著我們繼續往下想：是全世界所有的電腦都不多不少，由這幾種元件所組成嗎？如果我今天只需要一台架站的伺服器電腦，那我是不是只需要主機就好？如果我今天是一個辦公室的文書機，我應該還要再加上一個印表機的連線吧？如果我今天是給阿公阿嬤用的電腦，他們會不會用到光碟機之類的元件？如果我今天是一個電競選手，是不是還需要 GPU 和幾個固態硬碟？如果我今天是一個實況主，那麼裝一個攝影機用來捕捉畫面應該很重要吧？如果&amp;hellip; 如果&amp;hellip; 如果&amp;hellip;。假設我們要把所有可能的狀況全部都定義出來的話，那麼 Computer 的程式很有可能會長得像是下面這個樣子：</description>
+    </item>
+    
+    <item>
       <title>工廠方法模式</title>
       <link>https://fonu195713.github.io/docs/_trash/factory_method_pattern/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
