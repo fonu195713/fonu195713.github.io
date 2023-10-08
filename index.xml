@@ -153,10 +153,10 @@ Lorem markdownum insigne. Olympo signis Delphis!</description>
     
     <item>
       <title>UML</title>
-      <link>https://fonu195713.github.io/docs/computer_science/design_pattern/unified_modeling_language/</link>
+      <link>https://fonu195713.github.io/docs/_trash/unified_modeling_language/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/unified_modeling_language/</guid>
+      <guid>https://fonu195713.github.io/docs/_trash/unified_modeling_language/</guid>
       <description>UML#ChatGPT 的說明 UML，全名為 Unified Modeling Language（中文譯作「統一建模語言」）是一種軟體工程領域的模型建置語言，用於描述、設計、和規劃軟體系統的結構和行為。 UML 是一種圖形化的語言，它提供了一組符號和規則，用於創建各種圖表，以幫助軟體開發人員、系統分析師和其他相關人員對於系統的架構進行理解、溝通、和設計軟體。UML 由許多不同的圖表和圖形元素組成，其中一些主要的圖表包括下列幾種：［類別圖］（Class Diagrams）用來描述系統中的類別、物件、屬性和方法之間的關係，這是靜態結構的表示。［使用案例圖］（Use Case Diagrams）用於描述系統的功能和使用者之間的互動，以及用例之間的關係，這有助於捕捉系統的功能需求。［序列圖］（Sequence Diagrams）用於展示系統中物件之間的交互作用和訊息流程，這有助於理解系統的動態行為。［狀態圖］（State Diagrams）用於描述物件的不同狀態以及狀態之間的轉換。［活動圖］（Activity Diagrams）用來描述系統中的流程和操作，類似流程圖。 UML 在軟體開發過程中起著重要作用，它有助於團隊成員之間的溝通，幫助捕捉系統需求，並提供了一種通用的語言，用於設計和文件化軟體系統。 它被廣泛用於軟體開發領域，特別是物件導向的軟體開發，以及系統分析和設計。
 在軟體開發中，無論是系統的設計階段、修改類別之間的關係、或者是其他在以「物件」為基本單元情況下，我們通常會使用 UML 圖來詮釋不同類別（Class）、物件（Object）、屬性（Attribute）、方法（Method）以及它們之間的關係。以下是一些類圖中的細節，包括圖形元素和其含義：［類別］（Class）：類別是類別圖的主要元素之一，代表了一個抽象的概念、對象、或實體物件。通常以方框表示，方框中包含類別的名稱、成員變數、和方法。［屬性］（Attributes）屬性又稱作「成員變數」，是類別的特徵或特性，它們描述了類別的狀態。 通常以 &amp;ldquo;名稱：類型&amp;rdquo; 的形式表示，例如 name: String 表示一個名為姓名的屬性，其類型為字串。［方法］（Methods）方法表示類別可以執行的操作或行為，在非物件導向的程式中被稱為「函數」或「函式」。通常以 &amp;ldquo;名稱(參數清單)：傳回值類型&amp;rdquo; 的形式表示，例如，setName(name:String): void 表示一個名為設定姓名的方法，它接受一個字串做為參數，並不傳回任何值。［關聯］（Association）關聯用來表示類別之間的連接或關係。它用一條直線連接兩個類別，可能伴隨著空心箭頭，實心箭頭、圓形箭頭 &amp;hellip;等不同種類的箭頭，指向關聯的方向，不同種的箭頭則代表了不同種類的關聯方式。［繼承］（Inheritance）繼承是一種特殊的關聯方式，用來表示一個類別（子類別）繼承另一個類別（父類別）的屬性和方法，它通常以「一個空心箭頭指向父類別」的方式呈現。［介面］（Interface）介面是一個特定的方法集合，不帶有方法的實作細節。介面通常以帶有小半圓的矩形框表示，其中小半圓的一端連接到實現該介面的類別。［抽象類別］（Abstract Class）抽象類別是一個不能實例化的類別，通常用於定義一些通用的成員變數和方法，並要求子類別實現該抽象類別中的一些方法，它通常以斜體字表示。［依賴］（Dependency）依賴表示一個類別（或物件）依賴另一個類別。它通常以帶有箭頭的虛線表示，箭頭指向被依賴的類別。
 對於程式設計師來說，類圖的主要目的是可視化系統中類別之間的結構和關係，以便開發人員和設計師更好地理解和設計軟件系統。它可以帶來類別結構可視化、類別關係呈現、設計規劃和模型驗證、易於生成程式碼、和便於文檔化與溝通 &amp;hellip;等，在軟體設計的過程中，可以起到不小的作用。
@@ -251,6 +251,24 @@ class Main { public static void main(String args[]) { // 組成電腦的小物�
 簡單整理 簡單來說，SRP 在說的就是「一個類別，只負責一組類似的事情」
 程式碼範例 情境思考：假設我們受某校的教務處所委託，需要製作一個針對學生使用的「簡易學生管理系統」，裡面需要針對「學生」這一項身份完成以下幾個功能：學生資料管理（包含增刪改查學生的各種資料），課程管理（提供學生加退選課程，查看課程細節），成績查詢（包含歷年成績、當學期成績、生成成績單&amp;hellip;等），以及文件下載（包含各式各樣的學校文件，諸如學費繳費單、各式申請書、或者各處室的相關文件&amp;hellip;等）。在最最不推薦的狀況下，我們可以寫出類似於下面的程式碼：
 public class StudentManagementSystem { public void registerStudent(Student student) { // 修改學生資料 // 記錄學生的最後的更新時間 // 向學生的家長發送通知 // 向學生的導師發送通知 } public void enrollCourse(Student student, int courseId) { // 獲得學生資料 // 查詢學生的所有修課記錄 // 添加新課程 } public Student getGrades(int studentId) { // 查詢學生資料 // 查詢學生的所有修課記錄 // 查詢學生的各式成績 } public void downloadFiles(String fileName) { // 查詢某一份學校文件 // 生成該份文件的 PDF 檔 // 匯出 PDF } // 其他[簡易學生管理系統]的方法與功能 // 其他[簡易學生管理系統]的方法與功能 // 其他[簡易學生管理系統]的方法與功能 } 從程式的邏輯和功能來說，這份程式並沒有太大的問題。所有的功能都可以順利運行，且相關的程式邏輯都很正確。如果把這份程式直接提交給教務處的話，我想他們應該也不會有什麼太大的問題或者是意見才對。但是，雖然一切的一切都很順利，這份程式碼還是有著一點小小的改善空間：也就是它並沒有符合「單一職責原則」所規範的內容：意即「一個類別，只可以由一種『原因』而改變」。</description>
+    </item>
+    
+    <item>
+      <title>單例模式</title>
+      <link>https://fonu195713.github.io/docs/computer_science/design_pattern/singleton_pattern/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/singleton_pattern/</guid>
+      <description>單例模式#ChatGPT 的說明 單例模式（Singleton Pattern）是一種創建型設計模式，旨在確保一個類別只有一個實例，並提供一種存取該實例的全域方法。單例模式能確保無論在應用程式中哪個地方，都只會有一個實例化的物件，並且提供了對該物件的全域存取點。單例模式通常包含以下要素：私有建構子（Private Constructor）：單例類別的建構子通常是用 private 關鍵字進行封裝，這樣才可以確保其他類別無法直接實例化該類別的物件。私有靜態成員變數（Private Static Instance）：單例類別的內部會包含一個私有的靜態成員變數，用來儲存唯一的實例化的物件。公共靜態方法（Public Static Method）：單例模式的類別內部，也會包含一個公共的靜態方法，允許其他類別透過該方法取得單例物件。如果類別中的靜態成員變數為 null，那麼這個方法就會負責創建並回傳成員變數，但如果靜態成員變數不為 null，該方法則會直接回傳靜態成員變數的記憶體位址。
+單例模式的主要目標有以下三點：分別是「確保該類別的物件在應用程式中，只有一個物件存在，從而節省系統資源。」「提供一個對成員變數的全域存取點，以便其他類別可以輕鬆存取該物件。」以及「避免多次建立相同類型的對象，以確保對象的一致性和資料共享。」通常來說，單例模式可能會在以下的幾種情境出現：［資源共享］：當多個部分需要共享某個資源（例如資料庫連線、thread pool &amp;hellip;等）時，可以使用單例模式確保只有一個資源實例［全域配置］：當應用程式需要一個全域配置對象，以儲存配置資訊，並在整個應用程式中共用時，可以使用單例模式。［日誌記錄器］：在應用程式中使用單例模式來建立唯一的日誌記錄器，以確保所有日誌資訊都被記錄到同一個日誌檔案中。［快取管理］：單例模式可用於建立快取管理器，以確保快取的一致性和共用。
+簡單整理 問題描述：當某一個類別只需要一個物件的時候，該如何撰寫程式
+解決方案：將建構子私有化，並透過靜態方法和靜態變數進行物件生成
+程式細節：參照下面的段落
+UML 圖：
+程式碼範例 單例模式算是所有設的計模式當中，最好理解的一個。該模式的目的很明確：就是要確保「一個類別，只會生成一個物件。」那為什麼要確保一個類別只會生成一個物件呢？大多情況下是需要確保一些資料的一致性，像是在一個「資料庫系統」中，如果我們只有一個資料庫的話，可能就會希望這個「操縱資料庫」的物件是唯一的，不然如果發生一些並行的狀況，系統就會需要進行事物隔離的邏輯判斷，使得整個程式變得更加複雜。
+而實現單例模式的方法有很多，大致上可以歸類成 7 種不同的寫法，分別是：「final static variable」「static block initialization」「simple lazy initialization」「mutual exclusion」「double checked locking」「inner static class」和「enumerated type」。其中前 2 種為 Eager Singleton（中文譯做：餓漢式單例模式），中間 4 種為 Lazy intialization Singleton（中文譯做：懶漢式單例模式）。最後 1 種 &amp;hellip;就是 enum。
+先從第 1 種做法講起：final static variable 顧名思義，就是在類別裡面宣告一個常數的、靜態的成員變數，透過存取類別中唯一且無法被更改的變數，來達到單例模式的程式需求。這種寫法可以保證多執行緒下仍然維持單一物件，但缺點是如果該變數本身是屬於比較複雜的物件的話，初始化可能需要花費比較多的時間，並且如果該變數在初始化之後一直都沒有被使用的話，它就會變得有點佔記憶體空間，寫法如下：
+// 1. final static variable class Singleton { private final static Singleton INSTANCE = new Singleton(); private Singleton() {} public static Singleton getInstance() { return INSTANCE; } } 第 2 種方式是利用 Java 類別內的 static 區域，幫靜態成員變數做初始賦值，大致上跟方法 1 有著一模一樣的功能，差別只在於一個初始化的地方是寫在程式的變數後面，另外一個是寫在類別中的 static 區域。餓漢式單例模式的特點在於「會在系統初始化的最一開始，就為變數進行賦值」，因此無論是方法 1 還是方法 2，都有著 &amp;ldquo;系統初始化可能比較花時間&amp;rdquo; &amp;ldquo;可能很佔空間&amp;rdquo; 以及 &amp;ldquo;確保在多執行緒的環境下也能保持單例&amp;rdquo; 的優缺點。</description>
     </item>
     
     <item>

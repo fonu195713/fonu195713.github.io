@@ -7,6 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://fonu195713.github.io/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>UML</title>
+      <link>https://fonu195713.github.io/docs/_trash/unified_modeling_language/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/_trash/unified_modeling_language/</guid>
+      <description>UML#ChatGPT 的說明 UML，全名為 Unified Modeling Language（中文譯作「統一建模語言」）是一種軟體工程領域的模型建置語言，用於描述、設計、和規劃軟體系統的結構和行為。 UML 是一種圖形化的語言，它提供了一組符號和規則，用於創建各種圖表，以幫助軟體開發人員、系統分析師和其他相關人員對於系統的架構進行理解、溝通、和設計軟體。UML 由許多不同的圖表和圖形元素組成，其中一些主要的圖表包括下列幾種：［類別圖］（Class Diagrams）用來描述系統中的類別、物件、屬性和方法之間的關係，這是靜態結構的表示。［使用案例圖］（Use Case Diagrams）用於描述系統的功能和使用者之間的互動，以及用例之間的關係，這有助於捕捉系統的功能需求。［序列圖］（Sequence Diagrams）用於展示系統中物件之間的交互作用和訊息流程，這有助於理解系統的動態行為。［狀態圖］（State Diagrams）用於描述物件的不同狀態以及狀態之間的轉換。［活動圖］（Activity Diagrams）用來描述系統中的流程和操作，類似流程圖。 UML 在軟體開發過程中起著重要作用，它有助於團隊成員之間的溝通，幫助捕捉系統需求，並提供了一種通用的語言，用於設計和文件化軟體系統。 它被廣泛用於軟體開發領域，特別是物件導向的軟體開發，以及系統分析和設計。
+在軟體開發中，無論是系統的設計階段、修改類別之間的關係、或者是其他在以「物件」為基本單元情況下，我們通常會使用 UML 圖來詮釋不同類別（Class）、物件（Object）、屬性（Attribute）、方法（Method）以及它們之間的關係。以下是一些類圖中的細節，包括圖形元素和其含義：［類別］（Class）：類別是類別圖的主要元素之一，代表了一個抽象的概念、對象、或實體物件。通常以方框表示，方框中包含類別的名稱、成員變數、和方法。［屬性］（Attributes）屬性又稱作「成員變數」，是類別的特徵或特性，它們描述了類別的狀態。 通常以 &amp;ldquo;名稱：類型&amp;rdquo; 的形式表示，例如 name: String 表示一個名為姓名的屬性，其類型為字串。［方法］（Methods）方法表示類別可以執行的操作或行為，在非物件導向的程式中被稱為「函數」或「函式」。通常以 &amp;ldquo;名稱(參數清單)：傳回值類型&amp;rdquo; 的形式表示，例如，setName(name:String): void 表示一個名為設定姓名的方法，它接受一個字串做為參數，並不傳回任何值。［關聯］（Association）關聯用來表示類別之間的連接或關係。它用一條直線連接兩個類別，可能伴隨著空心箭頭，實心箭頭、圓形箭頭 &amp;hellip;等不同種類的箭頭，指向關聯的方向，不同種的箭頭則代表了不同種類的關聯方式。［繼承］（Inheritance）繼承是一種特殊的關聯方式，用來表示一個類別（子類別）繼承另一個類別（父類別）的屬性和方法，它通常以「一個空心箭頭指向父類別」的方式呈現。［介面］（Interface）介面是一個特定的方法集合，不帶有方法的實作細節。介面通常以帶有小半圓的矩形框表示，其中小半圓的一端連接到實現該介面的類別。［抽象類別］（Abstract Class）抽象類別是一個不能實例化的類別，通常用於定義一些通用的成員變數和方法，並要求子類別實現該抽象類別中的一些方法，它通常以斜體字表示。［依賴］（Dependency）依賴表示一個類別（或物件）依賴另一個類別。它通常以帶有箭頭的虛線表示，箭頭指向被依賴的類別。
+對於程式設計師來說，類圖的主要目的是可視化系統中類別之間的結構和關係，以便開發人員和設計師更好地理解和設計軟件系統。它可以帶來類別結構可視化、類別關係呈現、設計規劃和模型驗證、易於生成程式碼、和便於文檔化與溝通 &amp;hellip;等，在軟體設計的過程中，可以起到不小的作用。
+程式碼/圖形範例 類別 在物件導向程式設計中，「類別」通常是構成程式的一個重要的、不可或缺的元件（甚至對 Java 來說，所有的程式都是類別和物件就是了），因此如果要說明 UML 的畫法，第一個就介紹「類別」的畫法應該是再適合不過了，現在我們假設在一個「學生管理系統」中，有一個名為 Student 的類別，用 Java 來實作的話，程式如下所述：
+// 類別 [學生] class Student { // 這個類別裡面目前還沒有任何東西 } 畫成 UML 圖，則會像是下面的這個樣子（很簡單，就是一個三層的方框）：
+classDiagram class Student 那如果系統中有很多類別呢？像是有 Student, Teacher, School, Subject&amp;hellip; 之類的？</description>
+    </item>
+    
+    <item>
       <title>創建者模式</title>
       <link>https://fonu195713.github.io/docs/_trash/builder_pattern/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

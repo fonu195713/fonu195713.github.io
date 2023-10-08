@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>單例模式 | Fonu Site</title>
+
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+
+
+
+<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+
+
+
+
+
+
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1376ea1b520a8e81fc96bc8980784b7c" class="toggle"  />
+    <label for="section-1376ea1b520a8e81fc96bc8980784b7c" class="flex justify-between">
+      <a role="button" class="">理財規劃</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/finance/track_expenses/" class="">個人記帳</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
+    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+      <a role="button" class="">資工相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>單例模式</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="單例模式">
+  單例模式
+  <a class="anchor" href="#%e5%96%ae%e4%be%8b%e6%a8%a1%e5%bc%8f">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>單例模式（Singleton Pattern）是一種創建型設計模式，旨在確保一個類別只有一個實例，並提供一種存取該實例的全域方法。單例模式能確保無論在應用程式中哪個地方，都只會有一個實例化的物件，並且提供了對該物件的全域存取點。單例模式通常包含以下要素：私有建構子（Private Constructor）：單例類別的建構子通常是用 <code>private</code> 關鍵字進行封裝，這樣才可以確保其他類別無法直接實例化該類別的物件。私有靜態成員變數（Private Static Instance）：單例類別的內部會包含一個私有的靜態成員變數，用來儲存唯一的實例化的物件。公共靜態方法（Public Static Method）：單例模式的類別內部，也會包含一個公共的靜態方法，允許其他類別透過該方法取得單例物件。如果類別中的靜態成員變數為 <code>null</code>，那麼這個方法就會負責創建並回傳成員變數，但如果靜態成員變數不為 <code>null</code>，該方法則會直接回傳靜態成員變數的記憶體位址。</p>
+<p>單例模式的主要目標有以下三點：分別是「確保該類別的物件在應用程式中，只有一個物件存在，從而節省系統資源。」「提供一個對成員變數的全域存取點，以便其他類別可以輕鬆存取該物件。」以及「避免多次建立相同類型的對象，以確保對象的一致性和資料共享。」通常來說，單例模式可能會在以下的幾種情境出現：［<strong>資源共享</strong>］：當多個部分需要共享某個資源（例如資料庫連線、thread pool &hellip;等）時，可以使用單例模式確保只有一個資源實例［<strong>全域配置</strong>］：當應用程式需要一個全域配置對象，以儲存配置資訊，並在整個應用程式中共用時，可以使用單例模式。［<strong>日誌記錄器</strong>］：在應用程式中使用單例模式來建立唯一的日誌記錄器，以確保所有日誌資訊都被記錄到同一個日誌檔案中。［<strong>快取管理</strong>］：單例模式可用於建立快取管理器，以確保快取的一致性和共用。</p>
+<ul>
+<li><strong>簡單整理</strong></li>
+</ul>
+<p>問題描述：當某一個類別只需要一個物件的時候，該如何撰寫程式</p>
+<p>解決方案：將建構子私有化，並透過靜態方法和靜態變數進行物件生成</p>
+<p>程式細節：參照下面的段落</p>
+<p>UML 圖：</p>
+<p><img src="/image/design_pattern/singleton_uml.png" alt="image" /></p>
+<ul>
+<li><strong>程式碼範例</strong></li>
+</ul>
+<p>單例模式算是所有設的計模式當中，最好理解的一個。該模式的目的很明確：就是要確保「一個類別，只會生成一個物件。」那為什麼要確保一個類別只會生成一個物件呢？大多情況下是需要確保一些資料的一致性，像是在一個「資料庫系統」中，如果我們只有一個資料庫的話，可能就會希望這個「操縱資料庫」的物件是唯一的，不然如果發生一些<a href="https://zh.wikipedia.org/zh-tw/%E4%BA%8B%E5%8B%99%E9%9A%94%E9%9B%A2">並行</a>的狀況，系統就會需要進行事物隔離的邏輯判斷，使得整個程式變得更加複雜。</p>
+<p>而實現單例模式的方法有很多，大致上可以歸類成 7 種不同的寫法，分別是：「final static variable」「static block initialization」「simple lazy initialization」「mutual exclusion」「double checked locking」「inner static class」和「enumerated type」。其中前 2 種為 Eager Singleton（中文譯做：餓漢式單例模式），中間 4 種為 Lazy intialization Singleton（中文譯做：懶漢式單例模式）。最後 1 種 &hellip;就是 enum。</p>
+<p>先從第 1 種做法講起：final static variable 顧名思義，就是在類別裡面宣告一個常數的、靜態的成員變數，透過存取類別中唯一且無法被更改的變數，來達到單例模式的程式需求。這種寫法可以保證多執行緒下仍然維持單一物件，但缺點是如果該變數本身是屬於比較複雜的物件的話，初始化可能需要花費比較多的時間，並且如果該變數在初始化之後一直都沒有被使用的話，它就會變得有點佔記憶體空間，寫法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 1. final static variable
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">static</span> Singleton INSTANCE <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Singleton</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Singleton <span style="color:#a6e22e">getInstance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> INSTANCE<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>第 2 種方式是利用 Java 類別內的 static 區域，幫靜態成員變數做初始賦值，大致上跟方法 1 有著一模一樣的功能，差別只在於一個初始化的地方是寫在程式的變數後面，另外一個是寫在類別中的 static 區域。餓漢式單例模式的特點在於「會在系統初始化的最一開始，就為變數進行賦值」，因此無論是方法 1 還是方法 2，都有著 &ldquo;系統初始化可能比較花時間&rdquo; &ldquo;可能很佔空間&rdquo; 以及 &ldquo;確保在多執行緒的環境下也能保持單例&rdquo; 的優缺點。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 2. static block initialization
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Singleton instance<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Singleton</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Singleton <span style="color:#a6e22e">getInstance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> instance<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>第 3 種單例模式的是 simple lazy initialization，應該算是最最直觀、且最最容易被大家想到的程式撰寫方法：在類別裡面的 <code>getInstance()</code> 裡面寫上一個 <code>instance</code> 的 if 判斷，如果它是 <code>null</code>，就為這個靜態成員變數賦值，而如果它不是 <code>null</code>，就回傳這個 <code>instance</code>。這種寫法是 7 種實現方式裡面最為簡單、最為直觀、但也最為不安全的一種程式寫法：雖然在單執行緒的環境下沒有問題，但它無法保證多執行緒下的物件單一性，因此 <strong>『非.常.不.推.薦』使用這種寫法實現單例模式</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 3. simple lazy initialization
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Singleton instance<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Singleton</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Singleton <span style="color:#a6e22e">getInstance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> instance<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 4. mutual exclusion
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Singleton instance<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Singleton</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">synchronized</span> Singleton <span style="color:#a6e22e">getInstance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> instance<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 5. double checked locking
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">static</span> Singleton instance<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Singleton</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Singleton <span style="color:#a6e22e">getInstance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">synchronized</span><span style="color:#f92672">(</span>Singleton<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                    instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ThreadSafeSingleton<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> instance<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 5. inner static class
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Singleton</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InnerSingleton</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> Singleton INSTANCE <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Singleton <span style="color:#a6e22e">getInstance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> InnerSingleton<span style="color:#f92672">.</span><span style="color:#a6e22e">INSTANCE</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 7. enumerated type
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">enum</span> Singleton <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    INSTANCE<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doSomething</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// do something
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div></article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  <script>
+    const elements = document.getElementsByClassName("markdown");
+
+    Array.from(elements).forEach(element => {
+        const links = element.getElementsByTagName("a");
+        Array.from(links).forEach(link => {
+        link.target = "_blank";
+        });
+    });
+</script>
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: '91e953a7402d79bcef6c',
+        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
+        repo: 'fonu195713.github.io',     
+        owner: 'fonu195713',
+        admin: ['fonu195713'],
+        distractionFreeMode:  false ,  
+        pagerDirection: 'last',
+        language: 'zh-TW',
+        createIssueManually:  false ,
+        enableHotKey:  true ,
+        id: md5(location.pathname),      
+    });
+    gitalk.render('gitalk-container');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
