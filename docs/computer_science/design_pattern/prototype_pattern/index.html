@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>Docs | Fonu Site</title>
+    <title>原型模式 | Fonu Site</title>
 
     <link rel="icon" href="/favicon.png" type="image/x-icon">
 
@@ -178,7 +178,7 @@
   
 
   
-    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle"  />
+    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
     <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
       <a role="button" class="">資工相關</a>
     </label>
@@ -246,32 +246,42 @@
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Docs</strong>
+  <strong>原型模式</strong>
 
   <label for="toc-control">
-    
-    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
 
 
   
-  <aside class="hidden clearfix">
-    
-  
-
-
-
-
-  </aside>
-  
  
       </header>
 
       
       
-  <article class="markdown"></article>
+  <article class="markdown"><h1 id="原型模式">
+  原型模式
+  <a class="anchor" href="#%e5%8e%9f%e5%9e%8b%e6%a8%a1%e5%bc%8f">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>原型模式（Prototype pattern）是一種創建型設計模式，其主要目的是『透過不使用建構子的方式，創建類別中的新物件。』此模式的核心思想是基於已有對象的克隆（拷貝）來產生新的對象，這個已有對象稱為原型，而克隆的方式有淺克隆（Shallow clone）和深克隆（Deep clone）兩種。原型模式有以下關鍵特點和優點：［<strong>透過 clone 創建物件</strong>］：原型模式允許程式在運行的時後創建新的物件，而無需知道特定物件的構造細節。這是透過複製現有物件的屬性和狀態來實現的。［<strong>減少構造成本</strong>］：在某些情況下，物件的構造可能非常昂貴（像是需要花費大量資源、消耗大量時間 &hellip;等），透過原型模式，可以複製已有物件，來避免重複執行構造操作，從而提高效能和效率。［<strong>支援多樣化的物件</strong>］：原型模式允許建立多個不同屬性的物件，而無需重新實作整個物件的建構邏輯，這對於物件的變種非常有用。［<strong>簡化物件的創建</strong>］：原型模式簡化了物件的創建過程，尤其是在物件具有複雜結構或大量屬性時。可以使客戶端只需要呼叫模式中的 <code>clone</code> 方法，便可以實踐物件的創立。</p>
+<p>而在原型模式中，克隆（或拷貝）物件的方式總共分成兩種：［<strong>淺克隆</strong>］（Shallow clone）：淺克隆會在方法內建立一個新原型的物件，但該新物件的內部成員變數仍然與原始的原型物件共用同樣的子物件。這意味著，雖然新物件本身是與原物件獨立的，但在新物件內部仍然引用了原始物件中的某些子物件。如果對我們對任一物件的共享去性進行修改，這些修改將在兩個物件中都可見，因為它們引用同一份資料。淺克隆通常是較快且較節省記憶體的方式，但需要注意在共享子物件上可能出現潛在問題。［<strong>深克隆</strong>］（Deep Copy）：深拷貝重樣會創建一個新的物件，但與淺克隆不同的是。這種「創建」包括原始的原型物件，以及該物件的所有子物件（以遞回的方式完全複製整個物件結構）。這確保了新物件與原始物件之間完全獨立，對其中一個物件所做的修改不會影響另一個物件。深克隆通常比較安全，因為它避免了共享資料的問題，但可能需要更多時間和記憶體來執行，特別是對於複雜的物件結構。</p>
+<ul>
+<li><strong>簡單整理</strong></li>
+</ul>
+<p>問題描述：有時候使用 <code>new</code> 的方式建立物件會影響程式的可讀性、彈性、和可重用性。</p>
+<p>解決方案：可以透過 <code>clone</code> 方法解決對創建物件的細節依賴。</p>
+<p>程式細節：參照下面的段落</p>
+<p>UML 圖：</p>
+<p><img src="/image/design_pattern/prototype_uml.png" alt="image" /></p>
+<ul>
+<li><strong>程式碼範例</strong></li>
+</ul>
+</article>
  
       <div id="gitalk-container"></div>
 
@@ -296,22 +306,15 @@
 
       
   
+  <div class="book-comments">
+
+</div>
+  
  
 
       <label for="menu-control" class="hidden book-menu-overlay"></label>
     </div>
 
-    
-    <aside class="book-toc">
-      <div class="book-toc-content">
-        
-  
-
-
-
- 
-      </div>
-    </aside>
     
   </main>
 
