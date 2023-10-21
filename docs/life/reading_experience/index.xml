@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>閱讀心得 on Fonu Site</title>
+    <link>https://fonu195713.github.io/docs/life/reading_experience/</link>
+    <description>Recent content in 閱讀心得 on Fonu Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://fonu195713.github.io/docs/life/reading_experience/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>深入淺出設計模式</title>
+      <link>https://fonu195713.github.io/docs/life/reading_experience/head_first_design_patterns/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/reading_experience/head_first_design_patterns/</guid>
+      <description>深入淺出設計模式#心得編寫日期：2023-07-07
+書籍超連結
+內文：
+一直以來，我都對「設計模式」這個東西抱著若有似無的認知。具象一點說明的話，大概就是「知道『設計模式』是一種可以讓程式寫得更加漂亮、更有彈性的觀念和方法，但實際上這些觀念是什麼（我不知道），那些方法又該如和撰寫（我也不知道）」的狀況。然後在今年 5 月底左右吧？因為第二篇論文出現了一點卡關的狀況（文章的內容一直沒辦法寫成老師期望的那種感覺），也因為患有一點研究生症候群，就開始找手邊一些「一直以來都有興趣，但又找不到合適的時間去了解」的東西進行研究了。而這之中，【研究設計模式】剛好是其中之一。
+這邊的 &amp;ldquo;研究設計模式&amp;rdquo; 是指「閱讀和設計模式相關的書籍」。這邊我挑的是《深入淺出設計模式》並不是閱讀比較主流的《Design Patterns: Elements of Reusable》也就是四人幫撰寫的那本）。會選擇那本書的其中一個原因是：剛開始的我，並不知道這本設計模式的聖經本，另一個原因則是它是我最快速能找到的相關書籍，所以就&amp;hellip; 這樣開始了。
+雖然在四人幫的著作中，共列舉了 23 種常見的設計模式，但本書並沒有包含這麼多的內容。書中的 13 個章節裡，扣掉最後一個章節在介紹 MVC 架構（Model, View, Controller），以及倒數第 2 章在介紹不同模式的合併用法之外，其餘的 11 個章節依序僅介紹了 Strategy（策略模式）、observer（觀察者）、decorator（裝飾器）、factory（工廠模式，包含簡單工廠、工廠方法、和抽象工廠）、singleton（單例模式）、Command（命令模式）、Adapter（配適器）、Facade（外觀）、Template method（模板方法）、Iterator（迭代器）、Composite（組合模式）、State（狀態模式）、Proxy pattern（代理）&amp;hellip; 等。剩餘的模式則僅於書中的附錄稍作提及。但這並不代表這本書不是一本良好的教學素材。相反地，因為本書的撰寫方式有別於市面上大多數的教學書籍，採用了極大量的圖片、角色對話、與情境式的描述，為各種模式的優缺點、應用情境、特徵、使用方法做大量的說明，同時也附上了許多的觀念思考、練習題、與程式範本，因此在閱讀上，並不會出現常見的倦怠、疲憊、或單調的感覺。
+整體而言，這本書帶給我很多新的啟發，無論是程式的撰寫方式，例如「多用組合、少用繼承」「單一類別、單一職責」「依賴通用接口，不要依賴特定類別」&amp;hellip; 等，或者是各種不同模式的應用與架構「工廠模式可以讓物件的實例化延後至子類別中實現」「模板方法只關心演算法的骨幹，因此可以在不改變演算法結構的前提下，重新定義某些方法的執行細節」「單例模式可以讓類別只生成單一物件，以確保某些資源的分配不會遇到問題或錯誤」&amp;hellip; 等，抑或是程式的語法觀念，像是「C++ 的物件繼承，菱形繼承的問題與解決」「虛函數, 純虛函數」&amp;hellip; 等，都是在閱讀本書之後才有了一個更加明確與更加清晰的認識。雖然是在一個比較非主動的動機下，才開始閱讀本書，但整體而言，能夠「閱讀本書，並從書本當中學到了更多的知識」對我來說實在是一件很高興又很喜歡的事情。
+評分
+閱讀難度：★★★☆☆ （需要有基本的物件導向程式觀念） 推薦指數：★★★★★ </description>
+    </item>
+    
+  </channel>
+</rss>

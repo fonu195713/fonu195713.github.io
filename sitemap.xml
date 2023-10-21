@@ -6,6 +6,8 @@
   </url><url>
     <loc>https://fonu195713.github.io/_docs/example/table-of-contents/with-toc/</loc>
   </url><url>
+    <loc>https://fonu195713.github.io/docs/life/</loc>
+  </url><url>
     <loc>https://fonu195713.github.io/_docs/example/table-of-contents/without-toc/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/_docs/example/table-of-contents/</loc>
@@ -44,7 +46,13 @@
   </url><url>
     <loc>https://fonu195713.github.io/_docs/</loc>
   </url><url>
+    <loc>https://fonu195713.github.io/docs/creation/novel/note/0_hand_paper/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/creation/novel/note/45_master_characters/</loc>
+  </url><url>
     <loc>https://fonu195713.github.io/categories/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/creation/novel/note/story/key_points_ch01/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/</loc>
   </url><url>
@@ -56,17 +64,19 @@
   </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/interface_segregation_principle/</loc>
   </url><url>
+    <loc>https://fonu195713.github.io/docs/creation/novel/practice/practice002/characters/irmel/</loc>
+  </url><url>
     <loc>https://fonu195713.github.io/docs/creation/novel/practice/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/dependency_inversion_principle/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/creation/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/docs/finance/track_expenses/</loc>
-  </url><url>
     <loc>https://fonu195713.github.io/docs/_trash/builder_pattern/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/builder_pattern/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/creation/novel/note/45_master_characters/archetypes/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/prototype_pattern/</loc>
   </url><url>
@@ -84,19 +94,35 @@
   </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/factory_method_pattern/</loc>
   </url><url>
+    <loc>https://fonu195713.github.io/docs/creation/novel/practice/practice002/think/</loc>
+  </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/abstract_factory_pattern/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/creation/novel/note/story/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/_trash/least_knowledge_principle/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/least_knowledge_principle/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/docs/finance/</loc>
+    <loc>https://fonu195713.github.io/docs/life/reading_experience/head_first_design_patterns/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/creation/novel/practice/practice002/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/creation/novel/note/0_hand_paper/copy_fairy_tail/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/life/pomodoro/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/life/pomodoro/20231019/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/life/pomodoro/20231020/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/life/pomodoro/20231021/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/creation/coding/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/docs/creation/novel/note/</loc>
+    <loc>https://fonu195713.github.io/docs/creation/novel/practice/practice002/chapter001/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/docs/creation/novel/practice/practice002/</loc>
+    <loc>https://fonu195713.github.io/docs/creation/novel/practice/practice002/main_in_ch01/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/_trash/simple_factory_pattern_1/</loc>
   </url><url>
@@ -106,9 +132,13 @@
   </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/simple_factory_pattern/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/docs/finance/track_expenses/202308/</loc>
+    <loc>https://fonu195713.github.io/docs/creation/novel/practice/practice002/characters/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/docs/finance/track_expenses/202309/</loc>
+    <loc>https://fonu195713.github.io/docs/life/track_expenses/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/life/track_expenses/202308/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/life/track_expenses/202309/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/</loc>
   </url><url>
@@ -119,5 +149,7 @@
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/liskov_substitution_principle/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/open_closed_principle/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/life/reading_experience/</loc>
   </url>
 </urlset>
