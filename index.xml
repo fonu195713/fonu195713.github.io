@@ -152,18 +152,6 @@ Lorem markdownum insigne. Olympo signis Delphis!</description>
     </item>
     
     <item>
-      <title>Ch01 重點</title>
-      <link>https://fonu195713.github.io/docs/creation/novel/note/story/key_points_ch01/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fonu195713.github.io/docs/creation/novel/note/story/key_points_ch01/</guid>
-      <description>Ch01 重點#善良的背面一定是邪惡嗎？
-英雄就是要摧毀邪惡？還是號召善良？
-聖人是什麼？
-用某一個片刻來呈現角色過往的一切</description>
-    </item>
-    
-    <item>
       <title>UML</title>
       <link>https://fonu195713.github.io/docs/_trash/unified_modeling_language/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -188,32 +176,6 @@ classDiagram class Student 那如果系統中有很多類別呢？像是有 Stud
 簡單整理 類別在引入介面的時候，介面的方法全部都要實例，不要不實例
 程式碼範例 讓我們以一個簡單的例子來做思考：假設我們現在正在一家「交通工具生產公司」中工作，我們現在需要為公司製作一個簡單的「產品介紹系統」，該系統需要呈現各式交通工具的基本訊息（像是id、型號、大小、油槽容量、主要顏色、價格 &amp;hellip;等），而公司的產品包含但不限於汽車、機車、腳踏車、公車、遊艇、郵輪、飛機、直升機 &amp;hellip;等。在最最直觀的情況下，我們可以很直接地將每一個公司的產品，都視做一個獨立的類別進行分類，也就是像下面的這個樣子：
 // 汽車類別 class Car { // id, 型號, 價格, 顏色, 座位數量 ...等成員變數 private String id; private String name; private Double price; private String color; private Integer numOfSeats; // 汽車的移動方式 public void driving() { System.out.println(&amp;#34;車子可以利用 4 個輪子，在道路上行駛&amp;#34;); } // 其他關於 [汽車] 的相關方法 // 其他關於 [汽車] 的相關方法 } // 機車類別 class Motorcycle { // id, 型號, 價格, 顏色, 置物空間, 排氣量 .</description>
-    </item>
-    
-    <item>
-      <title>伊爾梅爾</title>
-      <link>https://fonu195713.github.io/docs/creation/novel/practice/practice002/characters/irmel/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fonu195713.github.io/docs/creation/novel/practice/practice002/characters/irmel/</guid>
-      <description>伊爾梅爾#人格原型：女救世主
-人物參考：
-外觀：
-臉龐：圓潤/瘦長，過往/年齡/職業，眼神
-皮膚：淺色/深色，滑順/粗糙，明顯的疤痕或胎記？
-頭髮：長髮/短髮/捲髮，髮型的原因？
-年齡：什麼年紀最適合傳達這個角色的內在掙扎？
-體型：豐腴/結實
-風格：時髦/落伍
-印象：別人喜歡他嗎？為什麼？
-角色的性格是內向還是外向
-ChatGPT: 伊爾梅爾，年齡 17 歲，她的容貌清秀、標緻，生於名門貴族之家。從小，她的父母就為她安排了多樣化的家教，使她習得各種知識和技藝。然而，伊爾梅爾大喇喇的性格使她不太擅長應對上流社會的社交場合，她不喜歡那些充滿政治意味的社交，因為在那裡她需要隱藏自己的真實意圖，偽裝成符合社會期望的樣子。比起待在那樣的環境，她更向往成為一名冒險者，渴望自由灑脫地出外闖蕩，並夢想著成為家喻戶曉的冒險者。她深信，只保持正面、積極的態度，任何問題都可以迎刃而解，因此她是一位典型的樂天主義者，對世間的黑暗、不公平和勾心鬥角知之甚少。
-角色的行為通常憑藉直覺還是依照邏輯 ChatGPT: 伊爾維爾雖然有著坦誠與直接的性格，但因為從小就有接受良好教育的緣故，在大部分的情況下，她比起直覺更善於利用邏輯面對事情，這使她成為一個有思考力的人。 然而，當置身於戰鬥的情境下，伊爾維爾對於直覺的依賴則比較邏輯還要來得多，一方面她深信戰鬥中總是有著許多無法用過往的邏輯來面對的狀況，另一方面，教授她戰鬥技巧的師傅也偏向「利用直覺，比利用邏輯來得有效」的戰鬥流派。這種特質使他在生活中表現出靈活性和堅韌性，能夠根據情況而變化，既有冷靜的頭腦，也有果斷的決策能力。
-角色是否有想要改變世界的願景 ChatGPT: 伊爾維爾有著想要改變世界的願景，準確來說，她的夢想即是「成為其他人的目標、準則、或榜樣。」她渴望成為一位知名的冒險者，透過點燃遠方的燈塔、為無數後繼 者的方向提供指引。 她相信，透過自己的冒險和探索，她可以激發他人內心的勇氣，讓他們也去追尋自己的夢想。她的志向不僅限於個人榮譽和名望，而是致力於分享她的經驗和智慧，使更多人受益。她夢想著成為那個為社會做出積極貢獻的人，無論是保護他人、啟發他人，還是透過教育，讓年輕一代了解（並擁抱）冒險精神和探索未知的勇氣。
-角色的出身、環境、臥室的描述與外觀 ChatGPT: 伊爾梅爾，年齡17歲，容貌清秀、標緻，生於名門貴族之家。她的臥室反映了她的出身和教育背景，裝飾華麗，充滿藝術品和古老的家族遺物。在這個房間中，她花了許多時間讀書和學習，以滿足她對知識的渴求。書櫃上擺滿了古籍和文學作品，而在牆上，可以看到家族的家譜和歷代成就的肖像畫。然而，比起待在這樣的環境，她更向往成為一名冒險者。這使她的房間中也藏著一些冒險者的足跡，如地圖、羽毛筆和一些古老的羅盤，都是她的夢想的象徵。伊爾梅爾的外貌和氣質反映了她的高貴出身，但也流露著自由思想和充滿冒險精神的特點。她的眼睛清澈而明亮，看似充滿著對未知世界的好奇。她的長髮濃密而柔順，經常綁成一個馬尾辮，以方便她的冒險之旅。她的服裝風格簡約但高雅，總是保持整潔，顯示出她對細節的關注和品味。這個年輕貴族的容貌和風格結合了出身和夢想，塑造了一位獨一無二的角色。
-角色喜歡自己嗎？為什麼？ ChatGPT: 伊爾梅爾喜歡自己，這是因為她深信「對自己的信任」是實現夢想和改變世界的第一步。她對自己的自信不僅來自她的出身和優越的教育，還源於她對生命和冒險的熱愛。儘管她在高貴的家庭中長大，但她沒有因為社會的期望而將自己局限在那個框架內，而是勇敢地選擇了自己的道路，追求她的冒險者夢想。如果她不喜歡自己，她將無法克服種種挑戰和困難。對她來說，相信自己是實現她的目標的關鍵，這種自信來自她的知識、技能和堅定的意志。她深知，如果連自己都不相信，她將無法引領其他人，成為那個改變世界的榜樣。因此，她以樂天主義者的態度對待自己，堅信只要保持積極、正面的心態，任何問題都可以迎刃而解，這種自信成為她不斷前進、勇往直前的原動力。
-角色對於他人（六親）有什麼感覺和看法 ChatGPT: 【尊重與理解】：伊爾梅爾的坦率和直接性格使她能夠與人建立真誠的關係。她可能對家人、兄弟姐妹以及冒險中的隊友表現出尊重和理解，並願意傾聽他們的意見和看法。【鼓勵與啟發】：作為一個充滿冒險精神和積極態度的人，伊爾梅爾可能會鼓勵和啟發她的家人和隊友去追尋自己的夢想，勇敢面對挑戰，以及相信他們也可以做出積極的改變。【協作與信任】：在冒險中，伊爾梅爾的直覺和戰鬥精神可能會使她成為一個值得信賴的隊友。她可能會對隊友表現出合作和信任，認為每個人都有他們獨特的能力和貢獻。【關懷與關懷】：儘管她渴望自由和冒險，伊爾梅爾可能仍然會對家人和親密的朋友表現出關心和關懷，確保他們的安全和福祉。【教育與分享】：基於她的願望成為他人的榜樣，伊爾梅爾可能會傾向於教育和分享她的知識和經驗，幫助其他人成長和發展。
-角色的興趣、嗜好，專長 角色對周遭的一切有控制的慾望嗎 其他人對於這個角色有什麼想法 角色認真的看待生活嗎？他會怎麼度過自己的閒暇時光 &amp;hellip;&amp;hellip; 角色關心著什麼？ 如果他被困在荒島上，他會希望手邊有哪 3 樣東西 如果他的房子被一場無情的大火給燃燒殆盡，他會最想念什麼東西 他在乎什麼？在意什麼？物品？評價？抑或是生活方式？ &amp;hellip;&amp;hellip; 角色會害怕什麼？ 為他帶來噩夢的是什麼？ 在深夜裡聽到槍響，他會有什麼反應？ 他會覺得是什麼造成這個聲響？ 他（在兒時）遭遇過什麼樣的經歷，導致他有這種恐懼？ &amp;hellip;&amp;hellip; 角色的動力是什麼？ 為了單純地活下去 為了安全與保障 為了愛/一個歸屬感 為了讓他人（或自己）看得起自己 為了了解他人 為了一些無法用邏輯（理性）說明的事情 為了實現心中的目標 &amp;hellip;&amp;hellip; 挑出 3 個原型，並試著寫出這 3 個原型如何影響故事發展 花 2 頁的篇幅來盡可能描述這個角色 嘗試與角色對話，從角色的視角與自己對話 </description>
     </item>
     
     <item>
@@ -367,34 +329,6 @@ class FurnutireFactory { // 靜態的 createFurniture() 方法 // 現在多了�
     </item>
     
     <item>
-      <title>想法</title>
-      <link>https://fonu195713.github.io/docs/creation/novel/practice/practice002/think/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fonu195713.github.io/docs/creation/novel/practice/practice002/think/</guid>
-      <description>創作過程出現的想法#最一開始的想法是什麼？#想要寫一個跟劍與魔法，中世紀，奇幻，人類、矮人、精靈、龍、魔法 &amp;hellip;等有關的奇幻小說（成長、冒險）。
-這個故事有什麼自己覺得有趣的賣點#應該是「主角沒有魔力，但卻是一個很厲害的魔法使」這點吧？
-故事的主題為何#主角為什麼沒有魔力#為什麼主角明明沒有魔力，卻可以作為一個很厲害的魔法使？#（這三個問題算是我在想到「賣點」之後，馬上出現的幾個問題）
-（下面的順序則是依照想到解答的先後回答）
-Ans 3：「因為他得到了一個『可以借用別人/周圍的魔力』的能力」
-Ans 1：主題&amp;hellip; 還沒想到，但我想往預支、等價交換、奉獻、付出與回報 &amp;hellip;等方向思考
-Ans 2：為什麼沒有魔力 &amp;hellip;不知道
-什麼是『能力』#要怎麼『預支』#（這兩個問題是打完上面的問題之後，應該要解釋的，新跑出來的東西）
-（這個應該就算是 &amp;hellip;有意義的「設定」了，對吧？）
-（會這麼理解的原因是我有想到：「設定必須因主題而生，主題必須因設定而定。」這句話
-Ans 1：
-『能力』就是「利用魔力所呈現出來的行為」，就是類似念能力、忍術、妖尾的xx魔法，在自己的設計上，希望可以比較接近念能力、忍術那種，就是「有一些固定的基底（特質系、強化系、火遁風遁 &amp;hellip;等）但可以用同樣的基底組合/研究出新東西」的感覺。所以我就設定成總共有「火、土、風、水」四大元素 + 「時間、空間」共 6 種基底，每種基底有不同的特性（火：發散，水：收斂，風：上升，土：下沈，時間空間 &amp;hellip;還沒想到，但跟前面一樣也是兩兩相對的感覺）。同時，因為每個人天生體內的魔力元素比例就不相同，因此不同的比例的基底，就能調配不同化學結果的特性，而這些調配出來的「化學結果」，就是可以利用魔力做到的「角色能力」。
-Ans 2：要怎麼『預支』&amp;hellip;還沒想到
-思考一下「主題」的內容#主題明確 = 知道故事要幹嘛
-進擊的巨人：對抗巨人是為了爭取自由
-一拳超人：人強大到一個程度，會淡很多事
-那 &amp;hellip;自己的主題？
-思考邏輯：
-主角要冒險 為什麼要冒險？（隨便想出一個原因）為了擴大生存空間 人類面對到某些問題，使得他們無法隨心所欲地選擇生存空間 什麼問題？（隨便想出一個原因）因為世界很危險，魔物很可怕 人類沒有壓倒性的方法可以解決魔物 人類只能依靠著某些魔物會害怕的東西生存 人類聚在一起生活 人類需要有力量、或手段、或方法才可以確保安全 怎麼獲得力量、手段、或方法？（隨便想出一個原因）可以跟神明請求 跟神明請求之後，有機會獲得力量 但獲得力量需要付出代價 修改世界觀：
-這個世界有著人類、精靈、矮人、龍 &amp;hellip;等智慧生物 這個世界存在著神明，凌駕於所有的智慧生物 這個世界存在著大量未知且危險的魔物，其個體能力能壓過智慧生物 為了在世界生存，智慧生物向神明乞求可以與魔物抗衡的物品、方法、或能力 神明回應了智慧生物的請求，在世界各地散落著不同的&amp;hellip;『聖髑』 智慧生物可以利用這些『聖髑』得到與魔物抗衡的機會 但『聖髑』都有著一些『束縛』，會限制智慧生物原本的能力 不過有一種特殊的『聖髑』，可以消除掉其他『聖髑』所帶來的『束縛』&amp;hellip; 故事的主題：</description>
-    </item>
-    
-    <item>
       <title>抽象工廠模式</title>
       <link>https://fonu195713.github.io/docs/computer_science/design_pattern/abstract_factory_pattern/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -476,43 +410,113 @@ Log websiteInfo = boss.getInfo(&amp;#34;WebsiteUpdate&amp;#34;); 朋友 知道�
     
     <item>
       <title>番茄鐘工作紀錄 2023/10/19</title>
-      <link>https://fonu195713.github.io/docs/life/pomodoro/20231019/</link>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202310/20231019/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://fonu195713.github.io/docs/life/pomodoro/20231019/</guid>
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202310/20231019/</guid>
       <description>番茄鐘工作紀錄 2023/10/19#Youtube：《故事的解剖》深度導讀 - 01 Youtube：《故事的解剖》深度導讀 - 01、借閱《故事的解剖》和《45個人格原型》 閱讀《故事的解剖》中的 01（故事面臨的難題：品質、技藝、課題、天賦） 閱讀《故事的解剖》中的 02（故事設計的相關術語：結構、事件） 閱讀《45個人格原型》中的第 1 部，並編寫筆記 閱讀《45個人格原型》中的魅惑繆思、亞馬遜女戰士、父之女、和養育者 閱讀《45個人格原型》中的女族長、神秘客、女救世主、和天真少女 </description>
     </item>
     
     <item>
       <title>番茄鐘工作紀錄 2023/10/20</title>
-      <link>https://fonu195713.github.io/docs/life/pomodoro/20231020/</link>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202310/20231020/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://fonu195713.github.io/docs/life/pomodoro/20231020/</guid>
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202310/20231020/</guid>
       <description>番茄鐘工作紀錄 2023/10/20#抄寫般若波羅密多心經，Gooaye EP.95 抄寫般若波羅密多心經，Gooaye EP.96 抄寫般若波羅密多心經，Gooaye EP.97 抄寫般若波羅密多心經，Gooaye EP.98（前半） 複習 0 號手稿「照抄妖精的尾巴」的內容，同時重新寫筆記 構思小說女主角的人物、形象 &amp;hellip;等設定 - 1（未完成） 構思小說女主角的人物、形象 &amp;hellip;等設定 - 2（未完成） 構思小說女主角的人物、形象 &amp;hellip;等設定 - 3（未完成） 構思小說女主角、男主角、女配角的性格、形象 &amp;hellip;等設定（未完成） 構思小說女主角、男主角、女配角的性格、形象 &amp;hellip;等設定（未完成） 構思小說第一章的內容（未完成） </description>
     </item>
     
     <item>
       <title>番茄鐘工作紀錄 2023/10/20</title>
-      <link>https://fonu195713.github.io/docs/life/pomodoro/20231021/</link>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202310/20231022/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://fonu195713.github.io/docs/life/pomodoro/20231021/</guid>
-      <description>番茄鐘工作紀錄 2023/10/20#重構 nccu_project/index.php （未完成） 重構 nccu_project/index.php （完成） 思考小說第一章的故事內容（未完成） 思考小說第一章的故事內容（未完成） 思考小說第一章的故事內容（初稿完成） 思考小說第一章的故事內容（修改）（未完成） 思考小說第一章的故事內容（修改）（完成） </description>
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202310/20231022/</guid>
+      <description>番茄鐘工作紀錄 2023/10/20#重構 nccu_project（程式外觀） 重構 nccu_project（程式外觀） 構思小說第一章情節（未完成） 構思小說第一章情節（未完成） 構思小說第一章情節（未完成） </description>
     </item>
     
     <item>
-      <title>第一話的幾個重點</title>
-      <link>https://fonu195713.github.io/docs/creation/novel/practice/practice002/main_in_ch01/</link>
+      <title>番茄鐘工作紀錄 2023/10/21</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202310/20231021/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://fonu195713.github.io/docs/creation/novel/practice/practice002/main_in_ch01/</guid>
-      <description>第一話的幾個重點#世界觀描述
-在這個充滿魔物的世界 上古的人類為了生存，必須不斷地逃離、抵抗這些魔物 直到有一天，人們發現了「火」的存在 人們可以用它來驅趕魔物、擊退魔物 因此，人們圍繞著「火」建立起了自己的家園 隨著時間的過去 人們的家園愈發茁壯、龐大 「火」開始無法完全覆蓋、保護他們的家園 因此，為了尋找其他的「火」 人們組建了一支又一支的冒險隊伍 期待可以找到新的「火」，以供人類使用、居住 並稱呼這些隊伍為點燃「火」的「火種」 主角想幹嘛
-主角的背景
-作為階級底層的主角，生活在「火」的最外圍 也因為最外圍的「火」最為微弱，因此容易遭遇魔物侵擾 對主角來說，活下去的最好方法便是成為「火種」 過程的衝突
-最外圍的生存地位最為低落、存在無理和歧視 容易遇到魔物的侵擾，資源非常有限 變化做結尾
-主角在最後成為了最為弱小的「火種」 【主題】#為了追求更加安穩的生活，哪些程度的「犧牲」是可被允許的？ 在疲憊的生活裡，「信仰」的存在價值是什麼？ </description>
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202310/20231021/</guid>
+      <description>番茄鐘工作紀錄 2023/10/21#重構 nccu_project/index.php（未完成） 重構 nccu_project/index.php（完成） 構思小說第一章的故事主題（未完成） 構思小說第一章的故事主題（未完成） 構思小說第一章的故事主題（初稿完成） 構思小說第一章的故事主題（修改中/未完成） 構思小說第一章的故事主題（完成） </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/10/23</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202310/20231023/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202310/20231023/</guid>
+      <description>番茄鐘工作紀錄 2023/10/23#抄心經，Gooaye Ep.99 抄心經，Gooaye Ep.100 抄心經，Gooaye Ep.101 重新建構故事第一章（未完成） 重新建構故事第一章（未完成） </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/10/24</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202310/20231024/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202310/20231024/</guid>
+      <description>番茄鐘工作紀錄 2023/10/24#抄心經，Gooaye Ep.102 抄心經，Gooaye Ep.103 抄心經，Gooaye Ep.104 幫大頭跟彪哥解決網站的問題 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/10/25</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202310/20231025/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202310/20231025/</guid>
+      <description>番茄鐘工作紀錄 2023/10/25#抄心經，0 號手稿技術面分析 抄心經，0 號手稿技術面分析 抄心經，0 號手稿技術面分析 幫大頭跟彪哥解決網站的問題 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/10/26</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202310/20231026/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202310/20231026/</guid>
+      <description>番茄鐘工作紀錄 2023/10/26#學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/10/27</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202310/20231027/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202310/20231027/</guid>
+      <description>番茄鐘工作紀錄 2023/10/27#幫大頭解決 apache 連不到 MySQL 的問題 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 思考小說的架構與情節 思考小說的架構與情節 思考小說的架構與情節 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/10/28</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202310/20231028/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202310/20231028/</guid>
+      <description>番茄鐘工作紀錄 2023/10/28#學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 教大頭 git command, ocp (Open Close Principle) 教大頭 git command, ocp (Open Close Principle) </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/10/29</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202310/20231029/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202310/20231029/</guid>
+      <description>番茄鐘工作紀錄 2023/10/29#學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 幫大頭解決 git 的相關問題 幫大頭解決 git 的相關問題 幫大頭解決 git 的相關問題 </description>
+    </item>
+    
+    <item>
+      <title>第一章重點</title>
+      <link>https://fonu195713.github.io/docs/creation/novel/note/story/ch01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/creation/novel/note/story/ch01/</guid>
+      <description>第一章重點#善良的背面一定是邪惡嗎？
+英雄就是要摧毀邪惡？還是號召善良？
+聖人是什麼？
+用某一個片刻來呈現角色過往的一切</description>
     </item>
     
     <item>
