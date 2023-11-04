@@ -373,6 +373,22 @@ Log websiteInfo = boss.getInfo(&amp;#34;WebsiteUpdate&amp;#34;); 朋友 知道�
     </item>
     
     <item>
+      <title>模板方法模式</title>
+      <link>https://fonu195713.github.io/docs/computer_science/design_pattern/template_pattern/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/computer_science/design_pattern/template_pattern/</guid>
+      <description>模板方法模式#ChatGPT 的說明 模板方法模式（Template Method Pattern）又稱作模板模式（Template Pattern）是一種行為型設計模式，該模式定義了一種演算法的骨架，並允許將特定步驟的程式細節延遲到子類別中實現。這個模式使得程式可以在不改變演算法結構的情況下，對演算法的某些步驟進行重新定義。模板方法模式在許多程式語言和框架中廣泛應用，它可以用於創建框架或函式庫，以便子類別可以自訂某些演算法的行為，同時保持整個演算法的一致性。
+以下是模板方法模式的關鍵要素和工作原理：［抽象模板］（Abstract Template）：抽象模板是一個抽象類別或接口，它用於定義演算法的骨架，通常包含一個（或多個）不同的模板方法，這些模板方法是演算法的關鍵步驟。通常，抽象模板中的模板方法會呼叫一些抽象的（或可擴展的）方法，以便在子類別中具體實現。［具體模板］（Concrete Template）：具體模板是抽象模板的子類別，它用於實作抽象模板中的抽象方法，以定義演算法的具體行為。具體模板通常的功能在於實作抽象方法，而不需要改變演算法的整體結構。［模板方法］（Template Method）：模板方法是抽象模板中所定義的方法，它描述了演算法的步驟和順序。這些步驟可以包括一些已經實現的操作和一些需要在特定子類別中實現的操作。模板方法透過呼叫抽象方法來完成演算法的不同部分。［鉤子方法］（Hook Method）：鉤子方法是在抽象模板中定義的可選方法，子類別可以選擇性地覆寫它們來影響演算法的行為。這允許子類別在不改變整體演算法結構的情況下，對演算法進行擴展或自訂。
+模板方法模式的優點包括以下 3 點：「透過提供特定的演算法的骨架，使得程式碼可以重複使用，減少了不同類別間的重複程式碼。」「允許在不改變整個演算法結構的情況下，讓使用者自訂特定步驟中的具體行為。」以及「提供了一種易於維護和擴展的程式設計方式。」
+簡單整理 問題描述：相似的類別會有著相似的方法、內容、或呼叫順序
+解決方案：透過建立一個通用的模板，讓不同類別可以使用相同模板，進而減少程式冗餘
+程式細節：參照下面的段落
+UML 圖：
+程式碼範例 </description>
+    </item>
+    
+    <item>
       <title>深入淺出設計模式</title>
       <link>https://fonu195713.github.io/docs/life/reading_experience/head_first_design_patterns/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -531,7 +547,25 @@ Log websiteInfo = boss.getInfo(&amp;#34;WebsiteUpdate&amp;#34;); 朋友 知道�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231101/</guid>
-      <description>番茄鐘工作紀錄 2023/11/01#</description>
+      <description>番茄鐘工作紀錄 2023/11/01#學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 幫大頭解決 Ubuntu 中， MySQL 無法和 PHP 溝通的問題 學習 Angular2+ (Angular)，參考 Youtube：凱哥寫程式 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/03</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231103/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231103/</guid>
+      <description>番茄鐘工作紀錄 2023/11/03#抄心經，Gooaye Ep.105 抄心經，Gooaye Ep.106 嘗試用 Sprinig boot 做一個 backend api 研究 maven 的用法、嘗試用 Sprinig boot 做一個 backend api 嘗試了解 maven, gradle 的差異 練習 gradle.kts 練習 gradle.kts 練習 gradle.kts </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/04</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231104/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231104/</guid>
+      <description>番茄鐘工作紀錄 2023/11/04#練習利用 gradle.kts 生成一個 java application。參考 呈上。撰寫模板方法模式的內容 撰寫模板方法模式的內容（說明、整理） 模板方法模式、gradle、小說內容 了解軟體設計模式，參考資料：YT - 水球軟體學院 了解軟體設計模式，參考資料：YT - 水球軟體學院 了解軟體設計模式，參考資料：YT - 水球軟體學院 </description>
     </item>
     
     <item>
