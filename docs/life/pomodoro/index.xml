@@ -147,7 +147,25 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231104/</guid>
-      <description>番茄鐘工作紀錄 2023/11/04#練習利用 gradle.kts 生成一個 java application。參考 呈上。撰寫模板方法模式的內容 撰寫模板方法模式的內容（說明、整理） 模板方法模式、gradle、小說內容 了解軟體設計模式，參考資料：YT - 水球軟體學院 了解軟體設計模式，參考資料：YT - 水球軟體學院 了解軟體設計模式，參考資料：YT - 水球軟體學院 </description>
+      <description>番茄鐘工作紀錄 2023/11/04#練習利用 gradle.kts 生成一個 java application。參考 呈上。撰寫模板方法模式的內容 撰寫模板方法模式的內容（說明、整理） 模板方法模式、gradle、小說內容 了解軟體設計模式，參考資料：YT - 水球軟體學院 了解軟體設計模式，參考資料：YT - 水球軟體學院 了解軟體設計模式，參考資料：YT - 水球軟體學院 抄心經，聽 YT：遊戲微服務計畫 抄心經，聽 YT：遊戲微服務計畫 抄心經，聽 YT：遊戲微服務計畫 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/05</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231105/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231105/</guid>
+      <description>番茄鐘工作紀錄 2023/11/05#研究 gradle 的運作流程，參考：Medium 文章：Gradle 的系列文章，學 jUnit test 5 研究 gradle 的運作流程，參考：Medium 文章：Gradle 的系列文章，學 jUnit test 5 利用 gradle 和 spring boot 建制出一個簡單的本地後端 api。參考：spring boot 教學 利用 gradle 和 spring boot 建制出一個簡單的本地後端 api。參考：spring boot 教學 了解 TDD, BDD, MVC, MVP &amp;hellip;等不同的軟工術語 閱讀Clean Architecture - 無瑕的程式碼 閱讀Clean Architecture - 無瑕的程式碼 閱讀Clean Architecture - 無瑕的程式碼 閱讀Clean Architecture - 無瑕的程式碼 抄心經，聽 YT：在地上滾的工程師 Nic </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/06</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231106/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231106/</guid>
+      <description>番茄鐘工作紀錄 2023/11/06#監考，雅芬老師的數位邏輯 監考，慧鳳老師的管理數學 閱讀Clean Architecture - 無瑕的程式碼 閱讀Clean Architecture - 無瑕的程式碼 閱讀Clean Architecture - 無瑕的程式碼 編寫閱讀心得：Clean Architecture - 無瑕的程式碼 編寫閱讀心得：Clean Architecture - 無瑕的程式碼 </description>
     </item>
     
   </channel>

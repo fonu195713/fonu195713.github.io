@@ -2,55 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://fonu195713.github.io/_docs/example/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/example/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/example/table-of-contents/with-toc/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/example/table-of-contents/with-toc/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/life/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/example/table-of-contents/without-toc/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/example/table-of-contents/without-toc/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/example/table-of-contents/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/example/table-of-contents/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/example/collapsed/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/example/collapsed/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/example/collapsed/3rd-level/4th-level/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/example/collapsed/3rd-level/4th-level/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/example/collapsed/3rd-level/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/example/collapsed/3rd-level/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/example/hidden/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/example/hidden/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/shortcodes/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/shortcodes/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/shortcodes/buttons/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/shortcodes/buttons/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/shortcodes/columns/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/shortcodes/columns/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/shortcodes/details/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/shortcodes/details/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/shortcodes/expand/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/shortcodes/expand/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/shortcodes/hints/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/shortcodes/hints/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/shortcodes/katex/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/shortcodes/katex/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/shortcodes/mermaid/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/shortcodes/mermaid/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/shortcodes/section/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/shortcodes/section/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/shortcodes/section/first-page/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/shortcodes/section/first-page/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/shortcodes/section/second-page/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/shortcodes/section/second-page/</loc>
   </url><url>
-    <loc>https://fonu195713.github.io/_docs/shortcodes/tabs/</loc>
-  </url><url>
-    <loc>https://fonu195713.github.io/_docs/</loc>
+    <loc>https://fonu195713.github.io/docs/_trash/_previous_docs/shortcodes/tabs/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/creation/novel/note/0_hand_paper/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/creation/novel/note/45_master_characters/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/categories/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/life/reading_experience/clean_architecture/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/</loc>
   </url><url>
@@ -144,6 +144,10 @@
   </url><url>
     <loc>https://fonu195713.github.io/docs/life/pomodoro/202311/20231104/</loc>
   </url><url>
+    <loc>https://fonu195713.github.io/docs/life/pomodoro/202311/20231105/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/life/pomodoro/202311/20231106/</loc>
+  </url><url>
     <loc>https://fonu195713.github.io/docs/creation/coding/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/creation/novel/note/story/ch01/</loc>
@@ -167,6 +171,8 @@
     <loc>https://fonu195713.github.io/docs/computer_science/design_pattern/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/computer_science/</loc>
+  </url><url>
+    <loc>https://fonu195713.github.io/docs/computer_science/software_engineering/</loc>
   </url><url>
     <loc>https://fonu195713.github.io/docs/_trash/liskov_substitution_principle/</loc>
   </url><url>
