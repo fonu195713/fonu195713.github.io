@@ -165,6 +165,18 @@ Lorem markdownum insigne. Olympo signis Delphis!</description>
     </item>
     
     <item>
+      <title>java.util.ConcurrentModificationException</title>
+      <link>https://fonu195713.github.io/docs/life/debug/java/concurrent_modification_exception/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/debug/java/concurrent_modification_exception/</guid>
+      <description>java.util.ConcurrentModificationException#前言 最近打算用 Java 寫出一個簡單的富饒之城桌遊，一方面打發剛畢業等當兵的尷尬時段、一方面也可以趁這個機會學一點自己想要學的其他東西，像是 Spring, Spring boot, Gradle, Anguler, TDD, BDD, DDD &amp;hellip;等。然後這個 Concurrent Modification Exception 就在做這件事情的過程中蹦出來了。稍微研究了一下之後，發現是個蠻有趣的東西，所以就打算記錄下來。
+程式 在 Java Document 裡面，對這個例外處理的有著很詳盡的描述。內容很多，但我們只要注意到裡面的第一句話 &amp;ldquo;This exception may be thrown by methods that have detected concurrent modification of an object when such modification is not permissible.&amp;rdquo; 就好，中文理解的話 &amp;hellip;可以翻成「當某個方法偵測到物件正在進行併發修改，但此物件並不支援併發修改的功能時，就會拋出此異常。」通常會在迭代器（iterator）或者是類似於迭代器的操作（ex. foreach）的操作下才會發生。
+我會發生這個問題，是因為我嘗試做以下的動作：
+生成 50 張富饒之城裡面的地區卡 隨機洗牌 發配一些牌給 n 個玩家 （遊戲開始） 第 1 個玩家抽牌 更新排堆內容（這邊拋出 ConcurrentModificationException） public void card() { // generate cards List&amp;lt;Card&amp;gt; card_list = Card.</description>
+    </item>
+    
+    <item>
       <title>UML</title>
       <link>https://fonu195713.github.io/docs/_trash/unified_modeling_language/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -632,7 +644,169 @@ UML 圖：
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231111/</guid>
-      <description>番茄鐘工作紀錄 2023/11/11#</description>
+      <description>番茄鐘工作紀錄 2023/11/11#試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/11</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231112/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231112/</guid>
+      <description>番茄鐘工作紀錄 2023/11/11#試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/14</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231114/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231114/</guid>
+      <description>番茄鐘工作紀錄 2023/11/14#試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 抄心經，聽股癌 Ep. 109 抄心經，聽股癌 Ep. 110 抄心經，聽股癌 Ep. 111 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/15</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231115/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231115/</guid>
+      <description>番茄鐘工作紀錄 2023/11/15#試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 抄心經，隨便聽一些不是很重要的東西 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/16</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231116/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231116/</guid>
+      <description>番茄鐘工作紀錄 2023/11/16#試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 抄心經，聽股癌 Ep.</description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/25</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231125/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231125/</guid>
+      <description>番茄鐘工作紀錄 2023/11/25#更新網頁文章：java.util.ConcurrentModificationException 更新網頁文章：java.util.ConcurrentModificationException 更新網頁文章：java.util.ConcurrentModificationException Youtube: DDD 的价值与不足 Youtube: DDD 的价值与不足 Youtube: DDD 的价值与不足 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/26</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231126/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231126/</guid>
+      <description>番茄鐘工作紀錄 2023/11/26#試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 調整座位，重灌 2502 的電腦 調整座位，重灌 2502 的電腦 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/27</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231127/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231127/</guid>
+      <description>番茄鐘工作紀錄 2023/11/27#抄心經，Gooaye Ep.117 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 2502 每週 meeting 2502 每週 meeting 2502 每週 meeting 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 算命工作 算命工作 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/28</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231128/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231128/</guid>
+      <description>番茄鐘工作紀錄 2023/11/28#試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/29</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231129/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231129/</guid>
+      <description>番茄鐘工作紀錄 2023/11/29#試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 調整 git 的提交內容和分支結構 調整 git 的提交內容和分支結構 去圖書館還書、看書、借書 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 重新閱讀 Clean Architecture 重新閱讀 Clean Architecture </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/11/30</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202311/20231130/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202311/20231130/</guid>
+      <description>番茄鐘工作紀錄 2023/11/30#抄心經，聽股癌 Ep. 118 研究、安裝一些新的 VScdoe 套件 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/12/01</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202312/20231201/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202312/20231201/</guid>
+      <description>番茄鐘工作紀錄 2023/12/01#抄心經，Gooaye Ep.119 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/12/04</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202312/20231204/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202312/20231204/</guid>
+      <description>番茄鐘工作紀錄 2023/12/04#2502 meeting（學妹報告） 2502 meeting（學妹報告） 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/12/05</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202312/20231205/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202312/20231205/</guid>
+      <description>番茄鐘工作紀錄 2023/12/05#試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/12/06</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202312/20231206/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202312/20231206/</guid>
+      <description>番茄鐘工作紀錄 2023/12/06#試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 幫學妹複習報告內容 幫學妹複習報告內容 幫學妹複習報告內容 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/12/07</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202312/20231207/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202312/20231207/</guid>
+      <description>番茄鐘工作紀錄 2023/12/07#試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/12/08</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202312/20231208/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202312/20231208/</guid>
+      <description>番茄鐘工作紀錄 2023/12/08#帶阿公去樓下復健、幫阿嬤拿藥、買午餐 去學校看學弟妹，專題加油 北上的路程（和欣客運） 北上的路程（和欣客運） 北上的路程（和欣客運） 北上的路程（和欣客運） 去呂杰家的路上 去呂杰家的路上 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 2502 台北串燒宵夜 2502 台北串燒宵夜 飯店 check in 飯店 check in </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/12/09</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202312/20231209/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202312/20231209/</guid>
+      <description>番茄鐘工作紀錄 2023/12/09#證交所考試（適性測驗） 證交所考試（數學 + 邏輯） 證交所考試（資安學科 40 選擇 + 60 手寫） 證交所考試（資安學科 40 選擇 + 60 手寫） 返程 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
+    </item>
+    
+    <item>
+      <title>番茄鐘工作紀錄 2023/12/10</title>
+      <link>https://fonu195713.github.io/docs/life/pomodoro/202312/20231210/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/pomodoro/202312/20231210/</guid>
+      <description>番茄鐘工作紀錄 2023/12/10#試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 中場休息，接個案子算命 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 試著用 DDD, TDD, gradle, Spring boot, Angular 做出一個富饒之城 </description>
     </item>
     
     <item>
@@ -750,6 +924,19 @@ UML 圖：
 資產的部分 台幣活存 23,368 元 台股股票淨值：33,297 元 借出共 143,500 元 錢包現金 2,977 元 負債的部分 貸款 157,000 元 備註
 這禮拜基本身上的錢沒什麼變化。定期定額仍然轉了大約 5,000 在 006208 上面，算命收到了大概 500-1000 左右的零用錢，家裡因為在大部分的情況下會幫我備餐，所以吃的錢幾乎沒什麼花到，然後借出的錢嘛 &amp;hellip;，雖然法院有寄強制執行的單子過來，但我猜帳戶大概率是沒錢啦？不過這兩天會去問看看、試試運氣。（雖然我還是打從心底覺得是我的錢終究會回到我身上就是了 XD）
 這個月有個 &amp;hellip;比較有趣的點？雖然最近沒在注意股市，不過 006208 的價格在這 1-2 個月越來越低了，這幾天應該會順便研究一下價格掉下來的原因？然後找個機會逢低加碼一些錢錢進去，算是早早存股、早早滾錢，預計多放個 3000-5000 進去？如果繼續跌的話，預計放進去的錢會再多一點。</description>
+    </item>
+    
+    <item>
+      <title>記帳 2023/11</title>
+      <link>https://fonu195713.github.io/docs/life/track_expenses/202311/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/track_expenses/202311/</guid>
+      <description>記帳 2023/11#各方面金流
+資產的部分 台幣活存 28,041 元 台股股票淨值：40,847 元 借出共 142,500 元 錢包現金 3,653 元 負債的部分 貸款 157,000 元（Oct） 貸款 5,000 元（千） 貸款 25,000 元（rL） 備註
+上個月的結尾說要再看看，然後逢低買進 006208，結果在寫完之後的兩天 6208 就直接從 73.2 漲到 74.8 左右了。雖然沒有跟到（要在認真思考一下分批進場的時機跟方式），但是股票那邊的總損益總算是來到正的了（雖然前 1 個月也轉正了，但那個才 +0.3% 左右，算是隨時都有可能再跌回去的狀態）。現在大概 +ˊ2.6% ，扣掉最一開始買在 76 左右價格的幾次，其他的 6208 報酬都是正的了。
+此外，這個月因為有接到額外的小案子，內容是幫一個用 WordPress 寫好的前端網頁做一點文字、視覺、跟 RWD 上的修改。因為案子很小，所以這份專案只收不到 20k 左右的金額。但整體而言也算是不無小補的狀況拉～！我覺得在這邊也可以思考一下額外接案賺收入的可能性。如果之後的工作沒有到太忙的話，一個月大概也可以接個 1-2 個短期的專案（前後端、或者是其他程式類型的都可以）幫自己多賺點收入。
+最後，這個月跟兩個朋友借了總共 3 萬塊。主要用途是還錢（算是先挖東補西的概念），當初拉了朋友 A 一起投資朋友 B 的生意，結果朋友 B 捲款跑了 QQ。出於自己的一些想法跟價值觀，最後的解決方法是我先把錢還給朋友 A，再慢慢跟朋友 B 拿回我和 A 的部分。但一時之間自己身上沒有足夠給 A 的金額，所以就先跟另另外的其他朋友借錢了。</description>
     </item>
     
     <item>

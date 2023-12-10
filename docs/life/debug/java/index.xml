@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java 相關問題 on Fonu Site</title>
+    <link>https://fonu195713.github.io/docs/life/debug/java/</link>
+    <description>Recent content in Java 相關問題 on Fonu Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://fonu195713.github.io/docs/life/debug/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>java.util.ConcurrentModificationException</title>
+      <link>https://fonu195713.github.io/docs/life/debug/java/concurrent_modification_exception/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fonu195713.github.io/docs/life/debug/java/concurrent_modification_exception/</guid>
+      <description>java.util.ConcurrentModificationException#前言 最近打算用 Java 寫出一個簡單的富饒之城桌遊，一方面打發剛畢業等當兵的尷尬時段、一方面也可以趁這個機會學一點自己想要學的其他東西，像是 Spring, Spring boot, Gradle, Anguler, TDD, BDD, DDD &amp;hellip;等。然後這個 Concurrent Modification Exception 就在做這件事情的過程中蹦出來了。稍微研究了一下之後，發現是個蠻有趣的東西，所以就打算記錄下來。
+程式 在 Java Document 裡面，對這個例外處理的有著很詳盡的描述。內容很多，但我們只要注意到裡面的第一句話 &amp;ldquo;This exception may be thrown by methods that have detected concurrent modification of an object when such modification is not permissible.&amp;rdquo; 就好，中文理解的話 &amp;hellip;可以翻成「當某個方法偵測到物件正在進行併發修改，但此物件並不支援併發修改的功能時，就會拋出此異常。」通常會在迭代器（iterator）或者是類似於迭代器的操作（ex. foreach）的操作下才會發生。
+我會發生這個問題，是因為我嘗試做以下的動作：
+生成 50 張富饒之城裡面的地區卡 隨機洗牌 發配一些牌給 n 個玩家 （遊戲開始） 第 1 個玩家抽牌 更新排堆內容（這邊拋出 ConcurrentModificationException） public void card() { // generate cards List&amp;lt;Card&amp;gt; card_list = Card.</description>
+    </item>
+    
+  </channel>
+</rss>
