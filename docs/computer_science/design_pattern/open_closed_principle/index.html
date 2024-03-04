@@ -82,7 +82,7 @@
   
 
   
-    <a href="/docs/life/debug/" class="">Debug 日誌</a>
+    <a href="/docs/life/pomodoro/" class="">日常工作紀錄</a>
   
 
           
@@ -100,7 +100,7 @@
   
 
   
-    <a href="/docs/life/pomodoro/" class="">番茄鐘工作紀錄</a>
+    <a href="/docs/life/debug/" class="">Debug 日誌</a>
   
 
           
@@ -351,7 +351,7 @@
 <ul>
 <li><strong>程式碼範例</strong></li>
 </ul>
-<p>開放封閉原則算是一個蠻好理解的設計原則，基本上就是「寫好的程式碼，盡量保持在不需要頻繁編輯的狀態」跟「寫好的程式碼，要容易被後來的程式碼飲用或擴充」這兩句話。用一個比較常見的舉例方式來解釋的話，讓我們考慮以下的情境：假設我們需要撰寫一支程式，該程式需要能夠透過不同參數，生成不同的圖形（圓形、正方形、長方形 &hellip;等），並且程式也要能夠計算該圖形的面積。如果不使用開放封閉原則的話，可能會寫出以下的程式：</p>
+<p>開放封閉原則算是一個滿好理解的設計原則，基本上就是「寫好的程式碼，盡量保持在不需要頻繁編輯的狀態」跟「寫好的程式碼，要容易被後來的程式碼飲用或擴充」這兩句話。用一個比較常見的舉例方式來解釋的話，讓我們考慮以下的情境：假設我們需要撰寫一支程式，該程式需要能夠透過不同參數，生成不同的圖形（圓形、正方形、長方形 &hellip;等），並且程式也要能夠計算該圖形的面積。如果不使用開放封閉原則的話，可能會寫出以下的程式：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 定義各種不同的圖形
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Circle</span> <span style="color:#f92672">{</span>
