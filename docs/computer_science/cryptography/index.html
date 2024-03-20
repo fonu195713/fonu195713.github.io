@@ -12,7 +12,7 @@
 
 
 
-<link rel="stylesheet" href="/book.min.b54adc0d1f3cdbd5dd5cddc405501c63daae88faf5272c571655f8ba52e6e6fa.css" integrity="sha256-tUrcDR8829XdXN3EBVAcY9quiPr1JyxXFlX4ulLm5vo=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.7510252a98b014e14a3c632e4fd10ef2d6b73bc99d7c8125fe4b8415e160cdb6.css" integrity="sha256-dRAlKpiwFOFKPGMuT9EO8ta3O8mdfIEl/kuEFeFgzbY=" crossorigin="anonymous">
 
 
 
@@ -82,7 +82,7 @@
   
 
   
-    <a href="/docs/life/diary/" class="">日記 - 公開版本</a>
+    <a href="/docs/life/diary/" class="">每日小記</a>
   
 
           
@@ -119,63 +119,6 @@
 
   
     <a href="/docs/life/reading_experience/" class="">閱讀心得</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-6cfa6c245d140f392e0bbc46134682d7" class="toggle"  />
-    <label for="section-6cfa6c245d140f392e0bbc46134682d7" class="flex justify-between">
-      <a role="button" class="">創作相關</a>
-    </label>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/creation/novel/" class="">小說試寫</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/creation/coding/" class="">程式專題</a>
   
 
           
@@ -300,24 +243,6 @@
         </li>
       
     
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/computer_science/software_engineering/" class="">軟體工程</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
   </ul>
 
         </li>
@@ -381,6 +306,10 @@
 <ul>
 <li><strong>ChatGPT 的說明</strong></li>
 </ul>
+<p>【密碼學】（Cryptography）是一門研究「如何確保訊息能夠安全地進行傳遞」的學科。它涉及到使用不同的數學技術和演算法來加密、解密我們想要保護的訊息，從而確保訊息在傳輸和存儲過程中，不被未經授權的人訪問或修改。在密碼學上，我們會利用密鑰（或稱為金鑰、Key）將原始訊息（通常稱為明文、Plain text、或 Plaintext）進行加密（Encryption）。加密後的原始資料會被稱為密文（Cipher text、或 Ciphertext）。金鑰是加密和解密的過程中至關重要的元素，它確保了加解密演算法的安全性，並且只有授權的用戶才能夠解開密文。在密碼學中，加密演算法可以分為對稱式加密（Symmetric Encryption）和非對稱式加密（Asymmetric Encryption）兩種。在對稱式加密中，加密的過程與解密的過程會使用相同的一把鑰匙；而在非對稱式加密中，則使用公鑰和私鑰 2 把不同的鑰匙分別進行加密和解密。</p>
+<p>除了對稱式加密和非對稱式加密外，密碼學還涉及其他重要概念，例如雜湊函數（Hash function）、訊息驗證碼（Message Authentication Code）、和數位簽章（Digital Signature）&hellip;等。<strong>雜湊函數</strong>是可以一種將任意大小的位元資料，轉換成固定位元長度的特殊函數。雜湊函數具、固定輸出長度、快速計算、唯一性、和不可逆性 &hellip;等不同的特點；<strong>訊息驗證碼</strong>是一種用於驗證數據的完整性（Integrity）和真實性（Authenticity）的密碼學技術。它通常使用雜湊函數、密鑰、以及相關訊息來對訊息生成一個固定長度的驗證碼。這個驗證碼與加密過後的訊息一起傳送給接收方。接收方首先會解密所有的得到的資訊，再使用相同雜湊函數、密鑰、以及相關訊息來重新計算驗證碼，然後與接收到的驗證碼進行比較，以確認數據的完整性和真實性；<strong>數位簽章</strong>則用來驗證資料的完整性（Integrity）和不可否認性（Non-repudiation），通常與非對稱式加密演算法相互結合，可用於確認資料的真實發送者，以及確認該訊息是否在傳遞的過程中有被修改。</p>
+<hr>
+<p>以下（To be continue&hellip;）</p>
 </article>
  
       <div id="gitalk-container"></div>
@@ -419,23 +348,6 @@
   </main>
 
   
-
-<script>
-    const gitalk = new Gitalk({
-        clientID: '91e953a7402d79bcef6c',
-        clientSecret: '22897328fab72d26e1f3a88e83ab654467232514',
-        repo: 'fonu195713.github.io',     
-        owner: 'fonu195713',
-        admin: ['fonu195713'],
-        distractionFreeMode:  false ,  
-        pagerDirection: 'last',
-        language: 'zh-TW',
-        createIssueManually:  false ,
-        enableHotKey:  true ,
-        id: md5(location.pathname),      
-    });
-    gitalk.render('gitalk-container');
-</script>
 </body>
 </html>
 
