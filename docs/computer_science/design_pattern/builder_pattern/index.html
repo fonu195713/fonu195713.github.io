@@ -66,8 +66,8 @@
   
 
   
-    <input type="checkbox" id="section-ce2f1594fa3d18bb5604540e4de080b5" class="toggle"  />
-    <label for="section-ce2f1594fa3d18bb5604540e4de080b5" class="flex justify-between">
+    <input type="checkbox" id="section-9c5fb070aa6a846f1d3da7c79cefb6b5" class="toggle"  />
+    <label for="section-9c5fb070aa6a846f1d3da7c79cefb6b5" class="flex justify-between">
       <a role="button" class="">生活相關</a>
     </label>
   
@@ -141,8 +141,8 @@
   
 
   
-    <input type="checkbox" id="section-343f49b47f255bcd0611d65bed416108" class="toggle"  />
-    <label for="section-343f49b47f255bcd0611d65bed416108" class="flex justify-between">
+    <input type="checkbox" id="section-29fcdd2f14dd6eca1f7ffa5701c3111e" class="toggle"  />
+    <label for="section-29fcdd2f14dd6eca1f7ffa5701c3111e" class="flex justify-between">
       <a role="button" class="">命理相關</a>
     </label>
   
@@ -198,8 +198,8 @@
   
 
   
-    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
-    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+    <input type="checkbox" id="section-9c904111af22e90e73dcd9cd05321afa" class="toggle" checked />
+    <label for="section-9c904111af22e90e73dcd9cd05321afa" class="flex justify-between">
       <a role="button" class="">資工相關</a>
     </label>
   
@@ -338,206 +338,206 @@
 <li><strong>程式碼範例</strong></li>
 </ul>
 <p>在物件導向程式設計中，伸縮式建構子（英文叫做 Telescoping constructor）是一種用來說明「提供多種不同參數組合的建構子，以利於物件生成」的詞彙。一般來說，伸縮式建構子只會在複雜物件的類別中出現，而所謂的複雜物件，指的則是經由不同子部件所組成的大型物件，用比較貼近生活的例子來說的話，複雜物件就像是一台汽車（由引擎、輪胎、車殼、窗戶、排氣管、方向盤 &hellip;等物件組成）一棟房子（由牆壁、大門、窗戶、屋頂、床、書桌 &hellip;等物件組成）或者是一台電腦（由鍵盤、滑鼠、螢幕、主機板、CPU、硬碟 &hellip;等物件組成）之類的東西。用程式的方式呈現大概會像這個樣子：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String args<span style="color:#f92672">[])</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 組成電腦的小物件們
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        MotherBoard motherBoard <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MotherBoard<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        CPU cpu <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CPU<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        Memory memory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Memory<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        Disk disk <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Disk<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        Power power <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Power<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        ComputerTower computerTower <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ComputerTower<span style="color:#f92672">(</span>motherBoard<span style="color:#f92672">,</span> cpu<span style="color:#f92672">,</span> memory<span style="color:#f92672">,</span> disk<span style="color:#f92672">,</span> power<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>        Monitor monitor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Monitor<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        Keyboard keyboard <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Keyboard<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        Mouse mouse <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Mouse<span style="color:#f92672">();</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String args<span style="color:#f92672">[]</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 組成電腦的小物件們</span>
+</span></span><span style="display:flex;"><span>        MotherBoard motherBoard <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MotherBoard();
+</span></span><span style="display:flex;"><span>        CPU cpu <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CPU();
+</span></span><span style="display:flex;"><span>        Memory memory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Memory();
+</span></span><span style="display:flex;"><span>        Disk disk <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Disk();
+</span></span><span style="display:flex;"><span>        Power power <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Power();
+</span></span><span style="display:flex;"><span>        ComputerTower computerTower <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ComputerTower(motherBoard, cpu, memory, disk, power);
+</span></span><span style="display:flex;"><span>        Monitor monitor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Monitor();
+</span></span><span style="display:flex;"><span>        Keyboard keyboard <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Keyboard();
+</span></span><span style="display:flex;"><span>        Mouse mouse <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Mouse();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// [電腦] 本身
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Computer computer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Computer<span style="color:#f92672">(</span>computerTower<span style="color:#f92672">,</span> monitor<span style="color:#f92672">,</span> keyboard<span style="color:#f92672">,</span> mouse<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Computer</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor<span style="color:#f92672">,</span> Keyboard keyboard<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor<span style="color:#f92672">,</span> Mouse mouse<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor<span style="color:#f92672">,</span> Keyboard keyboard<span style="color:#f92672">,</span> Mouse mouse<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor<span style="color:#f92672">,</span> Keyboard keyboard<span style="color:#f92672">,</span> Mouse mouse<span style="color:#f92672">,</span> GPU gpu<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor<span style="color:#f92672">,</span> Keyboard keyboard<span style="color:#f92672">,</span> Mouse mouse<span style="color:#f92672">,</span> Printer printer<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor1<span style="color:#f92672">,</span> Monitor monitor2<span style="color:#f92672">,</span> Keyboard keyboard<span style="color:#f92672">,</span> Mouse mouse<span style="color:#f92672">)</span> <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// [電腦] 本身</span>
+</span></span><span style="display:flex;"><span>        Computer computer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Computer(computerTower, monitor, keyboard, mouse);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Computer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span>(ComputerTower computerTower) {};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span>(ComputerTower computerTower, Monitor monitor) {};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span>(ComputerTower computerTower, Monitor monitor, Keyboard keyboard) {};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span>(ComputerTower computerTower, Monitor monitor, Mouse mouse) {};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span>(ComputerTower computerTower, Monitor monitor, Keyboard keyboard, Mouse mouse) {};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span>(ComputerTower computerTower, Monitor monitor, Keyboard keyboard, Mouse mouse, GPU gpu) {};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span>(ComputerTower computerTower, Monitor monitor, Keyboard keyboard, Mouse mouse, Printer printer) {};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span>(ComputerTower computerTower, Monitor monitor1, Monitor monitor2, Keyboard keyboard, Mouse mouse) {};
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他的建構子和方法 ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他的建構子和方法 ...</span>
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>但 Telescoping constructor 就像是其他的設計模式一樣，並不是一個在任何情況下都很適合使用的程式撰寫技巧，至少從上面的這個例子來說，我們可以單純從 <code>Computer</code> 的建構子們觀察到幾個比較明顯的問題：首先是［<strong>程式的維護成本</strong>］，因為 <code>Computer</code> 類別存在著多個不同的建構子，當有程式想要實作 <code>Computer</code> 物件的時候，我們很難第一眼就看出程式使用的是哪一個建構子，這會使得程式的維護成本變得很高。其次是［<strong>程式的彈性很低</strong>］，因為建構子侷限了 <code>Computer</code> 物件需要怎麼樣被生成，子物件需要按照一定的數量與順序被放進建構子中，這會使得程式整體的彈性變低，且各類別對於 <code>Computer</code> 中子物件的依賴程度也會變高。</p>
 <p>但無論是「建構子的數量過多」，還是「生成複雜物件需要依賴一定數量的子部件」，都可以透過一種方式來解決：那就是 &ldquo;讓建構子中的參數允許 <code>null</code> 的存在&rdquo;。透過允許 <code>null</code> 的存在，可以建構子們通通歸納在一起，變成一個「包含了所有部件的建構子」。並透過 <code>null</code> 的方式，彈性地選擇不同類型的要用哪一些電腦中的子部件來生成 <code>Computer</code> 這個複雜物件，就像是下面的這個樣子：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Computer</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一個包含了所有電腦可以配置的物件的建構子
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>ComputerTower computerTower<span style="color:#f92672">,</span> Monitor monitor1<span style="color:#f92672">,</span> Monitor monitor2<span style="color:#f92672">,</span> Keyboard keyboard<span style="color:#f92672">,</span> Mouse mouse<span style="color:#f92672">,</span> GPU gpu<span style="color:#f92672">,</span> Earphone earphone<span style="color:#f92672">,</span> Speaker speaker<span style="color:#f92672">,</span> Webcam webcam<span style="color:#f92672">,</span> Touchpad touchpad<span style="color:#f92672">,</span> Scanner scanner<span style="color:#f92672">,</span> Printer printer<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computerTower</span> <span style="color:#f92672">=</span> computerTower<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">monitor1</span> <span style="color:#f92672">=</span> monitor1<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">monitor2</span> <span style="color:#f92672">=</span> monitor2<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">keyboard</span> <span style="color:#f92672">=</span> keyboard<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">mouse</span> <span style="color:#f92672">=</span> mouse<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">gpu</span> <span style="color:#f92672">=</span> gpu<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">earphone</span> <span style="color:#f92672">=</span> earphone<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">speaker</span> <span style="color:#f92672">=</span> speaker<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">webcam</span> <span style="color:#f92672">=</span> webcam<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">touchpad</span> <span style="color:#f92672">=</span> touchpad<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">scanner</span> <span style="color:#f92672">=</span> scanner<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">printer</span> <span style="color:#f92672">=</span> printer<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">};</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 某間公司的 [伺服器主機] 類別
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Server</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 生成一台電腦，並將該電腦當成伺服器主機
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> Computer <span style="color:#a6e22e">getServer</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Computer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一個包含了所有電腦可以配置的物件的建構子</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span>(ComputerTower computerTower, Monitor monitor1, Monitor monitor2, Keyboard keyboard, Mouse mouse, GPU gpu, Earphone earphone, Speaker speaker, Webcam webcam, Touchpad touchpad, Scanner scanner, Printer printer) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computerTower</span> <span style="color:#f92672">=</span> computerTower;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">monitor1</span> <span style="color:#f92672">=</span> monitor1;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">monitor2</span> <span style="color:#f92672">=</span> monitor2;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">keyboard</span> <span style="color:#f92672">=</span> keyboard;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">mouse</span> <span style="color:#f92672">=</span> mouse;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">gpu</span> <span style="color:#f92672">=</span> gpu;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">earphone</span> <span style="color:#f92672">=</span> earphone;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">speaker</span> <span style="color:#f92672">=</span> speaker;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">webcam</span> <span style="color:#f92672">=</span> webcam;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">touchpad</span> <span style="color:#f92672">=</span> touchpad;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">scanner</span> <span style="color:#f92672">=</span> scanner;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">printer</span> <span style="color:#f92672">=</span> printer;
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 某間公司的 [伺服器主機] 類別</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Server</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 生成一台電腦，並將該電腦當成伺服器主機</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Computer <span style="color:#a6e22e">getServer</span>() {
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 假設這台伺服器只需要主機、GPU、跟印表機
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        ComputerTower computerTower <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">new</span> ComputerTower<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        GPU gpu <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Gpu<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        Printer printer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Printer<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 假設這台伺服器只需要主機、GPU、跟印表機</span>
+</span></span><span style="display:flex;"><span>        ComputerTower computerTower <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">new</span> ComputerTower();
+</span></span><span style="display:flex;"><span>        GPU gpu <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Gpu();
+</span></span><span style="display:flex;"><span>        Printer printer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Printer();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 把電腦做出來
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Computer computer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Computer<span style="color:#f92672">(</span>computerTower<span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> gpu<span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> printer<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> computer<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 把電腦做出來</span>
+</span></span><span style="display:flex;"><span>        Computer computer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Computer(computerTower, <span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">null</span>, gpu, <span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">null</span>, printer);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> computer;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>原本的問題得到了解決，但新的問題也應運而生：那就是［<strong>可讀性變差</strong>］。雖然在建構子裡面包含 <code>null</code> 並不是一件少見的事情，但在一個建構子裡面，有絕大多數的參數都是 <code>null</code> 就真的很少見了。這種程式在第一眼很容易會讓人有「阿放了那麼多 <code>null</code>，為什麼不乾脆再拉一個建構子出來啊？」的感覺（然後程式就會重新跳回上面的問題）。除此之外，一個更令人感到頭疼的問題是：如果我今天想要加一個子部件進去，我有辦法很快地知道哪個部件要放在哪裡嗎？或者說得簡單一點：你可以很快地告訴我建構子裡面， <code>GPU</code> 之後第 2 個 <code>null</code> 原本放的是什麼東西嗎？</p>
 <p>因此，為了解決「建構子的數量繁雜」「建構子會讓程式的彈性降低」與「建構子有太多 <code>null</code>」這三個交織在一起的問題，Builder pattern（<strong>創建者模式</strong>）的程式寫法就被發明出來了。它有點像是吸收了兩邊的優點所創造出來的模式：透過 <code>Builder</code> 生成複雜物件中的子部件，透過 <code>Director</code> 管理和執行需要生成的物件，使用者（<code>Client</code>）就只需要呼叫 <code>Director</code> 中的 <code>getResult()</code> 方法，就可以無痛得到預期中的複雜物件，就像是下面這樣：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 複雜物件 Computer 類別
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Computer</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 所有的子部件們
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> ComputerTower computerTower<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Monitor monitor<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Keyboard keyboard<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Mouse mouse<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> GPU gpu<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Earphone earphone<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Speaker speaker<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Webcam webcam<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Touchpad touchpad<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Scanner scanner<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Printer printer<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 複雜物件 Computer 類別</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Computer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 所有的子部件們</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ComputerTower computerTower;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Monitor monitor;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Keyboard keyboard;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Mouse mouse;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> GPU gpu;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Earphone earphone;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Speaker speaker;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Webcam webcam;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Touchpad touchpad;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Scanner scanner;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Printer printer;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 現在 Computer 只有一個建構子，而且沒有任何內容
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">()</span> <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Builder 類別，用來創建各種不同的子部件
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ComputerComponentsBuilder</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 要生成的目標物件
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> Computer computer<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 現在 Computer 只有一個建構子，而且沒有任何內容</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span>() {};
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Builder 類別，用來創建各種不同的子部件</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ComputerComponentsBuilder</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 要生成的目標物件</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Computer computer;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Builder 的建構子，用以生成一台全新的電腦
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ComputerComponentsBuilder</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computer</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Computer<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Builder 的建構子，用以生成一台全新的電腦</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ComputerComponentsBuilder</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computer</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Computer();
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Computer 中，所有部件的設定方法
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// Computer 中，所有部件的設定方法
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildComputerTower</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computer</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computerTower</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ComputerTower<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildMonitor</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computer</span><span style="color:#f92672">.</span><span style="color:#a6e22e">monitor</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ComputerTower<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildKeyboard</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computer</span><span style="color:#f92672">.</span><span style="color:#a6e22e">keyboard</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Keyboard<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildMouse</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computer</span><span style="color:#f92672">.</span><span style="color:#a6e22e">mouse</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Mouse<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildGPU</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computer</span><span style="color:#f92672">.</span><span style="color:#a6e22e">gpu</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GPU<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildEarphone</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computer</span><span style="color:#f92672">.</span><span style="color:#a6e22e">earphone</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Earphone<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildSpeaker</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computer</span><span style="color:#f92672">.</span><span style="color:#a6e22e">speaker</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Speaker<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildWebcam</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computer</span><span style="color:#f92672">.</span><span style="color:#a6e22e">webcam</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Webcam<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildTouchpad</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computer</span><span style="color:#f92672">.</span><span style="color:#a6e22e">touchpad</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Touchpad<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildScanner</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computer</span><span style="color:#f92672">.</span><span style="color:#a6e22e">scanner</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Scanner<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Computer 中，所有部件的設定方法</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Computer 中，所有部件的設定方法</span>
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildPrinter</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computer</span><span style="color:#f92672">.</span><span style="color:#a6e22e">printer</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Printer<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildComputerTower</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computer</span>.<span style="color:#a6e22e">computerTower</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ComputerTower();
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 用來回傳最後結果的 getResult() 方法 
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> Computer <span style="color:#a6e22e">getResult</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">computer</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Director 類別，用來控管 Computer 的建立、配置、和回傳
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ComputerDirector</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Computer <span style="color:#a6e22e">getResult</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Builder 物件
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        ComputerComponentsBuilder builder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ComputerComponentsBuilder<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildMonitor</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computer</span>.<span style="color:#a6e22e">monitor</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ComputerTower();
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 這邊同樣以「主機 + GPU + 印表機」的伺服器為例子
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        builder<span style="color:#f92672">.</span><span style="color:#a6e22e">buildComputerTower</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        builder<span style="color:#f92672">.</span><span style="color:#a6e22e">buildGPU</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        builder<span style="color:#f92672">.</span><span style="color:#a6e22e">buildPrinter</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildKeyboard</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computer</span>.<span style="color:#a6e22e">keyboard</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Keyboard();
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 回傳最後生成的結果
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Computer computer <span style="color:#f92672">=</span> builder<span style="color:#f92672">.</span><span style="color:#a6e22e">getResult</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> computer<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Client</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String args<span style="color:#f92672">[])</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        ComputerDirector director <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ComputerDirector<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        Computer computer <span style="color:#f92672">=</span> director<span style="color:#f92672">.</span><span style="color:#a6e22e">getResult</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildMouse</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computer</span>.<span style="color:#a6e22e">mouse</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Mouse();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildGPU</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computer</span>.<span style="color:#a6e22e">gpu</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GPU();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildEarphone</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computer</span>.<span style="color:#a6e22e">earphone</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Earphone();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildSpeaker</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computer</span>.<span style="color:#a6e22e">speaker</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Speaker();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildWebcam</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computer</span>.<span style="color:#a6e22e">webcam</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Webcam();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildTouchpad</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computer</span>.<span style="color:#a6e22e">touchpad</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Touchpad();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildScanner</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computer</span>.<span style="color:#a6e22e">scanner</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Scanner();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildPrinter</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computer</span>.<span style="color:#a6e22e">printer</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Printer();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 用來回傳最後結果的 getResult() 方法 </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Computer <span style="color:#a6e22e">getResult</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">computer</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Director 類別，用來控管 Computer 的建立、配置、和回傳</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ComputerDirector</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Computer <span style="color:#a6e22e">getResult</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Builder 物件</span>
+</span></span><span style="display:flex;"><span>        ComputerComponentsBuilder builder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ComputerComponentsBuilder();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 這邊同樣以「主機 + GPU + 印表機」的伺服器為例子</span>
+</span></span><span style="display:flex;"><span>        builder.<span style="color:#a6e22e">buildComputerTower</span>();
+</span></span><span style="display:flex;"><span>        builder.<span style="color:#a6e22e">buildGPU</span>();
+</span></span><span style="display:flex;"><span>        builder.<span style="color:#a6e22e">buildPrinter</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 回傳最後生成的結果</span>
+</span></span><span style="display:flex;"><span>        Computer computer <span style="color:#f92672">=</span> builder.<span style="color:#a6e22e">getResult</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> computer;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Client</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String args<span style="color:#f92672">[]</span>) {
+</span></span><span style="display:flex;"><span>        ComputerDirector director <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ComputerDirector();
+</span></span><span style="display:flex;"><span>        Computer computer <span style="color:#f92672">=</span> director.<span style="color:#a6e22e">getResult</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>為了方便理解上面的程式架構，我們同樣用生活中的例子來做說明：<code>Director</code> 因為是負責管理和調度複雜物件 <code>Computer</code> 的建立過程，因此我們可以把它想像成類似 &ldquo;原價屋&rdquo; 的角色；而 <code>Builder</code> 因為是負責提供各式各樣不同實體子部件的角色，所以它類似於 &ldquo;硬體供應商&rdquo;，而 <code>Client</code> 不用多說，就是我們這些買電腦的客戶了。綜上所述：一個 <code>Computer</code> 的生產過程就可以被我們解剖成以下的描述：「當我們（<code>Client</code>）需要一台電腦的時候，我們會去找原價屋（<code>Director</code>），並跟他們說『我們需要一台電腦（<code>getResult()</code>）』，而原價屋在收到我們的需求之後，會去找硬體供應商（<code>Builder</code>），並從供應商那邊取得需要的電腦零件（<code>build()</code>），最後再把電腦給我們（<code>return</code>）」。而這，就是模式的運行邏輯。</p>
 <p>此外，在實際的案例中，因為『原價屋』可以跟很多不同的『硬體供應商』進行零件的調度，所以 <code>Director</code> 類別更像是一個 &hellip;<a href="../simple_factory_pattern">工廠</a>？<code>Direct</code> 可以透過 <code>Client</code> 的不同需求（像是我要 ASUS 或 Acer 的電腦？我要筆電、文書機、還是電競電腦？）去調用不同的電腦創建邏輯、選擇不同的 <code>Builder</code> 進行子部件的創建 &hellip;等。就像是下面這個樣子：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Director 類別，用來控管 Computer 的建立、配置、和回傳
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ComputerDirector</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Computer <span style="color:#a6e22e">getResult</span><span style="color:#f92672">(</span>String brand<span style="color:#f92672">,</span> String level<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Builder 物件
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        ComputerComponentsBuilder builder<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 選擇不同的『硬體供應商』
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>brand<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;ASUS&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            builder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AsusComputerBuilder<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>brand<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Acer&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            builder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AcerComputerBuilder<span style="color:#f92672">();</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Director 類別，用來控管 Computer 的建立、配置、和回傳</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ComputerDirector</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Computer <span style="color:#a6e22e">getResult</span>(String brand, String level) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Builder 物件</span>
+</span></span><span style="display:flex;"><span>        ComputerComponentsBuilder builder;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 選擇不同的『硬體供應商』</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(brand.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;ASUS&#34;</span>))
+</span></span><span style="display:flex;"><span>            builder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AsusComputerBuilder();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(brand.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;Acer&#34;</span>))
+</span></span><span style="display:flex;"><span>            builder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AcerComputerBuilder();
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> BrandNotExistException<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> BrandNotExistException();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 用來回傳的 Computer 物件
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Computer computer<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 不同的 &#34;電腦&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>level<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;notebook&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            computer <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getNotebook</span><span style="color:#f92672">(</span>builder<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>level<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Low-End Computer&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            computer <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getLowEndComputer</span><span style="color:#f92672">(</span>builder<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>level<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;High-End Computer&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            computer <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getHighEndComputer</span><span style="color:#f92672">(</span>builder<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 用來回傳的 Computer 物件</span>
+</span></span><span style="display:flex;"><span>        Computer computer;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 不同的 &#34;電腦&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(level.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;notebook&#34;</span>))
+</span></span><span style="display:flex;"><span>            computer <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">getNotebook</span>(builder);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(level.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;Low-End Computer&#34;</span>))
+</span></span><span style="display:flex;"><span>            computer <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">getLowEndComputer</span>(builder);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(level.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;High-End Computer&#34;</span>))
+</span></span><span style="display:flex;"><span>            computer <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">getHighEndComputer</span>(builder);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> LevelNotExistException<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> LevelNotExistException();
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> computer<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> computer;
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他不同的方法，像是配置不同等級的電腦 ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他不同的方法，像是配置不同等級的電腦 ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他不同的方法，像是配置不同等級的電腦 ...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他不同的方法，像是配置不同等級的電腦 ...</span>
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div></article>
  
       <div id="gitalk-container"></div>

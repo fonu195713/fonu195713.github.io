@@ -66,8 +66,8 @@
   
 
   
-    <input type="checkbox" id="section-ce2f1594fa3d18bb5604540e4de080b5" class="toggle"  />
-    <label for="section-ce2f1594fa3d18bb5604540e4de080b5" class="flex justify-between">
+    <input type="checkbox" id="section-9c5fb070aa6a846f1d3da7c79cefb6b5" class="toggle"  />
+    <label for="section-9c5fb070aa6a846f1d3da7c79cefb6b5" class="flex justify-between">
       <a role="button" class="">生活相關</a>
     </label>
   
@@ -141,8 +141,8 @@
   
 
   
-    <input type="checkbox" id="section-343f49b47f255bcd0611d65bed416108" class="toggle"  />
-    <label for="section-343f49b47f255bcd0611d65bed416108" class="flex justify-between">
+    <input type="checkbox" id="section-29fcdd2f14dd6eca1f7ffa5701c3111e" class="toggle"  />
+    <label for="section-29fcdd2f14dd6eca1f7ffa5701c3111e" class="flex justify-between">
       <a role="button" class="">命理相關</a>
     </label>
   
@@ -198,8 +198,8 @@
   
 
   
-    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
-    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+    <input type="checkbox" id="section-9c904111af22e90e73dcd9cd05321afa" class="toggle" checked />
+    <label for="section-9c904111af22e90e73dcd9cd05321afa" class="flex justify-between">
       <a role="button" class="">資工相關</a>
     </label>
   
@@ -337,168 +337,168 @@
 <p>從純粹的程式碼上面來說，依賴反轉原則總共有三個重要的組成，分別是「低層模組」「高層模組」和「抽象類別」三種。其中，低層模組指的是「零件」，算是構成整個系統裡面，比較基礎、比較單純、比較不複雜的部分。如果拿一個 RPG 遊戲來做舉例的話，「低則模組」就有點像是刀、劍、弓、法杖、斧頭、藥水、衣服、靴子 &hellip;等比較小塊、比較基本、物件本身比較不會有太多變化的東西。</p>
 <p>「高層模組」指的則是由數個（或數十個）低層模組所組合而成的一個複雜類別，通常可以執行一些相對低層模組來說，更為複雜的操作。同樣拿 RPG 遊戲來舉例的話，高層模組可以是一個角色、一支隊伍、一個公會、一座城市、或者是一組軍團&hellip;等等。通常來講，高層模組和低層模組是一個「比較」的概念，如果視野是放在一個 <strong>角色</strong> 跟上，那麼角色就是高層模組、角色所攜帶的各種物品就是低層模組；如果視野是放在一支隊伍、更甚至於一組軍團上面，那麼 <strong>角色</strong> 在這裡可能就變成了低層模組。</p>
 <p>一般來說，在不使用「依賴反轉原則」的前提下，如果我們想要製作出一個高層模組（和它應有的功能）的話，我們通常會使用直接依賴的方式來完成，就如同下面的類別所示，一個角色與它身上的各種五花八門的配備：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 角色類別
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一個角色可能擁有的所有屬性
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 這邊只包含血量、魔力、攻擊力、和防禦力
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> Integer hp<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer mp<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer atk<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer def<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 角色類別</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一個角色可能擁有的所有屬性</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 這邊只包含血量、魔力、攻擊力、和防禦力</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer hp;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer atk;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer def;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一個角色可能擁有的各種武器
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 這邊包含了刀、劍、弓、法杖、斧頭、匕首、盾牌 ...等
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> Blade blade<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Sword sword<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Bow bow<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Staff staff<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Axe axe<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Dagger dagger<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Shield shield<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一個角色可能擁有的各種武器</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 這邊包含了刀、劍、弓、法杖、斧頭、匕首、盾牌 ...等</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Blade blade;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Sword sword;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Bow bow;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Staff staff;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Axe axe;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Dagger dagger;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Shield shield;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一個角色可能擁有的各種護具
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 這邊包含了頭盔、胸甲、護肘、護膝、鞋子 ...等
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> Helmet helmet<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Breastplate breastplate<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ElbowGuard elbowGuard<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> KneeGuard kneeGuard<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Footwear footwear<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一個角色可能擁有的各種護具</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 這邊包含了頭盔、胸甲、護肘、護膝、鞋子 ...等</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Helmet helmet;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Breastplate breastplate;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ElbowGuard elbowGuard;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> KneeGuard kneeGuard;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Footwear footwear;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一個角色可能擁有的所有道具
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 這邊只列出一些藥水、食品類型的道具
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 藥水因為可以複數持有，所以是陣列
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> HealthPotion<span style="color:#f92672">[]</span> healthPotion<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ManaPotion<span style="color:#f92672">[]</span> manaPotion<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> AttackPotion<span style="color:#f92672">[]</span> attackPotion<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> DefensePotion<span style="color:#f92672">[]</span> defensePotion<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Bread<span style="color:#f92672">[]</span> bread<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Water<span style="color:#f92672">[]</span> water<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Chicken<span style="color:#f92672">[]</span> chicken<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Beef<span style="color:#f92672">[]</span> beef<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Pork<span style="color:#f92672">[]</span> pork<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一個角色可能擁有的所有道具</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 這邊只列出一些藥水、食品類型的道具</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 藥水因為可以複數持有，所以是陣列</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> HealthPotion<span style="color:#f92672">[]</span> healthPotion;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ManaPotion<span style="color:#f92672">[]</span> manaPotion;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> AttackPotion<span style="color:#f92672">[]</span> attackPotion;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> DefensePotion<span style="color:#f92672">[]</span> defensePotion;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Bread<span style="color:#f92672">[]</span> bread;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Water<span style="color:#f92672">[]</span> water;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Chicken<span style="color:#f92672">[]</span> chicken;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Beef<span style="color:#f92672">[]</span> beef;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Pork<span style="color:#f92672">[]</span> pork;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 還有其他好多好多角色可能可以持有的東西 ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>     <span style="color:#75715e">// 還有其他好多好多角色可能可以持有的東西 ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 還有其他好多好多角色可能可以持有的東西 ...</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">// 還有其他好多好多角色可能可以持有的東西 ...</span>
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>可以看到，這個角色目前是以「只有最基本的幾種武器可以選擇」「只有最基本的防具可以選擇」「只有一些已經定義好的物品可以選擇」的狀況來做設計。此外，這些成員變數僅僅也只是「變數」而已，還不含各種武器的攻擊方法、各種防具的穿戴方式、各種物品的使用方式 &hellip;等幾十種（甚至是幾百種）方法。而光是這樣，這個「角色」的高層模組就已經依賴了至少 20 種不同的低層模組了。現在讓我們想想：如果今天我們想要在 <code>Blade</code> 類別裡面新增幾種不同的攻擊方式、如果我們要在 <code>Bow</code> 類別新增一個「根據不同等級的箭矢有著不同的攻擊力」的小小功能、如果我們今天想要為各種防具進行不同屬性強化、如果我們今天想要讓法杖擁有不同屬性的攻擊方式、如果、如果、如果 &hellip;</p>
 <p>很明顯地，這種「把所有具體的類別全部都塞在一個高層模組」的程式實現方式非常的可怕，對吧？因為高層模組（<code>Character</code>）對低層模組（所有東西）有著重度的依賴，因此只要任何一個模組發生了改變、細節上出了點變化、需要做點增刪查，那麼都有可能會影響到整個 <code>Character</code> 的程式內容。因此，在這樣的情況下，就很適合利用「依賴反轉原則」來對程式進行改寫：</p>
 <p>依賴反轉原則的做法主要有 3 步：</p>
 <p>首先是「建立一個介面、或一個抽象類別。」在實際的程式專案中，抽象類別或者是介面是一個鮮少會去做更動的程式部件。通常只有在專案需要大改，或者是程式架構需要重新調整的時候，才會進行一些編輯跟撰寫。這個樣的特性，很適合拿來放在這種「可以的話，勁量不要去做更動」的地方上面。因此我們首先要做的，就是要為這些角色所能擁有的所有東西，進行一個抽象類（或介面）的宣告：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 定義了名為 [武器][防具] 和 [道具] 的抽象類別
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Weapon</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 定義了名為 [武器][防具] 和 [道具] 的抽象類別</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Weapon</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span>();
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Armor</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">wear</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">takeOff</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Armor</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">wear</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">takeOff</span>();
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Item</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">use</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Item</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">use</span>();
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>接下來，我們要讓「低層模組」去依賴「抽象」。白話文來說，就是要讓這些裝備去繼承這些抽象類別，讓它們變得不再零散、不再紊亂，可以有一個大致上的秩序或分類，以便於其他類別（或介面）想要調用它們的時候，可以有一個整齊的、統一的收發通道，而不再是讓這些低層模組各自爲政，每個人有不同的方法、不同的名稱、不同的特性、不同的前置條件、或不同的後續效果 &hellip;</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 讓所有的 [低層模組] 去依賴剛剛生成的 [抽象]
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Weapon 類型
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Blade</span> <span style="color:#66d9ef">extends</span> Weapon <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sword</span> <span style="color:#66d9ef">extends</span> Weapon <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bow</span> <span style="color:#66d9ef">extends</span> Weapon <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Staff</span> <span style="color:#66d9ef">extends</span> Weapon <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Axe</span> <span style="color:#66d9ef">extends</span> Weapon <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dagger</span> <span style="color:#66d9ef">extends</span> Weapon <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Shield</span> <span style="color:#66d9ef">extends</span> Weapon <span style="color:#f92672">{};</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 讓所有的 [低層模組] 去依賴剛剛生成的 [抽象]</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Armor 類型
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Helmet</span> <span style="color:#66d9ef">extends</span> Armor <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Breastplate</span> <span style="color:#66d9ef">extends</span> Armor <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ElbowGuard</span> <span style="color:#66d9ef">extends</span> Armor <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KneeGuard</span> <span style="color:#66d9ef">extends</span> Armor <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Footwear</span> <span style="color:#66d9ef">extends</span> Armor <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Weapon 類型</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Blade</span> <span style="color:#66d9ef">extends</span> Weapon {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sword</span> <span style="color:#66d9ef">extends</span> Weapon {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bow</span> <span style="color:#66d9ef">extends</span> Weapon {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Staff</span> <span style="color:#66d9ef">extends</span> Weapon {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Axe</span> <span style="color:#66d9ef">extends</span> Weapon {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dagger</span> <span style="color:#66d9ef">extends</span> Weapon {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Shield</span> <span style="color:#66d9ef">extends</span> Weapon {};
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Item 類型
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HealthPotion</span> <span style="color:#66d9ef">extends</span> Item <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ManaPotion</span> <span style="color:#66d9ef">extends</span> Item <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AttackPotion</span> <span style="color:#66d9ef">extends</span> Item <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DefensePotion</span> <span style="color:#66d9ef">extends</span> Item <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bread</span> <span style="color:#66d9ef">extends</span> Item <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Water</span> <span style="color:#66d9ef">extends</span> Item <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Chicken</span> <span style="color:#66d9ef">extends</span> Item <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Beef</span> <span style="color:#66d9ef">extends</span> Item <span style="color:#f92672">{};</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Pork</span> <span style="color:#66d9ef">extends</span> Item <span style="color:#f92672">{};</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Armor 類型</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Helmet</span> <span style="color:#66d9ef">extends</span> Armor {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Breastplate</span> <span style="color:#66d9ef">extends</span> Armor {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ElbowGuard</span> <span style="color:#66d9ef">extends</span> Armor {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KneeGuard</span> <span style="color:#66d9ef">extends</span> Armor {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Footwear</span> <span style="color:#66d9ef">extends</span> Armor {};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Item 類型</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HealthPotion</span> <span style="color:#66d9ef">extends</span> Item {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ManaPotion</span> <span style="color:#66d9ef">extends</span> Item {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AttackPotion</span> <span style="color:#66d9ef">extends</span> Item {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DefensePotion</span> <span style="color:#66d9ef">extends</span> Item {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bread</span> <span style="color:#66d9ef">extends</span> Item {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Water</span> <span style="color:#66d9ef">extends</span> Item {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Chicken</span> <span style="color:#66d9ef">extends</span> Item {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Beef</span> <span style="color:#66d9ef">extends</span> Item {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Pork</span> <span style="color:#66d9ef">extends</span> Item {};
 </span></span></code></pre></div><p>當然啦，上面的例子並不完全，因為這些依賴的抽象之後的低層模組並沒有實際去覆寫原本抽象類別中的抽象方法（<code>attack()</code>, <code>wear</code>, <code>takeOff</code>, 和 <code>use</code>），但因為這邊只是一個小小的展示，沒有要實際上把程式給跑起來，所以就先省略掉這個步驟了。實際上各種不同的低層模組在依賴這些抽象類別或介面的時候，還是需要進行方法上面的改寫跟實作的，還是要稍微注意一下。</p>
 <p>最後，在做完前兩部之後，我們再來要做的，就是把高層模組所依賴的對象，從「特定的 xx 低層模組」切換成「抽象類別（或介面）」。透過依賴一個低層模組統一都有依賴到的抽象，我們可以很輕鬆且很有效率地改善原本高層模組中的重度依賴：現在 <code>Character</code> 只需要有三個不同的成員變數，就可以持有之前所涵蓋到的 20-30 種不同的具體類別了，程式的改善效率以指數的量級做提升：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 角色類別
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 角色所擁有的所有屬性（照舊）
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> Integer hp<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer mp<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer atk<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer def<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 角色類別</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 角色所擁有的所有屬性（照舊）</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer hp;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer atk;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer def;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 現在不需要依賴各式各樣的具體類別來達成原本的功能
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 只要依賴一個統一的抽象類別就可以了
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Weapon weapon<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    Armor<span style="color:#f92672">[]</span> armors<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    Item<span style="color:#f92672">[]</span> package<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 現在不需要依賴各式各樣的具體類別來達成原本的功能</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 只要依賴一個統一的抽象類別就可以了</span>
+</span></span><span style="display:flex;"><span>    Weapon weapon;
+</span></span><span style="display:flex;"><span>    Armor<span style="color:#f92672">[]</span> armors;
+</span></span><span style="display:flex;"><span>    Item<span style="color:#f92672">[]</span> package;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他 [角色] 所擁有的方法 ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他 [角色] 所擁有的方法 ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他 [角色] 所擁有的方法 ...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他 [角色] 所擁有的方法 ...</span>
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>除了程式行數的大幅減低之外，這樣做還有另外一個好處：因為無論是 <code>Weapon</code>, <code>Aromr</code> 還是 <code>Item</code>，因為在這些抽象類別中，我們有定義一個統一的調用方法（像是 <code>attack()</code>, <code>wear()</code> &hellip;等），所以我們可以很簡單地透過類似於 <code>weapon.attack()</code> 的程式寫法，來打成一個「攻擊」的功能，哪怕是任何的武器，哪怕不同的武器有著自己的攻擊方法，都可以用很簡潔且很容易閱讀的方式完成我們想要的功能。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 假設不同的 [低層模組] 因為各自的差異而有不同的方法名稱
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 但因為它們都有一個統一依賴的 [抽象類別]
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 因此無論原本的攻擊叫什麼名字，它們還是要實作出統一的抽象方法
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 以部分 Weapon 類型舉例
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Blade</span> <span style="color:#66d9ef">extends</span> Weapon <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">stab</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;用刀前刺&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 假設不同的 [低層模組] 因為各自的差異而有不同的方法名稱</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 但因為它們都有一個統一依賴的 [抽象類別]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 因此無論原本的攻擊叫什麼名字，它們還是要實作出統一的抽象方法</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">slash</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;用刀揮砍&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 以部分 Weapon 類型舉例</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Blade</span> <span style="color:#66d9ef">extends</span> Weapon {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">stab</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;用刀前刺&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">chop</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;用刀劈斬&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">slash</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;用刀揮砍&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 繼承自 Weapon 的 attack() 方法
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Override</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attak</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 用一些判斷邏輯，決定要進行哪一種攻擊
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">chop</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;用刀劈斬&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sword</span> <span style="color:#66d9ef">extends</span> Weapon <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 繼承自 Weapon 的 attack() 方法
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Override</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attak</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 單純攻擊
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;利用手上的劍進行攻擊&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 繼承自 Weapon 的 attack() 方法</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attak</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 用一些判斷邏輯，決定要進行哪一種攻擊</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 其他各種 [武器][防具] 和 [道具] 的程式細節 ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 其他各種 [武器][防具] 和 [道具] 的程式細節 ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 其他各種 [武器][防具] 和 [道具] 的程式細節 ...
-</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一些原本就有的成員變數 ..
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 一些原本就有的成員變數 ..
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sword</span> <span style="color:#66d9ef">extends</span> Weapon {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 繼承自 Weapon 的 attack() 方法</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attak</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 單純攻擊</span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;利用手上的劍進行攻擊&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 其他各種 [武器][防具] 和 [道具] 的程式細節 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 其他各種 [武器][防具] 和 [道具] 的程式細節 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 其他各種 [武器][防具] 和 [道具] 的程式細節 ...</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Character</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一些原本就有的成員變數 ..</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一些原本就有的成員變數 ..</span>
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 現在 [角色] 只需要進行 &#39;攻擊&#39; 方法
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 不需要知道武器實際的攻擊方法為何
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 反正只要透過 weapon 然後呼叫 attack()就行
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        weapon<span style="color:#f92672">.</span><span style="color:#a6e22e">attack</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 現在 [角色] 只需要進行 &#39;攻擊&#39; 方法</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 不需要知道武器實際的攻擊方法為何</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 反正只要透過 weapon 然後呼叫 attack()就行</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span>() {
+</span></span><span style="display:flex;"><span>        weapon.<span style="color:#a6e22e">attack</span>();
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一些其他的 [角色] 方法 ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 一些其他的 [角色] 方法 ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一些其他的 [角色] 方法 ...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一些其他的 [角色] 方法 ...</span>
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>透過將依賴反轉過來（原本：高 &gt; 低）（現在：高, 低 &gt; 抽象），讓高層模組和低層模組都去依賴一個幾乎不會變動、且擁有多元方法的抽象類別（或介面），就可以讓程式變得更加靈活、更加簡潔。如果高層模組需要抽換其他的低層模組的時候，也只需要寫上類似 <code>public void setWeapon(Weapon weapon)</code> 之類的方法，就可以輕易地替換掉了。這就是依賴反轉原則所想要傳達的理念、與它所帶來的好處。</p>
 </article>
  

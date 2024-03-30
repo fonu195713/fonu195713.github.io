@@ -66,8 +66,8 @@
   
 
   
-    <input type="checkbox" id="section-ce2f1594fa3d18bb5604540e4de080b5" class="toggle"  />
-    <label for="section-ce2f1594fa3d18bb5604540e4de080b5" class="flex justify-between">
+    <input type="checkbox" id="section-9c5fb070aa6a846f1d3da7c79cefb6b5" class="toggle"  />
+    <label for="section-9c5fb070aa6a846f1d3da7c79cefb6b5" class="flex justify-between">
       <a role="button" class="">生活相關</a>
     </label>
   
@@ -141,8 +141,8 @@
   
 
   
-    <input type="checkbox" id="section-343f49b47f255bcd0611d65bed416108" class="toggle"  />
-    <label for="section-343f49b47f255bcd0611d65bed416108" class="flex justify-between">
+    <input type="checkbox" id="section-29fcdd2f14dd6eca1f7ffa5701c3111e" class="toggle"  />
+    <label for="section-29fcdd2f14dd6eca1f7ffa5701c3111e" class="flex justify-between">
       <a role="button" class="">命理相關</a>
     </label>
   
@@ -198,8 +198,8 @@
   
 
   
-    <input type="checkbox" id="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="toggle" checked />
-    <label for="section-65fbf0e97cd47327287d9b0d7cc4b6ee" class="flex justify-between">
+    <input type="checkbox" id="section-9c904111af22e90e73dcd9cd05321afa" class="toggle" checked />
+    <label for="section-9c904111af22e90e73dcd9cd05321afa" class="flex justify-between">
       <a role="button" class="">資工相關</a>
     </label>
   
@@ -339,135 +339,135 @@
 <li><strong>程式碼範例</strong></li>
 </ul>
 <p>在常見的設計模式當中，與「工廠」有關的設計模式共有三種，它們由間單到複雜依序是簡單工廠模式、<a href="../factory_method_pattern">工廠方法模式</a>、以及<a href="../abstract_factory_pattern">抽象工廠模式</a>。簡單工廠模式顧名思義，就是透過一個「工廠」類別，將比較「簡單的」程次區域給獨立出來，通常會配合<a href="../single_responsibility_principle">單一職責原則</a>進行程式碼的檢查，如果某一段程式不符合單一職責原則的話，就可以考慮用簡單工廠將程式給區分出來。讓我們用一個簡單的範例來做說明：假設我們正在開發一個「線上傢俱閱覽系統」，使用者可以根據不同的需要來瀏覽、比較、或購買傢俱，程式片段大致如下所述：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 系統中的 [顧客] 類別
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Customer</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String account<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String password<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 系統中的 [顧客] 類別</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Customer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String account;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String password;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 透過不同的關鍵字，取得不同傢俱
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> Furniture <span style="color:#a6e22e">getFurniture</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        Furniture furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 透過不同的關鍵字，取得不同傢俱</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Furniture <span style="color:#a6e22e">getFurniture</span>(String name) {
+</span></span><span style="display:flex;"><span>        Furniture furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equal</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;chair&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Chair<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;desk&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Desk<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sofa&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Sofa<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;bed&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Bed<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;television&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Television<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equal</span>(<span style="color:#e6db74">&#34;chair&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Chair();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;desk&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Desk();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;sofa&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Sofa();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;bed&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Bed();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;television&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Television();
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> FurnitureIsNotExistException<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> FurnitureIsNotExistException();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> furniture<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> furniture;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>上圖的程式邏輯本身沒什麼問題，透過 <code>getFurniture()</code> 方法，我們的確可以讓顧客在系統中正確地看到他們想要留懶的不同傢俱。但從設計原則上，這樣的寫法就有可以改進的空間了，因為這支程式並不符合單一職責原則。白話文的來說： <code>Customer</code> 類別所負責的職責，應該僅限於跟「顧客」有關的東西才對，像是修改密碼、檢視帳戶資料、升級成 VIP 會員、儲值、訂閱相關資訊或取消訂閱 &hellip;等。但這個 <code>getFurniture()</code> 方法很明顯是在「創建一個傢俱，並回傳給使用者。」比起顧客，更像是「傢俱」類別的工作，因此針對這個部分，我們可以利用簡單工廠模式對程式進行改寫：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 系統中的 [顧客] 類別
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Customer</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 新增一個 [傢俱工廠]
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> FurnutireFactory factory<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String account<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String password<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 系統中的 [顧客] 類別</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Customer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 新增一個 [傢俱工廠]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> FurnutireFactory factory;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String account;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String password;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Furniture <span style="color:#a6e22e">getFurniture</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 將「獲得傢俱」的程式封裝起來
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Furniture furniture <span style="color:#f92672">=</span> factory<span style="color:#f92672">.</span><span style="color:#a6e22e">createFurniture</span><span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> furniture<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 系統中的 [傢俱工廠] 類別
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FurnutireFactory</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Furniture <span style="color:#a6e22e">createFurniture</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        Furniture furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Furniture <span style="color:#a6e22e">getFurniture</span>(String name) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 將「獲得傢俱」的程式封裝起來</span>
+</span></span><span style="display:flex;"><span>        Furniture furniture <span style="color:#f92672">=</span> factory.<span style="color:#a6e22e">createFurniture</span>(name);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> furniture;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 系統中的 [傢俱工廠] 類別</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FurnutireFactory</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Furniture <span style="color:#a6e22e">createFurniture</span>(String name) {
+</span></span><span style="display:flex;"><span>        Furniture furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 把「獲得傢俱」的程式邏輯擺放在 [傢俱工廠] 裡面
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equal</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;chair&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Chair<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;desk&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Desk<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sofa&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Sofa<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;bed&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Bed<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;television&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Television<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 把「獲得傢俱」的程式邏輯擺放在 [傢俱工廠] 裡面</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equal</span>(<span style="color:#e6db74">&#34;chair&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Chair();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;desk&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Desk();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;sofa&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Sofa();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;bed&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Bed();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;television&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Television();
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> FurnitureIsNotExistException<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> FurnitureIsNotExistException();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> furniture<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 系統中的 [傢俱] 類別（抽象的）
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Furnutire</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> String name<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> furniture;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 系統中的 [傢俱] 類別（抽象的）</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Furnutire</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> String name;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Furnutire</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 其他繼承了 [傢俱] 的不同真實傢俱
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Chair</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Chair</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span><span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Furnutire</span>(String name) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 其他繼承了 [傢俱] 的不同真實傢俱</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Table</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Table</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span><span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Chair</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Chair</span>(String name) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span>(name);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Lamp</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Lamp</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span><span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Table</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Table</span>(String name) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span>(name);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Computer</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span><span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Lamp</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Lamp</span>(String name) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span>(name);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Computer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Computer</span>(String name) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span>(name);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>這就是簡單工廠的具體範例了。</p>
 <p>執得一提的是，因為簡單工廠真的很簡單，因此在一些程式設計上，我們更傾向於把簡單工廠的方法（或方法們）宣告成靜態的（也就是加上 <code>static</code> 關鍵字）。因為如果將方法宣告成靜態方法，其他類別（例如 <code>Customer</code>）在調用工廠中的方法時，就不需要再額外 <code>new</code> 一個工廠的物件出來，算是一種節省記憶體空間的操作。而這種把方法宣告成靜態的撰寫方式也可以稱為「靜態工廠」。但需要注意的是：靜態工廠並不是一種模式，僅僅是一種工廠模式的優化方法而已：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FurnutireFactory</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 加入 static 關鍵字，使其成為靜態方法
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Furniture <span style="color:#a6e22e">createFurniture</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        Furniture furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FurnutireFactory</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 加入 static 關鍵字，使其成為靜態方法</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Furniture <span style="color:#a6e22e">createFurniture</span>(String name) {
+</span></span><span style="display:flex;"><span>        Furniture furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equal</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;chair&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Chair<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;desk&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Desk<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sofa&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Sofa<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;bed&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Bed<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;television&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Television<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equal</span>(<span style="color:#e6db74">&#34;chair&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Chair();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;desk&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Desk();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;sofa&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Sofa();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;bed&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Bed();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(name.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;television&#34;</span>))
+</span></span><span style="display:flex;"><span>            furniture <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Television();
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> FurnitureIsNotExistException<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> FurnitureIsNotExistException();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> furniture<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 系統中的 [顧客] 類別
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Customer</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String account<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String password<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> furniture;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 系統中的 [顧客] 類別</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Customer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String account;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String password;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Furniture <span style="color:#a6e22e">getFurniture</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 透過 [傢俱工廠] 直接獲得傢俱
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 省去了建立物件的過程
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Furniture furniture <span style="color:#f92672">=</span> FurnutireFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">createFurniture</span><span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> furniture<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Furniture <span style="color:#a6e22e">getFurniture</span>(String name) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 透過 [傢俱工廠] 直接獲得傢俱</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 省去了建立物件的過程</span>
+</span></span><span style="display:flex;"><span>        Furniture furniture <span style="color:#f92672">=</span> FurnutireFactory.<span style="color:#a6e22e">createFurniture</span>(name);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> furniture;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div></article>
  
       <div id="gitalk-container"></div>
