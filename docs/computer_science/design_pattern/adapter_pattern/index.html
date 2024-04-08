@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>隨手當神棍 | Fonu Site</title>
+    <title>適配器模式 | Fonu Site</title>
 
     <link rel="icon" href="/favicon.png" type="image/x-icon">
 
@@ -141,7 +141,7 @@
   
 
   
-    <input type="checkbox" id="section-29fcdd2f14dd6eca1f7ffa5701c3111e" class="toggle" checked />
+    <input type="checkbox" id="section-29fcdd2f14dd6eca1f7ffa5701c3111e" class="toggle"  />
     <label for="section-29fcdd2f14dd6eca1f7ffa5701c3111e" class="flex justify-between">
       <a role="button" class="">命理相關</a>
     </label>
@@ -175,7 +175,7 @@
   
 
   
-    <a href="/docs/occultism/divination/" class="active">隨手當神棍</a>
+    <a href="/docs/occultism/divination/" class="">隨手當神棍</a>
   
 
           
@@ -198,7 +198,7 @@
   
 
   
-    <input type="checkbox" id="section-9c904111af22e90e73dcd9cd05321afa" class="toggle"  />
+    <input type="checkbox" id="section-9c904111af22e90e73dcd9cd05321afa" class="toggle" checked />
     <label for="section-9c904111af22e90e73dcd9cd05321afa" class="flex justify-between">
       <a role="button" class="">資工相關</a>
     </label>
@@ -302,7 +302,7 @@
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>隨手當神棍</strong>
+  <strong>適配器模式</strong>
 
   <label for="toc-control">
     
@@ -316,24 +316,26 @@
 
       
       
-  <article class="markdown"><h1 id="隨手當神棍">
-  隨手當神棍
-  <a class="anchor" href="#%e9%9a%a8%e6%89%8b%e7%95%b6%e7%a5%9e%e6%a3%8d">#</a>
+  <article class="markdown"><h1 id="適配器模式">
+  適配器模式
+  <a class="anchor" href="#%e9%81%a9%e9%85%8d%e5%99%a8%e6%a8%a1%e5%bc%8f">#</a>
 </h1>
 <hr>
-<h4 id="2024--03">
-  2024 / 03
-  <a class="anchor" href="#2024--03">#</a>
-</h4>
 <ul>
-<li><a href="./when_can_grandpa_be_discharged_from_hospital">（塔羅）阿公哪時候可以出院</a></li>
+<li><strong>ChatGPT 的說明</strong></li>
 </ul>
-<h4 id="2024--04">
-  2024 / 04
-  <a class="anchor" href="#2024--04">#</a>
-</h4>
+<p>適配器模式（AdapterPattern）是一種結構型設計模式，該模式用於將一個類別的介面，轉換成客戶端所期望的另一個介面，從而使得原本不相容的類別能夠一起工作。適配器模式允許在不修改原始程式碼的情況下，將不同介面的類別組合在一起工作。適配器模式通常包含以下重要的類別和功能：【<strong>目標介面（Target）</strong>】：<code>Target</code> 是客戶端所期望使用的介面。適配器將來源介面適配成目標介面，使得客戶端可以使用目標介面來呼叫適配後的類別。【<strong>適配器（Adapter）</strong>】：適配器是實作了目標介面的類別，同時持有來源介面的一個實例。適配器的主要功能是「將來源介面的方法轉換成目標介面的方法。」並將客戶端的請求轉送給來源物件。【<strong>來源介面（Adaptee）</strong>】：它是需要被適配的類別，因其介面與目標介面不相容。適配器透過將 <code>Adaptee</code> 轉換成 <code>Target</code>，使得來源類別能夠與客戶端一起工作。</p>
+<p>適配器模式的功能和解決的問題主要包括：【<strong>解決介面不相容的問題</strong>】：當需要使用某一存在的類別，但其類別中的介面與客戶端所期望的介面不匹配時，適配器模式可以將其介面轉換成客戶端期望的介面，使得原本不相容的類別能夠一起工作。【<strong>封裝適配的轉換邏輯</strong>】：適配器將適配邏輯封裝在一個單獨的類別中，使得客戶端無需了解特定的適配細節，只需要透過目標介面來與適配後的類別互動。【<strong>提高程式碼可重用性</strong>】：適配器模式可以使得已經存在的類別與新的系統能夠一起工作，從而提高程式碼的複用性和可維護性。【<strong>透明地整合新功能</strong>】：當需要在現有的系統中整合新的功能時，可以透過適配器模式來實現，而無需修改現有的程式碼，從而保證系統的穩定性和可擴展性。</p>
 <ul>
-<li>null</li>
+<li><strong>簡單整理</strong></li>
+</ul>
+<p>問題描述：</p>
+<p>解決方案：</p>
+<p>程式細節：參照下面的段落</p>
+<p>UML 圖：</p>
+<p><img src="/image/design_pattern/abstract_factory_uml.png" alt="image" /></p>
+<ul>
+<li><strong>程式碼範例</strong></li>
 </ul>
 </article>
  

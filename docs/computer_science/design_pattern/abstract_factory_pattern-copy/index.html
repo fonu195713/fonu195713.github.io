@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -322,12 +322,12 @@
 </h1>
 <hr>
 <ul>
-<li><strong>ChatGPT 的說明</strong></li>
-</ul>
-<p>抽象工廠模式（AbstractFactoryPattern）是一種創建型設計模式，可以在不需指定的特定實體類別的前提下，將一組相關（或相互依賴）的物件建立組合在一起。在抽象工廠模式中，有以下幾個重要的類別：【<strong>抽象工廠（Abstract Factory）</strong>】：抽象工廠定義了一系列相關或相互依賴的物件介面，包括多個方法用於建立不同類型的物件，抽象工廠類別可以是抽象類別（Abstract class）或者是介面（Interface）。【<strong>具體工廠（Concrete Factory）</strong>】：具體工廠實現了抽象工廠中的所有抽象方法或介面，具體工廠的主要工作是負責創建一組相關的物件，每個具體工廠都能創建一組（或多組）特定類型的物件。【<strong>抽象產品（Abstract Product）</strong>】：類似於抽象工廠，抽象產品定義了一系列相關或相互依賴的物件介面，但並不具體指定物件的類別。【<strong>具體產品（ConcreteProduct）</strong>】：具體產品是實作了抽象產品介面的具體類，它們是由具體工廠所創建的物件。</p>
-<p>抽象工廠模式的功能包括：【<strong>封裝物件的創建過程</strong>】：抽象工廠將物件的創建邏輯封裝在工廠中，客戶端程式碼只需要透過抽象工廠介面來創建物件，而不需要關心特定物件的創建過程。【<strong>提供一致的介面</strong>】：抽象工廠模式提供了一組一致的介面來建立一系列相關的物件，這使得客戶端的程式碼能以一種統一的方式使用這些物件。【<strong>支援替換產品族</strong>】：由於抽象工廠模式將一組相關物件的建立封裝在一起，因此可以比較容易地替換整個產品族，只需要切換特定工廠即可。【<strong>符合開閉原則</strong>】：當需要新增一組產品時，可以透過擴展抽象工廠和具體工廠來實現，而不需要修改現有的程式碼，符合開閉原則。</p>
-<ul>
-<li><strong>簡單整理</strong></li>
+<li>
+<p><strong>ChatGPT 的說明</strong></p>
+</li>
+<li>
+<p><strong>簡單整理</strong></p>
+</li>
 </ul>
 <p>問題描述：當系統變得愈發龐大，即使將工廠進行抽象，也會導致程式高度耦合</p>
 <p>解決方案：對 <code>Factory</code> 和 <code>Product</code> 同時進行抽象</p>
@@ -384,7 +384,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> furniture;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>可以發現到，跟工廠方法中一開始出現的情況一樣，工廠中的 <code>createFurniture()</code> 方法又變得有點可怕了。因此，我們同樣需要對當前程式稍做修改，而其中一種修改方式，便是使用「抽象工廠模式」進行改寫：抽象工廠模式相對於簡單工廠和工廠方法，除了對於「工廠」類別進行抽象化之外，也同時會對「產品」進行一定程度的抽象化，也就是說，在這個例子裡面，我們除了原本根據傢俱的「材質」進行分類之外，也要把傢俱的「種類」進行分類。除此之外，為了避免單一方法中的 <code>if.else</code> 變得龐大複雜，我們也必須將取得各種不同傢俱的方法（<code>getFurniture()</code>）寫成更加細緻的形式（<code>getTable()</code>, <code>getChair</code> &hellip;等），整體而言，就像是下面這樣：</p>
+</span></span></code></pre></div><p>可以發現到，跟工廠方法中一開始出現的情況一樣，抽象工廠中的 <code>createFurniture()</code> 方法又變得有點可怕了。因此，我們同樣需要對當前程式稍做修改，而其中一種修改方式，便是使用「抽象工廠模式」進行改寫：抽象工廠模式相對於簡單工廠和工廠方法，除了對於「工廠」類別進行抽象化之外，也同時會對「產品」進行一定程度的抽象化，也就是說，在這個例子裡面，我們除了原本根據傢俱的「材質」進行分類之外，也要把傢俱的「種類」進行分類。除此之外，為了避免單一方法中的 <code>if.else</code> 變得龐大複雜，我們也必須將取得各種不同傢俱的方法（<code>getFurniture()</code>）寫成更加細緻的形式（<code>getTable()</code>, <code>getChair</code> &hellip;等），整體而言，就像是下面這樣：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 系統中的 [顧客] 類別</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Customer</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 新增一個 [傢俱工廠]</span>
