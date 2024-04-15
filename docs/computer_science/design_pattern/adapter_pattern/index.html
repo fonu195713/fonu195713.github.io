@@ -214,7 +214,7 @@
   
 
   
-    <a href="/docs/computer_science/debug/" class="">Debug 日誌</a>
+    <a href="/docs/computer_science/debug_log/" class="">Debug 日誌</a>
   
 
           
@@ -233,6 +233,24 @@
 
   
     <a href="/docs/computer_science/cryptography/" class="">密碼學</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/probability_theory/" class="">機率論</a>
   
 
           
@@ -329,15 +347,354 @@
 <ul>
 <li><strong>簡單整理</strong></li>
 </ul>
-<p>問題描述：</p>
-<p>解決方案：</p>
+<p>問題描述：如何在不更改原始程式碼的前提下，對於多個具有相似功能的類別和方法進行統一</p>
+<p>解決方案：透過「適配器」類別來調整、揉和不同程式的功能</p>
 <p>程式細節：參照下面的段落</p>
 <p>UML 圖：</p>
-<p><img src="/image/design_pattern/abstract_factory_uml.png" alt="image" /></p>
+<p><img src="/image/design_pattern/adapter_uml.png" alt="image" /></p>
 <ul>
 <li><strong>程式碼範例</strong></li>
 </ul>
-</article>
+<p>在網路已經普及化很久的現代中，資料的交換和儲存是電腦網路裡非常常見且非常核心的一環。為了確保資料在不同的載體下，資料的結構和內容能夠準確地傳輸和解釋，早期和現代的工程師們開發了各種這樣的資料傳輸格式，其中包括但不限於 JSON、XML、YAML 和 RSS&hellip;等，如果我們把這些資料儲存的方式用 Java 語言來呈現的話，大概可以寫成類似下面這些程式碼的感覺：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JsonCrud</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String filePath;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> jsonData;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">JsonCrud</span>(String filePath) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">filePath</span> <span style="color:#f92672">=</span> filePath;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">jsonData</span> <span style="color:#f92672">=</span> readJsonFile();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">readJsonFile</span>() {
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> data <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (BufferedReader reader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader(<span style="color:#66d9ef">new</span> FileReader(filePath))) {
+</span></span><span style="display:flex;"><span>            StringBuilder content <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>            String line;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> ((line <span style="color:#f92672">=</span> reader.<span style="color:#a6e22e">readLine</span>()) <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                content.<span style="color:#a6e22e">append</span>(line);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Assuming data is stored as key-value pairs in JSON format</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// You may need to implement a proper JSON parser based on your JSON structure</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Here, I&#39;m simply splitting the content by commas and assuming key-value pairs</span>
+</span></span><span style="display:flex;"><span>            String<span style="color:#f92672">[]</span> pairs <span style="color:#f92672">=</span> content.<span style="color:#a6e22e">toString</span>().<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;,&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (String pair : pairs) {
+</span></span><span style="display:flex;"><span>                String<span style="color:#f92672">[]</span> keyValue <span style="color:#f92672">=</span> pair.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;:&#34;</span>);
+</span></span><span style="display:flex;"><span>                String key <span style="color:#f92672">=</span> keyValue<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span>.<span style="color:#a6e22e">trim</span>().<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#34;\&#34;&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>                String value <span style="color:#f92672">=</span> keyValue<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>.<span style="color:#a6e22e">trim</span>().<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#34;\&#34;&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>                data.<span style="color:#a6e22e">put</span>(key, value);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> data;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">writeJsonFile</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (BufferedWriter writer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedWriter(<span style="color:#66d9ef">new</span> FileWriter(filePath))) {
+</span></span><span style="display:flex;"><span>            StringBuilder jsonBuilder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>            jsonBuilder.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;{&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (Map.<span style="color:#a6e22e">Entry</span><span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> entry : jsonData.<span style="color:#a6e22e">entrySet</span>()) {
+</span></span><span style="display:flex;"><span>                jsonBuilder.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;\&#34;&#34;</span>).<span style="color:#a6e22e">append</span>(entry.<span style="color:#a6e22e">getKey</span>()).<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;\&#34;:\&#34;&#34;</span>).<span style="color:#a6e22e">append</span>(entry.<span style="color:#a6e22e">getValue</span>()).<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;\&#34;,&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            jsonBuilder.<span style="color:#a6e22e">deleteCharAt</span>(jsonBuilder.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">-</span> 1);
+</span></span><span style="display:flex;"><span>            jsonBuilder.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;}&#34;</span>);
+</span></span><span style="display:flex;"><span>            writer.<span style="color:#a6e22e">write</span>(jsonBuilder.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addJsonValue</span>(String key, String value) {
+</span></span><span style="display:flex;"><span>        jsonData.<span style="color:#a6e22e">put</span>(key, value);
+</span></span><span style="display:flex;"><span>        writeJsonFile();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">showJsonValue</span>(String key) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> jsonData.<span style="color:#a6e22e">get</span>(key);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">updateJsonValue</span>(String key, String newValue) {
+</span></span><span style="display:flex;"><span>        jsonData.<span style="color:#a6e22e">put</span>(key, newValue);
+</span></span><span style="display:flex;"><span>        writeJsonFile();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">removeJsonValue</span>(String key) {
+</span></span><span style="display:flex;"><span>        jsonData.<span style="color:#a6e22e">remove</span>(key);
+</span></span><span style="display:flex;"><span>        writeJsonFile();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> org.w3c.dom.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.xml.parsers.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.xml.transform.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.xml.transform.dom.DOMSource;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.xml.transform.stream.StreamResult;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">XmlCrud</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String filePath;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Document document;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">XmlCrud</span>(String filePath) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">filePath</span> <span style="color:#f92672">=</span> filePath;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">document</span> <span style="color:#f92672">=</span> readXmlFile();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Document <span style="color:#a6e22e">readXmlFile</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            DocumentBuilderFactory factory <span style="color:#f92672">=</span> DocumentBuilderFactory.<span style="color:#a6e22e">newInstance</span>();
+</span></span><span style="display:flex;"><span>            DocumentBuilder builder <span style="color:#f92672">=</span> factory.<span style="color:#a6e22e">newDocumentBuilder</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> builder.<span style="color:#a6e22e">parse</span>(<span style="color:#66d9ef">new</span> File(filePath));
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">writeXmlFile</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            TransformerFactory transformerFactory <span style="color:#f92672">=</span> TransformerFactory.<span style="color:#a6e22e">newInstance</span>();
+</span></span><span style="display:flex;"><span>            Transformer transformer <span style="color:#f92672">=</span> transformerFactory.<span style="color:#a6e22e">newTransformer</span>();
+</span></span><span style="display:flex;"><span>            transformer.<span style="color:#a6e22e">setOutputProperty</span>(OutputKeys.<span style="color:#a6e22e">INDENT</span>, <span style="color:#e6db74">&#34;yes&#34;</span>);
+</span></span><span style="display:flex;"><span>            transformer.<span style="color:#a6e22e">setOutputProperty</span>(<span style="color:#e6db74">&#34;{http://xml.apache.org/xslt}indent-amount&#34;</span>, <span style="color:#e6db74">&#34;2&#34;</span>);
+</span></span><span style="display:flex;"><span>            DOMSource source <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DOMSource(document);
+</span></span><span style="display:flex;"><span>            StreamResult result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StreamResult(<span style="color:#66d9ef">new</span> File(filePath));
+</span></span><span style="display:flex;"><span>            transformer.<span style="color:#a6e22e">transform</span>(source, result);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addToXml</span>(String tagName, String value) {
+</span></span><span style="display:flex;"><span>        Element root <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getDocumentElement</span>();
+</span></span><span style="display:flex;"><span>        Element newElement <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createElement</span>(tagName);
+</span></span><span style="display:flex;"><span>        newElement.<span style="color:#a6e22e">appendChild</span>(document.<span style="color:#a6e22e">createTextNode</span>(value));
+</span></span><span style="display:flex;"><span>        root.<span style="color:#a6e22e">appendChild</span>(newElement);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">deleteFromXml</span>(String tagName) {
+</span></span><span style="display:flex;"><span>        NodeList nodeList <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementsByTagName</span>(tagName);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (nodeList.<span style="color:#a6e22e">getLength</span>() <span style="color:#f92672">&gt;</span> 0) {
+</span></span><span style="display:flex;"><span>            Node nodeToRemove <span style="color:#f92672">=</span> nodeList.<span style="color:#a6e22e">item</span>(0);
+</span></span><span style="display:flex;"><span>            nodeToRemove.<span style="color:#a6e22e">getParentNode</span>().<span style="color:#a6e22e">removeChild</span>(nodeToRemove);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getValueFromXml</span>(String tagName) {
+</span></span><span style="display:flex;"><span>        NodeList nodeList <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementsByTagName</span>(tagName);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (nodeList.<span style="color:#a6e22e">getLength</span>() <span style="color:#f92672">&gt;</span> 0) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> nodeList.<span style="color:#a6e22e">item</span>(0).<span style="color:#a6e22e">getTextContent</span>();
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.ArrayList;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.List;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">YamlCrud</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String filePath;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> lines;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">YamlCrud</span>(String filePath) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">filePath</span> <span style="color:#f92672">=</span> filePath;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lines</span> <span style="color:#f92672">=</span> inputYamlFile();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">inputYamlFile</span>() {
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> content <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (BufferedReader reader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader(<span style="color:#66d9ef">new</span> FileReader(filePath))) {
+</span></span><span style="display:flex;"><span>            String line;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> ((line <span style="color:#f92672">=</span> reader.<span style="color:#a6e22e">readLine</span>()) <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                content.<span style="color:#a6e22e">add</span>(line);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> content;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">writeYamlFile</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (BufferedWriter writer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedWriter(<span style="color:#66d9ef">new</span> FileWriter(filePath))) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (String line : lines) {
+</span></span><span style="display:flex;"><span>                writer.<span style="color:#a6e22e">write</span>(line);
+</span></span><span style="display:flex;"><span>                writer.<span style="color:#a6e22e">newLine</span>();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">appendToYaml</span>(String key, String value) {
+</span></span><span style="display:flex;"><span>        lines.<span style="color:#a6e22e">add</span>(key <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;: &#34;</span> <span style="color:#f92672">+</span> value);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">deleteFromYaml</span>(String key) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> lines.<span style="color:#a6e22e">size</span>(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            String line <span style="color:#f92672">=</span> lines.<span style="color:#a6e22e">get</span>(i);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (line.<span style="color:#a6e22e">startsWith</span>(key <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;: &#34;</span>)) {
+</span></span><span style="display:flex;"><span>                lines.<span style="color:#a6e22e">remove</span>(i);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getValueFromYaml</span>(String key) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (String line : lines) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (line.<span style="color:#a6e22e">startsWith</span>(key <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;: &#34;</span>)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> line.<span style="color:#a6e22e">substring</span>(key.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">+</span> 2).<span style="color:#a6e22e">trim</span>();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RssCrud</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String filePath;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String rssContent;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">RssCrud</span>(String filePath) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">filePath</span> <span style="color:#f92672">=</span> filePath;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">rssContent</span> <span style="color:#f92672">=</span> readRssFile();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String <span style="color:#a6e22e">readRssFile</span>() {
+</span></span><span style="display:flex;"><span>        StringBuilder content <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (BufferedReader reader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader(<span style="color:#66d9ef">new</span> FileReader(filePath))) {
+</span></span><span style="display:flex;"><span>            String line;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> ((line <span style="color:#f92672">=</span> reader.<span style="color:#a6e22e">readLine</span>()) <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                content.<span style="color:#a6e22e">append</span>(line).<span style="color:#a6e22e">append</span>(System.<span style="color:#a6e22e">lineSeparator</span>());
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> content.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">writeRssFile</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (BufferedWriter writer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedWriter(<span style="color:#66d9ef">new</span> FileWriter(filePath))) {
+</span></span><span style="display:flex;"><span>            writer.<span style="color:#a6e22e">write</span>(rssContent);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addToRss</span>(String newElement) {
+</span></span><span style="display:flex;"><span>        StringBuilder updatedContent <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder(rssContent);
+</span></span><span style="display:flex;"><span>        updatedContent.<span style="color:#a6e22e">append</span>(newElement).<span style="color:#a6e22e">append</span>(System.<span style="color:#a6e22e">lineSeparator</span>());
+</span></span><span style="display:flex;"><span>        rssContent <span style="color:#f92672">=</span> updatedContent.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>        writeRssFile();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">deleteFromRss</span>(String elementToRemove) {
+</span></span><span style="display:flex;"><span>        StringBuilder updatedContent <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>        String<span style="color:#f92672">[]</span> lines <span style="color:#f92672">=</span> rssContent.<span style="color:#a6e22e">split</span>(System.<span style="color:#a6e22e">lineSeparator</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (String line : lines) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>line.<span style="color:#a6e22e">contains</span>(elementToRemove)) {
+</span></span><span style="display:flex;"><span>                updatedContent.<span style="color:#a6e22e">append</span>(line).<span style="color:#a6e22e">append</span>(System.<span style="color:#a6e22e">lineSeparator</span>());
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        rssContent <span style="color:#f92672">=</span> updatedContent.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>        writeRssFile();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getValueFromRss</span>(String element) {
+</span></span><span style="display:flex;"><span>        String<span style="color:#f92672">[]</span> lines <span style="color:#f92672">=</span> rssContent.<span style="color:#a6e22e">split</span>(System.<span style="color:#a6e22e">lineSeparator</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (String line : lines) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (line.<span style="color:#a6e22e">contains</span>(element)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> line;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>不難發現到：不同的類別除了有不同的方法名稱之外，各自對於資料的操作、儲存方式也大相徑庭。因此如果只是單純利用上述 4 種不同的 Java class 直接進行不同格式的檔案操作的話，不難想像這會是一個很麻煩的工程 &hellip;。因此一種比較好的做法是「讓所有的類別都統一」無論是方法名稱，還是方法中的參數數量、資料型態，如果能夠先將不同的地方給劃整齊，那麼在後續的操作上就能方便許多了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">CrudInterface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create</span>(String key, String value);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">read</span>(String key);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span>(String key, String newValue);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">delete</span>(String key);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>只不過，在某些的情況下，直接修改這些類別中的原始程式碼可能不是一個可行的辦法。公司規定該程式碼不可進行修改、程式僅過第三方利用 API 或其他形式秀出接口，而非給予原始碼編輯（甚至是閱覽）的權限、類別已經存在已久，有大量的其他專案依賴著該類別，牽一髮而動全身可能會更加麻煩 &hellip;等。諸如此類的限制和困難很常在現實的情境下遇到。因此，「如何在不更改原始程式碼的前提下，對於多個具有相似功能的類別和方法進行統一」即是適配器模式（Adapter pattern）存在的理由與意義。適配器模式可以充當現實中「轉接頭」的功用，將某些類別的方法轉換成另一種不同的表現方式，就拿上面的 JSON 來做舉例：我們可以設計一個 <code>JsonAdapter</code> 類別，用來轉換該類別中的所有方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JsonAdapter</span> <span style="color:#66d9ef">implements</span> CrudInterface {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> JsonCrud jsonCrud;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">JsonAdapter</span>(JsonCrud jsonCrud) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">jsonCrud</span> <span style="color:#f92672">=</span> jsonCrud;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create</span>(String key, String value) {
+</span></span><span style="display:flex;"><span>        jsonCrud.<span style="color:#a6e22e">addJsonValue</span>(key, value);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">read</span>(String key) {
+</span></span><span style="display:flex;"><span>        jsonCrud.<span style="color:#a6e22e">showJsonValue</span>(key);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span>(String key, String newValue) {
+</span></span><span style="display:flex;"><span>        jsonCrud.<span style="color:#a6e22e">updateJsonValue</span>(key, newValue);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">delete</span>(String key) {
+</span></span><span style="display:flex;"><span>        jsonCrud.<span style="color:#a6e22e">removeJsonValue</span>(key);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>透過實作了 <code>CrudInterface</code> 介面的 <code>JsonAdapter</code> 類別，我們現在就可以使用 <code>CrudInterface</code> 中的共同方法對 Json 檔案進行 CRUD 的操作了。同樣的步驟也可以利用在 XML, YAML, 和 RSS 的類別上：分別建立關於這 3 種檔案格式的 Adapter，來讓所有的方法名稱進行統一，再透過統一的方法名稱進行資料的傳輸或轉換，無論在程式的複雜的上、還是可讀性上，都可以找到立竿見影的功效：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Client</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        JsonCrud jsonCrud <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> JsonCrud(<span style="color:#e6db74">&#34;data.json&#34;</span>);
+</span></span><span style="display:flex;"><span>        CrudInterface jsonAdapter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> JsonAdapter(jsonCrud);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        XmlCrud xmlCrud <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> XmlCrud(<span style="color:#e6db74">&#34;data.xml&#34;</span>);
+</span></span><span style="display:flex;"><span>        CrudInterface xmlAdapter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> XmlAdapter(xmlCrud);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        YamlCrud yamlCrud <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> YamlCrud(<span style="color:#e6db74">&#34;data.yaml&#34;</span>);
+</span></span><span style="display:flex;"><span>        CrudInterface yamlAdapter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> YamlAdapter(yamlCrud);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        RssCrud rssCrud <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RssCrud(<span style="color:#e6db74">&#34;data.rss&#34;</span>);
+</span></span><span style="display:flex;"><span>        CrudInterface rssAdapter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RssAdapter(rssCrud);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Performing CRUD operations on JSON file:&#34;</span>);
+</span></span><span style="display:flex;"><span>        jsonAdapter.<span style="color:#a6e22e">create</span>(<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;John&#34;</span>);
+</span></span><span style="display:flex;"><span>        jsonAdapter.<span style="color:#a6e22e">read</span>(<span style="color:#e6db74">&#34;name&#34;</span>);
+</span></span><span style="display:flex;"><span>        jsonAdapter.<span style="color:#a6e22e">update</span>(<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;Alice&#34;</span>);
+</span></span><span style="display:flex;"><span>        jsonAdapter.<span style="color:#a6e22e">read</span>(<span style="color:#e6db74">&#34;name&#34;</span>);
+</span></span><span style="display:flex;"><span>        jsonAdapter.<span style="color:#a6e22e">delete</span>(<span style="color:#e6db74">&#34;name&#34;</span>);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Performing CRUD operations on XML file:&#34;</span>);
+</span></span><span style="display:flex;"><span>        xmlAdapter.<span style="color:#a6e22e">create</span>(<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;John&#34;</span>);
+</span></span><span style="display:flex;"><span>        xmlAdapter.<span style="color:#a6e22e">read</span>(<span style="color:#e6db74">&#34;name&#34;</span>);
+</span></span><span style="display:flex;"><span>        xmlAdapter.<span style="color:#a6e22e">update</span>(<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;Alice&#34;</span>);
+</span></span><span style="display:flex;"><span>        xmlAdapter.<span style="color:#a6e22e">read</span>(<span style="color:#e6db74">&#34;name&#34;</span>);
+</span></span><span style="display:flex;"><span>        xmlAdapter.<span style="color:#a6e22e">delete</span>(<span style="color:#e6db74">&#34;name&#34;</span>);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Performing CRUD operations on YAML file:&#34;</span>);
+</span></span><span style="display:flex;"><span>        yamlAdapter.<span style="color:#a6e22e">create</span>(<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;John&#34;</span>);
+</span></span><span style="display:flex;"><span>        yamlAdapter.<span style="color:#a6e22e">read</span>(<span style="color:#e6db74">&#34;name&#34;</span>);
+</span></span><span style="display:flex;"><span>        yamlAdapter.<span style="color:#a6e22e">update</span>(<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;Alice&#34;</span>);
+</span></span><span style="display:flex;"><span>        yamlAdapter.<span style="color:#a6e22e">read</span>(<span style="color:#e6db74">&#34;name&#34;</span>);
+</span></span><span style="display:flex;"><span>        yamlAdapter.<span style="color:#a6e22e">delete</span>(<span style="color:#e6db74">&#34;name&#34;</span>);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Performing CRUD operations on RSS file:&#34;</span>);
+</span></span><span style="display:flex;"><span>        rssAdapter.<span style="color:#a6e22e">create</span>(<span style="color:#e6db74">&#34;&lt;item&gt;&lt;title&gt;New Item&lt;/title&gt;&lt;link&gt;http://example.com/new-item&lt;/link&gt;&lt;/item&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>        rssAdapter.<span style="color:#a6e22e">read</span>(<span style="color:#e6db74">&#34;&lt;title&gt;New Item&lt;/title&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>        rssAdapter.<span style="color:#a6e22e">delete</span>(<span style="color:#e6db74">&#34;&lt;item&gt;&lt;title&gt;New Item&lt;/title&gt;&lt;link&gt;http://example.com/new-item&lt;/link&gt;&lt;/item&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>        rssAdapter.<span style="color:#a6e22e">read</span>(<span style="color:#e6db74">&#34;&lt;title&gt;New Item&lt;/title&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></article>
  
       <div id="gitalk-container"></div>
 

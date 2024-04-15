@@ -7,5 +7,12 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <atom:link href="https://fonu195713.github.io/docs/computer_science/cryptography/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>凱薩加密法</title>
+      <link>https://fonu195713.github.io/docs/computer_science/cryptography/caesar_chipher/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://fonu195713.github.io/docs/computer_science/cryptography/caesar_chipher/</guid>
+      <description>凱薩加密法（Caesar Chipher）&#xD;#&#xD;ChatGPT 的說明 在密碼學中，凱撒加密法（Caesar Chipher）也被稱為凱撒密碼、移位密碼、凱撒編碼、或凱撒位移 &amp;hellip;等，是最簡單且最廣為人知的古典加密技術之一。它是一種替換式密碼（Substitution cipher），其中明文中的每個字母會被替換為字母表中某個固定數量的位置下的字母。例如：透過左移 3 個位置，字母 D 將被替換為 A，字母 E 將變為 B &amp;hellip;依此類推。這個方法以 Julius Caesar 的名字命名，具史料紀載：他曾在私人的信件來往中，使用了這種訊息的隱藏方法。&#xA;凱撒密碼的加密步驟通常作為更複雜方案的一部分（例如維吉尼亞密碼就有採用類似的加解密概念），並且在 ROT13 仍然有相關的現代應用。但凱撒密碼與所有單字母替換式的加解密方法一樣，在現代的社會中非常容易被破解，基本上提供不了現今強度的資訊安全保障功能。&#xA;加密 / 解密方式 作為一種替換式密碼，凱薩加密法的加密解密方式非常簡單，首先我們會設定一個偏移量 \(k\)&#xD;（通常會介於 1~25 之間），然後對每個明文中的英文字母進行偏移量的計算：假設我們設定個偏移量 \(k = 4\)&#xD;，且需要進行加密的明文為 apple，則凱薩加密首先會計算英文字母 a 在偏移 4 個字母之後，會變成什麼英文字母（在這個情況下，a 會變成 e），再以這個偏移過後的字母作為最終密文，因此當 \(k = 4\)&#xD;時，apple 就會變成 ettpi。&#xA;解密方式也很簡單，就是將偏移的方向倒過來：假設我們今天得到一串密文 bhoorz，且得知偏移量 \(k\)&#xD;為 3，根據凱薩加密的原理，如果我們想要將密文還原回去，就只需要將字母逐個往位移 3 個字元即可，因此 b 會變成 y (b -&amp;gt; a -&amp;gt; z -&amp;gt; y)、h 會變為 e、o 會變回 l、r 會變回 o、z 會變回 w。我們就可以知道原來的明文是 yellow。</description>
+    </item>
   </channel>
 </rss>
