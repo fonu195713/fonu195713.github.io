@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>裝飾器模式 | Fonu Site</title>
+
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+
+
+
+<link rel="stylesheet" href="/book.min.7510252a98b014e14a3c632e4fd10ef2d6b73bc99d7c8125fe4b8415e160cdb6.css" integrity="sha256-dRAlKpiwFOFKPGMuT9EO8ta3O8mdfIEl/kuEFeFgzbY=" crossorigin="anonymous">
+
+
+
+
+
+
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fonu Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c5fb070aa6a846f1d3da7c79cefb6b5" class="toggle"  />
+    <label for="section-9c5fb070aa6a846f1d3da7c79cefb6b5" class="flex justify-between">
+      <a role="button" class="">生活相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/life/diary/" class="">每日小記</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/life/track_expenses/" class="">記帳</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/life/reading_experience/" class="">閱讀心得</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-29fcdd2f14dd6eca1f7ffa5701c3111e" class="toggle"  />
+    <label for="section-29fcdd2f14dd6eca1f7ffa5701c3111e" class="flex justify-between">
+      <a role="button" class="">命理相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/occultism/ziwei/" class="">紫微斗數</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/occultism/divination/" class="">隨手當神棍</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c904111af22e90e73dcd9cd05321afa" class="toggle" checked />
+    <label for="section-9c904111af22e90e73dcd9cd05321afa" class="flex justify-between">
+      <a role="button" class="">資工相關</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/debug_log/" class="">Debug 日誌</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/cryptography/" class="">密碼學</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/probability_theory/" class="">機率論</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>裝飾器模式</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="裝飾器模式">
+  裝飾器模式
+  <a class="anchor" href="#%e8%a3%9d%e9%a3%be%e5%99%a8%e6%a8%a1%e5%bc%8f">#</a>
+</h1>
+<hr>
+<ul>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>裝飾器模式（Decorator Pattern）是一種軟體設計模式，屬於結構型模式之一。該模式允許你在不改變物件本身的前提下，動態地擴展其物件的功能。這種模式通常用於需要在運行時根據特定條件或需求動態添加功能的情況。裝飾器模式的核心思想是建立一系列的裝飾類別，這些類別實現了與被裝飾物件相同的界面，並且包含了被裝飾物件的一個實例。每個裝飾類別都可以在原始物件的行為前後加上自己的額外行為，從而擴展了原始物件的功能。以下是裝飾器模式的一些重點特性：</p>
+<p>【通用界面】：裝飾器與被裝飾物件實現相同的界面，這樣可以使得裝飾器與被裝飾物件可以互相替換，使得使用者不需要知道具體的實現細節。【堆疊性】：可以將多個裝飾器堆疊在一起，每個裝飾器都可以添加額外的功能，從而形成一個功能豐富的物件。【透明性】：裝飾器模式要求裝飾器和被裝飾物件實現相同的界面，這樣客戶端就可以透明地使用裝飾器，而不需要關心其具體的實現。</p>
+<p>舉個例子來說，假設在一個系統內，有一個基本的汽車類別，現在該系統需要為這個汽車添加一些額外的功能，例如空調、音響、導航 &hellip;等。在這樣的情境下，就可以透過先建立一個基本的「汽車」類別作為被裝飾物件，然後動態地建立空調裝飾器、音響裝飾器、導航裝飾器 &hellip;等裝飾器類別。每個裝飾器都實現了汽車的界面，並且包含了一個汽車的實例。這樣一來，當客戶端需要使用這些功能時，就可以動態地將這些裝飾器堆疊在一起，從而擴展了汽車的功能。</p>
+<ul>
+<li><strong>簡單整理</strong></li>
+</ul>
+<p>問題描述：同一個物件，需要動態擴充不同程式功能的時候。</p>
+<p>解決方案：將功能獨立成不同類別，並利用 <a href="../composite_aggregate_reuse_principle">aggregate</a> 的方式合成物件</p>
+<p>程式細節：參照下面的段落</p>
+<p>UML 圖：</p>
+<p><img src="/image/design_pattern/decorator_uml.png" alt="image" /></p>
+<ul>
+<li><strong>程式碼範例</strong></li>
+</ul>
+<p>在實務上，運用到 decorator pattern 的時機點還蠻多的？在實務上比較多用到 decorator 的地方則類似於絕大多數的 <code>Plugin</code>（功能擴充需求）。例如我原本就有一台簡單的 <code>SimpleHttpServer</code> 類別，該類別目前就只包含 <code>start()</code> 和 <code>getRequest()</code> 兩個方法而已。簡單來說 &hellip;就只是單純支援基本的 request 和 response（而且還只能回覆特定的 response），並沒有其他的特殊功能，大概就像是下面的這個程式的樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.BufferedReader;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.InputStreamReader;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.PrintWriter;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.ServerSocket;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.Socket;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimpleHttpServer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> PORT <span style="color:#f92672">=</span> 8080;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            ServerSocket serverSocket <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ServerSocket(PORT);
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Server listening on port &#34;</span> <span style="color:#f92672">+</span> PORT);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>) {
+</span></span><span style="display:flex;"><span>                Socket clientSocket <span style="color:#f92672">=</span> serverSocket.<span style="color:#a6e22e">accept</span>();
+</span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Client connected: &#34;</span> <span style="color:#f92672">+</span> clientSocket.<span style="color:#a6e22e">getInetAddress</span>().<span style="color:#a6e22e">getHostAddress</span>());
+</span></span><span style="display:flex;"><span>                getRequest(clientSocket);
+</span></span><span style="display:flex;"><span>                clientSocket.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getRequest</span>(Socket clientSocket) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        BufferedReader in <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader(<span style="color:#66d9ef">new</span> InputStreamReader(clientSocket.<span style="color:#a6e22e">getInputStream</span>()));
+</span></span><span style="display:flex;"><span>        String request <span style="color:#f92672">=</span> in.<span style="color:#a6e22e">readLine</span>();
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Request: &#34;</span> <span style="color:#f92672">+</span> request);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        String response_line <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HTTP/1.1 200 OK&#34;</span>;
+</span></span><span style="display:flex;"><span>        String response_header <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Content-Type: text/html&#34;</span>;
+</span></span><span style="display:flex;"><span>        String response_body <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;&lt;html&gt;&#34;</span> <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;&lt;head&gt;&lt;/head&gt;&#34;</span> <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;&lt;body&gt;&#34;</span> <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;&lt;h1&gt;Hello, world!&lt;/h1&gt;&#34;</span> <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;&lt;/body&gt;&#34;</span> <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;&lt;/html&gt;&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        String response <span style="color:#f92672">=</span> response_line <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\r\n&#34;</span> <span style="color:#f92672">+</span> response_header <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\r\n\r\n&#34;</span> <span style="color:#f92672">+</span> response_body;
+</span></span><span style="display:flex;"><span>        PrintWriter out <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PrintWriter(clientSocket.<span style="color:#a6e22e">getOutputStream</span>(), <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        out.<span style="color:#a6e22e">println</span>(response);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在這樣的情況下，如果我們想擴充原有的 <code>SimpleHttpServer</code> 類別的功能（像是&hellip; Log 之類的？），除了直接把方法新增在該 <code>SimpleHttpServer</code> 類別裡面之外，我們還可以利用這次要講的裝飾器模式，把功能單獨寫出來，讓程式可以更佳輕盈、易懂、跟簡潔。只是如果要套用模式的話，需要先確保【被裝飾者】（<code>SimpleHttpServer</code>）和【裝飾器】（<code>LoggingDecorator</code>）有可以共用的介面，所以需要對原本的  <code>SimpleHttpServer</code> 做一點點修改，再把新的 <code>LoggingDecorator</code> 加進我們的 <code>SimpleHttpServer</code> 裡面，就像是下面的這個樣子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 定義一個 HttpServer 的介面</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">HttpServer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start</span>(<span style="color:#66d9ef">int</span> port) <span style="color:#66d9ef">throws</span> IOException;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 讓原本的 SimpleHttpServer 類別繼承剛剛定義的 HttpServer 介面</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimpleHttpServer</span> <span style="color:#66d9ef">implements</span> HttpServer {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 那些程式 ...</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getRequest</span>(Socket clientSocket) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 那些程式 ...</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// 定義一個 HttpServerDecorator 的抽象類別</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 該類別因為是單純的 decorator 所以不允許單獨實例化</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 同時因為 decorator 要跟原本的程式有連結</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 所以 HttpServerDecorator 也需要繼承 HttpServer 這個介面</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HttpServerDecorator</span> <span style="color:#66d9ef">implements</span> HttpServer {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> HttpServer httpServer;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 裝飾器本身的重點仍然在於原本的 HttpServer 裡面</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 所以在建立 decorator 的額外功能時，仍需要一個真正的、可以使用的 httpServer 做為參數</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">HttpServerDecorator</span>(HttpServer httpServer) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">httpServer</span> <span style="color:#f92672">=</span> httpServer;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start</span>(<span style="color:#66d9ef">int</span> port) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        httpServer.<span style="color:#a6e22e">start</span>(port);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.logging.Logger;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoggingDecorator</span> <span style="color:#66d9ef">extends</span> HttpServerDecorator {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> Logger logger <span style="color:#f92672">=</span> Logger.<span style="color:#a6e22e">getLogger</span>(LoggingDecorator.<span style="color:#a6e22e">class</span>.<span style="color:#a6e22e">getName</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">LoggingDecorator</span>(HttpServer httpServer) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span>(httpServer);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start</span>(<span style="color:#66d9ef">int</span> port) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 為原本的 start() 增添 log 功能</span>
+</span></span><span style="display:flex;"><span>        logger.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;HTTP Server is starting ...&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span>.<span style="color:#a6e22e">start</span>(port);
+</span></span><span style="display:flex;"><span>        logger.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;HTTP Server started on port &#34;</span> <span style="color:#f92672">+</span> port);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>利用 decorator pattern 撰寫程式的好處，相較於「把所有想要新增的功能都放在 <code>SimpleHttpServer</code> 裡面」來說，明顯的好處有幾個：程式符合<a href="../open_closed_principle">開放封閉原則</a>，透過 <code>HttpServerDecorator</code> 來新增網頁伺服器的功能，我們可以在「不改變原本已經撰寫完成的程式」的情況下，對原本的程式進行擴充；其次，因為擴充新功能不會影響到就有的程式，所以我們不用擔心「專案愈發龐大時，<code>SimpleHttpServer</code> 也會逐漸變得龐大」這件事情，如果在往後的專案開發上，我們還需要再新增幾個功能（像是權限驗證、資料的壓縮或加密、限流、快取控制 &hellip;等），相對於全部塞進 <code>SimpleHttpServer</code>，分開來寫，並根據不同的使用情境動態增加或減少功能會來得更有效率；最後，因為程式的各項功能是分開寫的，這樣在維護和除錯上面，也會比全部擠在一起還要容易許多。</p>
+</article>
+ 
+      <div id="gitalk-container"></div>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

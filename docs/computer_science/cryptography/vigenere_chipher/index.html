@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>Debug 日誌 | Fonu Site</title>
+    <title>凱薩加密法 | Fonu Site</title>
 
     <link rel="icon" href="/favicon.png" type="image/x-icon">
 
@@ -214,7 +214,7 @@
   
 
   
-    <a href="/docs/computer_science/debug_log/" class="active">Debug 日誌</a>
+    <a href="/docs/computer_science/debug_log/" class="">Debug 日誌</a>
   
 
           
@@ -320,7 +320,7 @@
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Debug 日誌</strong>
+  <strong>凱薩加密法</strong>
 
   <label for="toc-control">
     
@@ -334,13 +334,23 @@
 
       
       
-  <article class="markdown"><h1 id="debug-日誌">
-  Debug 日誌
-  <a class="anchor" href="#debug-%e6%97%a5%e8%aa%8c">#</a>
+  <article class="markdown"><h1 id="維吉尼亞密碼表vigenère-chipher">
+  維吉尼亞密碼表（Vigenère Chipher）
+  <a class="anchor" href="#%e7%b6%ad%e5%90%89%e5%b0%bc%e4%ba%9e%e5%af%86%e7%a2%bc%e8%a1%a8vigen%c3%a8re-chipher">#</a>
 </h1>
 <hr>
 <ul>
-<li><a href="java">Java 相關問題</a></li>
+<li><strong>ChatGPT 的說明</strong></li>
+</ul>
+<p>維吉尼亞密碼表（Vigenère Cipher）是一種多表替換加密方法，利用一個關鍵字（稱為密鑰）來加密和解密文字。這種加密方法由法國密碼學家布萊斯·德·維吉尼亞（Blaise de Vigenère）於 16 世紀發明，被認為是歷史上最早的多表替換加密之一。維吉尼亞密碼表的特點如下：【明文】：準備用來加密的文字，通常是一段不想被他人所得知的重要訊息。【替換表】：與凱撒加密法不同，維吉尼亞密碼表使用的是一個可變的位移量。每個字元的位移量是根據密鑰中對應位置的字母來決定的。【重複密鑰】：如果加密的文字比密鑰長度長，則密鑰將重複使用直到達到足夠的長度。</p>
+<p>在維吉尼亞密碼表被廣泛使用的時代，它被認為是一種安全的加密方式，因為破解者需要知道正確的金鑰才能成功解密。維吉尼亞密碼表的加密解密過程如下：首先，將明文中的每個字元與密鑰中對應位置的字元結合，利用它們在維吉尼亞密碼表中的對應關係，找到對應的密文字元。例如，如果明文字元是 <code>a</code>，密鑰字元是 <code>b</code>，則加密後的字元就會是替換表中，第 <code>a</code> 行、第 <code>b</code> 列的字元。該密文的解密方式同樣可以透過【替換表】和【重複密鑰】達成：將密文中的每個字元與密鑰中對應位置的字元結合，利用它們在維吉尼亞密碼表中的對應關係，找到對應的明文字元，且與加密過程相反，這裡是根據「密文字元的行」與「密鑰字元的列」找到對應的明文字元。維吉尼亞密碼表相對於凱撒加密法更複雜，但也更安全。然而，它仍然可以通過破解密鑰或其他方法來被破解。</p>
+<ul>
+<li>
+<p><strong>加密 / 解密方式</strong></p>
+</li>
+<li>
+<p><strong>破譯方式</strong></p>
+</li>
 </ul>
 </article>
  
