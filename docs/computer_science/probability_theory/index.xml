@@ -2,17 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>機率論 on Fonu Site</title>
-    <link>https://fonu195713.github.io/docs/computer_science/probability_theory/</link>
+    <link>http://localhost:1313/docs/computer_science/probability_theory/</link>
     <description>Recent content in 機率論 on Fonu Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="https://fonu195713.github.io/docs/computer_science/probability_theory/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>機率分布</title>
-      <link>https://fonu195713.github.io/docs/computer_science/probability_theory/probability_distribution/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://fonu195713.github.io/docs/computer_science/probability_theory/probability_distribution/</guid>
-      <description>&#xD;機率分布（Probability distribution）&#xD;#&#xD;ChatGPT的說明 機率分布（Probability distribution）是描述隨機變數可能取得每個值的機率的數學模型。它是機率論的核心概念之一，用來表示隨機現象的結果在不同取值之間的機率分配情況。在機率分布裡，分布的方式總共可以分成「離散隨機變量機率分布」與「連續隨機變量機率分布」兩種：【離散隨機變量機率分布】：對於離散隨機變量，其機率分布可以由機率質量函數（Probability Mass Function，PMF）來描述。PMF 給出了每個可能值的取德機率，通常用符號 \(P(X) = x\)&#xD;來表示，其中 \(X\)&#xD;表示隨機變量， \(x\)&#xD;表示某個具體的值。 PMF 需要滿足兩個條件：分別是「所有可能的取值的機率都在 0 到 1 之間」與「所有可能取值的機率總和等於 1」。&#xA;【連續隨機變量的機率分布】：對於連續隨機變量，其機率分布由機率密度函數（Probability Density Function，PDF）來描述。機率密度函數通常表示為 \(f(x)\)&#xD;，表示在某個區間內取得某個值的機率密度。PDF 沒有直接的機率值，僅僅能表示位於該值附近的機率密度。對於連續隨機變量，「『機率』落在某個區間內的機率」等於「該區間內的機率密度函數的積分」。&#xA;離散機率分布的常見例子包括伯努利分布、二項式分布、卜瓦松分布 &amp;hellip;等，這些分布通常用於描述離散型隨機變量（例如描述試驗結果的成功或失敗次數）。連續機率分布的常見例子則包括正態分布、指數分布、連續行均勻分布 &amp;hellip;等，這些分布通常用於描述連續型隨機變量（如測量結果的時間、距離、或數值等）。&#xA;離散隨機變量機率分布&#xA;離散型均勻分布 </description>
-    </item>
+    <atom:link href="http://localhost:1313/docs/computer_science/probability_theory/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

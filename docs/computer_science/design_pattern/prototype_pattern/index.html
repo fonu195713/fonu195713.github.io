@@ -250,24 +250,6 @@
   
 
   
-    <a href="/docs/computer_science/probability_theory/" class="">機率論</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <a href="/docs/computer_science/design_pattern/" class="">設計模式</a>
   
 
@@ -342,8 +324,8 @@
 <ul>
 <li><strong>ChatGPT 的說明</strong></li>
 </ul>
-<p>原型模式（Prototype pattern）是一種創建型設計模式，其主要目的是『透過不使用建構子的方式，創建類別中的新物件。』此模式的核心思想是基於已有對象的克隆（拷貝）來產生新的對象，這個已有對象稱為原型，而克隆的方式有淺克隆（Shallow clone）和深克隆（Deep clone）兩種。原型模式有以下關鍵特點和優點：［<strong>透過 clone 創建物件</strong>］：原型模式允許程式在運行的時後創建新的物件，而無需知道特定物件的構造細節。這是透過複製現有物件的屬性和狀態來實現的。［<strong>減少構造成本</strong>］：在某些情況下，物件的構造可能非常昂貴（像是需要花費大量資源、消耗大量時間 &hellip;等），透過原型模式，可以複製已有物件，來避免重複執行構造操作，從而提高效能和效率。［<strong>支援多樣化的物件</strong>］：原型模式允許建立多個不同屬性的物件，而無需重新實作整個物件的建構邏輯，這對於物件的變種非常有用。［<strong>簡化物件的創建</strong>］：原型模式簡化了物件的創建過程，尤其是在物件具有複雜結構或大量屬性時。可以使客戶端只需要呼叫模式中的 <code>clone</code> 方法，便可以實踐物件的創立。</p>
-<p>而在原型模式中，克隆（或拷貝）物件的方式總共分成兩種：［<strong>淺克隆</strong>］（Shallow clone）：淺克隆會在方法內建立一個新原型的物件，但該新物件的內部成員變數仍然與原始的原型物件共用同樣的子物件。這意味著，雖然新物件本身是與原物件獨立的，但在新物件內部仍然引用了原始物件中的某些子物件。如果對我們對任一物件的共享去性進行修改，這些修改將在兩個物件中都可見，因為它們引用同一份資料。淺克隆通常是較快且較節省記憶體的方式，但需要注意在共享子物件上可能出現潛在問題。［<strong>深克隆</strong>］（Deep Copy）：深拷貝重樣會創建一個新的物件，但與淺克隆不同的是。這種「創建」包括原始的原型物件，以及該物件的所有子物件（以遞回的方式完全複製整個物件結構）。這確保了新物件與原始物件之間完全獨立，對其中一個物件所做的修改不會影響另一個物件。深克隆通常比較安全，因為它避免了共享資料的問題，但可能需要更多時間和記憶體來執行，特別是對於複雜的物件結構。</p>
+<p>原型模式（Prototype pattern）是一種創建型設計模式，其主要目的是『透過不使用建構子的方式，創建類別中的新物件。』此模式的核心思想是基於已有對象的拷貝（拷貝）來產生新的對象，這個已有對象稱為原型，而拷貝的方式有淺拷貝（Shallow clone）和深拷貝（Deep clone）兩種。原型模式有以下關鍵特點和優點：［<strong>透過 clone 創建物件</strong>］：原型模式允許程式在運行的時後創建新的物件，而無需知道特定物件的構造細節。這是透過複製現有物件的屬性和狀態來實現的。［<strong>減少構造成本</strong>］：在某些情況下，物件的構造可能非常昂貴（像是需要花費大量資源、消耗大量時間 &hellip;等），透過原型模式，可以複製已有物件，來避免重複執行構造操作，從而提高效能和效率。［<strong>支援多樣化的物件</strong>］：原型模式允許建立多個不同屬性的物件，而無需重新實作整個物件的建構邏輯，這對於物件的變種非常有用。［<strong>簡化物件的創建</strong>］：原型模式簡化了物件的創建過程，尤其是在物件具有複雜結構或大量屬性時。可以使客戶端只需要呼叫模式中的 <code>clone</code> 方法，便可以實踐物件的創立。</p>
+<p>而在原型模式中，拷貝（或拷貝）物件的方式總共分成兩種：［<strong>淺拷貝</strong>］（Shallow clone）：淺拷貝會在方法內建立一個新原型的物件，但該新物件的內部成員變數仍然與原始的原型物件共用同樣的子物件。這意味著，雖然新物件本身是與原物件獨立的，但在新物件內部仍然引用了原始物件中的某些子物件。如果對我們對任一物件的共享去性進行修改，這些修改將在兩個物件中都可見，因為它們引用同一份資料。淺拷貝通常是較快且較節省記憶體的方式，但需要注意在共享子物件上可能出現潛在問題。［<strong>深拷貝</strong>］（Deep Copy）：深拷貝重樣會創建一個新的物件，但與淺拷貝不同的是。這種「創建」包括原始的原型物件，以及該物件的所有子物件（以遞回的方式完全複製整個物件結構）。這確保了新物件與原始物件之間完全獨立，對其中一個物件所做的修改不會影響另一個物件。深拷貝通常比較安全，因為它避免了共享資料的問題，但可能需要更多時間和記憶體來執行，特別是對於複雜的物件結構。</p>
 <ul>
 <li><strong>簡單整理</strong></li>
 </ul>
@@ -355,7 +337,242 @@
 <ul>
 <li><strong>程式碼範例</strong></li>
 </ul>
-</article>
+<p>在系統開發中，使用資料庫（或相關的技術）儲存客戶端的一些資料是一件再平常不過的事情。假設我們現在正在一間大型的電商公司工作，使用該公司電商服務的會員總數有超過 100 萬人，且公司近期正在進行一項優惠活動：凡是加入年滿 2 年，且近 3 個月內曾在網站中下過訂單的會員，在雙十一購物節都可以獲得 1111 元的優惠券（11/11 凌晨 00:00 自動獲得）。同時公司並不希望因為這項優惠活動中斷電商網站的服務，且經過統計，符合活動資格的會員至少有 20 多萬人，如果要使用單純的 query 語法完成這項活動，程式包含後續的金流資料驗證 &hellip;等其他步驟，至少會需要花上 1-2 分鐘的更新時間。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.time.LocalDateTime;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.ArrayList;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.List;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Member</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> ID;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> LocalDateTime joinDate;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>Order<span style="color:#f92672">&gt;</span> orders;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Member</span>(<span style="color:#66d9ef">int</span> memberId, LocalDateTime joinDate) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">memberId</span> <span style="color:#f92672">=</span> memberId;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">joinDate</span> <span style="color:#f92672">=</span> joinDate;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">orders</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Member 的其他方法與 getters, setters ...</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.sql.Connection;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.sql.Database;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.sql.SQLException;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Database</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String DB_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;jdbc:mysql://localhost:3306/my_db&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String USER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;root&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String PASSWORD <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;root&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Connection connection;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DatabaseHolder</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> Database INSTANCE <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Database();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Database</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            connection <span style="color:#f92672">=</span> DriverManager.<span style="color:#a6e22e">getConnection</span>(DB_URL, USER, PASSWORD);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (SQLException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Database <span style="color:#a6e22e">getInstance</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> DatabaseHolder.<span style="color:#a6e22e">INSTANCE</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Member<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getMembersFromDatabase</span>() {
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>Member<span style="color:#f92672">&gt;</span> members <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 回傳 &#34;所有&#34; members</span>
+</span></span><span style="display:flex;"><span>        String sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;SELECT * FROM members&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (Statement statement <span style="color:#f92672">=</span> connection.<span style="color:#a6e22e">createStatement</span>();
+</span></span><span style="display:flex;"><span>             ResultSet resultSet <span style="color:#f92672">=</span> statement.<span style="color:#a6e22e">executeQuery</span>(sql)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> (resultSet.<span style="color:#a6e22e">next</span>()) {
+</span></span><span style="display:flex;"><span>                Member member <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Member();
+</span></span><span style="display:flex;"><span>                member.<span style="color:#a6e22e">setMemberId</span>(resultSet.<span style="color:#a6e22e">getInt</span>(<span style="color:#e6db74">&#34;member_id&#34;</span>));
+</span></span><span style="display:flex;"><span>                member.<span style="color:#a6e22e">setJoinDate</span>(resultSet.<span style="color:#a6e22e">getTimestamp</span>(<span style="color:#e6db74">&#34;join_date&#34;</span>).<span style="color:#a6e22e">toLocalDateTime</span>());
+</span></span><span style="display:flex;"><span>                members.<span style="color:#a6e22e">add</span>(member);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (SQLException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> members;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Member 的其他方法與 getters, setters ...</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.time.LocalDateTime;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.time.Month;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OnlineShoppingPlatform</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        OnlineShoppingPlatform platform <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> OnlineShoppingPlatform(<span style="color:#e6db74">&#34;Fonu online platform&#34;</span>);
+</span></span><span style="display:flex;"><span>        platform.<span style="color:#a6e22e">novemberPromotion</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">novemberPromotion</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>) {
+</span></span><span style="display:flex;"><span>            LocalDateTime currentDateTime <span style="color:#f92672">=</span> LocalDateTime.<span style="color:#a6e22e">now</span>();
+</span></span><span style="display:flex;"><span>            LocalDateTime targetDateTime <span style="color:#f92672">=</span> LocalDateTime.<span style="color:#a6e22e">of</span>(currentDateTime.<span style="color:#a6e22e">getYear</span>(), Month.<span style="color:#a6e22e">NOVEMBER</span>, 11, 0, 0);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 目標時間在當前時間之前，代表時間到了！</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (targetDateTime.<span style="color:#a6e22e">isBefore</span>(currentDateTime)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 開始撈資料，超級花時間</span>
+</span></span><span style="display:flex;"><span>                List<span style="color:#f92672">&lt;</span>Member<span style="color:#f92672">&gt;</span> members <span style="color:#f92672">=</span> database.<span style="color:#a6e22e">getMembersFromDatabase</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (Member member : members) {
+</span></span><span style="display:flex;"><span>                    List<span style="color:#f92672">&lt;</span>Order<span style="color:#f92672">&gt;</span> orderList <span style="color:#f92672">=</span> member.<span style="color:#a6e22e">getOrders</span>();
+</span></span><span style="display:flex;"><span>                    Order latestOrder <span style="color:#f92672">=</span> orderList.<span style="color:#a6e22e">get</span>(orderList.<span style="color:#a6e22e">size</span>() <span style="color:#f92672">-</span> 1);
+</span></span><span style="display:flex;"><span>                    LocalDateTime lastOrderDate <span style="color:#f92672">=</span> latestOrder.<span style="color:#a6e22e">getOrderDate</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">long</span> years <span style="color:#f92672">=</span> lastOrderDate.<span style="color:#a6e22e">until</span>(currentDateTime, ChronoUnit.<span style="color:#a6e22e">YEARS</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(years <span style="color:#f92672">&lt;</span> 2) {
+</span></span><span style="display:flex;"><span>                        member.<span style="color:#a6e22e">setCoin</span>(member.<span style="color:#a6e22e">getCoin</span>() <span style="color:#f92672">+</span> 1111);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 每秒檢查一次</span>
+</span></span><span style="display:flex;"><span>                Thread.<span style="color:#a6e22e">sleep</span>(1000);
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
+</span></span><span style="display:flex;"><span>                e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在這樣的情境下，透過單純「對 <code>query</code> 語句進行極致的優化，已達成『不中斷』的需求」就不是一個很好的辦法。因此，為了解決目前的問題，我們就可以應用到本篇文章在討論的原型模式（Prototype pattern）。原型模式，是一種「透過物件本身的 <code>clone()</code> 方法快速建立新物件」的一種程式撰寫技巧。透過單純複製現有物件的參數內容，省去大量與其他系統溝通的 IO 時間（例如與資料庫系統的溝通）。進而達到「加速」的需求。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.time.LocalDateTime;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.ArrayList;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.List;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Member</span> <span style="color:#66d9ef">implements</span> Cloneable {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> memberId;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> LocalDateTime joinDate;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>Order<span style="color:#f92672">&gt;</span> orders;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Member</span>(<span style="color:#66d9ef">int</span> memberId, LocalDateTime joinDate) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">memberId</span> <span style="color:#f92672">=</span> memberId;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">joinDate</span> <span style="color:#f92672">=</span> joinDate;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">orders</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Member 的其他方法與 getters, setters ...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 建立一個 clone() 方法，使物件本身允許被複製</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> Object <span style="color:#a6e22e">clone</span>() <span style="color:#66d9ef">throws</span> CloneNotSupportedException {
+</span></span><span style="display:flex;"><span>        Member clonedMember <span style="color:#f92672">=</span> (Member) <span style="color:#66d9ef">super</span>.<span style="color:#a6e22e">clone</span>();
+</span></span><span style="display:flex;"><span>        clonedMember.<span style="color:#a6e22e">orders</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 遞迴複製每個 Order 物件</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (Order order : <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">orders</span>) {
+</span></span><span style="display:flex;"><span>            clonedMember.<span style="color:#a6e22e">orders</span>.<span style="color:#a6e22e">add</span>((Order) order.<span style="color:#a6e22e">clone</span>());
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> clonedMember;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.sql.Connection;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.sql.DriverManager;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.sql.ResultSet;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.sql.SQLException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.sql.Statement;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Database</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String DB_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;jdbc:mysql://localhost:3306/my_db&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String USER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;root&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String PASSWORD <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;root&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>Member<span style="color:#f92672">&gt;</span> members;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DatabaseHolder</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> Database INSTANCE <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Database();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Database</span>() {
+</span></span><span style="display:flex;"><span>        members <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (Connection connection <span style="color:#f92672">=</span> DriverManager.<span style="color:#a6e22e">getConnection</span>(DB_URL, USER, PASSWORD);
+</span></span><span style="display:flex;"><span>             Statement statement <span style="color:#f92672">=</span> connection.<span style="color:#a6e22e">createStatement</span>();
+</span></span><span style="display:flex;"><span>             ResultSet resultSet <span style="color:#f92672">=</span> statement.<span style="color:#a6e22e">executeQuery</span>(<span style="color:#e6db74">&#34;SELECT * FROM members&#34;</span>)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> (resultSet.<span style="color:#a6e22e">next</span>()) {
+</span></span><span style="display:flex;"><span>                Member member <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Member(resultSet.<span style="color:#a6e22e">getInt</span>(<span style="color:#e6db74">&#34;member_id&#34;</span>),
+</span></span><span style="display:flex;"><span>                        resultSet.<span style="color:#a6e22e">getTimestamp</span>(<span style="color:#e6db74">&#34;join_date&#34;</span>).<span style="color:#a6e22e">toLocalDateTime</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 先把資料暫存在變數 members 裡面</span>
+</span></span><span style="display:flex;"><span>                members.<span style="color:#a6e22e">add</span>(member);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (SQLException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Database <span style="color:#a6e22e">getInstance</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> DatabaseHolder.<span style="color:#a6e22e">INSTANCE</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Member<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getMembersFromMemory</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> members;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Member 的其他方法與 getters, setters ...</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.time.LocalDateTime;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.time.Month;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OnlineShoppingPlatform</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Database database;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">OnlineShoppingPlatform</span>(String platformName) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">database</span> <span style="color:#f92672">=</span> Database.<span style="color:#a6e22e">getInstance</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        OnlineShoppingPlatform platform <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> OnlineShoppingPlatform(<span style="color:#e6db74">&#34;Fonu online platform&#34;</span>);
+</span></span><span style="display:flex;"><span>        platform.<span style="color:#a6e22e">novemberPromotion</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">novemberPromotion</span>() {
+</span></span><span style="display:flex;"><span>        LocalDateTime targetDateTime <span style="color:#f92672">=</span> LocalDateTime.<span style="color:#a6e22e">of</span>(currentDateTime.<span style="color:#a6e22e">getYear</span>(), Month.<span style="color:#a6e22e">NOVEMBER</span>, 11, 0, 0);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#66d9ef">true</span>) {
+</span></span><span style="display:flex;"><span>            LocalDateTime currentDateTime <span style="color:#f92672">=</span> LocalDateTime.<span style="color:#a6e22e">now</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (targetDateTime.<span style="color:#a6e22e">isBefore</span>(currentDateTime)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 拿出原本就暫存在 database 的 members</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 省去需要跟 DB system 溝通的時間</span>
+</span></span><span style="display:flex;"><span>                List<span style="color:#f92672">&lt;</span>Member<span style="color:#f92672">&gt;</span> members <span style="color:#f92672">=</span> database.<span style="color:#a6e22e">getMembersFromMemory</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (Member member : members) {
+</span></span><span style="display:flex;"><span>                    List<span style="color:#f92672">&lt;</span>Order<span style="color:#f92672">&gt;</span> orderList <span style="color:#f92672">=</span> member.<span style="color:#a6e22e">getOrders</span>();
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>orderList.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>                        Order latestOrder <span style="color:#f92672">=</span> orderList.<span style="color:#a6e22e">get</span>(orderList.<span style="color:#a6e22e">size</span>() <span style="color:#f92672">-</span> 1);
+</span></span><span style="display:flex;"><span>                        LocalDateTime lastOrderDate <span style="color:#f92672">=</span> latestOrder.<span style="color:#a6e22e">getOrderDate</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">long</span> years <span style="color:#f92672">=</span> lastOrderDate.<span style="color:#a6e22e">until</span>(currentDateTime).<span style="color:#a6e22e">toDays</span>() <span style="color:#f92672">/</span> 365;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">if</span> (years <span style="color:#f92672">&lt;</span> 2) {
+</span></span><span style="display:flex;"><span>                            member.<span style="color:#a6e22e">setCoin</span>(member.<span style="color:#a6e22e">getCoin</span>() <span style="color:#f92672">+</span> 1111);
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 每秒檢查一次</span>
+</span></span><span style="display:flex;"><span>                Thread.<span style="color:#a6e22e">sleep</span>(1000);
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
+</span></span><span style="display:flex;"><span>                e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></article>
  
       <div id="gitalk-container"></div>
 
